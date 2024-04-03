@@ -1,0 +1,26 @@
+/* global style resets */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	outline-style: none;
+}
+
+#background {
+	width: 100vw;
+  height: 100vh;
+  background-image: url(../media/background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#testPic {
+	width: 30rem;
+	height: 30rem;
+	border: 5px solid green;
+	background-color: yellow;
+	/* background-image: url(../media/testAsset.png); */
+}
