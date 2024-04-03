@@ -27,7 +27,7 @@ function init() {
     };
 
     static getClicked() {  
-      //console.log("your did it");
+      console.log("your did it");
       testPic.style.backgroundColor = "blue";
     }
   }
@@ -156,7 +156,7 @@ function init() {
 
   domAccessClassInstance.doStuff();
 
-  DOMAccess.testPic/addEventListener("click", DOMAccess.getClicked);
+  domAccessClassInstance.testPic.addEventListener("click", DOMAccess.getClicked);
 }
 
 window.onload = init;
