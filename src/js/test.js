@@ -1,3 +1,9 @@
+import { Collectibles } from "./Collectibles.js";
+import { Dice } from "./Dice.js";
+import { Game } from "./Game.js";
+import { Henchmen } from "./Henchman.js";
+import { Player } from "./Player.js";
+
 function init() {
 
   class DOMAccess {
@@ -28,7 +34,16 @@ function init() {
 
     static getClicked() {  
       console.log("your did it");
-      testPic.style.backgroundColor = "blue";
+      let d20 = new Dice("d20");
+      let roll = d20.roll();
+      console.log(roll);
+      testPic.innerHTML = roll;
+
+      if (testPic.style.backgroundColor != "blue") {
+        testPic.style.backgroundColor = "blue";
+      } else {
+        testPic.style.backgroundColor = "yellow";
+      }
     }
   }
 
