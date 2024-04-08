@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Henchmen Hospital</title>
+</head>
+<body>
+	<img src="#" alt="Henchmen portrait" id="henchmenPortrait">
+	<p>Henchmen remaining: 3</p>
+  
+  <!-- Display current health by changing the current value.
+  Change "max" based on the current enemy's max health -->
+  <span>Henchmen Health: </span>
+  <input type="range" min="0" max="100" value="100" id="healthBar" disabled>
+  <span> 100</span>
+  
+  <div id="gameLogs">
+    <span>Game logs: </span>
+    <!-- This thing should probably have its own scrollbar once there's enough text lines. -->
+    <p id="logText">This is a log entry.</p>
+  </div>
+  
+  <!-- TODO: figure out what the "dice rolling area" is exactly -->
+  <a href="#">Click here to roll dice</a>
+  
+  <div id="gameStats">
+    <span id="score">Score: 0</span>
+    <span id="stamina">Stamina: 100</span>
+    <span id="money">Money: 0</span>
+  </div>
+  
+  <div id="diceEffectsDisplay">
+    <span>Special effects: </span>
+    <span>Your d6 has a 10% chance to do double healing.</span>
+    <span>This enemy gets hurt by 2s!</span>
+  </div>
+  
+  <div id="collectableEffects">
+    <span id="boonEffects">Boon effects: </span>
+    <span id="curseEffects">Curse effects: </span>
+  </div>
+  
+  <div id="specialDice">
+    <span>Special dice</span>
+  </div>
+  
+  <a href="#">Roll dice!</a>
+  
+</body>
+</html>
