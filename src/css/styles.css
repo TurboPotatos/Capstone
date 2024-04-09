@@ -131,12 +131,22 @@ p {
 }
 
 #diceArea{
-  border: solid yellow;
+  /* border: solid yellow; */
   position: absolute;
   bottom: 1%;
   right: 50.2%;
   height: 56%;
   width: 27%;
+	/* background-position-x: 10px;
+	background-position-y: 10px; 
+	background-size: 90%;*/
+	border-style: solid;
+	border-image-source: url(../media/border3.png);
+	border-image-slice: 30;
+	border-image-width: 30px;
+	border-image-repeat: repeat;
+	border-image-outset: 10px; /* Adjust the outset to move the border inwards */
+	user-select: none;
 }
 
 #gameStats{
