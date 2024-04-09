@@ -3,15 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="src/js/Dice.js"></script>
+  <script type="module" src="src/js/test.js"></script>
   <link rel="stylesheet" href="src/css/styles.css">
 	<title>Henchmen Hospital</title>
 </head>
 <body>
   <div class="wrapper">
     <div id="henchmen">
-      <img src="#" alt="Henchmen portrait" id="henchmenPortrait">
-      <p>Henchmen remaining: 3</p>
+      <img src="src/media/testAsset.png" alt="Henchmen portrait" id="henchmenPortrait">
+      <p>
+        Special effects: <br><br>
+        Your d6 has a 10% chance to do double healing. <br><br>
+        This henchman gets hurt by 2s! <br>
+      </p>
       
       <!-- Display current health by changing the current value.
       Change "max" based on the current enemy's max health -->
@@ -32,15 +36,13 @@
     </div>
     
     <div id="gameStats">
-      <span id="score">Score: 0</span><br>
-      <span id="stamina">Stamina: 100</span><br>
-      <span id="money">Money: 0</span><br>
+      <div id="score">Score: 0</div><br>
+      <div id="stamina">Stamina: 100</div><br>
+      <div id="money">Money: 0</div><br>
     </div>
     
-    <div id="diceEffectsDisplay">
-      <span>Special effects: </span>
-      <span>Your d6 has a 10% chance to do double healing.</span>
-      <span>This enemy gets hurt by 2s!</span>
+    <div id="waveInfo">
+      <span>Henchmen remaining: 3</span>
     </div>
     
     <div id="collectableEffects">
@@ -53,7 +55,7 @@
     </div>
     
     <!-- TODO- link button to roll function onclick -->
-    <button type="button" onclick id="rollDiceBtn">Roll Dice</button>
+    <button type="button" id="rollDiceBtn">Roll Dice</button>
   </div>
 
   

@@ -9,10 +9,25 @@
 	outline-style: none;
 }
 
+div {
+  background-image: url(../media/texture2.png);
+	background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+p {
+	background-image: url(../media/texture2.png);
+	background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .wrapper {
 	width: 100vw;
   height: 100vh;
-  background-image: url(../media/background.png);
+  background-image: url(../media/background2.png);
+	background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
@@ -66,13 +81,15 @@
   position: relative;
   left: 1%;
   top: .5%;
+	background-image: none;
+	background-color:saddlebrown;
 }
 
 #henchmen img{
   border: solid green;
   position: absolute;
   height: 70%;
-  width: 72%;
+  width: 30%;
 }
 
 #henchmen span{
@@ -97,7 +114,7 @@
   right: 0;
   top: 0;
   height: 70%;
-  width: 25%;
+  width: 67%;
 }
 
 #gameLogs{
@@ -129,11 +146,19 @@
   right: 1%;
   width: 48%;
   height: 25%;
-  text-align: center;
+  /* text-align: center; */
   font-size: 24px;
+	display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+	flex-direction: column; /* Arrange items in a column */
 }
 
-#diceEffectsDisplay{
+#gameStats > div {
+	background-image: none;
+}
+
+#waveInfo{
   border: solid hotpink;
   position: absolute;
   right: 25.5%;

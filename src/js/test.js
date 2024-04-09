@@ -13,7 +13,9 @@ function init() {
     }
 
     logoPicCannon = document.querySelector("#zimmerArtillery");
+    diceArea = document.querySelector("#diceArea");
     testPic = document.querySelector("#testPic");
+    rollDiceBtn = document.querySelector("#rollDiceBtn");
 
     anotherProperty = {
       property1: 12
@@ -37,13 +39,15 @@ function init() {
       let d20 = new Dice("d20");
       let roll = d20.roll();
       console.log(roll);
-      testPic.innerHTML = roll;
+      diceArea.innerHTML = roll;
+      diceArea.style.fontSize = "23rem";
+      diceArea.style.textAlign = "center";
 
-      if (testPic.style.backgroundColor != "blue") {
-        testPic.style.backgroundColor = "blue";
-      } else {
-        testPic.style.backgroundColor = "yellow";
-      }
+      // if (testPic.style.backgroundColor != "blue") {
+      //   testPic.style.backgroundColor = "blue";
+      // } else {
+      //   testPic.style.backgroundColor = "yellow";
+      // }
     }
   }
 
@@ -53,7 +57,8 @@ function init() {
 
   domAccessClassInstance.doStuff();
 
-  domAccessClassInstance.testPic.addEventListener("click", DOMAccess.getClicked);
+  domAccessClassInstance.diceArea.addEventListener("click", DOMAccess.getClicked);
+  domAccessClassInstance.rollDiceBtn.addEventListener("click", DOMAccess.getClicked);
 }
 
 window.onload = init;
