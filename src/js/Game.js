@@ -36,4 +36,11 @@ export class Game {
     this.waveHenchmen[9].maxHealth *= 10;
   }
 
+  endOfWave() {
+    // Call function at end of wave
+
+    // function should show options for stamina regen, shop, workshop, and other events
+    // then once complete function should show options of waves of henchmen
+  }
+
 }

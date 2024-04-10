@@ -239,3 +239,7 @@ div {
 	-ms-user-select: none; /* IE10+/Edge */
 	user-select: none; /* Standard syntax */
 }
+
+input[type='number'] {
+  width: 28px;
+}
