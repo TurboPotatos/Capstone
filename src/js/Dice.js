@@ -28,7 +28,7 @@ export class Dice {
         numOfSides = 10;
         break;
       case "d12":
-        numofSides = 12;
+        numOfSides = 12;
         break;
       case "d20":
         numOfSides = 20;

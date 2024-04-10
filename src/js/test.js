@@ -35,12 +35,22 @@ function init() {
     };
 
     static getClicked() {  
-      console.log("your did it");
+      //console.log("your did it");
       let d20 = new Dice("d20");
-      let roll = d20.roll();
-      console.log(roll);
-      diceArea.innerHTML = roll;
-      diceArea.style.fontSize = "23rem";
+      let d12 = new Dice("d12");
+      let d10 = new Dice("d10");
+      let d8 = new Dice("d8");
+      let d6 = new Dice("d6");
+      let d4 = new Dice("d4");
+      let roll20 = d20.roll();
+      let roll12 = d12.roll();
+      let roll10 = d10.roll();
+      let roll8 = d8.roll();
+      let roll6 = d6.roll();
+      let roll4 = d4.roll();
+      //console.log(roll);
+      diceArea.innerHTML = "d20:" + roll20 + "<br>d12:" + roll12 + "<br>d10:" + roll10 + "<br>d8:" + roll8 + "<br>d6:" + roll6 + "<br>d4:" + roll4;
+      diceArea.style.fontSize = "2rem";
       diceArea.style.textAlign = "center";
 
       // if (testPic.style.backgroundColor != "blue") {
