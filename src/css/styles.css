@@ -131,10 +131,15 @@ div {
 	border-image-repeat: repeat;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
+	overflow-y: auto;
+}
+
+#average {
+	float: right;
 }
 
 #logText{
-  overflow-y: auto;
+  overflow-y: auto; /*Doesn't work. Moved to gameLogs*/
 }
 
 #diceArea{

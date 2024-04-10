@@ -6,6 +6,9 @@ import { Player } from "./Player.js";
 
 function init() {
 
+  let total = 0;
+  let numRolls = 0;
+
   class DOMAccess {
     constructor(someParameterVariable, stuff) {
       this.exampleProperty = someParameterVariable;
@@ -16,6 +19,9 @@ function init() {
     diceArea = document.querySelector("#diceArea");
     testPic = document.querySelector("#testPic");
     rollDiceBtn = document.querySelector("#rollDiceBtn");
+    score = document.querySelector("#score");
+    logText = document.querySelector("#logText");
+    average = document.querySelector("#average");
 
     anotherProperty = {
       property1: 12
@@ -31,10 +37,15 @@ function init() {
       // console.log(`last paragraph = ${document.querySelector("#motd > p:last-child").innerText}`);
 
       let d20 = new Dice("d20");
-      console.log(d20.roll());
+      let roll = d20.roll();
+      console.log(roll);
+      if (roll == 20) {
+        console.log("a winner is you!");
+      }
     };
 
     static getClicked() {  
+      numRolls++;
       //console.log("your did it");
       let d20 = new Dice("d20");
       let d12 = new Dice("d12");
@@ -48,10 +59,18 @@ function init() {
       let roll8 = d8.roll();
       let roll6 = d6.roll();
       let roll4 = d4.roll();
+
+      let rollTotal = roll20 + roll12 + roll10 + roll8 + roll6 + roll4;
+
+      //console.log(this.stillAnotherProperty);
+      total += rollTotal;
+      score.innerHTML = "Score: " + total;
+      logText.innerHTML += "<br>" + rollTotal + " (" + "d20:" + roll20 + " d12:" + roll12 + " d10:" + roll10 + " d8:" + roll8 + " d6:" + roll6 + " d4:" + roll4 + ")";
+      average.innerHTML = "Running Average: " + Math.round(total / numRolls);
       //console.log(roll);
-      diceArea.innerHTML = "d20:" + roll20 + "<br>d12:" + roll12 + "<br>d10:" + roll10 + "<br>d8:" + roll8 + "<br>d6:" + roll6 + "<br>d4:" + roll4;
-      diceArea.style.fontSize = "2rem";
-      diceArea.style.textAlign = "center";
+      diceArea.innerHTML = "d20: " + roll20 + "<br>d12: " + roll12 + "<br>d10: " + roll10 + "<br>d8: &nbsp;&nbsp;" + roll8 + "<br>d6: &nbsp;&nbsp;" + roll6 + "<br>d4: &nbsp;&nbsp;" + roll4;
+      diceArea.style.fontSize = "3.5rem";
+      diceArea.style.textAlign = "left";
 
       // if (testPic.style.backgroundColor != "blue") {
       //   testPic.style.backgroundColor = "blue";
