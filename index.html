@@ -10,25 +10,26 @@
 </head>
 <body>
   <div class="wrapper">
-    <div id="titleScreen">
-      <img src="#" alt="This is an image" id="titleArt">
+    
+    <div id="signIn">
+      Sign In!
+      <form action="startScreen.html" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <br>
+        <input type="submit" name="submit" value="Sign In">
+
+      </form>
       
-      <h2>Henchmen Hospital</h2>
     </div>
 
-    <div id="scores">
-      <a href="#">Sign In</a>
-      <a href="#">Leaderboard</a> 
-    </div>
+    <a href="startScreen.html">Play as Guest</a>
 
-    <div id="menuDiv">
-      <a href="game.html">Start game</a>
-    </div>
   </div>
   
- 
-
-
   <script type="module" src="src/js/test.js"></script>
 
 </body>

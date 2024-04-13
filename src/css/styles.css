@@ -8,14 +8,12 @@
 	text-decoration: none;
 	outline-style: none;
 }
-
 div {
   background-image: url(../media/texture2.png);
 	background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
 }
-
 .wrapper {
 	width: 100vw;
   height: 100vh;
@@ -25,9 +23,7 @@ div {
   background-position: center;
   position: relative;
 }
-
 /* Title/Start screen */
-
 #titleScreen {
   border: solid green;
   position: absolute;
@@ -36,7 +32,6 @@ div {
   top: 1.5rem;
   height: 68%;
 }
-
 #menuDiv{
   border: solid red;
   position:absolute;
@@ -46,7 +41,6 @@ div {
   height: 95%;
   background-color: lightblue;
 }
-
 #scores{
   border: solid yellow;
   position: absolute;
@@ -55,7 +49,6 @@ div {
   width: 65%;
   height: 25%;
 }
-
 #testPic {
 	width: 30rem;
 	height: 30rem;
@@ -65,7 +58,6 @@ div {
   text-align: center;
 	/* background-image: url(../media/testAsset.png); */
 }
-
 /* Game Screen */
 #henchmen{
   border: solid red;
@@ -77,14 +69,12 @@ div {
 	background-image: none;
 	background-color:saddlebrown;
 }
-
 #henchmen img{
   border: solid green;
   position: absolute;
   height: 70%;
   width: 30%;
 }
-
 #henchmen span{
   position: absolute;
   bottom: 15%;
@@ -94,13 +84,11 @@ div {
   padding-top: 10px;
   font-size: 24px;
 }
-
 #henchmen input{
   position: absolute;
   bottom: 1rem;
   width: 100%;
 }
-
 #henchmen p{
 	padding: 2rem;
   border: solid blue;
@@ -116,7 +104,6 @@ div {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
-
 #gameLogs{
   position: absolute;
   /* border: solid orange; */
@@ -133,15 +120,12 @@ div {
 	padding: 1.5rem;
 	overflow-y: auto;
 }
-
 #average {
 	float: right;
 }
-
 #logText{
   overflow-y: auto; /*Doesn't work. Moved to gameLogs*/
 }
-
 #diceArea{
   /* border: solid yellow; */
   position: absolute;
@@ -163,7 +147,6 @@ div {
 	padding: 1.5rem;
 	overflow-y: auto;
 }
-
 #gameStats{
   border: solid darkorchid;
   position: absolute;
@@ -178,11 +161,9 @@ div {
   justify-content: center; /* Horizontally center items */
 	flex-direction: column; /* Arrange items in a column */
 }
-
 #gameStats > div {
 	background-image: none;
 }
-
 #waveInfo{
   border: solid hotpink;
   position: absolute;
@@ -193,7 +174,6 @@ div {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
-
 #collectibleEffects{
   border: solid #ab19;
   position: absolute;
@@ -204,7 +184,6 @@ div {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
-
 #specialDice{
   border: solid turquoise;
   position: absolute;
@@ -215,7 +194,6 @@ div {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
-
 #rollDiceBtn{
   position: absolute;
   right: 2.5%;
@@ -227,15 +205,17 @@ div {
   font-size: 40px;
   transition-duration: .2s;
 }
-
 #rollDiceBtn:hover{
   background-color: yellow;
   box-shadow: -5px 5px 20px blue;
 }
-
 .unselectable {
 	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* IE10+/Edge */
 	user-select: none; /* Standard syntax */
+}
+
+input[type='number'] {
+  width: 28px;
 }
