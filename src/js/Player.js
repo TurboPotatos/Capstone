@@ -14,8 +14,8 @@ export class Player {
   d8Array = [];
   d10Array = [];
   dPercentArray = [];
-  d126Array = [];
-  d206Array = [];
+  d12Array = [];
+  d20Array = [];
 
   // Arrays of Collectibles
   virtueArray = [];
