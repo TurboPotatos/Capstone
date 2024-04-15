@@ -22,12 +22,13 @@ function init() {
     score = document.querySelector("#score");
     logText = document.querySelector("#logText");
     average = document.querySelector("#average");
+    //static xyz = 10;
 
     anotherProperty = {
       property1: 12
     };
 
-    stillAnotherProperty = 25;
+    //stillAnotherProperty = 25;
 
     doStuff() {
       // let primaryContentDiv = document.querySelector("#primaryContent");
@@ -62,7 +63,7 @@ function init() {
 
       let rollTotal = roll20 + roll12 + roll10 + roll8 + roll6 + roll4;
 
-      //console.log(this.stillAnotherProperty);
+      //console.log(DOMAccess.xyz);
       total += rollTotal;
       score.innerHTML = "Score: " + total;
       logText.innerHTML += "<br>" + rollTotal + " (" + "d20:" + roll20 + " d12:" + roll12 + " d10:" + roll10 + " d8:" + roll8 + " d6:" + roll6 + " d4:" + roll4 + ")";
