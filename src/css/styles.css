@@ -242,6 +242,12 @@ div {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
+.boon {
+  /* border: solid #ab19; */
+  max-width: 28%;
+  max-height: 28%;
+  position: relative;
+}
 #specialDice{
   border: solid turquoise;
   position: absolute;
