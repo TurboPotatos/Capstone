@@ -9,25 +9,30 @@
   <title>Henchmen Hospital</title>
 </head>
 <body>
-  <div class="wrapper">
-    
-    <div id="signIn">
-      Sign In!
-      <form action="startScreen.html" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password">
-        <br>
-        <input type="submit" name="submit" value="Sign In">
+  <div class="container">
 
-      </form>
+    <div id="content">
+      <div class="leftSide">
+        <img src="src/media/boon_labCoat.png" alt="placeholder">
+      </div>
       
+      <div id="signIn">
+        <h2>Welcome to Henchmen Hospital!</h2>
+        <h3>Sign in!</h3> <br><br>
+        <form action="startScreen.html" method="#">
+          <input type="text" name="username" placeholder="Username">
+          <input type="text" name="password" placeholder="Password">
+          <input type="submit" name="submit" value="Sign In">
+        </form>
+        <br>
+        Don't have an account yet?<br>
+        <a href="#">Create Account</a>
+        
+        <br><br><br><br><br>
+        Or
+        <a href="startScreen.html">Play as Guest</a>
+      </div>
     </div>
-
-    <a href="startScreen.html">Play as Guest</a>
-
   </div>
   
   <script type="module" src="src/js/test.js"></script>
