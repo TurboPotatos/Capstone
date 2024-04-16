@@ -8,7 +8,7 @@
 	text-decoration: none;
 	outline-style: none;
 }
-div {
+#gameDiv div {
   background-image: url(../media/texture2.png);
 	background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -36,7 +36,7 @@ div {
 
 #content{
   display: flex;
-  width: 60%;
+  width: 80%;
 }
 
 .leftSide,
@@ -45,18 +45,23 @@ div {
   max-width: 50%;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: cadetblue;
+  font-size: 1.6rem;
+  text-shadow: black 1px 1px 5px;
+
 }
 
-.leftSide img {
-  max-width: 100%;
-  height: auto;
+.leftSide {
+  background-image: url(../media/potionDice_transparent.png);
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
 
 #signIn h2 {
   margin-bottom: 1.5rem;
@@ -89,6 +94,13 @@ div {
   left: 2.5rem;
   top: 1.5rem;
   height: 68%;
+  color:cadetblue;
+  font-size: 3.5rem;
+  text-shadow: black 2px 1px 1px;
+  background-image: url(../media/otter-space.jpg);
+  background-size: cover;
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+	padding: 1.5rem;
 }
 #menuDiv{
   border: solid red;
@@ -97,7 +109,7 @@ div {
   top: 1.5rem;
   right: 1.5rem;
   height: 95%;
-  background-color: lightblue;
+  background-color: cadetblue;
 }
 #scores{
   border: solid yellow;
