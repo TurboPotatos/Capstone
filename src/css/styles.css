@@ -103,6 +103,9 @@
 	padding: 1.5rem;
 }
 #menuDiv{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: solid red;
   position:absolute;
   width: 30%;
@@ -110,7 +113,16 @@
   right: 1.5rem;
   height: 95%;
   background-color: cadetblue;
+  align-items: center;
 }
+
+#menuDiv form{
+  display: flex;
+  flex-direction: column;
+}
+
+
+
 #scores{
   border: solid yellow;
   position: absolute;
@@ -128,6 +140,61 @@
   text-align: center;
 	/* background-image: url(../media/testAsset.png); */
 }
+
+/* Leaderboard/History */
+
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  width: 100vw;
+}
+.tab a{
+  position: absolute;
+  right: 0;
+  padding: 10px 30px 7px 30px;
+}
+.tab button {
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  width: 50%;
+  border-bottom: 2px solid transparent;
+}
+
+.tab button:hover {
+  background-color: #ddd;
+}
+
+.tab button.active {
+  background-color: cadetblue;
+}
+
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  background-color: white;
+  width: 48.5%;
+  background-color: cadetblue;
+}
+
+#history{
+  position: relative;
+  left: 50%;
+  height: 100vh;
+}
+
+#leaderboard{
+  position: relative;
+  height: 100vh;
+}
+
+
+
+
 /* Game Screen */
 #henchmen{
   border: solid red;
