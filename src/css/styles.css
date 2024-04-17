@@ -320,6 +320,7 @@
   height: 35%;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
+  overflow-y: auto;
 }
 .boon {
   /* border: solid #ab19; */
