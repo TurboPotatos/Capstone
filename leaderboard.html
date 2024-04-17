@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+  <body>
+    <div class="wrapper" style="flex-direction: column;">
+      <div class="tab">
+        <a href="startScreen.html">Back to Start</a>
+        <button class="tablinks" onclick="openTab(event, 'leaderboard')" id="defaultOpen">Leaderboard</button>
+        <button class="tablinks" onclick="openTab(event, 'history')">History</button>
+      </div>
+
+      <div id="leaderboard" class="tabcontent">
+        <h3>Leaderboard Content</h3>
+        <p>This is the content for the leaderboard.</p>
+      </div>
+
+      <div id="history" class="tabcontent">
+        <h3>History Content</h3>
+        <p>This is the content for the history.</p>
+      </div>
+
+    </div>
+
+    <script>
+      document.getElementById("defaultOpen").click();
+    
+      function openTab(event, tabName) {
+        var tabcontent = document.getElementsByClassName("tabcontent");
+        for (var i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+    
+        var tablinks = document.getElementsByClassName("tablinks");
+        for (var i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+    
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.className += " active";
+      }
+    </script>
+    
+  </body>
+</html>
