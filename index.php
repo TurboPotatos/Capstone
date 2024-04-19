@@ -9,6 +9,15 @@
   <title>Henchmen Hospital</title>
 </head>
 <body>
+  <div class="navBar">
+    <a href="index.php">Sign In</a>
+    <a href="startScreen.html">Start Screen</a>
+    <a href="leaderboard.html">Leaderboard/History</a>
+    <a href="game.html">Game</a>
+    <a href="gameOver.html">Game Over</a>
+    <a href="shop.html">Shop</a>
+    <a href="workshop.html">Workshop</a>
+  </div>
   <div class="container">
 
     <div id="content">
