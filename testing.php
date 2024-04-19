@@ -66,7 +66,7 @@
   function redirect($url) {
     header('Location: '.$url);
     die();
-}
+  }
 
 
   $signUpPressed = sanitizeString(INPUT_POST, 'signUp'); 
