@@ -123,6 +123,9 @@
       ?> 
         <h2>Welcome to Henchmen Hospital!</h2>
         <h3>Sign in!</h3> <br><br>
+		
+		<!-- TODO: serialize the player object as a cookie -->
+		
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <input type="text" name="username" placeholder="Username">
           <input type="password" name="password" placeholder="Password">
@@ -145,6 +148,6 @@
     </div>
   </div>
   
-  <script type="module" src="src/js/test.js"></script>
+  <!-- <script type="module" src="src/js/test.js"></script> -->
 </body>
 </html>
