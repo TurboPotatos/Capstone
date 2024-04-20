@@ -19,42 +19,41 @@
   </div>
   <div class="wrapper" id="gameDiv">
 
-    <div id="henchmen">
-      <img src="src/media/testAsset.png" alt="Henchmen portrait" id="henchmenPortrait">
-      <p>
+    <div id="henchmenChart">
+      <!-- <p>
         Special effects: <br><br>
         Your d6 has a 10% chance to do double healing. <br><br>
         This henchman gets hurt by 2s! <br>
-      </p>
-      
-      <!-- Display current health by changing the current value.
-      Change "max" based on the current enemy's max health -->
-      <span>Henchmen Health: 100 </span>
-      <input type="range" min="0" max="100" value="100" id="healthBar" disabled>
-      
+      </p> -->
+      Placeholder: Henchmen medical charts
+    </div>
+    <div id="henchmenHealth">
+      Health
+    </div>
+    <div id="henchman">
+      Placeholder: Henchman portrait
     </div>
     
-    <div id="gameLogs">
-      <span>Game logs:</span>
-      <span id="average">Running Average:</span>
-      <p id="logText">
-        This is a log entry.
-      </p>
+   
+    <div id="diceContainer">
+      <!-- TODO: Add tabs for normal/special dice, add dice rolls -->
+      <div id="diceArea">
+        Dice Roll Area
+      </div>
+      <div id="specialDice">
+        <span>Special dice</span>
+      </div>
     </div>
-    <!-- TODO: figure out what the "dice rolling area" is exactly -->
-    <div id="diceArea">
-      Dice Roll Area
-    </div>
+    <button type="button" id="rollDiceBtn">Roll Dice</button>
     
-    <div id="gameStats">
+    <!-- 
+      TODO: Figure out where to put these
+      <div id="gameStats">
       <div id="score">Score: 0</div><br>
       <div id="stamina">Stamina: 100</div><br>
       <div id="money">Money: 0</div><br>
-    </div>
+    </div> -->
     
-    <div id="waveInfo">
-      <span>Henchmen remaining: 3</span>
-    </div>
     
     <div id="collectibleEffects">
       <span id="boonEffects">Boon effects: </span>
@@ -119,12 +118,16 @@ This is what Portal Gun does">
 This is what Star does">
     </div>
     
-    <div id="specialDice">
-      <span>Special dice</span>
+     <div id="gameLogs">
+      <span>Game logs:</span>
+      <br>
+      <span id="average">Running Average:</span>
+      <br>
+      <p id="logText">
+        This is a log entry.
+      </p>
     </div>
     
-    <!-- TODO- link button to roll function onclick -->
-    <button type="button" id="rollDiceBtn">Roll Dice</button>
   </div>
 
   

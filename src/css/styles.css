@@ -20,7 +20,7 @@
 }
 
 #gameDiv div {
-  background-image: url(../media/texture2.png);
+  /* background-image: url(../media/texture2.png); */
 	background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -219,58 +219,39 @@
 
 
 /* Game Screen */
-#henchmen{
-  border: solid red;
-  height: 40%;
-  width: 48.5%;
+#henchmenChart{
+  height: 56%;
+  width: 35%;
   position: relative;
   left: 1%;
   top: .5%;
 	background-image: none;
 	background-color:saddlebrown;
 }
-#henchmen img{
-  border: solid green;
+#henchmenHealth{
   position: absolute;
-  height: 70%;
-  width: 30%;
+  left: 37%;
+  top: 1%;
+  background-color: green;
+  width: 38%;
+  height: 3%;
 }
-#henchmen span{
+
+#henchman{
+  background-image: url(../media/testAsset.png);
   position: absolute;
-  bottom: 15%;
-  width: 100%;
-  height: 10%;
-  text-align: center;
-  padding-top: 10px;
-  font-size: 24px;
+  left: 37%;
+  top: 5%;
+  width: 38%;
+  height: 51%;
 }
-#henchmen input{
-  position: absolute;
-  bottom: 1rem;
-  width: 100%;
-}
-#henchmen p{
-	padding: 2rem;
-  border: solid blue;
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 70%;
-  width: 67%;
-	background-image: url(../media/texture2.png);
-	background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
-}
+
 #gameLogs{
   position: absolute;
-  /* border: solid orange; */
-  left: 1%;
+  right: 1%;
   bottom: 1%;
-  width: 20%;
-  height: 56%;
+  width: 45%;
+  height: 35%;
 	border-style: solid;
 	border-image-source: url(../media/border4.png);
 	border-image-slice: 30;
@@ -281,21 +262,17 @@
 	overflow-y: auto;
 }
 #average {
-	float: right;
+	float: left;
 }
-#logText{
-  overflow-y: auto; /*Doesn't work. Moved to gameLogs*/
-}
+
 #diceArea{
-  /* border: solid yellow; */
+  color: white;
   position: absolute;
   bottom: 1%;
-  right: 50.2%;
-  height: 56%;
-  width: 27%;
-	/* background-position-x: 10px;
-	background-position-y: 10px; 
-	background-size: 90%;*/
+  left: 1%;
+  height: 35%;
+  width: 45%;
+  background-image: url(../media/unwrappedDiceOutlines.png);
 	border-style: solid;
 	border-image-source: url(../media/border3.png);
 	border-image-slice: 30;
@@ -307,6 +284,46 @@
 	padding: 1.5rem;
 	overflow-y: auto;
 }
+
+#specialDice{
+  color: white;
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+  height: 35%;
+  width: 45%;
+  background-image: url(../media/unwrappedDiceOutlines.png);
+	border-style: solid;
+	border-image-source: url(../media/border3.png);
+	border-image-slice: 30;
+	border-image-width: 30px;
+	border-image-repeat: repeat;
+	border-image-outset: 10px; /* Adjust the outset to move the border inwards */
+	user-select: none;
+	box-sizing: border-box; /* Include padding and border in the total width and height */
+	padding: 1.5rem;
+	overflow-y: auto;
+  display: none;
+}
+
+#rollDiceBtn{
+  position: absolute;
+  left: 40%;
+  bottom: 15%;
+  height: 5%;
+  width: 15%;
+  color: blue;
+  background-color: #fafd35;
+  font-size: 40px;
+  transition-duration: .2s;
+  transform: rotate(270deg);
+}
+#rollDiceBtn:hover{
+  background-color: yellow;
+  box-shadow: -5px 5px 20px blue;
+}
+
+
 #gameStats{
   border: solid darkorchid;
   position: absolute;
@@ -324,23 +341,14 @@
 #gameStats > div {
 	background-image: none;
 }
-#waveInfo{
-  border: solid hotpink;
-  position: absolute;
-  right: 25.5%;
-  top: 27%;
-  width: 23.5%;
-  height: 35%;
-	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
-}
+
 #collectibleEffects{
   border: solid #ab19;
   position: absolute;
-  top: 27%;
+  top: 1%;
   right: 1%;
   width: 23.5%;
-  height: 35%;
+  height: 55%;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
   overflow-y: auto;
@@ -351,31 +359,7 @@
   max-height: 28%;
   position: relative;
 }
-#specialDice{
-  border: solid turquoise;
-  position: absolute;
-  right: 25.5%;
-  bottom: 1%;
-  height: 35%;
-  width: 23.5%;
-	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
-}
-#rollDiceBtn{
-  position: absolute;
-  right: 2.5%;
-  bottom: 13%;
-  height: 13%;
-  width: 20%;
-  color: blue;
-  background-color: #f8fa75;
-  font-size: 40px;
-  transition-duration: .2s;
-}
-#rollDiceBtn:hover{
-  background-color: yellow;
-  box-shadow: -5px 5px 20px blue;
-}
+
 .unselectable {
 	-webkit-user-select: none; /* Safari */
 	-moz-user-select: none; /* Firefox */
