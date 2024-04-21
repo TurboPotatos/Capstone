@@ -224,18 +224,79 @@
 
 /* Game Screen */
 #henchmenChart{
-  height: 80%;
-  width: 36%;
+  height: clamp(37rem, 50rem, 82%);
+  /* height: 80%; */
+  width: 31%;
   position: absolute;
-  right: 1%;
-  top: .5%;
-	background-image: url(../media/clipboard.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-position: 4rem -4rem;
-	background-color:saddlebrown;
+  right: 4%;
+  top: 2%;
+	/* background-image: url(../media/clipboard.png); */
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+  /* background-position: 4rem -4rem; */
+	background-color: white;
+  border-style: solid;
+	border-image-source: url(../media/border_clipboard.png);
+	border-image-slice: 30;
+	border-image-width: 30px;
+	border-image-repeat: repeat;
+	border-image-outset: 10px;
+	user-select: none;
 }
+#box {
+  position: absolute;
+  background-color: #b1b1b1;
+  height: 25%;
+  width: 30%;
+  top: 7%;
+  left: 9%;
+  background: url(../media/profilePic.png) no-repeat;
+  background-size: contain;
+  /* background-position: -200px -300px;
+  background-size: contain;
+  background-size: 1000px 1000px; */
+}
+#table1 {
+  width: 48%;
+  border-collapse: collapse;
+  position: absolute;
+  top: 7%;
+  right: 9%;
+  /* table-layout: fixed; */
+}
+#table2 {
+  width: 82%;
+  border-collapse: collapse;
+  position: absolute;
+  top: 35%;
+  left: 9%;
+  /* table-layout: fixed; */
+}
+th, td {
+  /* border: 1px solid #ccc; */
+  /* padding: 8px; */
+  text-align: left;
+  height: 2.5vh;
+  /* font-size: .3vh; */
+}
+th {
+  background-color: #b1b1b1; /* Grey background for header */
+}
+tr:nth-child(even) {
+  background-color: #d3d3d3; /* White background for even rows */
+}
+tr:nth-child(odd) {
+  background-color: #fff; /* Grey background for odd rows */
+}
+.Placeholder {
+  color: #b1b1b1;
+}
+#henchName {
+  font-size: clamp(1rem, 3.3vw, 3.35rem);
+}
+
+
 #field_01 {
   border: solid red;
   float: left;
