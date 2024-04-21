@@ -9,6 +9,10 @@
 	outline-style: none;
 }
 
+::-webkit-scrollbar { /* ////////////INVISIBLE SCROLLBARS//////////// */
+  display: none;
+}
+
 .navBar{
   width: 100%;
   height: 2rem;
@@ -19,12 +23,12 @@
   padding: 0px 20px;
 }
 
-#gameDiv div {
-  /* background-image: url(../media/texture2.png); */
+/* #gameDiv div {
+  background-image: url(../media/texture2.png);
 	background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
-}
+} */
 .wrapper {
 	width: 100vw;
   height: 100vh;
@@ -220,29 +224,116 @@
 
 /* Game Screen */
 #henchmenChart{
-  height: 56%;
-  width: 35%;
-  position: relative;
-  left: 1%;
+  height: 80%;
+  width: 36%;
+  position: absolute;
+  right: 1%;
   top: .5%;
-	background-image: none;
+	background-image: url(../media/clipboard.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position: 4rem -4rem;
 	background-color:saddlebrown;
 }
+#field_01 {
+  border: solid red;
+  float: left;
+  position: relative;
+  height: 8vh;
+  width: 11vw;
+  top: 14vh;
+  left: 12vw;
+  font-size: 2.5rem;
+  padding: .2rem;
+  box-sizing: border-box;
+}
+/* #field_01 {
+  border: solid red;
+  float: left;
+  position: relative;
+  height: 10%;
+  width: 31%;
+  top: 17.5%;
+  left: 33.5%;
+  font-size: 2.5rem;
+  padding: .2rem;
+  box-sizing: border-box;
+} */
+/* #field_01 {
+  border: solid red;
+  float: left;
+  position: relative;
+  height: 4rem;
+  width: 12rem;
+  top: 7rem;
+  left: 13rem;
+  font-size: 2.5rem;
+  padding: .2rem;
+  box-sizing: border-box;
+} */
+#field_02 {
+  border: solid blue;
+  float: left;
+  position: relative;
+  height: 7.3rem;
+  width: 50%;
+  top: 13.9rem;
+  left: -7rem;
+  padding: .2rem;
+  box-sizing: border-box;
+}
+#field_03 {
+  border: solid green;
+  float: left;
+  position: relative;
+  height: 8rem;
+  width: 17rem;
+  top: 14.9rem;
+  left: 5.05rem;
+  padding: .2rem;
+  box-sizing: border-box;
+}
+#field_04 {
+  border: solid yellow;
+  float: left;
+  position: relative;
+  height: 7.3rem;
+  width: 1.9rem;
+  top: 5.9rem;
+  left: 5.9rem;
+  font-weight: bolder;
+}
+#field_05 {
+  border: solid purple;
+  float: left;
+  position: relative;
+  height: 7.1rem;
+  width: 1.9rem;
+  top: 15.9rem;
+  left: 3.8rem;
+  font-weight: bolder;
+}
+
 #henchmenHealth{
   position: absolute;
-  left: 37%;
+  left: 34%;
   top: 1%;
   background-color: green;
-  width: 38%;
+  width: 27%;
   height: 3%;
 }
 
 #henchman{
-  background-image: url(../media/testAsset.png);
+  border: solid black;
+  background-image: url(../media/henchman_goomba.png), url(../media/texture2.png);
+  background-size: contain, cover;
+  background-repeat: no-repeat;
+  background-position: center;
   position: absolute;
-  left: 37%;
+  left: 34%;
   top: 5%;
-  width: 38%;
+  width: 27%;
   height: 51%;
 }
 
@@ -273,6 +364,9 @@
   height: 35%;
   width: 45%;
   background-image: url(../media/unwrappedDiceOutlines.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 	border-style: solid;
 	border-image-source: url(../media/border3.png);
 	border-image-slice: 30;
@@ -346,8 +440,8 @@
   border: solid #ab19;
   position: absolute;
   top: 1%;
-  right: 1%;
-  width: 23.5%;
+  left: 1%;
+  width: 31%;
   height: 55%;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
@@ -355,8 +449,8 @@
 }
 .boon {
   /* border: solid #ab19; */
-  max-width: 28%;
-  max-height: 28%;
+  max-width: clamp(4rem, 5.6rem, 28%);
+  max-height: clamp(4rem, 5.6rem, 28%);
   position: relative;
 }
 
