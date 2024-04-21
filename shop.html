@@ -16,5 +16,99 @@
     <a href="shop.html">Shop</a>
     <a href="workshop.html">Workshop</a>
   </div>
+  <div class="wrapper" style="flex-direction: column;">
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'vendingMachine')" id="defaultOpen">Vending Machine</button>
+      <button class="tablinks" onclick="openTab(event, 'diceMachine')">Dice Machine</button>
+    </div>
+
+    <div id="vendingMachine" class="shopTabcontent">
+      <!-- <h3>vendingMachine Content</h3> -->
+      <!-- <p>This is the content for the vendingMachine.</p> -->
+
+      <div id="dispensors"></div>
+
+      <div id="vendingItems">
+        <div id="vendingItems1">
+          <img src="src/media/boon_pickaxe.png" class="boon" alt="Pickaxe" title="Pickaxe
+          
+          This is what Pickaxe does">
+                <img src="src/media/boon_pokeball.png" class="boon" alt="Pokeball" title="Pokeball
+                
+          This is what Pokeball does">
+                <img src="src/media/boon_portalGun.png" class="boon" alt="Portal Gun" title="Portal Gun
+                
+          This is what Portal Gun does">
+        </div>
+
+        <div id="vendingItems2">
+          <img src="src/media/boon_star.png" class="boon" alt="Star" title="Star
+          
+          This is what Star does">
+                <img src="src/media/boon_triforce.png" class="boon" alt="Triforce" title="Triforce
+                
+          This is what Triforce does">
+                <img src="src/media/boon_mushroom.png" class="boon" alt="Mushroom" title="Mushroom
+                
+          This is what Mushroom does">
+        </div>
+
+        <div id="vendingItems3">
+          <img src="src/media/boon_elderScroll.png" class="boon" alt="ElderScroll" title="ElderScroll
+          
+          This is what ElderScroll does">
+                <img src="src/media/boon_companionCube.png" class="boon" alt="Companion Cube" title="Companion Cube
+                
+          This is what Companion Cube does">
+                <img src="src/media/boon_estusFlask.png" class="boon" alt="Estus Flask" title="Estus Flask
+                
+          This is what Estus Flask does">
+        </div>
+
+        <div id="vendingItems4">
+          <img src="src/media/boon_nukaCola.png" class="boon" alt="Nuka Cola" title="Nuka Cola
+          
+          This is what Nuka Cola does" style="transform: rotate(-42deg);">
+                <img src="src/media/boon_tetrisPiece.png" class="boon" alt="Tetris Piece" title="Tetris Piece
+                
+          This is what Tetris Piece does">
+                <img src="src/media/boon_crowbar.png" class="boon" alt="Crowbar" title="Crowbar
+                
+          This is what Crowbar does">
+        </div>
+      </div>
+    </div>
+
+    <div id="diceMachine" class="shopTabcontent">
+      <!-- <h3>diceMachine Content</h3> -->
+      <!-- <p>This is the content for the diceMachine.</p> -->
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("defaultOpen").click();
+
+    function openTab(event, tabName) {
+      var tabcontent = document.getElementsByClassName("shopTabcontent");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      var tablinks = document.getElementsByClassName("tablinks");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      event.currentTarget.className += " active";
+    }
+
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    if (tab === 'diceMachine') {
+      openTab(event, 'diceMachine');
+    }
+  </script>
 </body>
 </html>
