@@ -273,7 +273,8 @@
   /* border: solid green; */
   float: left;
   position: relative;
-  top: 8%;
+  top: 5%;
+  height: 20%;
 }
 #vendingItems3 {
   /* border: solid blue; */
@@ -287,12 +288,30 @@
   position: relative;
   top: 15%;
 }
-#vendingItems1 > .boon,
-#vendingItems2 > .boon,
-#vendingItems3 > .boon,
-#vendingItems4 > .boon {
+.boonContainer .boon {
+  width: 100%;
+}
+.tooltip {
+  position: absolute;
+  /* top: 10%; */
+  /* left: 10%; */
+  width: 250%;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
+}
+/* .boonContainer:hover .tooltip {
+  display: block;
+} */
+.boonContainer {
+  /* border: solid red; */
+  display: block;
+  float: left;
+  position: relative;
   width: 25%;
-  /* height: ; */
 }
 
 #diceMachine{
