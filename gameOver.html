@@ -16,16 +16,37 @@
     <a href="shop.html">Shop</a>
     <a href="workshop.html">Workshop</a>
   </div>
-	<h2>Game Over</h2>
-  <div id="endingStats">
-    <p>Game stats</p>
-    <p id="henchmenHealedAmount">You healed 4,000,000,000,000,000,001 henchmen.</p>
+  <div class="wrapper" style="border: 1px solid red;">
+    <h2 id="gameOver">Game Over!</h2>
+    
+    <table id="statsTable">
+      <th>Stats</th>
+      <tr>
+        <td>Henchmen Healed: <span>.</span></td>
+      </tr>
+      <tr>
+        <td>Healing done: <span>.</span></td>
+      </tr>
+      <tr>
+        <td>Money earned: <span>.</span></td>
+      </tr>
+      <tr>
+        <td>Total Score: <span>.</span></td>
+      </tr>
+    </table>
+
+    
+    <table id="infoTable">
+      <th>Info</th>
+      <tr>
+        <td>Specialization: <span>.</span></td>
+      </tr>
+      <tr>
+        <td>Boons Collected: <span id="collectedBoons"><img src="src/media/boon_labCoat.png"></span></td>
+      </tr>
+    </table>
+    
+    <a href="index.php" style="color: white;">Continue</a>
   </div>
-  
-  <div id="ownedItems">
-    <p>Owned items: </p>
-  </div>
-  
-  <a href="index.html">Continue</a>
 </body>
 </html>
