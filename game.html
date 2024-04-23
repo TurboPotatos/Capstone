@@ -3,7 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="module" src="src/js/test.js"></script>
+  <!-- <script type="module" src="src/js/test.js"></script> -->
+  <script type="module" src="src\js\gameview\GameView.js"></script>
+  
   <link rel="stylesheet" href="src/css/styles.css">
 	<title>Henchmen Hospital</title>
 </head>
@@ -135,23 +137,27 @@
     
    
     <div id="diceContainer">
-      <!-- TODO: Add tabs for normal/special dice, add dice rolls -->
-      <div id="diceArea">
+      <div>
+        <button class="diceTabs" onclick="openTab(event, 'diceArea')" id="defaultOpen">Dice Area</button>
+        <button class="diceTabs" onclick="openTab(event, 'specialDice')">Special Dice</button>
+      </div>
+      
+      <div id="diceArea" class="diceRolling">
         Dice Roll Area
       </div>
-      <div id="specialDice">
-        <span>Special dice</span>
+
+      <div id="specialDice" class="diceRolling">
+        Special Dice
       </div>
     </div>
     <button type="button" id="rollDiceBtn">Roll Dice</button>
     
-    <!-- 
-      TODO: Figure out where to put these
-      <div id="gameStats">
-      <div id="score">Score: 0</div><br>
+    
+    <div id="gameStats">
       <div id="stamina">Stamina: 100</div><br>
+      <div id="score">Score: 0</div><br>
       <div id="money">Money: 0</div><br>
-    </div> -->
+    </div>
     
     
     <div id="collectibleEffects">
@@ -240,7 +246,7 @@ This is what Tetris Piece does">
       
 This is what Crowbar does">
     </div>
-    
+    <div id="gameLogsTab">Logs</div>
      <div id="gameLogs">
       <span>Game logs:</span>
       <br>
@@ -253,6 +259,36 @@ This is what Crowbar does">
     
   </div>
 
-  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const gameLogs = document.getElementById("gameLogs");
+      const gameLogsTab = document.getElementById("gameLogsTab");
+
+      gameLogsTab.addEventListener("click", function() {
+        gameLogs.classList.toggle("collapsed");
+        gameLogsTab.classList.toggle("collapsed");
+      });
+    });
+
+    document.getElementById("defaultOpen").click();
+
+    function openTab(event, tabName) {
+      var tabcontent = document.getElementsByClassName("diceRolling");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      var diceTabs = document.getElementsByClassName("diceTabs");
+      for (var i = 0; i < diceTabs.length; i++) {
+        diceTabs[i].className = diceTabs[i].className.replace(" active", "");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      event.currentTarget.className += " active";
+    }
+
+
+  </script>
 </body>
 </html>
+

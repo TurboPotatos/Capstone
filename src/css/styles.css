@@ -37,7 +37,6 @@
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
-  display: flex;
   align-items: stretch;
 }
 
@@ -493,6 +492,12 @@ tr:nth-child(odd) {
   height: 3%;
 }
 
+#staminaBar{
+  width: 100%;
+  height: 100%;
+  background-color: green;
+}
+
 #henchman{
   border: solid black;
   background-image: url(../media/henchman_goomba.png), url(../media/texture2.png);
@@ -503,13 +508,13 @@ tr:nth-child(odd) {
   left: 34%;
   top: 5%;
   width: 27%;
-  height: 51%;
+  height: 46%;
 }
 
 #gameLogs{
-  position: absolute;
-  right: 1%;
-  bottom: 1%;
+  position: fixed;
+  right: 0;
+  bottom: 0;
   width: 45%;
   height: 35%;
 	border-style: solid;
@@ -520,18 +525,63 @@ tr:nth-child(odd) {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 	overflow-y: auto;
+  overflow-x: hidden;
+  transition: right 0.5s;
 }
+
+#gameLogs.collapsed {
+  right: -44%; /* Collapsed state */
+}
+
+#gameLogsTab {
+  background-color: salmon;
+  position: fixed;
+  bottom: 4%;
+  right: 44%;
+  transform: rotate(270deg);
+  z-index: 500;
+  font-size: 20px;
+  padding: 2px 10px;
+  cursor: pointer;
+  transition: right 0.5s;
+}
+#gameLogsTab.collapsed{
+  right: 0%;
+}
+
 #average {
 	float: left;
 }
 
-#diceArea{
-  color: white;
+#diceContainer{
   position: absolute;
   bottom: 1%;
   left: 1%;
   height: 35%;
   width: 45%;
+}
+
+.diceTabs {
+  position: relative;
+  float: left;
+  cursor: pointer;
+  padding: 5px;
+  transition: 0.3s;
+  width: 50%;
+  border-bottom: 2px solid transparent;
+  border-radius: 2px;
+  top: -1rem;
+}
+
+.diceTabs:hover {
+  background-color: #ddd;
+}
+
+.diceTabs.active {
+  background-color: cadetblue;
+}
+
+#diceArea{
   background-image: url(../media/unwrappedDiceOutlines.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -542,31 +592,29 @@ tr:nth-child(odd) {
 	border-image-width: 30px;
 	border-image-repeat: repeat;
 	border-image-outset: 10px; /* Adjust the outset to move the border inwards */
-	user-select: none;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
-	overflow-y: auto;
+  color: white;
+  height: 100%;
+  padding-left: 20px;
 }
+  
+
 
 #specialDice{
-  color: white;
-  position: absolute;
-  bottom: 1%;
-  left: 1%;
-  height: 35%;
-  width: 45%;
   background-image: url(../media/unwrappedDiceOutlines.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 	border-style: solid;
 	border-image-source: url(../media/border3.png);
 	border-image-slice: 30;
 	border-image-width: 30px;
 	border-image-repeat: repeat;
 	border-image-outset: 10px; /* Adjust the outset to move the border inwards */
-	user-select: none;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
-	overflow-y: auto;
-  display: none;
+  color: white;
+  height: 100%;
+  padding-left: 20px;
 }
 
 #rollDiceBtn{
@@ -590,18 +638,17 @@ tr:nth-child(odd) {
 #gameStats{
   border: solid darkorchid;
   position: absolute;
-  top: .5%;
-  right: 1%;
+  top: 53%;
+  left: 1%;
   width: 48%;
-  height: 25%;
-  /* text-align: center; */
-  font-size: 24px;
+  height: 7%;
+  font-size: 20px;
 	display: flex;
-  align-items: center; /* Vertically center items */
-  justify-content: center; /* Horizontally center items */
-	flex-direction: column; /* Arrange items in a column */
+  align-items: center;
 }
 #gameStats > div {
+  flex: 1;
+  text-align: center;
 	background-image: none;
 }
 
@@ -611,7 +658,7 @@ tr:nth-child(odd) {
   top: 1%;
   left: 1%;
   width: 31%;
-  height: 55%;
+  height: 50%;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
   overflow-y: auto;
@@ -621,6 +668,48 @@ tr:nth-child(odd) {
   max-width: clamp(4rem, 5.6rem, 28%);
   max-height: clamp(4rem, 5.6rem, 28%);
   position: relative;
+}
+
+/* Game Over */
+
+#gameOver{
+  color: white;
+  text-align: center;
+  padding: 1.4rem 0;
+}
+
+#statsTable{
+  position: absolute;
+  width: 38%;
+  margin-top: 2%;
+  left: 10%;
+}
+
+#infoTable{
+  position: absolute;
+  width: 38%;
+  margin-top: 2%;
+  right: 10%;
+}
+
+#statsTable th{
+  text-align: center;
+}
+
+#statsTable td{
+  height: 3rem;
+}
+
+#statsTable span{
+  float: right;
+}
+
+#infoTable td{
+  height: 6.1rem;
+}
+
+#infoTable img{
+  height: 3rem;
 }
 
 .unselectable {
