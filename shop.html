@@ -135,9 +135,96 @@
       <!-- <h3>diceMachine Content</h3> -->
       <!-- <p>This is the content for the diceMachine.</p> -->
     </div>
+    <div id="buyItem">Buy Item</div>
+    <div id="playerInfo">See Player Info</div>
   </div>
+  
 
+
+  <script src="./src/js/Collectibles.js" type="module"></script>
+  <script src="./src/js/Boons.js" type="module"></script>
+  <script src="./src/js/Player.js" type="module"></script>
+  <script type="module">
+    import { Player } from "./src/js/Player.js";
+    import { Collectibles } from "./src/js/Collectibles.js";
+    import { Boons } from "./src/js/Boons.js";
+
+    let player = new Player();
+
+    let activeBoon = new Boons();
+
+    const shopContent = document.querySelectorAll('.boonContainer');
+
+    const overLayer = document.querySelector('#dispensors');
+
+    overLayer.addEventListener("mousedown", (e) => {
+
+      const x = e.clientX;
+      const y = e.clientY;
+
+      // console.log("x: " + x + " y: " + y);
+
+      shopContent.forEach(shopItem => {
+        const rect = shopItem.getBoundingClientRect();
+        const tooltip = shopItem.querySelector('.tooltip');
+
+        // console.log("left: " + rect.left + "right: " + rect.right + "top: " + rect.top + "bottom: " + rect.bottom);
+        // console.log(tooltip);
+
+        if (tooltip) {
+          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+            tooltip.style.display = 'block';
+            activeBoon = new Boons(shopItem.id.substring(5));
+          } else {
+            tooltip.style.display = 'none';
+          }
+        }
+
+      });
+    });
+    
+    shopContent.forEach(shopItem => {
+      
+      // Get random boon
+      let boon = new Boons();
+      boon.setToRandomBoon();
+      console.log(boon.src);
+
+      // Set shop HTML to match boon
+
+      shopItem.innerHTML = `
+      <img src="${boon.filePath}" class="boon">
+      <span class="tooltip">
+        ${boon.name} <br><br> ${boon.description}              
+      </span>
+      `;
+
+      shopItem.id = boon.name;
+
+
+    });
+
+    document.querySelector("#playerInfo").addEventListener("click", function() {
+      console.log(player.viceArray);
+      console.log(player.virtueArray);
+    });
+
+    document.querySelector("#buyItem").addEventListener("click", function() {
+      if (activeBoon.name != "") {
+        player.addConsumable(activeBoon);
+        let selected = document.querySelector(`#${activeBoon.name}`);
+        if (selected) {
+          selected.style.opacity = 0;
+          selected.id = ``;
+        }
+        activeBoon = new Boons();
+      }
+    });
+
+
+  </script>
   <script>
+
     document.getElementById("defaultOpen").click();
 
     function openTab(event, tabName) {
@@ -162,33 +249,6 @@
       openTab(event, 'diceMachine');
     }
 
-    const overlappingImg = document.querySelector('#dispensors');
-    const boons = document.querySelectorAll('.boonContainer');
-
-    overlappingImg.addEventListener("mousedown", (e) => {
-
-      const x = e.clientX;
-      const y = e.clientY;
-
-      console.log("x: " + x + " y: " + y);
-
-      boons.forEach(boon => {
-        const rect = boon.getBoundingClientRect();
-        const tooltip = boon.querySelector('.tooltip');
-
-        console.log("left: " + rect.left + "right: " + rect.right + "top: " + rect.top + "bottom: " + rect.bottom);
-        // console.log(tooltip);
-
-        if (tooltip) {
-          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-            tooltip.style.display = 'block';
-          } else {
-            tooltip.style.display = 'none';
-          }
-        }
-
-      });
-    });
   </script>
 </body>
 </html>
