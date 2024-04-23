@@ -65,7 +65,7 @@ function init() {
 
       //console.log(DOMAccess.xyz);
       total += rollTotal;
-      score.innerHTML = "Score: " + total;
+      //score.innerHTML = "Score: " + total;
       logText.innerHTML += "<br>" + rollTotal + " (" + "d20:" + roll20 + " d12:" + roll12 + " d10:" + roll10 + " d8:" + roll8 + " d6:" + roll6 + " d4:" + roll4 + ")";
       average.innerHTML = "Running Average: " + Math.round(total / numRolls);
       //console.log(roll);

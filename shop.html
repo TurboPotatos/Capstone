@@ -16,5 +16,179 @@
     <a href="shop.html">Shop</a>
     <a href="workshop.html">Workshop</a>
   </div>
+  <div class="wrapper" style="flex-direction: column;">
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'vendingMachine')" id="defaultOpen">Vending Machine</button>
+      <button class="tablinks" onclick="openTab(event, 'diceMachine')">Dice Machine</button>
+    </div>
+
+    <div id="vendingMachine" class="shopTabcontent">
+      <!-- <h3>vendingMachine Content</h3> -->
+      <!-- <p>This is the content for the vendingMachine.</p> -->
+
+      <div id="dispensors"></div>
+
+      <div id="vendingItems">
+        <div id="vendingItems1">
+
+          <div class="boonContainer">
+            <img src="src/media/boon_pickaxe.png" class="boon">
+            <span class="tooltip">
+              Pickaxe <br><br> Bohold: a pickaxe. <br> This pickaxe was forged in the fires of Mt. Doom.              
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_pokeball.png" class="boon">
+            <span class="tooltip">
+              Pokeball <br><br> This is what Pokeball does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_portalGun.png" class="boon">
+            <span class="tooltip">
+              Portal Gun <br><br> This is what Portal Gun does
+            </span>
+          </div>
+
+        </div>
+
+        <div id="vendingItems2">
+
+          <div class="boonContainer">
+            <img src="src/media/boon_star.png" class="boon">
+            <span class="tooltip">
+              Star <br><br> This is what Star does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_triforce.png" class="boon">
+            <span class="tooltip">
+              Triforce <br><br> This is what Triforce does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_mushroom.png" class="boon">
+            <span class="tooltip">
+              Mushroom <br><br> This is what Mushroom does
+            </span>
+          </div>
+
+        </div>
+
+        <div id="vendingItems3">
+
+          <div class="boonContainer">
+            <img src="src/media/boon_elderScroll.png" class="boon">
+            <span class="tooltip">
+              Elder Scroll <br><br> This is what Elder Scroll does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_companionCube.png" class="boon">
+            <span class="tooltip">
+              Companion Cube <br><br> This is what Companion Cube does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_estusFlask.png" class="boon">
+            <span class="tooltip">
+              Estus Flask <br><br> This is what Estus Flask does
+            </span>
+          </div>
+
+        </div>
+
+        <div id="vendingItems4">
+
+          <div class="boonContainer">
+            <img src="src/media/boon_nukaCola.png" class="boon">
+            <span class="tooltip">
+              Nuka Cola <br><br> This is what Nuka Cola does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_tetrisPiece.png" class="boon">
+            <span class="tooltip">
+              Tetris Piece <br><br> This is what Tetris Piece does
+            </span>
+          </div>
+
+          <div class="boonContainer">
+            <img src="src/media/boon_crowbar.png" class="boon">
+            <span class="tooltip">
+              Crowbar <br><br> This is what Crowbar does
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div id="diceMachine" class="shopTabcontent">
+      <!-- <h3>diceMachine Content</h3> -->
+      <!-- <p>This is the content for the diceMachine.</p> -->
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("defaultOpen").click();
+
+    function openTab(event, tabName) {
+      var tabcontent = document.getElementsByClassName("shopTabcontent");
+      for (var i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      var tablinks = document.getElementsByClassName("tablinks");
+      for (var i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      event.currentTarget.className += " active";
+    }
+
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const tab = urlParams.get('tab');
+    if (tab === 'diceMachine') {
+      openTab(event, 'diceMachine');
+    }
+
+    const overlappingImg = document.querySelector('#dispensors');
+    const boons = document.querySelectorAll('.boonContainer');
+
+    overlappingImg.addEventListener("mousedown", (e) => {
+
+      const x = e.clientX;
+      const y = e.clientY;
+
+      console.log("x: " + x + " y: " + y);
+
+      boons.forEach(boon => {
+        const rect = boon.getBoundingClientRect();
+        const tooltip = boon.querySelector('.tooltip');
+
+        console.log("left: " + rect.left + "right: " + rect.right + "top: " + rect.top + "bottom: " + rect.bottom);
+        // console.log(tooltip);
+
+        if (tooltip) {
+          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+            tooltip.style.display = 'block';
+          } else {
+            tooltip.style.display = 'none';
+          }
+        }
+
+      });
+    });
+  </script>
 </body>
 </html>
