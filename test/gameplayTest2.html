@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dice Roller</title>
+<style>
+    body {
+        background-color: cadetblue;
+    }
+    .button-container {
+        display: flex;
+        flex-direction: row;
+        align-items: left;
+        margin-top: 20px;
+    }
+    .die-btn {
+        margin: 10px;
+        border: none;
+        padding: 0;
+        background: transparent;
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    .die-btn:before {
+        content: '';
+        position: absolute;
+        width: 70px;
+        height: 70px;
+        background: #fff;
+        z-index: -10;
+    }
+    .die-btn:disabled:before {
+        background-color: grey;
+    }
+    .die-btn.selected:before {
+        background: blue;
+    }
+    .d4:before {
+       content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #0edd61;
+        clip-path: polygon(50% 0%, 100% 90%, 0% 90%);
+        z-index: -10;
+    }
+
+    .d6:before {
+        content: '';
+        position: absolute;
+        width: 80%;
+        height: 80%;
+        background-color: #9686dd;
+        z-index: -10;
+    }
+
+    .d8:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #b2d119;
+        clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
+        z-index: -10;
+    }
+
+    .d10:before {
+        content: '';
+        position: absolute;
+        width: 75%;
+        height: 75%;
+        background-color: #da1ca4;
+        z-index: -10;
+        transform: rotate(45deg);
+    }
+    
+    .d12:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #0edd61;
+        clip-path: polygon(50% 0%, 100% 40%, 80% 90%, 20% 90%, 0% 40%);
+        z-index: -10;
+    }
+
+    .d20:before {
+        content: '';
+        position: absolute;
+        width: 130%;
+        height: 100%;
+        background-color: #c9a112;
+        clip-path: polygon(50% 0%, 77% 21%, 90% 50%, 77% 79%, 50% 100%, 23% 79%, 10% 50%, 23% 21%);
+        z-index: -10;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="button-container">
+    <button class="die-btn d4" data-faces="4">4</button>
+    <button class="die-btn d6" data-faces="6">6</button>
+    <button class="die-btn d8" data-faces="8">8</button>
+    <button class="die-btn d10" data-faces="10">10</button>
+    <button class="die-btn d12" data-faces="12">12</button>
+    <button class="die-btn d20" data-faces="20">20</button>
+</div>
+
+<button id="btnRoll" onclick="rollDice()">Roll</button>
+
+<button id="btnReset" onclick="resetButtons()">Reset</button>
+
+<div id="result"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var dieButtons = document.querySelectorAll('.die-btn');
+    dieButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('selected');
+        });
+    });
+});
+
+function rollDice() {
+    var selectedDie = document.querySelectorAll('.die-btn.selected');
+    if (selectedDie.length === 0) {
+        alert("Please select at least one die to roll.");
+        return;
+    }
+
+    var totalResult = 0;
+    var results = [];
+    selectedDie.forEach(function(btn) {
+        var numFaces = parseInt(btn.dataset.faces);
+        var result = Math.floor(Math.random() * numFaces) + 1;
+        totalResult += result;
+        results.push("You rolled a " + result + " on a " + numFaces + "-sided die.");
+    });
+
+    document.getElementById('result').innerText = results.join('\n') + "\nTotal: " + totalResult;
+
+    // Disable selected die buttons after rolling
+    selectedDie.forEach(function(btn) {
+        btn.classList.remove('selected');
+        btn.disabled = true;
+    });
+}
+
+function resetButtons() {
+    var buttons = document.getElementsByTagName('button');
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = false;
+    }
+    document.getElementById('result').innerText = "";
+}
+</script>
+
+</body>
+</html>
