@@ -1,294 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <script type="module" src="src/js/test.js"></script> -->
-  <script type="module" src="src\js\gameview\GameView.js"></script>
-  
-  <link rel="stylesheet" href="src/css/styles.css">
-	<title>Henchmen Hospital</title>
-</head>
-<body>
-  <div class="navBar">
-    <a href="index.php">Sign In</a>
-    <a href="startScreen.html">Start Screen</a>
-    <a href="leaderboard.html">Leaderboard/History</a>
-    <a href="game.html">Game</a>
-    <a href="gameOver.html">Game Over</a>
-    <a href="shop.html">Shop</a>
-    <a href="workshop.html">Workshop</a>
-  </div>
-  <div class="wrapper" id="gameDiv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <script type="module" src="src/js/test.js"></script> -->
+    <script type="module" src="src/js/test.js"></script>
 
-    <div id="henchmenChart">
-      <!-- <p>
-        Special effects: <br><br>
-        Your d6 has a 10% chance to do double healing. <br><br>
-        This henchman gets hurt by 2s! <br>
-      </p> -->
-      <!-- Placeholder: Henchmen medical charts -->
-      <!-- <div id="field_01">field_01</div>
-      <div id="field_02">field_02</div>
-      <div id="field_03">field_03</div>
-      <div id="field_04">&nbsp;&nbsp;X</div>
-      <div id="field_05">&nbsp;&nbsp;X</div> -->
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="src/css/gameplay.css" />
 
-			<div id="box"></div>
-
-			<table id="table1">
-			<thead>
-				<tr>
-					<th class="Placeholder">************</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td id="henchName">Henchman Name</td>
-				</tr>
-			</tbody>
-			</table>
-
-			<table id="table2">
-			<thead>
-				<tr>
-					<th class="Placeholder">******************</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td>Boons</td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td>Your d6 has a 10% chance to do double healing</td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-			</tbody>
-
-			<thead>
-				<tr>
-				<th><br></th>
-				<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td>Curses</td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td>This henchman gets hurt by 2s</td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td><br></td>
-				</tr>
-			</tbody>
-			</table>
+    <title>Henchmen Hospital</title>
+  </head>
+  <body>
+    <div class="navBar">
+      <a href="index.php">Sign In</a>
+      <a href="startScreen.html">Start Screen</a>
+      <a href="leaderboard.html">Leaderboard/History</a>
+      <a href="game.html">Game</a>
+      <a href="gameOver.html">Game Over</a>
+      <a href="shop.html">Shop</a>
+      <a href="workshop.html">Workshop</a>
     </div>
+    <div class="wrapper" id="gameDiv">
+      <div id="henchmenChart">
+        <div id="box"></div>
 
-    <div id="henchmenHealth">
-      Health
-    </div>
-    <div id="henchman">
-      <!-- Placeholder: Henchman portrait -->
-    </div>
-    
-   
-    <div id="diceContainer">
-      <div>
-        <button class="diceTabs" onclick="openTab(event, 'diceArea')" id="defaultOpen">Dice Area</button>
-        <button class="diceTabs" onclick="openTab(event, 'specialDice')">Special Dice</button>
-      </div>
-      
-      <div id="diceArea" class="diceRolling">
-        Dice Roll Area
+        <table id="table1">
+          <thead>
+            <tr>
+              <th class="Placeholder">************</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td id="henchName">Goomba</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table id="table2">
+          <thead>
+            <tr>
+              <th class="Placeholder">******************</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td>Threshold: 7</td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td>Healing Factor: 15</td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td>Stamina Penalty: 10</td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+          </tbody>
+
+          <thead>
+            <tr>
+              <th><br /></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td>Curses</td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td>This henchman gets hurt by 2s</td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+            <tr>
+              <td><br /></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <div id="specialDice" class="diceRolling">
-        Special Dice
+      <div id="henchmenHealth">
+        <!-- Health -->
+        <div id="henchmenHealth2"></div>
+        <span>35/100</span>
+      </div>
+
+      <div id="henchman">
+        <!-- Placeholder: Henchman portrait -->
+      </div>
+
+      <div id="diceContainer">
+        <div>
+          <button
+            class="diceTabs"
+            onclick="openTab(event, 'diceArea')"
+            id="defaultOpen"
+          >
+            Dice Area
+          </button>
+          <button class="diceTabs" onclick="openTab(event, 'specialDice')">
+            Special Dice
+          </button>
+        </div>
+
+        <div id="diceArea" class="diceRolling">
+          <span>Dice Roll Area</span>
+
+          <!-- <div class="button-container">
+            <button class="die-btn d4" data-faces="4">4</button>
+            <button class="die-btn d6" data-faces="6">6</button>
+            <button class="die-btn d8" data-faces="8">8</button>
+            <button class="die-btn d10" data-faces="10">10</button>
+            <button class="die-btn d12" data-faces="12">12</button>
+            <button class="die-btn d20" data-faces="20">20</button>
+          </div>
+        
+          <div id="btnDiv">
+              <button id="btnReset">Reset</button>
+              <button id="btnRoll">Roll</button>
+          </div> -->
+        </div>
+
+        <div id="specialDice" class="diceRolling">
+          <span>Special Dice</span>
+        </div>
+      </div>
+      <button type="button" id="rollDiceBtn">Roll Dice</button>
+
+      <div id="gameStats">
+        <div id="stamina">Stamina: 100</div>
+        <br />
+        <div id="score">Score: 0</div>
+        <br />
+        <div id="money">Money: 0</div>
+        <br />
+      </div>
+
+      <div id="collectibleEffects">
+        <!-- <span id="boonEffects">Boon effects: </span> -->
+        <!-- <span id="curseEffects">Curse effects: </span> -->
+
+        <img
+          src="src/media/boon_gloves.png"
+          class="boon"
+          alt="Gloves"
+          title="Gloves
+
+This is what Gloves does"
+        />
+        <img
+          src="src/media/boon_labCoat.png"
+          class="boon"
+          alt="Lab Coat"
+          title="Lab Coat
+      
+This is what Lab Coat does"
+        />
+        <img
+          src="src/media/boon_lollipops.png"
+          class="boon"
+          alt="Lollipops"
+          title="Lollipops
+      
+This is what Lollipops does"
+        />
+        <img
+          src="src/media/boon_mask.png"
+          class="boon"
+          alt="Mask"
+          title="Mask
+      
+This is what Mask does"
+        />
+        <img
+          src="src/media/boon_medicalBag.png"
+          class="boon"
+          alt="Medical Bag"
+          title="Medical Bag
+      
+This is what Medical Bag does"
+        />
+        <img
+          src="src/media/boon_pillBottle.png"
+          class="boon"
+          alt="Pill Bottle"
+          title="Pill Bottle
+      
+This is what Pill Bottle does"
+        />
+        <img
+          src="src/media/boon_reflexHammer.png"
+          class="boon"
+          alt="Reflex Hammer"
+          title="Reflex Hammer
+      
+This is what Reflex Hammer does"
+        />
+        <img
+          src="src/media/boon_rxPad.png"
+          class="boon"
+          alt="Rx Pad"
+          title="Rx Pad
+      
+This is what Rx Pad does"
+        />
+        <img
+          src="src/media/boon_scalpel.png"
+          class="boon"
+          alt="Scalpel"
+          title="Scalpel
+      
+This is what Scalpel does"
+        />
+        <img
+          src="src/media/boon_scrubs.png"
+          class="boon"
+          alt="Scrubs"
+          title="Scrubs
+      
+This is what Scrubs does"
+        />
+        <img
+          src="src/media/boon_thermometer.png"
+          class="boon"
+          alt="Thermometer"
+          title="Thermometer
+      
+This is what Thermometer does"
+        />
+        <img
+          src="src/media/boon_tongueDepressor.png"
+          class="boon"
+          alt="Tongue Depressor"
+          title="Tongue Depressor
+      
+This is what Tongue Depressor does"
+        />
+        <img
+          src="src/media/boon_beamSword.png"
+          class="boon"
+          alt="Beam Sword"
+          title="Beam Sword
+      
+This is what Beam Sword does"
+        />
+        <img
+          src="src/media/boon_chaosEmerald.png"
+          class="boon"
+          alt="Chaos Emerald"
+          title="Chaos Emerald
+      
+This is what Chaos Emerald does"
+        />
+        <img
+          src="src/media/boon_goggles.png"
+          class="boon"
+          alt="Goggles"
+          title="Goggles
+      
+This is what Goggles does"
+        />
+        <img
+          src="src/media/boon_pickaxe.png"
+          class="boon"
+          alt="Pickaxe"
+          title="Pickaxe
+      
+This is what Pickaxe does"
+        />
+        <img
+          src="src/media/boon_pokeball.png"
+          class="boon"
+          alt="Pokeball"
+          title="Pokeball
+      
+This is what Pokeball does"
+        />
+        <img
+          src="src/media/boon_portalGun.png"
+          class="boon"
+          alt="Portal Gun"
+          title="Portal Gun
+      
+This is what Portal Gun does"
+        />
+        <img
+          src="src/media/boon_star.png"
+          class="boon"
+          alt="Star"
+          title="Star
+      
+This is what Star does"
+        />
+        <img
+          src="src/media/boon_triforce.png"
+          class="boon"
+          alt="Triforce"
+          title="Triforce
+      
+This is what Triforce does"
+        />
+        <img
+          src="src/media/boon_mushroom.png"
+          class="boon"
+          alt="Mushroom"
+          title="Mushroom
+      
+This is what Mushroom does"
+        />
+        <img
+          src="src/media/boon_elderScroll.png"
+          class="boon"
+          alt="ElderScroll"
+          title="ElderScroll
+      
+This is what ElderScroll does"
+        />
+        <img
+          src="src/media/boon_companionCube.png"
+          class="boon"
+          alt="Companion Cube"
+          title="Companion Cube
+      
+This is what Companion Cube does"
+        />
+        <img
+          src="src/media/boon_estusFlask.png"
+          class="boon"
+          alt="Estus Flask"
+          title="Estus Flask
+      
+This is what Estus Flask does"
+        />
+        <img
+          src="src/media/boon_nukaCola.png"
+          class="boon"
+          alt="Nuka Cola"
+          title="Nuka Cola
+      
+This is what Nuka Cola does"
+          style="transform: rotate(-42deg)"
+        />
+        <img
+          src="src/media/boon_tetrisPiece.png"
+          class="boon"
+          alt="Tetris Piece"
+          title="Tetris Piece
+      
+This is what Tetris Piece does"
+        />
+        <img
+          src="src/media/boon_crowbar.png"
+          class="boon"
+          alt="Crowbar"
+          title="Crowbar
+      
+This is what Crowbar does"
+        />
+      </div>
+      <div id="gameLogsTab" class="collapsed">Logs</div>
+      <div id="gameLogs" class="collapsed">
+        <span>Game logs:</span>
+        <br />
+        <span id="average">Running Average:</span>
+        <br />
+        <p id="logText">This is a log entry.</p>
       </div>
     </div>
-    <button type="button" id="rollDiceBtn">Roll Dice</button>
-    
-    
-    <div id="gameStats">
-      <div id="stamina">Stamina: 100</div><br>
-      <div id="score">Score: 0</div><br>
-      <div id="money">Money: 0</div><br>
-    </div>
-    
-    
-    <div id="collectibleEffects">
-      <!-- <span id="boonEffects">Boon effects: </span> -->
-      <!-- <span id="curseEffects">Curse effects: </span> -->
-      
-      <img src="src/media/boon_gloves.png" class="boon" alt="Gloves" title="Gloves
 
-This is what Gloves does">
-      <img src="src/media/boon_labCoat.png" class="boon" alt="Lab Coat" title="Lab Coat
-      
-This is what Lab Coat does">
-      <img src="src/media/boon_lollipops.png" class="boon" alt="Lollipops" title="Lollipops
-      
-This is what Lollipops does">
-      <img src="src/media/boon_mask.png" class="boon" alt="Mask" title="Mask
-      
-This is what Mask does">
-      <img src="src/media/boon_medicalBag.png" class="boon" alt="Medical Bag" title="Medical Bag
-      
-This is what Medical Bag does">
-      <img src="src/media/boon_pillBottle.png" class="boon" alt="Pill Bottle" title="Pill Bottle
-      
-This is what Pill Bottle does">
-      <img src="src/media/boon_reflexHammer.png" class="boon" alt="Reflex Hammer" title="Reflex Hammer
-      
-This is what Reflex Hammer does">
-      <img src="src/media/boon_rxPad.png" class="boon" alt="Rx Pad" title="Rx Pad
-      
-This is what Rx Pad does">
-      <img src="src/media/boon_scalpel.png" class="boon" alt="Scalpel" title="Scalpel
-      
-This is what Scalpel does">
-      <img src="src/media/boon_scrubs.png" class="boon" alt="Scrubs" title="Scrubs
-      
-This is what Scrubs does">
-      <img src="src/media/boon_thermometer.png" class="boon" alt="Thermometer" title="Thermometer
-      
-This is what Thermometer does">
-      <img src="src/media/boon_tongueDepressor.png" class="boon" alt="Tongue Depressor" title="Tongue Depressor
-      
-This is what Tongue Depressor does">
-      <img src="src/media/boon_beamSword.png" class="boon" alt="Beam Sword" title="Beam Sword
-      
-This is what Beam Sword does">
-      <img src="src/media/boon_chaosEmerald.png" class="boon" alt="Chaos Emerald" title="Chaos Emerald
-      
-This is what Chaos Emerald does">
-      <img src="src/media/boon_goggles.png" class="boon" alt="Goggles" title="Goggles
-      
-This is what Goggles does">
-      <img src="src/media/boon_pickaxe.png" class="boon" alt="Pickaxe" title="Pickaxe
-      
-This is what Pickaxe does">
-      <img src="src/media/boon_pokeball.png" class="boon" alt="Pokeball" title="Pokeball
-      
-This is what Pokeball does">
-      <img src="src/media/boon_portalGun.png" class="boon" alt="Portal Gun" title="Portal Gun
-      
-This is what Portal Gun does">
-      <img src="src/media/boon_star.png" class="boon" alt="Star" title="Star
-      
-This is what Star does">
-      <img src="src/media/boon_triforce.png" class="boon" alt="Triforce" title="Triforce
-      
-This is what Triforce does">
-      <img src="src/media/boon_mushroom.png" class="boon" alt="Mushroom" title="Mushroom
-      
-This is what Mushroom does">
-      <img src="src/media/boon_elderScroll.png" class="boon" alt="ElderScroll" title="ElderScroll
-      
-This is what ElderScroll does">
-      <img src="src/media/boon_companionCube.png" class="boon" alt="Companion Cube" title="Companion Cube
-      
-This is what Companion Cube does">
-      <img src="src/media/boon_estusFlask.png" class="boon" alt="Estus Flask" title="Estus Flask
-      
-This is what Estus Flask does">
-      <img src="src/media/boon_nukaCola.png" class="boon" alt="Nuka Cola" title="Nuka Cola
-      
-This is what Nuka Cola does" style="transform: rotate(-42deg);">
-      <img src="src/media/boon_tetrisPiece.png" class="boon" alt="Tetris Piece" title="Tetris Piece
-      
-This is what Tetris Piece does">
-      <img src="src/media/boon_crowbar.png" class="boon" alt="Crowbar" title="Crowbar
-      
-This is what Crowbar does">
-    </div>
-    <div id="gameLogsTab">Logs</div>
-     <div id="gameLogs">
-      <span>Game logs:</span>
-      <br>
-      <span id="average">Running Average:</span>
-      <br>
-      <p id="logText">
-        This is a log entry.
-      </p>
-    </div>
-    
-  </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const gameLogs = document.getElementById("gameLogs");
+        const gameLogsTab = document.getElementById("gameLogsTab");
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const gameLogs = document.getElementById("gameLogs");
-      const gameLogsTab = document.getElementById("gameLogsTab");
-
-      gameLogsTab.addEventListener("click", function() {
-        gameLogs.classList.toggle("collapsed");
-        gameLogsTab.classList.toggle("collapsed");
+        gameLogsTab.addEventListener("click", function () {
+          gameLogs.classList.toggle("collapsed");
+          gameLogsTab.classList.toggle("collapsed");
+        });
       });
-    });
 
-    document.getElementById("defaultOpen").click();
+      document.getElementById("defaultOpen").click();
 
-    function openTab(event, tabName) {
-      var tabcontent = document.getElementsByClassName("diceRolling");
-      for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+      function openTab(event, tabName) {
+        var tabcontent = document.getElementsByClassName("diceRolling");
+        for (var i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+
+        var diceTabs = document.getElementsByClassName("diceTabs");
+        for (var i = 0; i < diceTabs.length; i++) {
+          diceTabs[i].className = diceTabs[i].className.replace(" active", "");
+        }
+
+        document.getElementById(tabName).style.display = "block";
+        event.currentTarget.className += " active";
       }
-
-      var diceTabs = document.getElementsByClassName("diceTabs");
-      for (var i = 0; i < diceTabs.length; i++) {
-        diceTabs[i].className = diceTabs[i].className.replace(" active", "");
-      }
-
-      document.getElementById(tabName).style.display = "block";
-      event.currentTarget.className += " active";
-    }
-
-
-  </script>
-</body>
+    </script>
+  </body>
 </html>
-

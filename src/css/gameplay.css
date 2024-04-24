@@ -1,0 +1,160 @@
+.button-container {
+  border: solid red;
+  /* background-image: url(../media/texture2.png); */
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  top: 10%;
+  left: 5%;
+}
+.die-btn {
+  /* border: solid green; */
+  margin: 10px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  /* z-index: 10; */
+}
+
+.die-btn span {
+  z-index: 100;
+  border: solid green;
+  color: black;
+  font-size: 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.die-btn:before {
+  content: '';
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: #fff;
+  z-index: -1; /* THE PROBLEM */
+}
+.die-btn:disabled:before {
+  background-color: grey;
+}
+.die-btn.selected:before {
+  background: blue;
+}
+.d4:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #0edd61;
+  clip-path: polygon(50% 0%, 100% 90%, 0% 90%);
+  /* z-index: 0; */
+}
+
+.d6:before {
+  content: '';
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: #9686dd;
+  /* z-index: -10; */
+}
+
+.d8:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #b2d119;
+  clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
+  /* z-index: -10; */
+}
+
+.d10:before {
+  content: '';
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  background-color: #da1ca4;
+  /* z-index: -10; */
+  transform: rotate(45deg);
+}
+
+.d12:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #0edd61;
+  clip-path: polygon(50% 0%, 100% 40%, 80% 90%, 20% 90%, 0% 40%);
+  /* z-index: -10; */
+}
+
+.d20:before {
+  content: '';
+  position: absolute;
+  width: 130%;
+  height: 100%;
+  background-color: #c9a112;
+  clip-path: polygon(50% 0%, 77% 21%, 90% 50%, 77% 79%, 50% 100%, 23% 79%, 10% 50%, 23% 21%);
+  /* z-index: -10; */
+}
+
+#btnDiv {
+  border: solid red;
+  display: block;
+  position: absolute;
+  width: 34%;
+  height: 7%;
+  top: 55%;
+  left: 5%;
+}
+#btnDiv button {
+  width: 45%;
+  height: 100%;
+}
+#btnRoll{
+  position: absolute;
+  right: 0;
+}
+
+#result {
+  position: absolute;
+  top: 40%;
+  left: 5%;
+  font-size: 2rem;
+}
+
+/* #henchman {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  
+}
+.henchSpan {
+  font-size: 3rem;
+  color: darkblue;
+  text-shadow: rgb(82, 82, 82) 1px 1px 1px;
+} */
+
+#player {
+  font-size: 3rem;
+  color: green;
+  text-shadow: black 1px 1px 1px;
+}
+#score {
+  position: relative;
+  left: 10%;
+}

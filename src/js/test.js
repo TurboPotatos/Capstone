@@ -70,8 +70,10 @@ function init() {
       average.innerHTML = "Running Average: " + Math.round(total / numRolls);
       //console.log(roll);
       diceArea.innerHTML = "d20: " + roll20 + "<br>d12: " + roll12 + "<br>d10: " + roll10 + "<br>d8: &nbsp;&nbsp;" + roll8 + "<br>d6: &nbsp;&nbsp;" + roll6 + "<br>d4: &nbsp;&nbsp;" + roll4;
-      diceArea.style.fontSize = "3.5rem";
+      diceArea.style.fontSize = "1.5rem";
       diceArea.style.textAlign = "left";
+      diceArea.style.paddingTop = "4rem";
+      diceArea.style.paddingLeft = "6rem";
 
       // if (testPic.style.backgroundColor != "blue") {
       //   testPic.style.backgroundColor = "blue";
@@ -87,7 +89,7 @@ function init() {
 
   domAccessClassInstance.doStuff();
 
-  domAccessClassInstance.diceArea.addEventListener("click", DOMAccess.getClicked);
+  // domAccessClassInstance.diceArea.addEventListener("click", DOMAccess.getClicked);
   domAccessClassInstance.rollDiceBtn.addEventListener("click", DOMAccess.getClicked);
 }
 

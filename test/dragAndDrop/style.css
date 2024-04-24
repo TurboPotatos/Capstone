@@ -16,7 +16,7 @@ body {
   height: 40rem;
   width: 80rem;
   box-sizing: border-box;
-  background: url(unwrappedDiceOutlines.png), no-repeat;
+  background: url(../art/unwrappedDiceOutlines.png), no-repeat;
   background-position: 2.1rem -1.5rem; /* Adjust these values to show the specific part */
   background-size: 120rem 120rem; /* Adjust these values to control the size */
 }
