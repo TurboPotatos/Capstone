@@ -13,6 +13,9 @@ export class Boon {
     if (this.effects.acquireCurrency) {
       player.currency += this.effects.acquireCurrency;
     }
+    if (this.effects.estusFlask) {
+      player.estusFlask += this.effects.estusFlask;
+    }
   }
   
 }
@@ -24,7 +27,7 @@ const boonArray = {
   // "Speed Boots": new Boon("Speed Boots", "Increases movement speed", { speedBoost: true }),
   // "Lucky Charm": new Boon("Lucky Charm", "Increases critical hit chance by 10%", { criticalHitChance: 0.1 }),
 
-  "MONEY!": new Boon("MONEY!", "GET MONEY!", { acquireCurrency: 10 }),
+  "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }),
   "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }),
 
   "beamSword" : new Boon("beamSword", "", {temp: 0}),
@@ -32,7 +35,7 @@ const boonArray = {
   "companionCube" : new Boon("companionCube", "", {temp: 0}),
   "crowbar" : new Boon("crowbar", "", {temp: 0}),
   "elderScroll" : new Boon("elderScroll", "", {temp: 0}),
-  "estusFlask" : new Boon("estusFlask", "", {temp: 0}),
+  "estusFlask" : new Boon("estusFlask", "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}),
   "gloves" : new Boon("gloves", "", {temp: 0}),
   "goggles" : new Boon("goggles", "", {temp: 0}),
   "labCoat" : new Boon("labCoat", "", {temp: 0}),
@@ -83,7 +86,7 @@ const boonArray = {
   // You can read redacted henchman charts.
   // Henchman is considered healed if it's within 5% of its max health.
   // When you run out of stamina, gain 50% stamina, then this is destroyed.
-  // +3 to your first roll after resetting your dice.
+  
   // Your first reset of a wave costs 0 stamina.
   // Dice from the dice machine come with 2 random faces.
 };

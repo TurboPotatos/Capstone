@@ -3,20 +3,25 @@ import { Player } from "./Player.js";
 import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
 
-let staminaValue = 60;
-let scoreValue = 0;
-let currencyValue = 0;
+// let staminaValue = 60;
+// let scoreValue = 0;
+// let currencyValue = 0;
+let rollBonus = false;
 let wave = 0;
 let henchman = new Henchmen("Goomba " + wave, wave);
 let player = new Player();
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("Has Estus Flask: " + player.estusFlask);
+
+  const boonCollection = document.querySelector('#boonCollection');
 
   const btnRoll = document.querySelector('#btnRoll');
   const btnReset = document.querySelector('#btnReset');
 
   const btnAddStamina = document.querySelector('#btnAddStamina');
   const btnAddCurrency = document.querySelector('#btnAddCurrency');
+  const btnEstusFlask = document.querySelector('#btnEstusFlask');
 
   const henchName = document.querySelector('#henchName');
   const health = document.querySelector('#health');
@@ -52,16 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
     resetButtons();
   });
   btnAddStamina.addEventListener("click", (e) => {
-    //const staminaBuff = new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 });
-    //staminaBuff.applyEffects(player);
     boonArray["Stamina Potion"].applyEffects(player);
     stamina.innerHTML = "Stamina: " + player.stamina;
   });
   btnAddCurrency.addEventListener("click", (e) => {
-    //const staminaBuff = new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 });
-    //staminaBuff.applyEffects(player);
     boonArray["MONEY!"].applyEffects(player);
     currency.innerHTML = "Currency: " + player.currency;
+    boonCollection.innerHTML += "<div id=\"boon\"><img src=\"../../src/media/boon_chaosEmerald.png\"><span class=\"tooltip\">" + boonArray["MONEY!"].description + "</span></div>";
+    // boonCollection.innerHTML += "<img src='../../src/media/boon_chaosEmerald.png' + title=\"" + boonArray["MONEY!"].description + "\">";
+  });
+  btnEstusFlask.addEventListener("click", (e) => {
+    boonArray["estusFlask"].applyEffects(player);
+    boonCollection.innerHTML += "<div id=\"boon\"><img src=\"../../src/media/boon_estusFlask.png\"><span class=\"tooltip\">" + boonArray["estusFlask"].description + "</span></div>";
+    console.log("Has Estus Flask: " + player.estusFlask);
   });
 
   var dieButtons = document.querySelectorAll('.die-btn');
@@ -73,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function rollResult(total) {
+
   if (henchman.threshold <= total) {
     henchman.health += henchman.healingFactor;
 
@@ -118,6 +127,13 @@ function rollDice() {
       results.push("You rolled a " + result + " on a " + numFaces + "-sided die.");
   });
 
+  if (rollBonus) {
+    rollBonus = false;
+    totalResult += player.estusFlask;
+    results.push("+3 from Estus Flask");
+    console.log("rollBonus: " + rollBonus);
+  }
+
   document.getElementById('result').innerText = results.join('\n') + "\nTotal: " + totalResult;
 
   // Disable selected die buttons after rolling
@@ -137,8 +153,12 @@ function resetButtons() {
   document.querySelector('#result').innerText = "";
 
   if (!henchman.henchmenFull()) {
-      staminaValue -= henchman.staminaPenalty;
-      stamina.innerHTML = "Stamina: " + staminaValue;
+      player.stamina -= henchman.staminaPenalty;
+      stamina.innerHTML = "Stamina: " + player.stamina;
+  }
+  if (player.estusFlask) {
+    rollBonus = true;
+    console.log("rollBonus: " + rollBonus);
   }
 }
 

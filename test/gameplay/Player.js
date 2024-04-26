@@ -18,6 +18,9 @@ export class Player {
   // boonArray = [];
   items = [];
 
+  // Active boons
+  estusFlask = false;
+
   addItem(item) {
     if (!this.items[item.name]) {
       this.items[item.name] = [];
