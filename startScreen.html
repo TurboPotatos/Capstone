@@ -22,6 +22,7 @@
       <!-- <img src="src/media/otter-space.jpg" alt="This is an image" id="titleArt"> -->
       
       <h2>Henchmen Hospital</h2>
+      <h6 id="splashText"></h6>
     </div>
     <div id="menuDiv">
       <!-- <a href="game.html">Start game</a> -->
@@ -102,6 +103,38 @@
     </div>
 
   </div>
+
+  <script>
+    const splashText = document.querySelector('#splashText');
+    quipArray = [
+    "Henchin' Ain't easy",
+    "BANANA!!!",
+    "You know what separates henchmen from minions? Presentation!",
+    "Being a henchman is like being a sidekick with a cooler uniform and a higher risk of getting punched",
+    "In the world of henching, loyalty is everything",
+    "Being a henchman means always having a plan for when the hero shows up and not following through with that plan",
+    "You know you're a henchman when your job description includes 'menacing glare' and 'sinister laugh'",
+    "In the henchman handbook, chapter one is 'How to stand menacingly by the entrance'; there is no chapter two",
+    "Henchmen always seem to have impeccable dental hygiene. Evil dental plans must be amazing!",
+    "Being a henchman means mastering the art of evil laughter while maintaining a serious demeanor",
+    "Henchman rule number one: You take a punch, you go down. This job isn't worth your life",
+    "Never get attached to the evil lair, it's only a matter of time before somebody hits the self-destruct button",
+    "Taking on an unwinnable fight is what separates the henchmen from the henchboys",
+    "It beats working at McDonald's",
+    "You hear something? Eh, must've been the wind...",
+    "Survival is a roll of the dice",
+    "Never tell me the odds",
+    "No copyright infringement intended",
+    "News team... ASSEMBLE!!!",
+    "Rated #1 in Popular Henchmanics magazine!"
+    ];
+
+    randomQuipIndex = Math.floor(Math.random() * quipArray.length);
+
+    splashText.innerHTML = quipArray[randomQuipIndex];
+    // splashText.innerHTML = quipArray.length;
+
+  </script>
 
 </body>
 </html>

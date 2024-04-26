@@ -83,8 +83,9 @@
 
 #signIn input,
 #signIn button {
+  /* border: solid #fafd35; */
   display: block;
-  width: 90%;
+  width: 100%;
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
   border-radius: 4px;
@@ -116,6 +117,11 @@
   box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
+
+#splashText {
+  width: 60%;
+}
+
 #menuDiv {
   display: flex;
   flex-direction: column;
@@ -440,7 +446,8 @@ tr:nth-child(odd) {
 
 #henchman {
   border: solid black;
-  background-image: url(../media/henchman_goomba.png), url(../media/texture2.png);
+  background-image: none;
+  /* background-image: url(../media/henchman_goomba.png), url(../media/texture2.png); */
   background-size: contain, cover;
   background-repeat: no-repeat;
   background-position: center;
