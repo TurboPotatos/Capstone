@@ -144,5 +144,9 @@ body {
 }
 #score {
   position: relative;
+  left: 5%;
+}
+#currency {
+  position: relative;
   left: 10%;
 }

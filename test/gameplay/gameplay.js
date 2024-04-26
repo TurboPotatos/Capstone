@@ -1,14 +1,22 @@
 import { Henchmen } from "./Henchman.js";
+import { Player } from "./Player.js";
+import { Boon } from "./Boon.js";
+import { boonArray } from "./Boon.js";
 
-let staminaValue = 50;
+let staminaValue = 60;
 let scoreValue = 0;
+let currencyValue = 0;
 let wave = 0;
 let henchman = new Henchmen("Goomba " + wave, wave);
+let player = new Player();
 
 document.addEventListener('DOMContentLoaded', function() {
 
   const btnRoll = document.querySelector('#btnRoll');
   const btnReset = document.querySelector('#btnReset');
+
+  const btnAddStamina = document.querySelector('#btnAddStamina');
+  const btnAddCurrency = document.querySelector('#btnAddCurrency');
 
   const henchName = document.querySelector('#henchName');
   const health = document.querySelector('#health');
@@ -17,24 +25,43 @@ document.addEventListener('DOMContentLoaded', function() {
   const threshold = document.querySelector('#threshold');
   const staminaPenalty = document.querySelector('#staminaPenalty');
   const healingFactor = document.querySelector('#healingFactor');
+  const currencyGiven = document.querySelector('#currencyGiven');
 
   const stamina = document.querySelector('#stamina');
   const score = document.querySelector('#score');
+  const currency = document.querySelector('#currency');
 
-  stamina.innerHTML = "Stamina: " + staminaValue;
-  score.innerHTML = "Score: " + scoreValue;
+  stamina.innerHTML = "Stamina: " + player.stamina;
+  score.innerHTML = "Score: " + player.score;
+  currency.innerHTML = "Currency: " + player.currency;
+  // stamina.innerHTML = "Stamina: " + staminaValue;
+  // score.innerHTML = "Score: " + scoreValue;
+  // currency.innerHTML = "Currency: " + currencyValue;
 
   henchName.innerHTML = "Name: " + henchman.name;
   health.innerHTML = "Health: " + henchman.health + "/" + henchman.maxHealth;
   threshold.innerHTML = "Threshold: " + henchman.threshold;
   staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
   healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
+  currencyGiven.innerHTML = "Currency Given: " + henchman.currencyGiven;
 
   btnRoll.addEventListener("click", (e) => {
     rollDice();
   });
   btnReset.addEventListener("click", (e) => {
     resetButtons();
+  });
+  btnAddStamina.addEventListener("click", (e) => {
+    //const staminaBuff = new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 });
+    //staminaBuff.applyEffects(player);
+    boonArray["Stamina Potion"].applyEffects(player);
+    stamina.innerHTML = "Stamina: " + player.stamina;
+  });
+  btnAddCurrency.addEventListener("click", (e) => {
+    //const staminaBuff = new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 });
+    //staminaBuff.applyEffects(player);
+    boonArray["MONEY!"].applyEffects(player);
+    currency.innerHTML = "Currency: " + player.currency;
   });
 
   var dieButtons = document.querySelectorAll('.die-btn');
@@ -60,6 +87,7 @@ function rollResult(total) {
     }
 
     scoreValue += henchman.scoreGiven;
+    currencyValue += henchman.currencyGiven;
     wave++;
     staminaValue += 30;
     henchman = new Henchmen("Goomba " + wave, wave);
@@ -68,8 +96,9 @@ function rollResult(total) {
     threshold.innerHTML = "Threshold: " + henchman.threshold;
     staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
     healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
-    stamina.innerHTML = "Stamina: " + staminaValue;
-    score.innerHTML = "Score: " + scoreValue;
+    stamina.innerHTML = "Stamina: " + player.stamina;
+    score.innerHTML = "Score: " + player.score;
+    currency.innerHTML = "Currency: " + player.currency;
   }
 }
 
