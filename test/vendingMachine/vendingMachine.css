@@ -65,6 +65,7 @@
   left: 5%;
   width: 65%;
   height: 70%;
+  pointer-events: none;
 }
 #keypadFrame {
   /* border: solid blue; */
@@ -145,4 +146,39 @@
   left: 7%;
   width: 60%;
   height: 18%;
+}
+
+table {
+  height: 100%;
+  width: 100%;
+}
+
+tr {
+  height: 25%;
+  /* border: 1px solid green; */
+}
+
+td {
+  width: 30%;
+  /* border: 1px solid orange; */
+}
+
+td img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.tooltip {
+  position: absolute;
+  /* top: 10%; */
+  /* left: 10%; */
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
 }

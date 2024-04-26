@@ -65,8 +65,8 @@ export class Player {
   subtractCurrency(toSubtract) {
     // Function reduces currency and returns true if player has enough
     // Returns false if player doesn't have enough
-    if (currency >= toSubtract) {
-      currency -= toSubtract;
+    if (this.currency >= toSubtract) {
+      this.currency -= toSubtract;
       return true;
     } else {
       return false;

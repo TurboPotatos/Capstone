@@ -13,23 +13,8 @@ export class Boons extends Collectibles {
   // Name of boon
   name = "";
 
-
-// boon_pickaxe src\\media\\boon_pickaxe.png
-// boon_pillBottle src\\media\\boon_pillBottle.png
-// boon_pokeball src\\media\\boon_pokeball.png
-// boon_portalGun src\\media\\boon_portalGun.png
-// boon_reflexHammer src\\media\\boon_reflexHammer.png
-// boon_rxPad src\\media\\boon_rxPad.png
-// boon_scalpel src\\media\\boon_scalpel.png
-// boon_scrubs src\\media\\boon_scrubs.png
-// boon_star src\\media\\boon_star.png
-// boon_stethoscope src\\media\\boon_stethoscope.png
-// boon_syringe src\\media\\boon_syringe.png
-// boon_tetrisPiece src\\media\\boon_tetrisPiece.png
-// boon_thermometer src\\media\\boon_thermometer.png
-// boon_tongueDepressor src\\media\\boon_tongueDepressor.png
-// boon_triforce src\\media\\boon_triforce.png
-
+  // Cost of boon
+  cost = 0;
 
   constructor (nameOfBoon) {
 
@@ -37,32 +22,32 @@ export class Boons extends Collectibles {
 
     switch (nameOfBoon) {
       case "beamSword": 
-        this.filePath = "src\media\boon_beamSword.png";
+        this.filePath = "src\\media\\boon_beamSword.png";
         this.description = "Beam Sword";
         this.name = "boon_beamSword";
       break;
       case "chaosEmerald": 
-        this.filePath = "src\media\boon_chaosEmerald.png"
+        this.filePath = "src\\media\\boon_chaosEmerald.png"
         this.description = "Chaos Emerald";
         this.name = "boon_chaosEmerald";
       break;
       case "companionCube": 
-        this.filePath = "src\media\boon_companionCube.png";
+        this.filePath = "src\\media\\boon_companionCube.png";
         this.description = "Companion Cube";
         this.name = "boon_companionCube";
       break;
       case "crowbar": 
-        this.filePath = "src\media\boon_crowbar.png";
+        this.filePath = "src\\media\\boon_crowbar.png";
         this.description = "";
         this.name = "boon_crowbar";
       break;
       case "elderScroll": 
-        this.filePath = "src\media\boon_elderScroll.png";
+        this.filePath = "src\\media\\boon_elderScroll.png";
         this.description = "";
         this.name = "boon_elderScroll";
       break;
       case "estusFlask": 
-        this.filePath = "src\media\boon_estusFlask.png";
+        this.filePath = "src\\media\\boon_estusFlask.png";
         this.description = "";
         this.name = "boon_estusFlask ";
       break;
@@ -72,7 +57,7 @@ export class Boons extends Collectibles {
         this.name = "boon_gloves";
       break;
       case "goggles": 
-        this.filePath = "src\media\boon_goggles.png";
+        this.filePath = "src\\media\\boon_goggles.png";
         this.description = "";
         this.name = "boon_goggles";
       break;
@@ -106,26 +91,81 @@ export class Boons extends Collectibles {
         this.description = "";
         this.name = "boon_nukaCola";
       break;
-      // case "": 
-      //   this.filePath = "src\media\boon_beamSword.png";
-      //   this.description = "";
-      //   this.name = "boon_beamSword";
-      // break;
-      // case "": 
-      //   this.filePath = "src\media\boon_beamSword.png";
-      //   this.description = "";
-      //   this.name = "boon_beamSword";
-      // break;
-      // case "": 
-      //   this.filePath = "src\media\boon_beamSword.png";
-      //   this.description = "";
-      //   this.name = "boon_beamSword";
-      // break;
-      // case "": 
-      //   this.filePath = "src\media\boon_beamSword.png";
-      //   this.description = "";
-      //   this.name = "boon_beamSword";
-      // break;
+      case "pickaxe": 
+        this.filePath = "src\\media\\boon_pickaxe.png";
+        this.description = "";
+        this.name = "boon_pickaxe";
+      break;
+      case "pillBottle": 
+        this.filePath = "src\\media\\boon_pillBottle.png";
+        this.description = "";
+        this.name = "boon_pillBottle";
+      break;
+      case "pokeball": 
+        this.filePath = "src\\media\\boon_pokeball.png";
+        this.description = "";
+        this.name = "boon_pokeball";
+      break;
+      case "portalGun": 
+        this.filePath = "src\\media\\boon_portalGun.png";
+        this.description = "";
+        this.name = "boon_portalGun";
+      break;
+      case "reflexHammer": 
+        this.filePath = "src\\media\\boon_reflexHammer.png";
+        this.description = "";
+        this.name = "boon_reflexHammer";
+      break;
+      case "rxPad": 
+        this.filePath = "src\\media\\boon_rxPad.png";
+        this.description = "";
+        this.name = "boon_rxPad";
+      break;
+      case "scalpel": 
+        this.filePath = "src\\media\\boon_scalpel.png";
+        this.description = "";
+        this.name = "boon_scalpel";
+      break;
+      case "scrubs": 
+        this.filePath = "src\\media\\boon_scrubs.png";
+        this.description = "";
+        this.name = "boon_scrubs";
+      break;
+      case "star": 
+        this.filePath = "src\\media\\boon_star.png";
+        this.description = "";
+        this.name = "boon_star";
+      break;
+      case "stethoscope": 
+        this.filePath = "src\\media\\boon_stethoscope.png";
+        this.description = "";
+        this.name = "boon_stethoscope";
+      break;
+      case "syringe": 
+        this.filePath = "src\\media\\boon_syringe.png";
+        this.description = "";
+        this.name = "boon_syringe";
+      break;
+      case "tetrisPiece": 
+        this.filePath = "src\\media\\boon_tetrisPiece.png";
+        this.description = "";
+        this.name = "boon_tetrisPiece";
+      break;
+      case "thermometer": 
+        this.filePath = "src\\media\\boon_thermometer.png";
+        this.description = "";
+        this.name = "boon_thermometer";
+      break;
+      case "tongueDepressor": 
+        this.filePath = "src\\media\\boon_tongueDepressor.png";
+        this.description = "";
+        this.name = "boon_tongueDepressor";
+      break;
+      case "triforce": 
+        this.filePath = "src\\media\\boon_triforce.png";
+        this.description = "";
+        this.name = "boon_triforce";
+      break;
     }
 
     this.description = "Test description";
@@ -137,7 +177,7 @@ export class Boons extends Collectibles {
     const randomFloat = Math.random();
 
     // Scale the random number to the range 1 to 29
-    const randomInteger = Math.floor(randomFloat * 14) + 1;
+    const randomInteger = Math.floor(randomFloat * 29) + 1;
     switch (randomInteger) {
       case 1: 
         this.filePath = "src\\media\\boon_beamSword.png";
@@ -209,6 +249,83 @@ export class Boons extends Collectibles {
         this.description = "";
         this.name = "boon_nukaCola";
       break;
+      case 15: 
+        this.filePath = "src\\media\\boon_pickaxe.png";
+        this.description = "";
+        this.name = "boon_pickaxe";
+      break;
+      case 16: 
+        this.filePath = "src\\media\\boon_pillBottle.png";
+        this.description = "";
+        this.name = "boon_pillBottle";
+      break;
+      case 17: 
+        this.filePath = "src\\media\\boon_pokeball.png";
+        this.description = "";
+        this.name = "boon_pokeball";
+      break;
+      case 18: 
+        this.filePath = "src\\media\\boon_portalGun.png";
+        this.description = "";
+        this.name = "boon_portalGun";
+      break;
+      case 19: 
+        this.filePath = "src\\media\\boon_reflexHammer.png";
+        this.description = "";
+        this.name = "boon_reflexHammer";
+      break;
+      case 20: 
+        this.filePath = "src\\media\\boon_rxPad.png";
+        this.description = "";
+        this.name = "boon_rxPad";
+      break;
+      case 21: 
+        this.filePath = "src\\media\\boon_scalpel.png";
+        this.description = "";
+        this.name = "boon_scalpel";
+      break;
+      case 22: 
+        this.filePath = "src\\media\\boon_scrubs.png";
+        this.description = "";
+        this.name = "boon_scrubs";
+      break;
+      case 23: 
+        this.filePath = "src\\media\\boon_star.png";
+        this.description = "";
+        this.name = "boon_star";
+      break;
+      case 24: 
+        this.filePath = "src\\media\\boon_stethoscope.png";
+        this.description = "";
+        this.name = "boon_stethoscope";
+      break;
+      case 25: 
+        this.filePath = "src\\media\\boon_syringe.png";
+        this.description = "";
+        this.name = "boon_syringe";
+      break;
+      case 26: 
+        this.filePath = "src\\media\\boon_tetrisPiece.png";
+        this.description = "";
+        this.name = "boon_tetrisPiece";
+      break;
+      case 27: 
+        this.filePath = "src\\media\\boon_thermometer.png";
+        this.description = "";
+        this.name = "boon_thermometer";
+      break;
+      case 28: 
+        this.filePath = "src\\media\\boon_tongueDepressor.png";
+        this.description = "";
+        this.name = "boon_tongueDepressor";
+      break;
+      case 29: 
+        this.filePath = "src\\media\\boon_triforce.png";
+        this.description = "";
+        this.name = "boon_triforce";
+      break;
     }
+
+    this.cost = Math.floor(randomFloat * 30) + 1;
   }
 }

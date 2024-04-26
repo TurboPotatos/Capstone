@@ -1,9 +1,10 @@
 export class Boon {
   
-  constructor(name, description, effects) {
+  constructor(name, description, effects, filePath) {
     this.name = name;
     this.description = description;
     this.effects = effects;
+    this.filePath = filePath;
   }
 
   applyEffects(player) {
@@ -27,38 +28,38 @@ const boonArray = {
   // "Speed Boots": new Boon("Speed Boots", "Increases movement speed", { speedBoost: true }),
   // "Lucky Charm": new Boon("Lucky Charm", "Increases critical hit chance by 10%", { criticalHitChance: 0.1 }),
 
-  "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }),
-  "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }),
+  "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }, "src\\media\\boon_beamSword.png"),
+  "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }, "src\\media\\boon_beamSword.png"),
 
-  "beamSword" : new Boon("beamSword", "", {temp: 0}),
-  "chaosEmerald" : new Boon("chaosEmerald", "", {temp: 0}),
-  "companionCube" : new Boon("companionCube", "", {temp: 0}),
-  "crowbar" : new Boon("crowbar", "", {temp: 0}),
-  "elderScroll" : new Boon("elderScroll", "", {temp: 0}),
-  "estusFlask" : new Boon("estusFlask", "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}),
-  "gloves" : new Boon("gloves", "", {temp: 0}),
-  "goggles" : new Boon("goggles", "", {temp: 0}),
-  "labCoat" : new Boon("labCoat", "", {temp: 0}),
-  "lollipops" : new Boon("lollipops", "", {temp: 0}),
-  "mask" : new Boon("mask", "", {temp: 0}),
-  "medicalBag" : new Boon("medicalBag", "", {temp: 0}),
-  "mushroom" : new Boon("mushroom", "", {temp: 0}),
-  "nukaCola" : new Boon("nukaCola", "", {temp: 0}),
-  "pickaxe" : new Boon("pickaxe", "", {temp: 0}),
-  "pillBottle" : new Boon("pillBottle", "", {temp: 0}),
-  "pokeball" : new Boon("pokeball", "", {temp: 0}),
-  "portalGun" : new Boon("portalGun", "", {temp: 0}),
-  "reflexHammer" : new Boon("reflexHammer", "", {temp: 0}),
-  "rxPad" : new Boon("rxPad", "", {temp: 0}),
-  "scalpel" : new Boon("scalpel", "", {temp: 0}),
-  "scrubs" : new Boon("scrubs", "", {temp: 0}),
-  "star" : new Boon("star", "", {temp: 0}),
-  "stethoscope" : new Boon("stethoscope", "", {temp: 0}),
-  "syringe" : new Boon("syringe", "", {temp: 0}),
-  "tetrisPiece" : new Boon("tetrisPiece", "", {temp: 0}),
-  "thermometer" : new Boon("thermometer", "", {temp: 0}),
-  "tongueDepressor" : new Boon("tongueDepressor", "", {temp: 0}),
-  "triforce" : new Boon("triforce", "", {temp: 0}),
+  "beamSword" : new Boon("beamSword", "", {temp: 0}, "src\\media\\boon_beamSword.png"),
+  "chaosEmerald" : new Boon("chaosEmerald", "", {temp: 0}, "src\\media\\boon_chaosEmerald.png"),
+  "companionCube" : new Boon("companionCube", "", {temp: 0}, "src\\media\\boon_companionCube.png"),
+  "crowbar" : new Boon("crowbar", "", {temp: 0}, "src\\media\\boon_crowbar.png"),
+  "elderScroll" : new Boon("elderScroll", "", {temp: 0}, "src\\media\\boon_elderScroll.png"),
+  "estusFlask" : new Boon("estusFlask", "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, "src\\media\\boon_estusFlask.png"),
+  "gloves" : new Boon("gloves", "", {temp: 0}, "src\\media\\boon_gloves.png"),
+  "goggles" : new Boon("goggles", "", {temp: 0}, "src\\media\\boon_goggles.png"),
+  "labCoat" : new Boon("labCoat", "", {temp: 0}, "src\\media\\boon_labCoat.png"),
+  "lollipops" : new Boon("lollipops", "", {temp: 0}, "src\\media\\boon_lollipops.png"),
+  "mask" : new Boon("mask", "", {temp: 0}, "src\\media\\boon_mask.png"),
+  "medicalBag" : new Boon("medicalBag", "", {temp: 0}, "src\\media\\boon_medicalBag.png"),
+  "mushroom" : new Boon("mushroom", "", {temp: 0}, "src\\media\\boon_mushroom.png"),
+  "nukaCola" : new Boon("nukaCola", "", {temp: 0}, "src\\media\\boon_nukaCola.png"),
+  "pickaxe" : new Boon("pickaxe", "", {temp: 0}, "src\\media\\boon_pickaxe.png"),
+  "pillBottle" : new Boon("pillBottle", "", {temp: 0}, "src\\media\\boon_pillBottle.png"),
+  "pokeball" : new Boon("pokeball", "", {temp: 0}, "src\\media\\boon_pokeball.png"),
+  "portalGun" : new Boon("portalGun", "", {temp: 0}, "src\\media\\boon_portalGun.png"),
+  "reflexHammer" : new Boon("reflexHammer", "", {temp: 0}, "src\\media\\boon_reflexHammer.png"),
+  "rxPad" : new Boon("rxPad", "", {temp: 0}, "src\\media\\boon_rxPad.png"),
+  "scalpel" : new Boon("scalpel", "", {temp: 0}, "src\\media\\boon_scalpel.png"),
+  "scrubs" : new Boon("scrubs", "", {temp: 0}, "src\\media\\boon_scrubs.png"),
+  "star" : new Boon("star", "", {temp: 0}, "src\\media\\boon_star.png"),
+  "stethoscope" : new Boon("stethoscope", "", {temp: 0}, "src\\media\\boon_stethoscope.png"),
+  "syringe" : new Boon("syringe", "", {temp: 0}, "src\\media\\boon_syringe.png"),
+  "tetrisPiece" : new Boon("tetrisPiece", "", {temp: 0}, "src\\media\\boon_tetrisPiece.png"),
+  "thermometer" : new Boon("thermometer", "", {temp: 0}, "src\\media\\boon_thermometer.png"),
+  "tongueDepressor" : new Boon("tongueDepressor", "", {temp: 0}, "src\\media\\boon_tongueDepressor.png"),
+  "triforce" : new Boon("triforce", "", {temp: 0}, "src\\media\\boon_triforce.png"),
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.
@@ -93,3 +94,12 @@ const boonArray = {
 
 // Export the boons
 export { boonArray };
+
+let boonNameArray = [];
+
+Object.keys(boonArray).forEach(function(key) {
+  // Add the key to the keysArray
+  boonNameArray.push(key);
+});
+
+export { boonNameArray };
