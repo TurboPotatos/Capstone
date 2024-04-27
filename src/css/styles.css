@@ -336,7 +336,7 @@
 
 
 /* Game Screen */
-#henchmenChart {
+.henchmenChart {
   height: clamp(37rem, 50rem, 95%);
   /* height: 80%; */
   width: 31%;
@@ -357,6 +357,34 @@
 	border-image-outset: 10px;
 	user-select: none;
 }
+
+#medChart2{
+  display: none;
+}
+
+
+
+.clientTabs {
+  position: absolute;
+  top: 100px;
+  right: -65px;
+  display: flex; 
+  flex-direction: column; 
+  align-items: flex-end; 
+}
+
+.chartTabs {
+  transform: rotate(90deg);
+  transform-origin: right;
+  margin: 40px;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(236, 169, 169);
+}
+
+
 #box {
   position: absolute;
   background-color: #b1b1b1;
@@ -683,4 +711,45 @@ tr:nth-child(odd) {
 
 input[type='number'] {
   width: 28px;
+}
+
+
+
+/* WORKSHOP */
+
+.wrap{
+  display: flex;
+  height: 80vh;
+  perspective: 500px;
+  margin-top: 3%;
+}
+
+
+.left, .right {
+  flex: 1;
+  transform: rotateY(20deg) translateZ(-50px);
+  background-color: #8a6a41;
+}
+.center {
+  background-color: #614828;
+  flex: 2;
+  margin-left: -10%; 
+  margin-right: -10%;
+  transform: translateZ(-130px);
+  z-index: -10;
+  padding: 2% 10%;
+  overflow-y: auto;
+}
+
+.center table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.center td{
+  height: 80px;
+}
+
+  
+.right{
+  transform: rotateY(-20deg) translateZ(-50px);
 }
