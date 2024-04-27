@@ -2,12 +2,26 @@ import { Henchmen } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
+import { Dice } from "../../src/js/Dice.js";
 
 
 let rollBonus = false;
 let wave = 0;
 let henchman = new Henchmen("Goomba " + wave, wave);
 let player = new Player();
+
+let tempDice = new Dice("d4");
+player.addDice(tempDice);
+tempDice = new Dice("d6");
+player.addDice(tempDice);
+tempDice = new Dice("d8");
+player.addDice(tempDice);
+tempDice = new Dice("d10");
+player.addDice(tempDice);
+tempDice = new Dice("d12");
+player.addDice(tempDice);
+tempDice = new Dice("d20");
+player.addDice(tempDice);
 
 document.addEventListener('DOMContentLoaded', function() {
 //   console.log("Has Estus Flask: " + player.estusFlask);
@@ -31,6 +45,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const score = document.querySelector('#score');
   const currency = document.querySelector('#money');
 
+  const diceArea = document.querySelector("#diceArea");
+  
+
+  // Add dice to the diceArea
+  for (let i = 0; i < player.diceArray.length; i++) {
+    diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
+  }
+
   stamina.innerHTML = "Stamina: " + player.stamina;
   score.innerHTML = "Score: " + player.score;
   currency.innerHTML = "Money: " + player.currency;
@@ -47,8 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
   btnRoll.addEventListener("click", (e) => {
     rollDice();
   });
+
+  console.log(btnEndTurn);
+
   btnEndTurn.addEventListener("click", (e) => {
-    resetButtons();
+    console.log("test")
+    // resetButtons();
   });
 
 //   btnAddStamina.addEventListener("click", (e) => {
@@ -67,107 +93,106 @@ document.addEventListener('DOMContentLoaded', function() {
 //     console.log("Has Estus Flask: " + player.estusFlask);
 //   });
 
-//   var dieButtons = document.querySelectorAll('.die-btn');
-//   dieButtons.forEach(function(btn) {
-//       btn.addEventListener('click', function() {
-//           this.classList.toggle('selected');
-//       });
-//   });
-});
+  var dieButtons = document.querySelectorAll('.die-btn');
+  dieButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('selected');
+    });
+  });
 
-function rollResult(total) {
 
-  if (henchman.threshold <= total) {
-    henchman.health += henchman.healingFactor;
+  function rollResult(total) {
 
-    health.innerHTML = henchman.health + "/" + henchman.maxHealth;
+    if (henchman.threshold <= total) {
+      henchman.health += henchman.healingFactor;
+
+      health.innerHTML = henchman.health + "/" + henchman.maxHealth;
+    }
+
+    if (henchman.henchmenFull()) {
+
+      // const buttons = document.querySelectorAll('button');
+      // for (var i = 0; i < buttons.length; i++) {
+      //   buttons[i].disabled = false;
+      // }
+
+
+      player.score += henchman.scoreGiven;
+      player.currency += henchman.currencyGiven;
+      wave++;
+      player.stamina += 30;
+      henchman = new Henchmen("Goomba " + wave, wave);
+      health.innerHTML = henchman.health + "/" + henchman.maxHealth;
+      henchName.innerHTML = henchman.name;
+      threshold.innerHTML = "Threshold: " + henchman.threshold;
+      staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
+      healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
+      stamina.innerHTML = "Stamina: " + player.stamina;
+      score.innerHTML = "Score: " + player.score;
+      currency.innerHTML = "Money: " + player.currency;
+    }
   }
 
-  gameLog.innerHTML += "Rolled Dice";
-  // if (henchman.henchmenFull()) {
+  function rollDice() {
+    var selectedDie = document.querySelectorAll('.die-btn.selected');
+    if (selectedDie.length === 0) {
+      alert("Please select at least one die to roll.");
+      return;
+    }
 
-    // const buttons = document.querySelectorAll('button');
-    // for (var i = 0; i < buttons.length; i++) {
-    //   buttons[i].disabled = false;
+    var totalResult = 0;
+    var results = [];
+    selectedDie.forEach(function(btn) {
+        var dice = player.diceArray[parseInt(btn.id.substring(4))];
+        var result = dice.roll();
+        totalResult += result;
+        results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
+    });
+
+    // if (rollBonus) {
+    //   rollBonus = false;
+    //   totalResult += player.estusFlask;
+    //   results.push("+3 from Estus Flask");
+    //   console.log("rollBonus: " + rollBonus);
     // }
 
+    gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult;
 
-    player.score += henchman.scoreGiven;
-    player.currency += henchman.currencyGiven;
-    wave++;
-    player.stamina += 30;
-    henchman = new Henchmen("Goomba " + wave, wave);
-    health.innerHTML = henchman.health + "/" + henchman.maxHealth;
-    henchName.innerHTML = henchman.name;
-    threshold.innerHTML = "Threshold: " + henchman.threshold;
-    staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
-    healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
-    stamina.innerHTML = "Stamina: " + player.stamina;
-    score.innerHTML = "Score: " + player.score;
-    // currency.innerHTML = "Money: " + player.currency;
-  // }
-}
+    // Disable selected die buttons after rolling
+    selectedDie.forEach(function(btn) {
+        btn.classList.remove('selected');
+        btn.disabled = true;
+    });
 
-function rollDice() {
-  console.log("rolled");
-  // var selectedDie = document.querySelectorAll('.die-btn.selected');
-  // if (selectedDie.length === 0) {
-  //     alert("Please select at least one die to roll.");
-  //     return;
-  // }
+    rollResult(totalResult);
+  }
 
-  var totalResult = 0;
-  var results = [];
-  // selectedDie.forEach(function(btn) {
-  //     var numFaces = parseInt(btn.dataset.faces);
-  //     var result = Math.floor(Math.random() * numFaces) + 1;
-  //     totalResult += result;
-  //     results.push("You rolled a " + result + " on a " + numFaces + "-sided die.");
-  // });
+  function resetButtons() {
+    console.log("test");
+    const buttons = document.querySelectorAll('.die-btn');
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].disabled = false;
+    }
 
-  // if (rollBonus) {
-  //   rollBonus = false;
-  //   totalResult += player.estusFlask;
-  //   results.push("+3 from Estus Flask");
-  //   console.log("rollBonus: " + rollBonus);
-  // }
-
-  // document.getElementById('result').innerText = results.join('\n') + "\nTotal: " + totalResult;
-
-  // Disable selected die buttons after rolling
-  // selectedDie.forEach(function(btn) {
-  //     btn.classList.remove('selected');
-  //     btn.disabled = true;
-  // });
-
-  rollResult(totalResult);
-}
-
-function resetButtons() {
-  // const buttons = document.querySelectorAll('button');
-  // for (var i = 0; i < buttons.length; i++) {
-  //     buttons[i].disabled = false;
-  // }
-  // document.querySelector('#result').innerText = "";
-
-  if (!henchman.henchmenFull()) {
+    if (!henchman.henchmenFull()) {
       player.stamina -= henchman.staminaPenalty;
       stamina.innerHTML = "Stamina: " + player.stamina;
+    }
+    // if (player.estusFlask) {
+    //   rollBonus = true;
+    //   console.log("rollBonus: " + rollBonus);
+    // }
   }
-  // if (player.estusFlask) {
-  //   rollBonus = true;
-  //   console.log("rollBonus: " + rollBonus);
-  // }
-}
 
-// function allDisabled() {
-//   var buttons = document.querySelectorAll('.die-btn');
-//   let result = true;
-//   buttons.forEach(function (button) {
-//     // console.log(button.disabled);
-//     if (!button.disabled) {
-//       result = false; // a #notdisabledbutton was detected
-//     }
-//   });
-//   return result; // all dice used
-// }
+  // function allDisabled() {
+  //   var buttons = document.querySelectorAll('.die-btn');
+  //   let result = true;
+  //   buttons.forEach(function (button) {
+  //     // console.log(button.disabled);
+  //     if (!button.disabled) {
+  //       result = false; // a #notdisabledbutton was detected
+  //     }
+  //   });
+  //   return result; // all dice used
+  // }
+});

@@ -5,14 +5,8 @@ export class Player {
   stamina = 50;
   score = 0;
   
-  // Array of dice types
-  d4Array = [];
-  d6Array = [];
-  d8Array = [];
-  d10Array = [];
-  dPercentArray = [];
-  d12Array = [];
-  d20Array = [];
+  // Array of dice
+  diceArray = [];
 
   // Arrays of Collectibles
   // boonArray = [];
@@ -39,32 +33,7 @@ export class Player {
   }
 
   addDice(dice) {
-    switch (dice.typeOf) {
-      case "d4":
-        this.d4Array.push(dice);
-        break;
-      case "d6":
-        this.d6Array.push(dice);
-        break;
-      case "d8":
-        this.d8Array.push(dice);
-        break;
-      case "d10":
-        this.d10Array.push(dice);
-        break;
-      case "d%":
-        this.dPercentArray.push(dice);
-        break;
-      case "d12":
-        this.d12Array.push(dice);
-        break;
-      case "d20":
-        this.d20Array.push(dice);
-        break;
-      default:
-        this.d6Array.push(dice);
-        break;
-    }
+    this.diceArray.push(dice);
   }
 
   addConsumable(consumable) {
