@@ -1,5 +1,14 @@
 //SOURCE: https://web.dev/articles/drag-and-drop
 
+var content = document.querySelectorAll(".box");
+var contentArray = [];
+content.forEach(cell => {
+  contentArray[cell.id] = cell.innerHTML;
+});
+
+// For implimentation: Consider using an array as such above to keep track of changes to the dice
+// and when the user moves on or 'saves' then overwrite the dice sides array with the values inside the content array
+
 document.addEventListener('DOMContentLoaded', (event) => {
 
   var dragSrcEl = null;
@@ -43,6 +52,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     } else if (dragSrcEl != this && dragSrcEl.tagName === 'DIV' && this.tagName === 'DIV') {
       dragSrcEl.innerHTML = this.innerHTML;
       this.innerHTML = e.dataTransfer.getData('text/html');
+      
+      contentArray[dragSrcEl.id] = dragSrcEl.innerHTML;
+      contentArray[this.id] = this.innerHTML;
+
+      console.log(contentArray);
     }
     
     return false;
