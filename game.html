@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <script type="module" src="src/js/test.js"></script> -->
     <script type="module" src="src/js/test.js"></script>
 
-    <link rel="stylesheet" href="src/css/styles.css" />
-    <link rel="stylesheet" href="src/css/dice.css" />
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/dice.css">
 
     <title>Henchmen Hospital</title>
   </head>
@@ -148,7 +148,7 @@
               <td><br></td>
             </tr>
             <tr>
-              <td id="henchName">Goomba</td>
+              <td id="henchName">Grunt</td>
             </tr>
           </tbody>
         </table>
@@ -165,19 +165,19 @@
               <td><br></td>
             </tr>
             <tr>
-              <td id="threshold">Threshold: 7</td>
+              <td id="threshold">Threshold: 10</td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td id="healingFactor">Healing Factor: 15</td>
+              <td id="healingFactor">Healing Factor: 11</td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td id="staminaPenalty">Stamina Penalty: 10</td>
+              <td id="staminaPenalty">Stamina Penalty: 15</td>
             </tr>
             <tr>
               <td><br></td>
@@ -250,21 +250,7 @@
         </div>
 
         <div id="diceArea" class="diceRolling">
-          <!-- <span>Dice Roll Area</span> -->
 
-          <!-- <div class="button-container">
-            <button class="die-btn d4" data-faces="4">4</button>
-            <button class="die-btn d6" data-faces="6">6</button>
-            <button class="die-btn d8" data-faces="8">8</button>
-            <button class="die-btn d10" data-faces="10">10</button>
-            <button class="die-btn d12" data-faces="12">12</button>
-            <button class="die-btn d20" data-faces="20">20</button>
-          </div>
-        
-          <div id="btnDiv">
-              <button id="btnReset">Reset</button>
-              <button id="btnRoll">Roll</button>
-          </div> -->
         </div>
 
         <div id="specialDice" class="diceRolling">
@@ -508,9 +494,9 @@ This is what Crowbar does"
       <div id="gameLogs" class="collapsed">
         <span>Game logs:</span>
         <br>
-        <span id="average">Running Average:</span>
+        <!-- <span id="average">Running Average:</span> -->
         <br>
-        <p id="logText">This is a log entry.</p>
+        <p id="logText"></p>
       </div>
     </div>
 
@@ -553,50 +539,50 @@ This is what Crowbar does"
     </script>
 
   <script>
-    // const henchman = document.querySelector('#henchman');
-    // const henchName = document.querySelector('#henchName');
+    const henchman = document.querySelector('#henchman');
+    const henchName = document.querySelector('#henchName');
 
-    // const henchArray = {
-    //   "Beetle" : "url(src/media/Henchmen/henchman_beetle.png), url(src/media/texture2.png)",
-    //   "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin.png), url(src/media/texture2.png)",
-    //   "Ghost" : "url(src/media/Henchmen/henchman_ghost.png), url(src/media/texture2.png)",
-    //   "Goomba" : "url(src/media/Henchmen/henchman_goomba.png), url(src/media/texture2.png)",
-    //   "Grunt" : "url(src/media/Henchmen/henchman_grunt.png), url(src/media/texture2.png)",
-    //   "Henchman 24" : "url(src/media/Henchmen/henchman_henchman24.png), url(src/media/texture2.png)",
-    //   "Iago" : "url(src/media/Henchmen/henchman_iago.png), url(src/media/texture2.png)",
-    //   "Pain and Panic" : "url(src/media/Henchmen/henchman_imps.png), url(src/media/texture2.png)",
-    //   "Koopa Troopa" : "url(src/media/Henchmen/henchman_koopaTroopa.png), url(src/media/texture2.png)",
-    //   "Minion" : "url(src/media/Henchmen/henchman_megaMinion.png), url(src/media/texture2.png)",
-    //   "Minion" : "url(src/media/Henchmen/henchman_minion.png), url(src/media/texture2.png)",
-    //   "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader.png), url(src/media/texture2.png)",
-    //   "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper.png), url(src/media/texture2.png)",
-    //   "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
-    // };
+    const henchArray = {
+      "Beetle" : "url(src/media/Henchmen/henchman_beetle.png), url(src/media/texture2.png)",
+      "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin.png), url(src/media/texture2.png)",
+      "Ghost" : "url(src/media/Henchmen/henchman_ghost.png), url(src/media/texture2.png)",
+      "Goomba" : "url(src/media/Henchmen/henchman_goomba.png), url(src/media/texture2.png)",
+      "Grunt" : "url(src/media/Henchmen/henchman_grunt.png), url(src/media/texture2.png)",
+      "Henchman 24" : "url(src/media/Henchmen/henchman_henchman24.png), url(src/media/texture2.png)",
+      "Iago" : "url(src/media/Henchmen/henchman_iago.png), url(src/media/texture2.png)",
+      "Pain and Panic" : "url(src/media/Henchmen/henchman_imps.png), url(src/media/texture2.png)",
+      "Koopa Troopa" : "url(src/media/Henchmen/henchman_koopaTroopa.png), url(src/media/texture2.png)",
+      "Minion" : "url(src/media/Henchmen/henchman_megaMinion.png), url(src/media/texture2.png)",
+      "Minion" : "url(src/media/Henchmen/henchman_minion.png), url(src/media/texture2.png)",
+      "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader.png), url(src/media/texture2.png)",
+      "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper.png), url(src/media/texture2.png)",
+      "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
+    };
 
-    // const henchNameArray = [
-    //   "Beetle",
-    //   "Bokoblin",
-    //   "Ghost",
-    //   "Goomba",
-    //   "Grunt",
-    //   "Henchman 24",
-    //   "Iago",
-    //   "Pain and Panic",
-    //   "Koopa Troopa",
-    //   "Minion",
-    //   "Minion",
-    //   "Space Invader",
-    //   "Storm Trooper",
-    //   "Turret",
-    // ];
+    const henchNameArray = [
+      "Beetle",
+      "Bokoblin",
+      "Ghost",
+      "Goomba",
+      "Grunt",
+      "Henchman 24",
+      "Iago",
+      "Pain and Panic",
+      "Koopa Troopa",
+      "Minion",
+      "Minion",
+      "Space Invader",
+      "Storm Trooper",
+      "Turret",
+    ];
 
-    // const randomIndex = Math.floor(Math.random() * henchNameArray.length);
+    const randomIndex = Math.floor(Math.random() * henchNameArray.length);
 
-    // // henchman.style.border = "solid red";
-    // henchman.style.backgroundImage = henchArray[henchNameArray[randomIndex]];
-    // // henchman.innerHTML = henchArray[randomHenchIndex];
+    // henchman.style.border = "solid red";
+    henchman.style.backgroundImage = henchArray[henchNameArray[randomIndex]];
+    // henchman.innerHTML = henchArray[randomHenchIndex];
 
-    // henchName.innerHTML = henchNameArray[randomIndex];
+    henchName.innerHTML = henchNameArray[randomIndex];
 
   </script>
   <script type="module" src="./test/gameplay/gameplay.js"></script>

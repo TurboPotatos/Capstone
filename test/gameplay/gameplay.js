@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
     //   console.log("rollBonus: " + rollBonus);
     // }
 
-    gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult;
+    gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult + "<br><br>";
 
     // Disable selected die buttons after rolling
     selectedDie.forEach(function(btn) {
