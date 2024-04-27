@@ -39,9 +39,9 @@ function init() {
 
       let d20 = new Dice("d20");
       let roll = d20.roll();
-      console.log(roll);
+      // console.log(roll);
       if (roll == 20) {
-        console.log("a winner is you!");
+        // console.log("a winner is you!");
       }
     };
 
@@ -87,10 +87,10 @@ function init() {
 
   // console.log(`Message from DOMAccess class: ${domAccessClassInstance.exampleProperty} and stuff property ${domAccessClassInstance.stuff}`);
 
-  domAccessClassInstance.doStuff();
+  // domAccessClassInstance.doStuff();
 
   // domAccessClassInstance.diceArea.addEventListener("click", DOMAccess.getClicked);
-  domAccessClassInstance.rollDiceBtn.addEventListener("click", DOMAccess.getClicked);
+  // domAccessClassInstance.rollDiceBtn.addEventListener("click", DOMAccess.getClicked);
 }
 
 window.onload = init;
