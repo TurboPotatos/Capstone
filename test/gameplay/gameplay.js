@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   btnEndTurn.addEventListener("click", (e) => {
-    // console.log("test")
     resetButtons();
   });
 
@@ -105,21 +104,21 @@ document.addEventListener('DOMContentLoaded', function() {
       henchman.health += henchman.healingFactor;
 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
+      if ((henchman.health / henchman.maxHealth) >= 1) {
+        healthBar.style.width = '100%';
+      } else {
+        healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`; 
+      }
     }
 
     if (henchman.henchmenFull()) {
-
-      // const buttons = document.querySelectorAll('button');
-      // for (var i = 0; i < buttons.length; i++) {
-      //   buttons[i].disabled = false;
-      // }
-
 
       player.score += henchman.scoreGiven;
       player.currency += henchman.currencyGiven;
       wave++;
       player.stamina += 30;
       henchman = new Henchmen("Goomba " + wave, wave);
+      healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`; 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
       henchName.innerHTML = henchman.name;
       threshold.innerHTML = "Threshold: " + henchman.threshold;
