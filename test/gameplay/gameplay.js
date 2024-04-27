@@ -70,11 +70,9 @@ document.addEventListener('DOMContentLoaded', function() {
     rollDice();
   });
 
-  console.log(btnEndTurn);
-
   btnEndTurn.addEventListener("click", (e) => {
-    console.log("test")
-    // resetButtons();
+    // console.log("test")
+    resetButtons();
   });
 
 //   btnAddStamina.addEventListener("click", (e) => {
