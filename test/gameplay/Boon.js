@@ -31,35 +31,151 @@ const boonArray = {
   "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }, "src/media/boon_beamSword.png"),
   "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }, "src/media/boon_beamSword.png"),
 
-  "beamSword" : new Boon("beamSword", "", {temp: 0}, "src/media/boon_beamSword.png"),
-  "chaosEmerald" : new Boon("chaosEmerald", "", {temp: 0}, "src/media/boon_chaosEmerald.png"),
-  "companionCube" : new Boon("companionCube", "", {temp: 0}, "src/media/boon_companionCube.png"),
-  "crowbar" : new Boon("crowbar", "", {temp: 0}, "src/media/boon_crowbar.png"),
-  "elderScroll" : new Boon("elderScroll", "", {temp: 0}, "src/media/boon_elderScroll.png"),
-  "estusFlask" : new Boon("estusFlask", "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, "src/media/boon_estusFlask.png"),
-  "gloves" : new Boon("gloves", "", {temp: 0}, "src/media/boon_gloves.png"),
-  "goggles" : new Boon("goggles", "", {temp: 0}, "src/media/boon_goggles.png"),
-  "labCoat" : new Boon("labCoat", "", {temp: 0}, "src/media/boon_labCoat.png"),
-  "lollipops" : new Boon("lollipops", "", {temp: 0}, "src/media/boon_lollipops.png"),
-  "mask" : new Boon("mask", "", {temp: 0}, "src/media/boon_mask.png"),
-  "medicalBag" : new Boon("medicalBag", "", {temp: 0}, "src/media/boon_medicalBag.png"),
-  "mushroom" : new Boon("mushroom", "", {temp: 0}, "src/media/boon_mushroom.png"),
-  "nukaCola" : new Boon("nukaCola", "", {temp: 0}, "src/media/boon_nukaCola.png"),
-  "pickaxe" : new Boon("pickaxe", "", {temp: 0}, "src/media/boon_pickaxe.png"),
-  "pillBottle" : new Boon("pillBottle", "", {temp: 0}, "src/media/boon_pillBottle.png"),
-  "pokeball" : new Boon("pokeball", "", {temp: 0}, "src/media/boon_pokeball.png"),
-  "portalGun" : new Boon("portalGun", "", {temp: 0}, "src/media/boon_portalGun.png"),
-  "reflexHammer" : new Boon("reflexHammer", "", {temp: 0}, "src/media/boon_reflexHammer.png"),
-  "rxPad" : new Boon("rxPad", "", {temp: 0}, "src/media/boon_rxPad.png"),
-  "scalpel" : new Boon("scalpel", "", {temp: 0}, "src/media/boon_scalpel.png"),
-  "scrubs" : new Boon("scrubs", "", {temp: 0}, "src/media/boon_scrubs.png"),
-  "star" : new Boon("star", "", {temp: 0}, "src/media/boon_star.png"),
-  "stethoscope" : new Boon("stethoscope", "", {temp: 0}, "src/media/boon_stethoscope.png"),
-  "syringe" : new Boon("syringe", "", {temp: 0}, "src/media/boon_syringe.png"),
-  "tetrisPiece" : new Boon("tetrisPiece", "", {temp: 0}, "src/media/boon_tetrisPiece.png"),
-  "thermometer" : new Boon("thermometer", "", {temp: 0}, "src/media/boon_thermometer.png"),
-  "tongueDepressor" : new Boon("tongueDepressor", "", {temp: 0}, "src/media/boon_tongueDepressor.png"),
-  "triforce" : new Boon("triforce", "", {temp: 0}, "src/media/boon_triforce.png"),
+  "beamSword" : 
+  new Boon( "beamSword", 
+            "Beam Sword: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_beamSword.png"),
+
+  "chaosEmerald" : 
+  new Boon( "chaosEmerald", 
+            "Chaos Emerald: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_chaosEmerald.png"),
+
+  "companionCube" : 
+  new Boon( "companionCube", 
+            "Companion Cube: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_companionCube.png"),
+
+  "crowbar" : 
+  new Boon( "crowbar", 
+            "Crowbar: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_crowbar.png"),
+
+  "elderScroll" : 
+  new Boon( "elderScroll", 
+            "Elder Scroll: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_elderScroll.png"),
+
+  "estusFlask" : 
+  new Boon( "estusFlask", 
+            "EestusFlaskstus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, 
+            "src/media/boon_estusFlask.png"),
+
+  "gloves" : 
+  new Boon( "gloves", 
+            "Gloves: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_gloves.png"),
+
+  "goggles" : 
+  new Boon( "goggles", 
+            "Goggles: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_goggles.png"),
+
+  "labCoat" : 
+  new Boon( "labCoat", 
+            "LabCoat: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_labCoat.png"),
+
+  "lollipops" : 
+  new Boon( "lollipops", 
+            "Lollipops: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_lollipops.png"),
+
+  "mask" : 
+  new Boon( "mask", 
+            "Mask: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_mask.png"),
+
+  "medicalBag" : 
+  new Boon( "medicalBag", 
+            "Medical Bag: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_medicalBag.png"),
+
+  "mushroom" : 
+  new Boon( "mushroom", 
+            "Mushroom: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_mushroom.png"),
+
+  "nukaCola" : 
+  new Boon( "nukaCola", 
+            "NukaCola: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_nukaCola.png"),
+
+  "pickaxe" : 
+  new Boon( "pickaxe", 
+            "Pickaxe: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_pickaxe.png"),
+
+  "pillBottle" : 
+  new Boon( "pillBottle", 
+            "PillBottle: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_pillBottle.png"),
+
+  "pokeball" : 
+  new Boon( "pokeball", 
+            "Pokeball: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_pokeball.png"),
+
+  "portalGun" : 
+  new Boon( "portalGun", 
+            "Portal Gun: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_portalGun.png"),
+
+  "reflexHammer" : 
+  new Boon( "reflexHammer", 
+            "Reflex Hammer: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_reflexHammer.png"),
+
+  "rxPad" : 
+  new Boon( "rxPad", 
+            "RX Pad: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_rxPad.png"),
+
+  "scalpel" : 
+  new Boon( "scalpel", 
+            "Scalpel: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_scalpel.png"),
+
+  "scrubs" : 
+  new Boon( "scrubs", 
+            "Scrubs: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_scrubs.png"),
+
+  "star" : 
+  new Boon( "star", 
+            "Star: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_star.png"),
+
+  "stethoscope" : 
+  new Boon( "stethoscope", 
+            "Stethoscope: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_stethoscope.png"),
+
+  "syringe" : 
+  new Boon( "syringe", 
+            "Syringe: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_syringe.png"),
+
+  "tetrisPiece" : 
+  new Boon( "tetrisPiece", 
+            "Tetris Piece: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_tetrisPiece.png"),
+
+  "thermometer" : 
+  new Boon( "thermometer", 
+            "Thermometer: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_thermometer.png"),
+
+  "tongueDepressor" : 
+  new Boon( "tongueDepressor", 
+            "Tongue Depressor: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_tongueDepressor.png"),
+
+  "triforce" : 
+  new Boon( "triforce", 
+            "Triforce: <br><br>Item description", {temp: 0}, 
+            "src/media/boon_triforce.png"),
+
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.

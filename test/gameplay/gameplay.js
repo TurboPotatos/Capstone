@@ -144,6 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var result = dice.roll();
         totalResult += result;
         results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
+        btn.innerHTML = result;
     });
 
     // if (rollBonus) {
