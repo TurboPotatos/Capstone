@@ -22,12 +22,15 @@
       <a href="workshop.html">Workshop</a>
     </div>
 
-    <div class="fadeOverlay"></div>
+    
 
     <div class="wrapper" id="gameDiv">
 
-      <div id="checkDice">
-        <button id="backBtn">Back</button>
+      <div id="checkDiceContainer">
+        <div id="checkDice">
+          <button id="backBtn">Back</button>
+        </div>
+        <!-- <div class="fadeOverlay"></div> -->
       </div>
       
       <div class="henchmenChart" id="medChart1">
@@ -598,16 +601,13 @@ This is what Crowbar does"
     document.addEventListener('DOMContentLoaded', function() {
       const fadeBtn = document.querySelector('#fadeBtn');
       const backBtn = document.querySelector('#backBtn');
-      const checkDice = document.querySelector('#checkDice');
-      const fadeOverlay = document.querySelector('.fadeOverlay');
+      const checkDiceContainer = document.querySelector('#checkDiceContainer');
 
       fadeBtn.addEventListener("click", (e) => {
-        fadeOverlay.style.display = "block";
-        checkDice.style.display = "block";
+        checkDiceContainer.style.display = "block";
       });
       backBtn.addEventListener("click", (e) => {
-        fadeOverlay.style.display = "none";
-        checkDice.style.display = "none";
+        checkDiceContainer.style.display = "none";
       });
     });
 
@@ -616,6 +616,6 @@ This is what Crowbar does"
 
   <button type="button" id="endTurnBtn">End Turn</button>
   <button type="button" id="fadeBtn">Fade Screen</button>
-  
+
   </body>
 </html>
