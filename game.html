@@ -569,22 +569,27 @@ This is what Crowbar does"
       "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
     };
 
-    const henchNameArray = [
-      "Beetle",
-      "Bokoblin",
-      "Ghost",
-      "Goomba",
-      "Grunt",
-      "Henchman 24",
-      "Iago",
-      "Pain and Panic",
-      "Koopa Troopa",
-      "Minion",
-      "Minion",
-      "Space Invader",
-      "Storm Trooper",
-      "Turret",
-    ];
+    let henchNameArray = [];
+    for (key in henchArray) {
+      henchNameArray.push(key);
+    }
+
+    // const henchNameArray = [
+    //   "Beetle",
+    //   "Bokoblin",
+    //   "Ghost",
+    //   "Goomba",
+    //   "Grunt",
+    //   "Henchman 24",
+    //   "Iago",
+    //   "Pain and Panic",
+    //   "Koopa Troopa",
+    //   "Minion",
+    //   "Minion",
+    //   "Space Invader",
+    //   "Storm Trooper",
+    //   "Turret",
+    // ];
 
     const randomIndex = Math.floor(Math.random() * henchNameArray.length);
 

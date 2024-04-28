@@ -211,3 +211,13 @@ body {
 .d20:disabled {
   background-image: url(../../src/media/d20.png);
 }
+
+.success:disabled {
+  /* color: white; */
+  color: green;
+  text-shadow: 2px 2px 0px black;
+}
+.failure:disabled {
+  color: red;
+  text-shadow: 2px 2px 0px black;
+}

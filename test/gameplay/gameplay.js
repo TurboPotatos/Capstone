@@ -104,7 +104,9 @@ document.addEventListener('DOMContentLoaded', function() {
       henchman.health += henchman.healingFactor;
 
       selectedDie.forEach(function(btn) {
-        btn.style.color = "green";
+        // btn.style.color = "green";
+        // btn.style.textShadow = "2px 2px 0px black";
+        btn.classList.add("success");
       });
 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
@@ -115,7 +117,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } else {
       selectedDie.forEach(function(btn) {
-        btn.style.color = "red";
+        // btn.style.color = "red";
+        // btn.style.textShadow = "2px 2px 0px black";
+        btn.classList.add("failure");
       });
     }
 
@@ -178,7 +182,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].disabled = false;
-      buttons[i].style.color = "black";
+      // buttons[i].style.color = "black";
+      // buttons[i].style.textShadow = "none";
+      buttons[i].classList.remove("success", "failure");
     }
 
     if (!henchman.henchmenFull()) {
