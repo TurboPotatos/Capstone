@@ -58,7 +58,7 @@ const boonArray = {
 
   "estusFlask" : 
   new Boon( "estusFlask", 
-            "EestusFlaskstus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, 
+            "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, 
             "src/media/boon_estusFlask.png"),
 
   "gloves" : 
@@ -73,7 +73,7 @@ const boonArray = {
 
   "labCoat" : 
   new Boon( "labCoat", 
-            "LabCoat: <br><br>Item description", {temp: 0}, 
+            "Lab Coat: <br><br>Item description", {temp: 0}, 
             "src/media/boon_labCoat.png"),
 
   "lollipops" : 
@@ -98,7 +98,7 @@ const boonArray = {
 
   "nukaCola" : 
   new Boon( "nukaCola", 
-            "NukaCola: <br><br>Item description", {temp: 0}, 
+            "Nuka Cola: <br><br>Item description", {temp: 0}, 
             "src/media/boon_nukaCola.png"),
 
   "pickaxe" : 
@@ -108,7 +108,7 @@ const boonArray = {
 
   "pillBottle" : 
   new Boon( "pillBottle", 
-            "PillBottle: <br><br>Item description", {temp: 0}, 
+            "Pill Bottle: <br><br>Item description", {temp: 0}, 
             "src/media/boon_pillBottle.png"),
 
   "pokeball" : 
