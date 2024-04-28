@@ -98,10 +98,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-  function rollResult(total) {
+  function rollResult(total, selectedDie) {
 
     if (henchman.threshold <= total) {
       henchman.health += henchman.healingFactor;
+
+      selectedDie.forEach(function(btn) {
+        btn.style.color = "green";
+      });
 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
       if ((henchman.health / henchman.maxHealth) >= 1) {
@@ -109,6 +113,10 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`; 
       }
+    } else {
+      selectedDie.forEach(function(btn) {
+        btn.style.color = "red";
+      });
     }
 
     if (henchman.henchmenFull()) {
@@ -155,14 +163,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // }
 
     gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult + "<br><br>";
-
+    
     // Disable selected die buttons after rolling
     selectedDie.forEach(function(btn) {
-        btn.classList.remove('selected');
-        btn.disabled = true;
+      btn.classList.remove('selected');
+      btn.disabled = true;
     });
-
-    rollResult(totalResult);
+    
+    rollResult(totalResult, selectedDie);
   }
 
   function resetButtons() {
@@ -170,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].disabled = false;
+      buttons[i].style.color = "black";
     }
 
     if (!henchman.henchmenFull()) {
