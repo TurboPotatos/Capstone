@@ -21,7 +21,14 @@
       <a href="shop.html">Shop</a>
       <a href="workshop.html">Workshop</a>
     </div>
+
+    <div class="fadeOverlay"></div>
+
     <div class="wrapper" id="gameDiv">
+
+      <div id="checkDice">
+        <button id="backBtn">Back</button>
+      </div>
       
       <div class="henchmenChart" id="medChart1">
         <div class="clientTabs" id="clientTab1">
@@ -585,7 +592,30 @@ This is what Crowbar does"
     henchName.innerHTML = henchNameArray[randomIndex];
 
   </script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeBtn = document.querySelector('#fadeBtn');
+      const backBtn = document.querySelector('#backBtn');
+      const checkDice = document.querySelector('#checkDice');
+      const fadeOverlay = document.querySelector('.fadeOverlay');
+
+      fadeBtn.addEventListener("click", (e) => {
+        fadeOverlay.style.display = "block";
+        checkDice.style.display = "block";
+      });
+      backBtn.addEventListener("click", (e) => {
+        fadeOverlay.style.display = "none";
+        checkDice.style.display = "none";
+      });
+    });
+
+  </script>
   <script type="module" src="./test/gameplay/gameplay.js"></script>
+
   <button type="button" id="endTurnBtn">End Turn</button>
+  <button type="button" id="fadeBtn">Fade Screen</button>
+  
   </body>
 </html>

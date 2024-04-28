@@ -29,6 +29,18 @@
   background-repeat: no-repeat;
   background-position: center;
 } */
+
+.fadeOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Adjust darkness here */
+  z-index: 501;
+  display: none;
+}
+
 .wrapper {
 	width: 100vw;
   height: 100vh;
@@ -335,7 +347,28 @@
 }
 
 
-/* Game Screen */
+/* Game Screen //////////////////////////////////////////////////////////// */
+
+#checkDice {
+  border: 1.5rem solid black;
+  border-radius: 5%;
+  position: absolute;
+  float: left;
+  height: 70%;
+  width: 40%;
+  top: 10%;
+  left: 25%;
+  background-image: url(../media/texture2.png);
+  background-size: cover;
+  box-sizing: border-box;
+  display: none;
+  z-index: 1000;
+}
+#backBtn {
+  height: 10%;
+  width: 20%;
+}
+
 .henchmenChart {
   height: clamp(37rem, 50rem, 95%);
   /* height: 80%; */

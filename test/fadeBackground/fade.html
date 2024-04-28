@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fading and Darkening Background</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background: url(../../src/media/background2.png);
+        background-size: cover;
+        /* You can replace 'your-background-image.jpg' with your actual image */
+    }
+    
+    .central-div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.8); /* Adjust opacity here */
+        padding: 20px;
+        border-radius: 10px;
+    }
+    
+    .fadeOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust darkness here */
+        z-index: -1; /* Push it behind other content */
+    }
+</style>
+</head>
+<body>
+    <div class="fadeOverlay"></div>
+    <div class="central-div">
+        <!-- Your content here -->
+        <h1>This is a central div</h1>
+        <p>This content will be placed in the central div.</p>
+    </div>
+</body>
+</html>
