@@ -338,7 +338,7 @@
 
 /* Game Screen //////////////////////////////////////////////////////////// */
 
-#checkDiceContainer{
+#colorBox{
   position: absolute;
   top: 0;
   left: 0;
@@ -347,22 +347,7 @@
   display: none;
   z-index: 1001;
 }
-#checkDice {
-  border: 1.5rem solid black;
-  border-radius: 5%;
-  position: absolute;
-  float: left;
-  height: 70%;
-  width: 40%;
-  top: 10%;
-  left: 25%;
-  background-image: url(../media/texture2.png);
-  background-size: cover;
-  box-sizing: border-box;
-  /* display: block; */
-  z-index: 1003;
-}
-#checkDiceContainer:before {
+#colorBox:before {
   content: '';
   position: absolute;
   float: left;
@@ -374,9 +359,58 @@
   z-index: -1;
   /* display: block; */
 }
+#colorPicker {
+  border: 1.5rem solid black;
+  border-radius: 5%;
+  position: absolute;
+  float: left;
+  height: 70%;
+  width: 40%;
+  top: 10%;
+  left: 25%;
+  /* background-image: url(../media/texture2.png); */
+  background-color: cadetblue;
+  background-size: cover;
+  box-sizing: border-box;
+  /* display: block; */
+  z-index: 1003;
+}
+.slider-container {
+  /* border: solid red; */
+  padding: 10%;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+#redRange,
+#greenRange,
+#blueRange {
+  /* border: solid red; */
+  position: relative;
+  float: left;
+  margin: 1rem;
+  top: 1rem;
+  width: 60%;
+  left: 1rem;
+}
+#redRangeLabel,
+#greenRangeLabel,
+#blueRangeLabel {
+  position: relative;
+  float: left;
+  margin-right: 1rem;
+  top: 1rem;
+  font-size: 2rem;
+}
 #backBtn {
+  position: absolute;
   height: 10%;
   width: 20%;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .henchmenChart {
