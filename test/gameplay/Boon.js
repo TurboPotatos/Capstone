@@ -28,152 +28,181 @@ const boonArray = {
   // "Speed Boots": new Boon("Speed Boots", "Increases movement speed", { speedBoost: true }),
   // "Lucky Charm": new Boon("Lucky Charm", "Increases critical hit chance by 10%", { criticalHitChance: 0.1 }),
 
-  "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }, "src/media/boon_beamSword.png"),
-  "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }, "src/media/boon_beamSword.png"),
+  // "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }, "src/media/boon_beamSword.png"),
+  // "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }, "src/media/boon_beamSword.png"),
 
   "beamSword" : 
   new Boon( "beamSword", 
-            "Beam Sword: <br><br>Item description", {temp: 0}, 
+            "Beam Sword: <br><br>50% chance to heal for +5 when you exceed the threshold by a factor of 2", 
+            {healChance: 0.5, ThresholdFactor: 2}, 
             "src/media/boon_beamSword.png"),
 
   "chaosEmerald" : 
   new Boon( "chaosEmerald", 
-            "Chaos Emerald: <br><br>Item description", {temp: 0}, 
+            "Chaos Emerald: <br><br>When buying a die face of 7 or below, you get an additional one", 
+            {faceValue: 7}, 
             "src/media/boon_chaosEmerald.png"),
 
   "companionCube" : 
   new Boon( "companionCube", 
-            "Companion Cube: <br><br>Item description", {temp: 0}, 
+            "Companion Cube: <br><br>d4s roll double", 
+            {d4Multiplier: 2}, 
             "src/media/boon_companionCube.png"),
 
   "crowbar" : 
   new Boon( "crowbar", 
-            "Crowbar: <br><br>Item description", {temp: 0}, 
+            "Crowbar: <br><br>If you would lose more than 10 stamina, you lose 10 instead", 
+            {staminaLost: 10}, 
             "src/media/boon_crowbar.png"),
 
   "elderScroll" : 
   new Boon( "elderScroll", 
-            "Elder Scroll: <br><br>Item description", {temp: 0}, 
+            "Elder Scroll: <br><br>Henchman are worth +3 gold when fully healed", 
+            {goldBonus: 0}, 
             "src/media/boon_elderScroll.png"),
 
   "estusFlask" : 
   new Boon( "estusFlask", 
-            "Estus Flask: <br><br>+3 to your first roll after resetting your dice", {estusFlask: 3}, 
+            "Estus Flask: <br><br>+3 to your first roll after resetting your dice", 
+            {estusFlask: 3}, 
             "src/media/boon_estusFlask.png"),
 
   "gloves" : 
   new Boon( "gloves", 
-            "Gloves: <br><br>Item description", {temp: 0}, 
+            "Gloves: <br><br>Overhealing a henchman recovers your stamina by half that amount", 
+            {staminaRestore: 0.5}, 
             "src/media/boon_gloves.png"),
 
   "goggles" : 
   new Boon( "goggles", 
-            "Goggles: <br><br>Item description", {temp: 0}, 
+            "Goggles: <br><br>d10 gets +1 to each roll", 
+            {d10Bonus: 1}, 
             "src/media/boon_goggles.png"),
 
   "labCoat" : 
   new Boon( "labCoat", 
-            "Lab Coat: <br><br>Item description", {temp: 0}, 
+            "Lab Coat: <br><br>When you only roll one die, you roll it twice and take the higher number", 
+            {advantage: true}, 
             "src/media/boon_labCoat.png"),
 
   "lollipops" : 
   new Boon( "lollipops", 
-            "Lollipops: <br><br>Item description", {temp: 0}, 
+            "Lollipops: <br><br>Items in the vending machine cost 20% less", 
+            {vendingDiscount: 0.2}, 
             "src/media/boon_lollipops.png"),
 
   "mask" : 
   new Boon( "mask", 
-            "Mask: <br><br>Item description", {temp: 0}, 
+            "Mask: <br><br>10% chance to get an additional item from the vending machine", 
+            {bonusVendChance: 0.1}, 
             "src/media/boon_mask.png"),
 
   "medicalBag" : 
   new Boon( "medicalBag", 
-            "Medical Bag: <br><br>Item description", {temp: 0}, 
+            "Medical Bag: <br><br>+20 max stamina", 
+            {maxStamina: 20}, 
             "src/media/boon_medicalBag.png"),
 
   "mushroom" : 
   new Boon( "mushroom", 
-            "Mushroom: <br><br>Item description", {temp: 0}, 
+            "Mushroom: <br><br>Henchmen start with +10 health", 
+            {bonusHealth: 10}, 
             "src/media/boon_mushroom.png"),
 
   "nukaCola" : 
   new Boon( "nukaCola", 
-            "Nuka Cola: <br><br>Item description", {temp: 0}, 
+            "Nuka Cola: <br><br>Ignore the next 2 curses", 
+            {ignoreCurses: 2}, 
             "src/media/boon_nukaCola.png"),
 
   "pickaxe" : 
   new Boon( "pickaxe", 
-            "Pickaxe: <br><br>Item description", {temp: 0}, 
+            "Pickaxe: <br><br>+5 to all rolls, but you can only roll 1 die at a time", 
+            {rollBonus: 5, MaxRolledDice: 1}, 
             "src/media/boon_pickaxe.png"),
 
   "pillBottle" : 
   new Boon( "pillBottle", 
-            "Pill Bottle: <br><br>Item description", {temp: 0}, 
+            "Pill Bottle: <br><br>If you roll doubles, double the value", 
+            {rollMultiplier: 2}, 
             "src/media/boon_pillBottle.png"),
 
   "pokeball" : 
   new Boon( "pokeball", 
-            "Pokeball: <br><br>Item description", {temp: 0}, 
+            "Pokeball: <br><br>Die faces fit any die", 
+            {pokeball: true}, 
             "src/media/boon_pokeball.png"),
 
   "portalGun" : 
   new Boon( "portalGun", 
-            "Portal Gun: <br><br>Item description", {temp: 0}, 
+            "Portal Gun: <br><br>Your dice roll for (13 minus the value of the roll)", 
+            {inverse: 13}, 
             "src/media/boon_portalGun.png"),
 
   "reflexHammer" : 
   new Boon( "reflexHammer", 
-            "Reflex Hammer: <br><br>Item description", {temp: 0}, 
+            "Reflex Hammer: <br><br>If you roll 3 1s in a single roll (using exactly 3 dice), fully heal the henchman", 
+            {reflexHammer: true}, 
             "src/media/boon_reflexHammer.png"),
 
   "rxPad" : 
   new Boon( "rxPad", 
-            "RX Pad: <br><br>Item description", {temp: 0}, 
+            "RX Pad: <br><br>If you miss the threshold by over 10, reroll the dice you just rolled", 
+            {lowRoll: 10}, 
             "src/media/boon_rxPad.png"),
 
   "scalpel" : 
   new Boon( "scalpel", 
-            "Scalpel: <br><br>Item description", {temp: 0}, 
+            "Scalpel: <br><br>You can have +1 die in your dice tray", 
+            {extraDice: 1}, 
             "src/media/boon_scalpel.png"),
 
   "scrubs" : 
   new Boon( "scrubs", 
-            "Scrubs: <br><br>Item description", {temp: 0}, 
+            "Scrubs: <br><br>+1 to henchman healing factor", 
+            {healingFactor: 1}, 
             "src/media/boon_scrubs.png"),
 
   "star" : 
   new Boon( "star", 
-            "Star: <br><br>Item description", {temp: 0}, 
+            "Star: <br><br>Prevent the first time a henchman would lose health", 
+            {star: true}, 
             "src/media/boon_star.png"),
 
   "stethoscope" : 
   new Boon( "stethoscope", 
-            "Stethoscope: <br><br>Item description", {temp: 0}, 
+            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 5 stamina", 
+            {staminaDamage: 5}, 
             "src/media/boon_stethoscope.png"),
 
   "syringe" : 
   new Boon( "syringe", 
-            "Syringe: <br><br>Item description", {temp: 0}, 
+            "Syringe: <br><br>You can read redacted henchman charts", 
+            {syringe: true}, 
             "src/media/boon_syringe.png"),
 
   "tetrisPiece" : 
   new Boon( "tetrisPiece", 
-            "Tetris Piece: <br><br>Item description", {temp: 0}, 
+            "Tetris Piece: <br><br>Henchman is considered healed if it's within 5% of its max health", 
+            {henchIsHealed: 0.05}, 
             "src/media/boon_tetrisPiece.png"),
 
   "thermometer" : 
   new Boon( "thermometer", 
-            "Thermometer: <br><br>Item description", {temp: 0}, 
+            "Thermometer: <br><br>When you run out of stamina, gain 50% stamina, then this is destroyed", 
+            {thermometer: 0.5}, 
             "src/media/boon_thermometer.png"),
 
   "tongueDepressor" : 
   new Boon( "tongueDepressor", 
-            "Tongue Depressor: <br><br>Item description", {temp: 0}, 
+            "Tongue Depressor: <br><br>Your first reset of a wave costs 0 stamina", 
+            {tongueDepressor: true}, 
             "src/media/boon_tongueDepressor.png"),
 
   "triforce" : 
   new Boon( "triforce", 
-            "Triforce: <br><br>Item description", {temp: 0}, 
+            "Triforce: <br><br>Dice from the dice machine come with 2 random faces", 
+            {bonusDieFaces: 2}, 
             "src/media/boon_triforce.png"),
 
 
