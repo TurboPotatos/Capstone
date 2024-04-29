@@ -501,12 +501,12 @@ th, td {
 th {
   background-color: #b1b1b1; /* Grey background for header */
 }
-tr:nth-child(even) {
-  background-color: #d3d3d3; /* White background for even rows */
+/* tr:nth-child(even) {
+  background-color: #d3d3d3;
 }
 tr:nth-child(odd) {
-  background-color: #fff; /* Grey background for odd rows */
-}
+  background-color: #fff; 
+} */
 .Placeholder {
   color: #b1b1b1;
 }
