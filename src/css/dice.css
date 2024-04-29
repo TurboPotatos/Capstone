@@ -55,7 +55,7 @@ body {
   mask-repeat: no-repeat;
   mask-size: contain;
   mask-position: center;
-  z-index: -1;
+  z-index: -10;
 }
 .d4 {
   /* background-image: url(../../src/media/d4.png), url(../../src/media/background_d4.png); */
@@ -211,7 +211,7 @@ body {
   right: 0;
   height: 100%;
   width: 100%;
-  z-index: 1;
+  z-index: -5;
   /* background-image: url(../../src/media/background_d20.png); */
   background-size: contain;
   background-color: gray;
