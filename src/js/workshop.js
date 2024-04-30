@@ -10,6 +10,8 @@ let player = new Player();
 
 let boughtDiceSide = new DiceSide(-1, 1);
 
+let items = document.querySelectorAll('.box');
+
 const shopContent = document.querySelectorAll('.slot');
 
 let tempDice = new Dice("d4");
@@ -69,10 +71,13 @@ document.querySelector("#buyItem").addEventListener("click", function() {
     if (player.subtractCurrency(15)) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
       player.diceSideArray.push(boughtDiceSide);
+
+      // console.log(boughtDiceSide.value);
+
       let selected = document.querySelector('.active');
       if (selected) {
         selected.style.opacity = 0;
-        selected.id = ``;
+        selected.id = '';
       }
       
       // Add dice side to player inventory
@@ -86,6 +91,7 @@ document.querySelector("#buyItem").addEventListener("click", function() {
       playerDiceSides.appendChild(newDiceSide);
       
       boughtDiceSide = new DiceSide(-1, 1);
+      prepareItems();
     }
   }
 });
@@ -183,6 +189,8 @@ playerDiceSides.addEventListener("click", () => {
   });
 });
 
+prepareItems();
+
 var dragSrcEl = null;
   
 function handleDragStart(e) {
@@ -222,11 +230,17 @@ function handleDrop(e) {
     e.stopPropagation(); // stops the browser from redirecting.
   }
   
-  if (dragSrcEl != this && dragSrcEl.tagName === 'IMG' && this.tagName === 'IMG') {
-    var tempSrc = dragSrcEl.src;
-    dragSrcEl.src = this.src;
-    this.src = tempSrc;
-  } else if ((dragSrcEl != this) && (dragSrcEl.tagName === 'LI' || dragSrcEl.tagName === 'DIV') && (this.tagName === 'LI' || this.tagName === 'DIV')) {
+  // if (dragSrcEl != this && dragSrcEl.tagName === 'IMG' && this.tagName === 'IMG') {
+  //   var tempSrc = dragSrcEl.src;
+  //   dragSrcEl.src = this.src;
+  //   this.src = tempSrc;
+  // } else 
+  
+  // if ((dragSrcEl != this) && (dragSrcEl.tagName === 'LI' || dragSrcEl.tagName === 'DIV') && (this.tagName === 'LI' || this.tagName === 'DIV')) {
+  if ((dragSrcEl != this)) {
+
+    console.log("dragSrcEl.innerHTML: " + dragSrcEl.innerHTML + "\nthis.innerHTML: " + this.innerHTML + "\ne.dataTransfer.getData('text/html'): " + e.dataTransfer.getData('text/html'));
+
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
     
@@ -247,13 +261,14 @@ function handleDragEnd(e) {
   });
 }
 
-
-let items = document.querySelectorAll('.box');
-items.forEach(function(item) {
-  item.addEventListener('dragstart', handleDragStart, false);
-  item.addEventListener('dragenter', handleDragEnter, false);
-  item.addEventListener('dragover', handleDragOver, false);
-  item.addEventListener('dragleave', handleDragLeave, false);
-  item.addEventListener('drop', handleDrop, false);
-  item.addEventListener('dragend', handleDragEnd, false);
-});
+function prepareItems() {
+  items = document.querySelectorAll('.box');
+  items.forEach(function(item) {
+    item.addEventListener('dragstart', handleDragStart, false);
+    item.addEventListener('dragenter', handleDragEnter, false);
+    item.addEventListener('dragover', handleDragOver, false);
+    item.addEventListener('dragleave', handleDragLeave, false);
+    item.addEventListener('drop', handleDrop, false);
+    item.addEventListener('dragend', handleDragEnd, false);
+  });
+}
