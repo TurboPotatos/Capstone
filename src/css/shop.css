@@ -1,50 +1,76 @@
-/* global style resets */
-* {
-	margin: 0;
-	padding: 0;
-	border: 0 none;
-	font-weight: normal;
-	font-style: normal;
-	text-decoration: none;
-	outline-style: none;
-}
-#wrapper {
-  /* border: solid red; */
-  border: none;
+#coffeeWrapper {
+  /* border: solid blue; */
   position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: cadetblue;
-	background-size: cover;
+  height: 70%;
+  width: 23%;
+  left: 7%;
+}
+.coffeeDispensor {
+  border: .5rem solid rgb(32, 32, 32);
+  /* background-color: black; */
+  /* position: relative; */
+  background-image: url(../media/coffee.png);
   background-repeat: no-repeat;
-  background-position: center;
-  position: relative;
-  align-items: stretch;
+  background-size: cover;
+  top: 4%;
+  left: 10%;
+  width: 53%;
+  height: 70%;
+}
+.coffeeBillSlot {
+  /* border: solid violet; */
+  background-color: rgb(37, 37, 37);
+  /* position: absolute; */
+  float: right;
+  top: -25%;
+  right: -25%;
+  width: 25%;
+  height: 3.5%;
+}
+.coffeeCoinSlot {
+  /* border: solid pink; */
+  background-color: rgb(37, 37, 37);
+  float: right;
+  top: -19%;
+  right: -50%;
+  width: 5%;
+  height: 7%;
+}
+.coffeeKeypadFrame {
+  /* border: solid blue; */
+  border: .4rem solid black;
+  background-color: rgb(103, 103, 103);
+  float: right;
+  /* position: absolute; */
+  top: -60%;
+  right: 3%;
+  width: 30%;
+  height: 30%;
 }
 
+#vendWrapper {
+  /* border: solid red; */
+  position: absolute;
+  height: 70%;
+  width: 30%;
+  left: 40%;
+}
 .vendingMachine {
   box-sizing: border-box;
   border: .5rem solid black;
-  height: 2rem;
-  width: 2rem;
+  /* height: 2rem; */
+  /* width: 2rem; */
   position: relative;
-  flex: 1;
+  /* flex: 1; */
 }
-.coffeeMachine {
-  flex: 1;
-}
-
-#front {
+.front {
   /* border: solid red; */
   background-color: rgb(103, 84, 55);
-  top: 10%;
-  width: 30%;
-  height: 80%;
+  /* top: 10%; */
+  width: 100%;
+  height: 100%;
 }
-#storage {
+.storage {
   /* border: solid orange; */
   border: .5rem solid rgb(69, 69, 69);
   background-color: black;
@@ -53,13 +79,14 @@
   width: 65%;
   height: 70%;
 }
-#rows {
+.rows {
   /* border: solid yellow; */
   /* background-image: url(boon_pokeball.png); */
   width: 100%;
   height: 100%;
+  overflow-y: hidden;
 }
-#window {
+.window {
   /* border: solid green; */
   /* border: .5rem solid rgb(82, 82, 82); */
   background-color: rgb(99, 147, 147);
@@ -72,7 +99,7 @@
   height: 70%;
   pointer-events: none;
 }
-#keypadFrame {
+.keypadFrame {
   /* border: solid blue; */
   border: .4rem solid black;
   background-color: rgb(103, 103, 103);
@@ -83,7 +110,7 @@
   width: 24%;
   height: 30%;
 }
-#lcdScreen {
+.lcdScreen {
   /* border: solid purple; */
   border: .4rem solid black;
   background-color: rgb(85, 5, 5);
@@ -92,7 +119,7 @@
   top: 6%;
   left: 10%;
 }
-#numPad {
+.numPad {
   /* border: solid teal; */
   border: .4rem solid black;
   background-color: rgb(189, 189, 189);
@@ -101,7 +128,7 @@
   top: 13%;
   left: 6%;
 }
-#billSlot {
+.billSlot {
   /* border: solid violet; */
   background-color: rgb(37, 37, 37);
   float: right;
@@ -110,7 +137,7 @@
   width: 20%;
   height: 3.5%;
 }
-#coinSlot {
+.coinSlot {
   /* border: solid pink; */
   background-color: rgb(37, 37, 37);
   float: right;
@@ -119,7 +146,7 @@
   width: 4%;
   height: 7%;
 }
-#changeReturn {
+.changeReturn {
   /* border: solid greenyellow; */
   border: 4px solid rgb(107, 107, 107);
   /* background-color: rgb(42, 42, 42); */
@@ -132,7 +159,7 @@
   width: 18%;
   height: 10%;
 }
-#changeReturn div{
+.changeReturn div{
   /* border: solid greenyellow; */
   background-color: rgb(42, 42, 42);
   /* float: right; */
@@ -141,7 +168,7 @@
   width: 100%;
   height: 100%;
 }
-#itemRetrieval {
+.itemRetrieval {
   /* border: solid grey; */
   background-color: rgb(20, 20, 20);
   position: absolute;
@@ -188,17 +215,69 @@ td img {
   z-index: 1005;
 }
 
-#diceMachine {
-  height: 80vh;
-  top: 5.5%;
+#diceMachineWrapper {
+  /* border: solid green; */
+  position: absolute;
+  height: 50%;
   width: 30%;
-  left: 25%;
-  flex: 1;
+  right: 0;
+}
+#diceMachine {
+  height: 100%;
+  width: 100%;
+  /* top: 5.5%; */
+  /* left: 25%; */
+  /* flex: 1; */
   background-color: transparent;
   background-image: url(../media/gumballMachine.png);
   background-size: contain; 
-  background-size: 45% 90;
+  /* background-size: 45% 90; */
   background-repeat: no-repeat;
   background-position: center;
   box-sizing: border-box;
+}
+
+#diceBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1001;
+}
+#diceBox:before {
+  content: '';
+  position: absolute;
+  float: left;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Adjust darkness here */
+  z-index: -1;
+  /* display: block; */
+}
+#diceContainer {
+  border: 1.5rem solid black;
+  border-radius: 5%;
+  position: absolute;
+  float: left;
+  height: 70%;
+  width: 40%;
+  top: 10%;
+  left: 25%;
+  /* background-image: url(../media/texture2.png); */
+  background-color: cadetblue;
+  background-size: cover;
+  box-sizing: border-box;
+  /* display: block; */
+  z-index: 1003;
+}
+#backBtn {
+  position: absolute;
+  height: 10%;
+  width: 20%;
+  bottom: 1rem;
+  right: 1rem;
 }

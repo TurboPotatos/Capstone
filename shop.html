@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Shop</title>
   <link rel="stylesheet" href="src/css/styles.css">
   <link rel="stylesheet" href="src/css/shop.css">
 </head>
@@ -22,92 +22,118 @@
       <span class="tooltip">Test</span>
     </div>
     <div id="buyItem">Buy Item</div>
-      <div id="playerInfo">See Player Info</div>
-      <div id="addMoneys">Aquire Currency</div>
-      <div>Current Currency: <span id="currentCurrency">0</span></div>
-      <button type="button" id="fadeBtn">Pick Color</button>
-    <div class="vendingMachine shopTabcontent" id="front">
+    <div id="playerInfo">See Player Info</div>
+    <div id="addMoneys">Aquire Currency</div>
+    <div>Current Currency: <span id="currentCurrency">0</span></div>
+    <button type="button" id="fadeBtn">Pick Color</button>
 
-      <div class="vendingMachine" id="storage">
+    <div id="coffeeWrapper">
+      <div class="vendingMachine front">
+
+        <div class="vendingMachine coffeeDispensor coffeeMachine">
+
+        </div>
         
-        <div class="vendingMachine" id="rows">
-          <table>
-            <tbody>
-              <tr class="row1">
-                <td class="col1 slot"></td>
-                <td class="col2 slot"></td>
-                <td class="col3 slot"></td>
-              </tr>
-              <tr class="row2">
-                <td class="col1 slot"></td>
-                <td class="col2 slot"></td>
-                <td class="col3 slot"></td>
-              </tr>
-              <tr class="row3">
-                <td class="col1 slot"></td>
-                <td class="col2 slot"></td>
-                <td class="col3 slot"></td>
-              </tr>
-              <tr class="row4">
-                <td class="col1 slot"></td>
-                <td class="col2 slot"></td>
-                <td class="col3 slot"></td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="vendingMachine coffeeKeypadFrame">
+          <div class="vendingMachine lcdScreen">
+
+          </div>
+
+          <div class="vendingMachine numPad">
+
+          </div>
+        </div>
+
+        <div class="vendingMachine coffeeBillSlot">
 
         </div>
 
-      </div>
-      <div class="vendingMachine" id="window">
-
-      </div>
-
-      <div class="vendingMachine" id="keypadFrame">
-        <div class="vendingMachine" id="lcdScreen">
+        <div class="vendingMachine coffeeCoinSlot">
 
         </div>
 
-        <div class="vendingMachine" id="numPad">
-
+        <div class="vendingMachine changeReturn">
+          <div></div>
         </div>
-      </div>
-
-      <div class="vendingMachine" id="billSlot">
 
       </div>
-
-      <div class="vendingMachine" id="coinSlot">
-
-      </div>
-
-      <div class="vendingMachine" id="changeReturn">
-        <div></div>
-      </div>
-
-      <div class="vendingMachine" id="itemRetrieval">
-
-      </div>
-
     </div>
 
-    <div id="diceMachine" class="shopTabcontent diceMachine">
-      <!-- <h3>diceMachine Content</h3> -->
-      <!-- <p>This is the content for the diceMachine.</p> -->
+    <div id="vendWrapper">
+      <div class="vendingMachine front">
+
+        <div class="vendingMachine storage">
+          
+          <div class="vendingMachine rows">
+            <table>
+              <tbody>
+                <tr class="row1">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row2">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row3">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row4">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+        <div class="vendingMachine window">
+
+        </div>
+
+        <div class="vendingMachine keypadFrame">
+          <div class="vendingMachine lcdScreen">
+
+          </div>
+
+          <div class="vendingMachine numPad">
+
+          </div>
+        </div>
+
+        <div class="vendingMachine billSlot">
+
+        </div>
+
+        <div class="vendingMachine coinSlot">
+
+        </div>
+
+        <div class="vendingMachine changeReturn">
+          <div></div>
+        </div>
+
+        <div class="vendingMachine itemRetrieval">
+
+        </div>
+
+      </div>
+    </div> <!-- endingMachine -->
+
+    <div id="diceMachineWrapper">
+      <div id="diceMachine">
+
+      </div>
     </div>
   </div>
   <div id="diceBox">
     <div id="diceContainer">
-      <div class="slider-container">
-        <label id="redRangeLabel" for="redRange">Red:</label>
-        <input id="redRange" type="range" min="0" max="255" value="0">
-        <br>
-        <label id="greenRangeLabel" for="greenRange">Green:</label>
-        <input id="greenRange" type="range" min="0" max="255" value="0">
-        <br>
-        <label id="blueRangeLabel" for="blueRange">Blue:</label>
-        <input id="blueRange" type="range" min="0" max="255" value="0">
-      </div>
 
       <button id="backBtn">Back</button>
   </div>  
