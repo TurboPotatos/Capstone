@@ -178,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function resetButtons() {
-    console.log("test");
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
       buttons[i].disabled = false;
