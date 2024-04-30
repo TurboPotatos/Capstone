@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Henchmen Hospital - At the Supply Closet</title>
   <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/workshop.css">
 </head>
 <body style="background-color: dimgray;">
   
@@ -20,26 +21,37 @@
   <div class="wrap">
     <div class="left"></div>
     <div class="center">
-      <table >
+      <table>
         <tr>
-          <td>Placeholder</td>
-          <td>Placeholder</td>
-          <td>Placeholder</td>          
+          <td class="slot" id="slot1">Placeholder</td>
+          <td class="slot" id="slot2">Placeholder</td>
+          <td class="slot" id="slot3">Placeholder</td>          
         </tr>
         <tr>
-          <td>Placeholder</td>
-          <td>Placeholder</td>
-          <td>Placeholder</td>          
+          <td class="slot" id="slot4">Placeholder</td>
+          <td class="slot" id="slot5">Placeholder</td>
+          <td class="slot" id="slot6">Placeholder</td>          
         </tr>
         <tr>
-          <td>Placeholder</td>
-          <td>Placeholder</td>
-          <td>Placeholder</td>          
+          <td class="slot" id="slot7">Placeholder</td>
+          <td class="slot" id="slot8">Placeholder</td>
+          <td class="slot" id="slot9">Placeholder</td>          
         </tr>
       </table>
     </div>
     <div class="right"></div>
   </div>
-  
+  <div id="buyItem">Buy Item</div>
+  <div id="addMoneys">Aquire Currency</div>
+  <div>Current Currency: <span id="currentCurrency"></span></div>
+  <div id="playerInfo">See Player</div>
+  <div class="diceListWrapper">
+    Modify Dice
+  </div>
+  <ul class="diceList" style="display: none;"></ul>
+  <br>
+  <ul class="playerDiceFaces">Player Dice</ul>
+  <br><br><br><br><br><br>
+  <script src="./src/js/workshop.js" type="module"></script>
 </body>
 </html>

@@ -57,6 +57,6 @@ export class Dice {
     return tempDiceSide;
 
     // Assuming javascript has issues with the code above, go the cheap way
-    this.sides[sideIndex].value = newDiceSide;
+    // this.sides[sideIndex].value = newDiceSide;
   }
 }

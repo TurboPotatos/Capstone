@@ -1,0 +1,28 @@
+.diceSide {
+  background-color: aquamarine;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(100, 200, 200, 1);
+  user-select: none;
+}
+
+.diceListDisplay {
+  background-color: aliceblue;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(200, 200, 200, 1);
+  display: inline-block;
+  user-select: none;
+}
+
+.diceListItem {
+  background-color: aliceblue;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(200, 200, 200, 1);
+  display: inline-block;
+  user-select: none;
+}
+.diceListWrapper {
+  background-color: green;
+}
