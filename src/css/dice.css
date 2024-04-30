@@ -57,15 +57,6 @@ body {
   mask-position: center;
   z-index: -10;
 }
-.d4 {
-  /* background-image: url(../../src/media/d4.png), url(../../src/media/background_d4.png); */
-  
-}
-.d6 {
-  /* background-image: url(../../src/media/d6.png), url(../../src/media/background_d6.png); */
-  /* border: solid red; */
-  /* position: relative; */
-}
 #d6left {
   /* border: solid green; */
   position: relative;
@@ -103,21 +94,6 @@ body {
 }
 .cube div {
   padding-top: 1rem;
-}
-.d8 {
-  /* background-image: url(../../src/media/d8.png), url(../../src/media/background_d8.png); */
-}
-.d10 {
-  /* background-image: url(../../src/media/d10.png), url(../../src/media/background_d10.png); */
-  /* padding-top: .6rem; */
-}
-.d12 {
-  /* background-image: url(../../src/media/d12.png), url(../../src/media/background_d12.png); */
-  /* padding-top: .7rem; */
-}
-.d20 {
-  /* background-image: url(../../src/media/d20.png), url(../../src/media/background_d20.png); */
-  /* padding-top: .6rem; */
 }
 .d4:after {
   background-image: url(../../src/media/d4.png);
