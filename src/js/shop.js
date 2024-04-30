@@ -1,9 +1,7 @@
-import { Player } from "../../src/js/Player.js";
-import { Collectibles } from "../../src/js/Collectibles.js";
-import { Boons } from "../../src/js/Boons.js";
-import { Boon } from "../../test/gameplay/Boon.js";
-import { boonArray } from "../../test/gameplay/Boon.js";
-import { boonNameArray } from "../../test/gameplay/Boon.js";
+import { Player } from "./Player.js";
+import { Boon } from "./Boon.js";
+import { boonArray } from "./Boon.js";
+import { boonNameArray } from "./Boon.js";
 
 let player = new Player();
 
@@ -86,7 +84,6 @@ document.querySelector("#buyItem").addEventListener("click", function() {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
       player.addConsumable(activeBoon);
       let selected = document.querySelector(`#${activeBoon.name}`);
-      console.log(selected);
       if (selected) {
         selected.style.opacity = 0;
         selected.id = ``;
@@ -99,4 +96,27 @@ document.querySelector("#buyItem").addEventListener("click", function() {
 document.querySelector("#addMoneys").addEventListener("click", function() {
   player.currency += 10;
   document.querySelector("#currentCurrency").innerHTML = player.currency;
+});
+
+let coffeeMachine = document.querySelector(".coffeeMachine")
+
+coffeeMachine.addEventListener("click", function() {
+  activeBoon = boonArray['cuppaJoe'];
+  
+  let tooltip = coffeeMachine.querySelector(".tooltip");
+  tooltip.innerHTML = `${activeBoon.name} <br><br> ${activeBoon.description}`;
+
+  let alreadyDisplayed = (tooltip.style.display == "block");
+
+  let allTooltips = document.querySelectorAll('.tooltip');
+  allTooltips.forEach(tip => {
+    tip.style.display = "none";
+  });
+
+  if (alreadyDisplayed) {
+    tooltip.style.display = 'none';
+  } else {
+    tooltip.style.display = 'block';
+  }
+   
 });

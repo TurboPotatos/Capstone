@@ -31,7 +31,12 @@
   height: 2rem;
   width: 2rem;
   position: relative;
+  flex: 1;
 }
+.coffeeMachine {
+  flex: 1;
+}
+
 #front {
   /* border: solid red; */
   background-color: rgb(103, 84, 55);
@@ -181,4 +186,19 @@ td img {
   border-radius: 5px;
   display: none;
   z-index: 1005;
+}
+
+#diceMachine {
+  height: 80vh;
+  top: 5.5%;
+  width: 30%;
+  left: 25%;
+  flex: 1;
+  background-color: transparent;
+  background-image: url(../media/gumballMachine.png);
+  background-size: contain; 
+  background-size: 45% 90;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
 }

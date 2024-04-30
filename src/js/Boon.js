@@ -205,6 +205,12 @@ const boonArray = {
             {bonusDieFaces: 2}, 
             "src/media/boon_triforce.png"),
 
+  "cuppaJoe" : 
+  new Boon( "cuppaJoe", 
+            "Cuppa Joe: <br><br>Restores 50 stamina, increases price of duplicate purchases", 
+            {coffeeStaminaRestore: 50}, 
+            ""),
+
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.
