@@ -25,6 +25,7 @@
       <div id="playerInfo">See Player Info</div>
       <div id="addMoneys">Aquire Currency</div>
       <div>Current Currency: <span id="currentCurrency">0</span></div>
+      <button type="button" id="fadeBtn">Pick Color</button>
     <div class="vendingMachine shopTabcontent" id="front">
 
       <div class="vendingMachine" id="storage">
@@ -95,6 +96,21 @@
       <!-- <p>This is the content for the diceMachine.</p> -->
     </div>
   </div>
+  <div id="diceBox">
+    <div id="diceContainer">
+      <div class="slider-container">
+        <label id="redRangeLabel" for="redRange">Red:</label>
+        <input id="redRange" type="range" min="0" max="255" value="0">
+        <br>
+        <label id="greenRangeLabel" for="greenRange">Green:</label>
+        <input id="greenRange" type="range" min="0" max="255" value="0">
+        <br>
+        <label id="blueRangeLabel" for="blueRange">Blue:</label>
+        <input id="blueRange" type="range" min="0" max="255" value="0">
+      </div>
+
+      <button id="backBtn">Back</button>
+  </div>  
   <script src="src/js/shop.js" type="module"></script>
 </body>
 </html>

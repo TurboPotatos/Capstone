@@ -120,3 +120,16 @@ coffeeMachine.addEventListener("click", function() {
   }
    
 });
+
+const fadeBtn = document.querySelector('#fadeBtn');
+const backBtn = document.querySelector('#backBtn');
+const colorBox = document.querySelector('#diceBox');
+colorBox.style.display = "none";
+fadeBtn.addEventListener("click", (e) => {
+  colorBox.style.display = "block";
+  // console.log("test");
+});
+
+backBtn.addEventListener("click", (e) => {
+  colorBox.style.display = "none";
+});
