@@ -26,3 +26,7 @@
 .diceListWrapper {
   background-color: green;
 }
+
+.active {
+  color: white;
+}
