@@ -14,6 +14,8 @@ let items = document.querySelectorAll('.box');
 
 const shopContent = document.querySelectorAll('.slot');
 
+player.currency = 15;
+
 let tempDice = new Dice("d4");
 player.addDice(tempDice);
 tempDice = new Dice("d6");
@@ -62,8 +64,10 @@ shopContent.forEach(shopItem => {
 
 
 document.querySelector("#playerInfo").addEventListener("click", function() {
+  console.log("Player's dice sides: ");
   console.log(player.diceSideArray);
-  console.log(player.currency);
+  console.log("Player's dice: ");
+  console.log(player.diceArray);
 });
 
 document.querySelector("#buyItem").addEventListener("click", function() {
@@ -87,6 +91,8 @@ document.querySelector("#buyItem").addEventListener("click", function() {
       newDiceSide.classList.add('box');
       newDiceSide.draggable = true;
       newDiceSide.style.display = document.querySelector('.playerDiceFaces .diceSide').style.display;
+
+      newDiceSide.setAttribute('data-info', player.diceSideArray.length - 1);
       
       playerDiceSides.appendChild(newDiceSide);
       
@@ -130,8 +136,6 @@ document.querySelector(".diceListWrapper").addEventListener("click", function() 
   }
 });
 
-let diceIdCounter = 0;
-
 document.querySelectorAll(".diceListItem").forEach(item => {
   // add all their dice sides as elements
   let testDice = player.diceArray[parseInt(item.id.substring(11))];
@@ -144,9 +148,8 @@ document.querySelectorAll(".diceListItem").forEach(item => {
     newDiceSide.classList.add('box');
     newDiceSide.draggable = true;
 
-    // generate unique id
-    newDiceSide.id = "diceFace_" + diceIdCounter;
-    diceIdCounter ++;
+    // set info for later use
+    newDiceSide.setAttribute('data-info', i);
 
     item.appendChild(newDiceSide);
   }
@@ -173,8 +176,11 @@ for(let i = 0; i < player.diceSideArray.length; i++) {
   newDiceSide.textContent = player.diceSideArray[i].value;
   newDiceSide.classList.add('diceSide');
   newDiceSide.classList.add('box');
+  newDiceSide.id = "arrayIndex_" + i;
   newDiceSide.draggable = true;
   newDiceSide.style.display = "none";
+
+  newDiceSide.setAttribute('data-info', i);
 
   playerDiceSides.appendChild(newDiceSide);
 }
@@ -230,16 +236,59 @@ function handleDrop(e) {
     e.stopPropagation(); // stops the browser from redirecting.
   }
   
-  // if (dragSrcEl != this && dragSrcEl.tagName === 'IMG' && this.tagName === 'IMG') {
-  //   var tempSrc = dragSrcEl.src;
-  //   dragSrcEl.src = this.src;
-  //   this.src = tempSrc;
-  // } else 
-  
-  // if ((dragSrcEl != this) && (dragSrcEl.tagName === 'LI' || dragSrcEl.tagName === 'DIV') && (this.tagName === 'LI' || this.tagName === 'DIV')) {
   if ((dragSrcEl != this)) {
 
-    console.log("dragSrcEl.innerHTML: " + dragSrcEl.innerHTML + "\nthis.innerHTML: " + this.innerHTML + "\ne.dataTransfer.getData('text/html'): " + e.dataTransfer.getData('text/html'));
+    // dragSrcEl is the OBJECT BEING DRAGGED
+    // this is the OBJECT DRAGGED ONTO
+
+    // This works by using data-info as the INDEX of the diceSide in its parent array
+    // and, if the parent has an id (and is therefore one of the player's dice) then
+    // the id of its parents is the index of the dice in the player's diceArray[]
+    
+    let parentDraggedDiceSide = dragSrcEl.parentNode;
+    let draggedDiceSide;
+    let draggedDiceSideIndex = parseInt(dragSrcEl.getAttribute('data-info'));
+    let draggedSideStoredIn = "";
+    
+    let parentDraggedOnDiceSide = this.parentNode;
+    let draggedOnDiceSide;
+    let draggedOnDiceSideIndex = parseInt(this.getAttribute('data-info'));
+    let draggedOnSideStoredIn = "";
+    
+    if (parentDraggedDiceSide.id != null && parentDraggedDiceSide.id != "") {
+      draggedDiceSide = player.diceArray[parseInt(parentDraggedDiceSide.id.substring(11))].sides[draggedDiceSideIndex];
+      draggedSideStoredIn = "player.diceArray";
+    } else {
+      draggedDiceSide = player.diceSideArray[draggedDiceSideIndex];
+      draggedSideStoredIn = "player.diceSideArray";
+    }
+    
+    if (parentDraggedOnDiceSide.id != null && parentDraggedOnDiceSide.id != "") {
+      draggedOnDiceSide = player.diceArray[parseInt(parentDraggedOnDiceSide.id.substring(11))].sides[draggedOnDiceSideIndex];
+      draggedOnSideStoredIn = "player.diceArray";
+    } else {
+      draggedOnDiceSide = player.diceSideArray[draggedOnDiceSideIndex];
+      draggedOnSideStoredIn = "player.diceSideArray";
+    }
+
+
+    // Swapping values
+    let tempDiceSide = draggedOnDiceSide;
+    
+    if (draggedOnSideStoredIn == "player.diceArray") {
+      player.diceArray[parseInt(parentDraggedOnDiceSide.id.substring(11))].sides[draggedOnDiceSideIndex] = draggedDiceSide;
+    } else {
+      player.diceSideArray[draggedOnDiceSideIndex] = draggedDiceSide;
+    }
+    
+    if (draggedSideStoredIn == "player.diceArray") {
+      player.diceArray[parseInt(parentDraggedDiceSide.id.substring(11))].sides[draggedDiceSideIndex] = tempDiceSide;
+    } else {
+      player.diceSideArray[draggedDiceSideIndex] = tempDiceSide;
+    }
+
+    console.log(draggedDiceSide.value);
+    console.log(draggedOnDiceSide.value);
 
     dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
