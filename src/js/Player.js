@@ -12,7 +12,7 @@ export class Player {
   diceSideArray = [];
 
   // Arrays of Collectibles
-  // boonArray = [];
+  boonArray = [];
   items = [];
 
   // Active boons
@@ -39,8 +39,9 @@ export class Player {
     this.diceArray.push(dice);
   }
 
-  addConsumable(consumable) {
-    (consumable.typeOf == "Virtue") ? this.virtueArray.push(consumable) : this.viceArray.push(consumable);
+  addBoon(boon) {
+    // (consumable.typeOf == "Virtue") ? this.virtueArray.push(consumable) : this.viceArray.push(consumable);
+    this.boonArray.push(boon);
   }
 
   damageStamina(damage) {
