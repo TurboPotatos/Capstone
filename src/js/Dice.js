@@ -1,10 +1,12 @@
+import { DiceSide } from "./DiceSide.js";
+
 export class Dice {
   // TODO: Figure out making things private and make getters/setters
 
-  static diceOptions = ["d4", "d6", "d8", "d10", "d%", "d12", "d20"];
+  static diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
 
   sides = [];
-  typeOf = ""; // d4, d6, d8, d10, d%, d12, d20
+  typeOf = ""; // d4, d6, d8, d10, d12, d20
 
   // Construct a dice object with a populated sides[] array
   constructor(typeOf) {
@@ -24,9 +26,6 @@ export class Dice {
       case "d10":
         numOfSides = 10;
         break;
-      case "d%":
-        numOfSides = 10;
-        break;
       case "d12":
         numOfSides = 12;
         break;
@@ -39,26 +38,25 @@ export class Dice {
         break;
     }
 
-    if (this.typeOf != "d%") {
-      for (let i = 0; i < numOfSides; i+=1) {
-        this.sides[i] = i + 1;
-      }
-    } else {
-      for (let i = 0; i < numOfSides; i+=1) {
-        this.sides[i] = (i + 1) * 10;
-      }
+
+    for (let i = 1; i < numOfSides + 1; i+=1) {
+      this.sides.push(new DiceSide(i, 0));
     }
+
   }
 
   // Return a random value from the sides[] array
   roll() {
-    let rand = Math.random();
-    rand *= this.sides.length;
-    return this.sides[Math.ceil(rand) - 1];
+    return this.sides[Math.ceil(Math.random() * this.sides.length) - 1].value;
   }
   
   // Change a value in the sides[] array at specified index
-  changeSideValue(sideIndex, sideValue) {
-    this.sides[sideIndex] = sideValue;
+  changeSideValue(sideIndex, newDiceSide) {
+    let tempDiceSide = this.sides[sideIndex];
+    this.sides[sideIndex] = newDiceSide;
+    return tempDiceSide;
+
+    // Assuming javascript has issues with the code above, go the cheap way
+    // this.sides[sideIndex].value = newDiceSide;
   }
 }

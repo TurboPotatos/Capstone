@@ -6,3 +6,69 @@ td{
 td::after{
   box-shadow: 0px 40px 5px 0 rgb(48, 37, 20);
 }
+
+.diceSide {
+  background-color: aquamarine;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(100, 200, 200, 1);
+  width: 1rem;
+  text-align: center;
+  font-weight: bolder;
+  user-select: none;
+}
+.diceSide:hover {
+  cursor: pointer;
+}
+
+.diceListDisplay {
+  background-color: aliceblue;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(200, 200, 200, 1);
+  display: inline-block;
+  user-select: none;
+}
+.diceListDisplay:hover {
+  cursor: pointer;
+}
+
+.diceListItem {
+  background-color: aliceblue;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid rgba(200, 200, 200, 1);
+  display: inline-block;
+  user-select: none;
+}
+.diceListWrapper {
+  background-color: green;
+}
+
+.active {
+  color: white;
+}
+
+.slot {
+  /* border: solid red; */
+  font-size: 3rem;
+  font-weight: bolder;
+  user-select: none;
+}
+.slot:hover {
+  cursor: pointer;
+}
+
+.center td {
+  /* position: relative; */
+  /* top: 30%; */
+  width: 10%;
+  height: 9rem;
+  text-align: center;
+}
+.center > table {
+  /* border: solid red; */
+  position: relative;
+  top: 10%;
+}
+

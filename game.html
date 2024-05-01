@@ -22,7 +22,26 @@
       <a href="shop.html">Shop</a>
       <a href="workshop.html">Workshop</a>
     </div>
+
+    
+
     <div class="wrapper" id="gameDiv">
+      <div id="colorBox">
+        <div id="colorPicker">
+          <div class="slider-container">
+            <label id="redRangeLabel" for="redRange">Red:</label>
+            <input id="redRange" type="range" min="0" max="255" value="0">
+            <br>
+            <label id="greenRangeLabel" for="greenRange">Green:</label>
+            <input id="greenRange" type="range" min="0" max="255" value="0">
+            <br>
+            <label id="blueRangeLabel" for="blueRange">Blue:</label>
+            <input id="blueRange" type="range" min="0" max="255" value="0">
+          </div>
+
+          <button id="backBtn">Back</button>
+      </div>  
+    </div>
       
       <div class="henchmenChart" id="medChart1">
         <div class="clientTabs" id="clientTab1">
@@ -560,22 +579,27 @@ This is what Crowbar does"
       "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
     };
 
-    const henchNameArray = [
-      "Beetle",
-      "Bokoblin",
-      "Ghost",
-      "Goomba",
-      "Grunt",
-      "Henchman 24",
-      "Iago",
-      "Pain and Panic",
-      "Koopa Troopa",
-      "Minion",
-      "Minion",
-      "Space Invader",
-      "Storm Trooper",
-      "Turret",
-    ];
+    let henchNameArray = [];
+    for (key in henchArray) {
+      henchNameArray.push(key);
+    }
+
+    // const henchNameArray = [
+    //   "Beetle",
+    //   "Bokoblin",
+    //   "Ghost",
+    //   "Goomba",
+    //   "Grunt",
+    //   "Henchman 24",
+    //   "Iago",
+    //   "Pain and Panic",
+    //   "Koopa Troopa",
+    //   "Minion",
+    //   "Minion",
+    //   "Space Invader",
+    //   "Storm Trooper",
+    //   "Turret",
+    // ];
 
     const randomIndex = Math.floor(Math.random() * henchNameArray.length);
 
@@ -586,7 +610,52 @@ This is what Crowbar does"
     henchName.innerHTML = henchNameArray[randomIndex];
 
   </script>
+
+  <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const fadeBtn = document.querySelector('#fadeBtn');
+      const backBtn = document.querySelector('#backBtn');
+      const colorBox = document.querySelector('#colorBox');
+
+      fadeBtn.addEventListener("click", (e) => {
+        colorBox.style.display = "block";
+      });
+      backBtn.addEventListener("click", (e) => {
+        colorBox.style.display = "none";
+      });
+    });
+
+  </script>
+  <script>
+    const redRange = document.querySelector('#redRange');
+    const greenRange = document.querySelector('#greenRange');
+    const blueRange = document.querySelector('#blueRange');
+    const colorPicker = document.querySelector('#colorPicker');
+
+    function updateColor() {
+      const allDice = document.querySelectorAll('.die-btn');
+      const redValue = redRange.value;
+      const greenValue = greenRange.value;
+      const blueValue = blueRange.value;
+      const color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+      colorPicker.style.backgroundColor = color;
+
+      for (var i = 0; i < allDice.length; i++) {
+        allDice[i].style.setProperty('--dieBtnAfterBGColor', color);
+      }
+    }
+
+    redRange.addEventListener('input', updateColor);
+    greenRange.addEventListener('input', updateColor);
+    blueRange.addEventListener('input', updateColor);
+  </script>
+
+
   <script type="module" src="./test/gameplay/gameplay.js"></script>
+
   <button type="button" id="endTurnBtn">End Turn</button>
+  <button type="button" id="fadeBtn">Pick Color</button>
+
   </body>
 </html>

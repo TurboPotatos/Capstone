@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Shop</title>
   <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/shop.css">
 </head>
 <body>
   <div class="navBar">
@@ -16,239 +17,126 @@
     <a href="shop.html">Shop</a>
     <a href="workshop.html">Workshop</a>
   </div>
-  <div class="wrapper" style="flex-direction: column;">
-    <div class="tab">
-      <button class="tablinks" onclick="openTab(event, 'vendingMachine')" id="defaultOpen">Vending Machine</button>
-      <button class="tablinks" onclick="openTab(event, 'diceMachine')">Dice Machine</button>
-    </div>
-
-    <div id="vendingMachine" class="shopTabcontent">
-      <!-- <h3>vendingMachine Content</h3> -->
-      <!-- <p>This is the content for the vendingMachine.</p> -->
-
-      <div id="dispensors"></div>
-
-      <div id="vendingItems">
-        <div id="vendingItems1">
-
-          <div class="boonContainer">
-            <img src="src/media/boon_pickaxe.png" class="boon">
-            <span class="tooltip">
-              Pickaxe <br><br> Bohold: a pickaxe. <br> This pickaxe was forged in the fires of Mt. Doom.              
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_pokeball.png" class="boon">
-            <span class="tooltip">
-              Pokeball <br><br> This is what Pokeball does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_portalGun.png" class="boon">
-            <span class="tooltip">
-              Portal Gun <br><br> This is what Portal Gun does
-            </span>
-          </div>
-
-        </div>
-
-        <div id="vendingItems2">
-
-          <div class="boonContainer">
-            <img src="src/media/boon_star.png" class="boon">
-            <span class="tooltip">
-              Star <br><br> This is what Star does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_triforce.png" class="boon">
-            <span class="tooltip">
-              Triforce <br><br> This is what Triforce does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_mushroom.png" class="boon">
-            <span class="tooltip">
-              Mushroom <br><br> This is what Mushroom does
-            </span>
-          </div>
-
-        </div>
-
-        <div id="vendingItems3">
-
-          <div class="boonContainer">
-            <img src="src/media/boon_elderScroll.png" class="boon">
-            <span class="tooltip">
-              Elder Scroll <br><br> This is what Elder Scroll does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_companionCube.png" class="boon">
-            <span class="tooltip">
-              Companion Cube <br><br> This is what Companion Cube does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_estusFlask.png" class="boon">
-            <span class="tooltip">
-              Estus Flask <br><br> This is what Estus Flask does
-            </span>
-          </div>
-
-        </div>
-
-        <div id="vendingItems4">
-
-          <div class="boonContainer">
-            <img src="src/media/boon_nukaCola.png" class="boon">
-            <span class="tooltip">
-              Nuka Cola <br><br> This is what Nuka Cola does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_tetrisPiece.png" class="boon">
-            <span class="tooltip">
-              Tetris Piece <br><br> This is what Tetris Piece does
-            </span>
-          </div>
-
-          <div class="boonContainer">
-            <img src="src/media/boon_crowbar.png" class="boon">
-            <span class="tooltip">
-              Crowbar <br><br> This is what Crowbar does
-            </span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <div id="diceMachine" class="shopTabcontent">
-      <!-- <h3>diceMachine Content</h3> -->
-      <!-- <p>This is the content for the diceMachine.</p> -->
+  <div class="wrapper">
+    <div class="coffeeMachine">Gobbliegook
+      <span class="tooltip">Test</span>
     </div>
     <div id="buyItem">Buy Item</div>
     <div id="playerInfo">See Player Info</div>
+    <div id="addMoneys">Aquire Currency</div>
+    <div>Current Currency: <span id="currentCurrency">0</span></div>
+    <button type="button" id="fadeBtn">Pick Color</button>
+
+    <div id="coffeeWrapper">
+      <div class="vendingMachine front">
+
+        <div class="vendingMachine coffeeDispensor coffeeMachine">
+
+        </div>
+        
+        <div class="vendingMachine coffeeKeypadFrame">
+          <div class="vendingMachine lcdScreen">
+
+          </div>
+
+          <div class="vendingMachine numPad">
+
+          </div>
+        </div>
+
+        <div class="vendingMachine coffeeBillSlot">
+
+        </div>
+
+        <div class="vendingMachine coffeeCoinSlot">
+
+        </div>
+
+        <div class="vendingMachine changeReturn">
+          <div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="vendWrapper">
+      <div class="vendingMachine front">
+
+        <div class="vendingMachine storage">
+          
+          <div class="vendingMachine rows">
+            <table>
+              <tbody>
+                <tr class="row1">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row2">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row3">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+                <tr class="row4">
+                  <td class="col1 slot"></td>
+                  <td class="col2 slot"></td>
+                  <td class="col3 slot"></td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+        <div class="vendingMachine window">
+
+        </div>
+
+        <div class="vendingMachine keypadFrame">
+          <div class="vendingMachine lcdScreen">
+
+          </div>
+
+          <div class="vendingMachine numPad">
+
+          </div>
+        </div>
+
+        <div class="vendingMachine billSlot">
+
+        </div>
+
+        <div class="vendingMachine coinSlot">
+
+        </div>
+
+        <div class="vendingMachine changeReturn">
+          <div></div>
+        </div>
+
+        <div class="vendingMachine itemRetrieval">
+
+        </div>
+
+      </div>
+    </div> <!-- endingMachine -->
+
+    <div id="diceMachineWrapper">
+      <div id="diceMachine">
+
+      </div>
+    </div>
   </div>
-  
+  <div id="diceBox">
+    <div id="diceContainer">
 
-
-  <script src="./src/js/Collectibles.js" type="module"></script>
-  <script src="./src/js/Boons.js" type="module"></script>
-  <script src="./src/js/Player.js" type="module"></script>
-  <script type="module">
-    import { Player } from "./src/js/Player.js";
-    import { Collectibles } from "./src/js/Collectibles.js";
-    import { Boons } from "./src/js/Boons.js";
-
-    let player = new Player();
-
-    let activeBoon = new Boons();
-
-    const shopContent = document.querySelectorAll('.boonContainer');
-
-    const overLayer = document.querySelector('#dispensors');
-
-    overLayer.addEventListener("mousedown", (e) => {
-
-      const x = e.clientX;
-      const y = e.clientY;
-
-      // console.log("x: " + x + " y: " + y);
-
-      shopContent.forEach(shopItem => {
-        const rect = shopItem.getBoundingClientRect();
-        const tooltip = shopItem.querySelector('.tooltip');
-
-        // console.log("left: " + rect.left + "right: " + rect.right + "top: " + rect.top + "bottom: " + rect.bottom);
-        // console.log(tooltip);
-
-        if (tooltip) {
-          if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
-            tooltip.style.display = 'block';
-            activeBoon = new Boons(shopItem.id.substring(5));
-          } else {
-            tooltip.style.display = 'none';
-          }
-        }
-
-      });
-    });
-    
-    shopContent.forEach(shopItem => {
-      
-      // Get random boon
-      let boon = new Boons();
-      boon.setToRandomBoon();
-      console.log(boon.src);
-
-      // Set shop HTML to match boon
-
-      shopItem.innerHTML = `
-      <img src="${boon.filePath}" class="boon">
-      <span class="tooltip">
-        ${boon.name} <br><br> ${boon.description}              
-      </span>
-      `;
-
-      shopItem.id = boon.name;
-
-
-    });
-
-    document.querySelector("#playerInfo").addEventListener("click", function() {
-      console.log(player.viceArray);
-      console.log(player.virtueArray);
-    });
-
-    document.querySelector("#buyItem").addEventListener("click", function() {
-      if (activeBoon.name != "") {
-        player.addConsumable(activeBoon);
-        let selected = document.querySelector(`#${activeBoon.name}`);
-        if (selected) {
-          selected.style.opacity = 0;
-          selected.id = ``;
-        }
-        activeBoon = new Boons();
-      }
-    });
-
-
-  </script>
-  <script>
-
-    document.getElementById("defaultOpen").click();
-
-    function openTab(event, tabName) {
-      var tabcontent = document.getElementsByClassName("shopTabcontent");
-      for (var i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-      }
-
-      var tablinks = document.getElementsByClassName("tablinks");
-      for (var i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-      }
-
-      document.getElementById(tabName).style.display = "block";
-      event.currentTarget.className += " active";
-    }
-
-    // Parse URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const tab = urlParams.get('tab');
-    if (tab === 'diceMachine') {
-      openTab(event, 'diceMachine');
-    }
-
-  </script>
+      <button id="backBtn">Back</button>
+  </div>  
+  <script src="src/js/shop.js" type="module"></script>
 </body>
 </html>
