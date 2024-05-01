@@ -1,9 +1,12 @@
-import { Henchmen } from "./Henchman.js";
-import { Player } from "./Player.js";
-import { Boon } from "./Boon.js";
-import { boonArray } from "./Boon.js";
+import { Henchmen } from "../../src/js/Henchman.js";
+import { Player } from "../../src/js/Player.js";
+import { Boon } from "../../src/js/Boon.js";
+import { boonArray } from "../../src/js/Boon.js";
 import { Dice } from "../../src/js/Dice.js";
 
+
+const storedPlayerJSON = localStorage.getItem('player');
+const storedPlayer = JSON.parse(storedPlayerJSON);
 
 let rollBonus = false;
 let wave = 0;
@@ -23,10 +26,13 @@ player.addDice(tempDice);
 tempDice = new Dice("d20");
 player.addDice(tempDice);
 
+player.addBoon(boonArray['companionCube']);
+
 document.addEventListener('DOMContentLoaded', function() {
 //   console.log("Has Estus Flask: " + player.estusFlask);
 
 //   const boonCollection = document.querySelector('#boonCollection');
+  const collectibleEffects = document.querySelector('#collectibleEffects');
 
   const btnRoll = document.querySelector('#rollDiceBtn');
   const btnEndTurn = document.querySelector('#endTurnBtn');
@@ -47,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const diceArea = document.querySelector("#diceArea");
   
+  populateBoons();
+  console.log("boons");
 
   // Add dice to the diceArea
   for (let i = 0; i < player.diceArray.length; i++) {
@@ -207,4 +215,23 @@ document.addEventListener('DOMContentLoaded', function() {
   //   });
   //   return result; // all dice used
   // }
+
+  function populateBoons() {
+    for (var i = 0; i < player.boonArray.length; i++) {
+
+      let newImgTag = document.createElement('img');
+      newImgTag.src = `../../${player.boonArray[i].filePath}`;
+      newImgTag.classList.add("boon");
+
+      // const boonImgTag = `
+
+      //   <span class="tooltip">
+      //   ${player.boonArray[i].description}
+      //   </span>
+      // `;
+      collectibleEffects.appendChild(newImgTag);
+      console.log(newImgTag);
+    }
+    console.log(player.boonArray.length);
+  }
 });

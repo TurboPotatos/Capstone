@@ -10,8 +10,8 @@ let activeBoon = new Boon("", "", "", "");
 const shopContent = document.querySelectorAll('.slot');
 
 let bannedArray = [];
-for (let i = 0; i < player.viceArray.length; i++) {
-  bannedArray.push(player.viceArray[i]);
+for (let i = 0; i < player.boonArray.length; i++) {
+  bannedArray.push(player.boonArray[i]);
 }
 
 shopContent.forEach(shopItem => {
@@ -40,7 +40,7 @@ shopContent.forEach(shopItem => {
   shopItem.innerHTML = `
   <img src="../../${boon.filePath}" class="boon">
     <span class="tooltip">
-    ${boon.name} <br><br> ${boon.description}              
+    ${boon.description}
     </span>
   `;
 
@@ -70,7 +70,7 @@ shopContent.forEach(shopItem => {
 
 
 document.querySelector("#playerInfo").addEventListener("click", function() {
-  console.log(player.viceArray);
+  console.log(player.boonArray);
   console.log(player.currency);
 });
 
@@ -82,7 +82,7 @@ document.querySelector("#buyItem").addEventListener("click", function() {
   if (activeBoon.name != "") {
     if (player.subtractCurrency(15)) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
-      player.addConsumable(activeBoon);
+      player.addBoon(activeBoon);
       let selected = document.querySelector(`#${activeBoon.name}`);
       if (selected) {
         selected.style.opacity = 0;
@@ -132,4 +132,10 @@ fadeBtn.addEventListener("click", (e) => {
 
 backBtn.addEventListener("click", (e) => {
   colorBox.style.display = "none";
+});
+
+const returnToGameBtn = document.querySelector('#returnToGameBtn');
+returnToGameBtn.addEventListener("click", (e) => {
+  localStorage.setItem('player', JSON.stringify(player));
+  window.location.href = 'game.html';
 });
