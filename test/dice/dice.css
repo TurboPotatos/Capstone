@@ -36,10 +36,39 @@ body {
   /* position: relative;
   float: left; */
 }
+.triangle {
+  /* border: solid red; */
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  margin: 0 auto; /* Center the cube horizontally */
+  transform: rotateX(-40deg) rotateY(45deg); /* Adjust rotation to look at a corner */
+}
+
 .d4 {
   background-image: url(../../src/media/d4.png);
-  
 }
+
+#d4left{
+  position: relative;
+  float: left;
+  width: 45px;
+  height: 45px;
+  transform:translateY(11px) translateX(-15px) rotateY(-100deg);
+  box-sizing: border-box;
+}
+
+#d4right{
+  position: relative;
+  float: left;
+  width: 45px;
+  height: 45px;
+  box-sizing: border-box;
+  transform: translateY(0px) translateX(35px) rotateX(10deg) rotateY(10deg);
+}
+
+
 .d6 {
   background-image: url(../../src/media/d6.png);
   /* border: solid red; */
@@ -83,9 +112,101 @@ body {
 .cube div {
   padding-top: 1rem;
 }
+
+.hexagon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  transform-style: preserve-3d;
+  margin: 0 auto; /* Center the cube horizontally */
+}
+
+#d8left{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(40deg) rotateY(-15deg) translateY(-22px) translateX(-16px) translateZ(10px) rotateZ(87deg) skewX(25deg);
+}
+
+#d8right{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(-40deg) rotateY(-15deg) translateY(-14px) translateX(12px) translateZ(-16px) rotateZ(-87deg) skewX(-25deg);
+}
+
+#d8center{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateY(32px) translateX(17px);
+}
+
+#d8bottom{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateY(55px) translateX(-18px) rotateX(50deg) ;
+}
 .d8 {
   background-image: url(../../src/media/d8.png);
 }
+
+#d10center{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(16px) translateY(28px);
+}
+
+#d10topLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(-20deg) rotateY(60deg) translateX(-27px) translateY(-27px) rotateZ(45deg) skewX(-20deg);
+}
+
+#d10topRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(20deg) rotateY(-60deg) translateX(90px) translateY(-30px) rotateZ(-20deg) skewX(20deg) skewY(-15deg);
+}
+
+#d10botLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(30deg) rotateY(50deg) translateX(20px) translateY(-80px) rotateZ(-80deg) skewY(50deg);
+  font-size: 8px;
+}
+
+#d10botRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: rotateX(30deg) rotateY(-50deg) translateX(30px) translateY(-98px) rotateZ(100deg) skewX(20deg) skewY(-40deg);
+  font-size: 8px;
+}
+
 .d10 {
   background-image: url(../../src/media/d10.png);
   padding-top: .6rem;

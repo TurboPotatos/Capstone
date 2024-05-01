@@ -1,0 +1,49 @@
+#gameOver {
+  color: white;
+  text-align: center;
+  padding: 1.4rem 0;
+}
+
+#statsTable {
+  position: absolute;
+  width: 38%;
+  margin-top: 2%;
+  left: 10%;
+}
+
+#infoTable {
+  position: absolute;
+  width: 38%;
+  margin-top: 2%;
+  right: 10%;
+}
+
+#statsTable th {
+  text-align: center;
+}
+
+#statsTable td {
+  height: 3rem;
+}
+
+#statsTable span {
+  float: right;
+}
+
+#infoTable td {
+  height: 6.1rem;
+}
+
+#infoTable img {
+  height: 3rem;
+}
+
+th {
+  background-color: #b1b1b1; /* Grey background for header */
+}
+tr:nth-child(even) {
+  background-color: #d3d3d3; /* White background for even rows */
+}
+tr:nth-child(odd) {
+  background-color: #fff; /* Grey background for odd rows */
+}

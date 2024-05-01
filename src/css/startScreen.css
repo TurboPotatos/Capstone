@@ -1,0 +1,51 @@
+#titleScreen {
+  border: solid green;
+  position: absolute;
+  width: 65%;
+  left: 2.5rem;
+  top: 1.5rem;
+  height: 68%;
+  color:cadetblue;
+  font-size: 3.5rem;
+  text-shadow: black 2px 1px 1px;
+  background-image: url(../media/otter-space.jpg);
+  background-size: cover;
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+	padding: 1.5rem;
+}
+
+#splashText {
+  width: 60%;
+}
+
+#menuDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid red;
+  position:absolute;
+  width: 30%;
+  top: 1.5rem;
+  right: 1.5rem;
+  height: 95%;
+  background-color: cadetblue;
+  align-items: center;
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+	padding: 1.5rem;
+	overflow-y: auto;
+}
+
+#menuDiv form {
+  display: flex;
+  flex-direction: column;
+}
+
+#nav {
+  border: solid yellow;
+  position: absolute;
+  width: 65%;
+  left: 2.5rem;
+  bottom: 1rem;
+  height: 23%;
+  background-color: cadetblue;
+}
