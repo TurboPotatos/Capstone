@@ -6,7 +6,8 @@ import { DiceSide } from "./DiceSide.js";
 import { Dice } from "./Dice.js";
 
 
-let player = new Player();
+// let player = new Player();
+const player = new Player(JSON.parse(localStorage.getItem('player')));
 
 let boughtDiceSide = new DiceSide(-1, 1);
 
@@ -14,27 +15,29 @@ let items = document.querySelectorAll('.box');
 
 const shopContent = document.querySelectorAll('.slot');
 
-player.currency = 15;
+document.querySelector("#currentCurrency").innerHTML = player.currency;
 
-let tempDice = new Dice("d4");
-player.addDice(tempDice);
-tempDice = new Dice("d6");
-player.addDice(tempDice);
-tempDice = new Dice("d8");
-player.addDice(tempDice);
-tempDice = new Dice("d10");
-player.addDice(tempDice);
-tempDice = new Dice("d12");
-player.addDice(tempDice);
-tempDice = new Dice("d20");
-player.addDice(tempDice);
+// player.currency = 15;
 
-for (let i = 0; i < 5; i++) {
-  let rand = Math.ceil(Math.random() * 20);
-  let tempDiceSide = new DiceSide(rand, 1);
+// let tempDice = new Dice("d4");
+// player.addDice(tempDice);
+// tempDice = new Dice("d6");
+// player.addDice(tempDice);
+// tempDice = new Dice("d8");
+// player.addDice(tempDice);
+// tempDice = new Dice("d10");
+// player.addDice(tempDice);
+// tempDice = new Dice("d12");
+// player.addDice(tempDice);
+// tempDice = new Dice("d20");
+// player.addDice(tempDice);
 
-  player.diceSideArray.push(tempDiceSide);
-}
+// for (let i = 0; i < 5; i++) {
+//   let rand = Math.ceil(Math.random() * 20);
+//   let tempDiceSide = new DiceSide(rand, 1);
+
+//   player.diceSideArray.push(tempDiceSide);
+// }
 
 shopContent.forEach(shopItem => {
   // Get random dice side
@@ -321,3 +324,9 @@ function prepareItems() {
     item.addEventListener('dragend', handleDragEnd, false);
   });
 }
+
+const returnToGameBtn = document.querySelector('#returnToGameBtn');
+returnToGameBtn.addEventListener("click", (e) => {
+  localStorage.setItem('player', JSON.stringify(player));
+  window.location.href = 'game.html';
+});

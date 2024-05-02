@@ -3,13 +3,15 @@ import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
 import { boonNameArray } from "./Boon.js";
 
-let player = new Player();
+// let player = new Player();
+const player = new Player(JSON.parse(localStorage.getItem('player')));
 
 let activeBoon = new Boon("", "", "", "");
 
 const shopContent = document.querySelectorAll('.slot');
+document.querySelector("#currentCurrency").innerHTML = player.currency;
 
-player.addBoon(boonArray['crowbar']);
+// player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
 for (let i = 0; i < player.boonArray.length; i++) {

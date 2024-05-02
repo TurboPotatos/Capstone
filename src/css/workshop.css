@@ -1,3 +1,14 @@
+#devTools {
+  border: solid red;
+  width: 20%;
+  background-color: cadetblue;
+  /* position: absolute; */
+  /* float: left; */
+  font-size: 2rem;
+  /* display: block; */
+  cursor: pointer;
+}
+
 td{
   border-bottom: 1px solid rgba(68, 48, 17, 0.904);
   text-align: center;
@@ -72,3 +83,10 @@ td::after{
   top: 10%;
 }
 
+#returnToGameBtn {
+  position: absolute;
+  height: 10%;
+  width: 20%;
+  top: 4rem;
+  left: 1rem;
+}
