@@ -136,6 +136,8 @@ function updateCurrency() {
 
 // Add event listeners to watch for changes to their values
 diceBuys.forEach(function(diceBuy) {
+  diceBuy.value = 0;
+
   diceBuy.addEventListener('input', function() {
 
     let newValue = diceBuy.value;
