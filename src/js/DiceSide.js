@@ -3,10 +3,12 @@ export class DiceSide {
   cost = 10;
   value = 0;
 
-  constructor(value, difficulty) {
+  constructor(value, difficulty, cost) {
     this.value = value;
     this.cost = 1.2*Math.pow(this.cost, difficulty);
-    // this.value = Math.ceil(Math.random * 20);
+    if (cost !== undefined) {
+      this.cost = cost;
+    }
   }
 
 }

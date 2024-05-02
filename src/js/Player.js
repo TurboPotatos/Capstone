@@ -1,3 +1,8 @@
+import { DiceSide } from "./DiceSide.js";
+import { Dice } from "./Dice.js";
+import { Boon } from "./Boon.js";
+import { boonArray } from "./Boon.js";
+
 export class Player {
 
   // Player properties
@@ -27,14 +32,43 @@ export class Player {
       this.score = player.score;
       
       // Array of dice
-      this.diceArray = player.diceArray;
+      for (let i = 0; i < player.diceArray.length; i++) {
+        // Make new dice from the info in the stored generic objects
+        let newDice = new Dice(player.diceArray[i].typeOf);
+        for (let j = 0; j < player.diceArray[i].length; j++) {
+          let storedDiceSide = player.diceArray[i][j];
+          let newDiceSide = new DiceSide(storedDiceSide.value, -1, storedDiceSide.cost);
+
+          newDice.changeSideValue(j, newDiceSide);
+        }
+
+        this.addDice(newDice);
+      }
 
       // Array of dice sides
-      this.diceSideArray = player.diceSideArray;
+      for (let i = 0; i < player.diceSideArray.length; i++) {
+        let storedDiceSide = player.diceSideArray[i];
+        let newDiceSide = new DiceSide(storedDiceSide.value, -1, storedDiceSide.cost);
+
+        this.diceSideArray.append(newDiceSide);
+      }
 
       // Arrays of Collectibles
-      this.boonArray = player.boonArray;
-      this.items = player.items;
+      // this.boonArray = player.boonArray;
+      for (let i = 0; i < player.boonArray.length; i++) {
+        // Make new boon from the generic object's stored property
+        let newBoon = boonArray[player.boonArray[i].name];
+
+        this.addBoon(newBoon);
+      }
+
+      // this.items = player.items;
+      // for (let i = 0; i < player.items.length; i++) {
+      //   // Make new boon from the generic object's stored property
+      //   let newBoon = boonArray[player.items[i].name];
+
+      //   this.addBoon(newBoon);
+      // }
 
       // Active boons
       this.estusFlask = player.estusFlask;
