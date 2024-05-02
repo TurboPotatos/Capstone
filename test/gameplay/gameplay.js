@@ -216,10 +216,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // }
 
   function populateBoons() {
-<<<<<<< Updated upstream
-    console.log(storedPlayer.boonArray.length);
-=======
->>>>>>> Stashed changes
     for (var i = 0; i < storedPlayer.boonArray.length; i++) {
 
       let newImgTag = document.createElement('img');
