@@ -9,23 +9,29 @@ export class Game {
 
   gameConsole = ""; // RENAME. String variable to output what each dice player has rolls
 
-  player = new Player();
+  // player = new Player();
 
   constructor(difficulty) {
     // Theory code for difficulty options
     // More considerations for difficulty increasing is less currency generated
-    // switch (difficulty) {
-    //   case "Normal":
-    //     this.difficulty = 1.5;
-    //     break;
-    //   case "Hard":
-    //     this.difficulty = 3;
-    //     break;
-    //   default:
-    //     this.difficulty = 1;
-    //     break;
-    // }
-    this.difficulty = 1.2;
+    switch (difficulty) {
+      case "Easy":
+        this.difficulty = 1;
+        break;
+      case "Normal":
+        this.difficulty = 1.5;
+        break;
+      case "Hard":
+        this.difficulty = 3;
+        break;
+      case "Impossible":
+        this.difficulty = 6;
+        break;
+      default:
+        this.difficulty = 1;
+        break;
+    }
+    // this.difficulty = 1.2;
   }
 
   createNewWave() {

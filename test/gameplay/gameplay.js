@@ -217,10 +217,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // }
 
   function populateBoons() {
-    for (var i = 0; i < player.boonArray.length; i++) {
+    console.log(storedPlayer.boonArray.length);
+    for (var i = 0; i < storedPlayer.boonArray.length; i++) {
 
       let newImgTag = document.createElement('img');
-      newImgTag.src = `../../${player.boonArray[i].filePath}`;
+      newImgTag.src = `../../${storedPlayer.boonArray[i].filePath}`;
       newImgTag.classList.add("boon");
 
       // const boonImgTag = `
