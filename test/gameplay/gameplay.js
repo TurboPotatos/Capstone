@@ -5,27 +5,31 @@ import { boonArray } from "../../src/js/Boon.js";
 import { Dice } from "../../src/js/Dice.js";
 
 
-const storedPlayer = JSON.parse(localStorage.getItem('player'));
+let storedPlayer = JSON.parse(localStorage.getItem('player'));
 
 let rollBonus = false;
 let wave = 0;
 let henchman = new Henchmen("Goomba " + wave, wave);
-let player = new Player();
+storedPlayer = new Player(storedPlayer);
 
-let tempDice = new Dice("d4");
-player.addDice(tempDice);
-tempDice = new Dice("d6");
-player.addDice(tempDice);
-tempDice = new Dice("d8");
-player.addDice(tempDice);
-tempDice = new Dice("d10");
-player.addDice(tempDice);
-tempDice = new Dice("d12");
-player.addDice(tempDice);
-tempDice = new Dice("d20");
-player.addDice(tempDice);
+// let tempDice = new Dice("d4");
+// player.addDice(tempDice);
+// tempDice = new Dice("d6");
+// player.addDice(tempDice);
+// tempDice = new Dice("d8");
+// player.addDice(tempDice);
+// tempDice = new Dice("d10");
+// player.addDice(tempDice);
+// tempDice = new Dice("d12");
+// player.addDice(tempDice);
+// tempDice = new Dice("d20");
+// player.addDice(tempDice);
 
-player.addBoon(boonArray['companionCube']);
+// player.addBoon(boonArray['companionCube']);
+
+
+// storedPlayer.addDice(tempDice);
+
 
 document.addEventListener('DOMContentLoaded', function() {
 //   console.log("Has Estus Flask: " + player.estusFlask);
@@ -56,13 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("boons");
 
   // Add dice to the diceArea
-  for (let i = 0; i < player.diceArray.length; i++) {
-    diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
+  for (let i = 0; i < storedPlayer.diceArray.length; i++) {
+    diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${storedPlayer.diceArray[i].typeOf}">${storedPlayer.diceArray[i].typeOf}</button>`;
   }
 
-  stamina.innerHTML = "Stamina: " + player.stamina;
-  score.innerHTML = "Score: " + player.score;
-  currency.innerHTML = "Money: " + player.currency;
+  stamina.innerHTML = "Stamina: " + storedPlayer.stamina;
+  score.innerHTML = "Score: " + storedPlayer.score;
+  currency.innerHTML = "Money: " + storedPlayer.currency;
 
   henchName.innerHTML = henchman.name;
   health.innerHTML = henchman.health + "/" + henchman.maxHealth;
@@ -132,10 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (henchman.henchmenFull()) {
 
-      player.score += henchman.scoreGiven;
-      player.currency += henchman.currencyGiven;
+      storedPlayer.score += henchman.scoreGiven;
+      storedPlayer.currency += henchman.currencyGiven;
       wave++;
-      player.stamina += 30;
+      storedPlayer.stamina += 30;
       henchman = new Henchmen("Goomba " + wave, wave);
       healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`; 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
@@ -143,9 +147,9 @@ document.addEventListener('DOMContentLoaded', function() {
       threshold.innerHTML = "Threshold: " + henchman.threshold;
       staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
       healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
-      stamina.innerHTML = "Stamina: " + player.stamina;
-      score.innerHTML = "Score: " + player.score;
-      currency.innerHTML = "Money: " + player.currency;
+      stamina.innerHTML = "Stamina: " + storedPlayer.stamina;
+      score.innerHTML = "Score: " + storedPlayer.score;
+      currency.innerHTML = "Money: " + storedPlayer.currency;
     }
   }
 
@@ -159,7 +163,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalResult = 0;
     var results = [];
     selectedDie.forEach(function(btn) {
-        var dice = player.diceArray[parseInt(btn.id.substring(4))];
+
+      console.log("storedPlayer: ");
+      console.log(storedPlayer.diceArray[parseInt(btn.id.substring(4))]);
+      console.log("player: ");
+      //console.log(player.diceArray[parseInt(btn.id.substring(4))]);
+
+        var dice = storedPlayer.diceArray[parseInt(btn.id.substring(4))];
+
+
         var result = dice.roll();
         totalResult += result;
         results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
@@ -194,8 +206,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (!henchman.henchmenFull()) {
-      player.stamina -= henchman.staminaPenalty;
-      stamina.innerHTML = "Stamina: " + player.stamina;
+      storedPlayer.stamina -= henchman.staminaPenalty;
+      stamina.innerHTML = "Stamina: " + storedPlayer.stamina;
     }
     // if (player.estusFlask) {
     //   rollBonus = true;
@@ -222,15 +234,32 @@ document.addEventListener('DOMContentLoaded', function() {
       newImgTag.src = `../../${storedPlayer.boonArray[i].filePath}`;
       newImgTag.classList.add("boon");
 
-      // const boonImgTag = `
+      let newSpanTag = document.createElement('span');
+      newSpanTag.innerHTML = storedPlayer.boonArray[i].description;
+      newSpanTag.classList.add("tooltip");
 
-      //   <span class="tooltip">
-      //   ${player.boonArray[i].description}
-      //   </span>
-      // `;
       collectibleEffects.appendChild(newImgTag);
-      console.log(newImgTag);
+      newImgTag.insertAdjacentElement('afterend', newSpanTag);
+      // newImgTag.appendChild(newSpanTag);
+      // console.log(newImgTag);
+
+      newImgTag.addEventListener("click", function() {
+        let tooltip = newSpanTag;
+        let alreadyDisplayed = (tooltip.style.display == "block");
+    
+        let allTooltips = document.querySelectorAll('.tooltip');
+        allTooltips.forEach(tip => {
+          tip.style.display = "none";
+        });
+    
+        if (alreadyDisplayed) {
+          tooltip.style.display = 'none';
+        } else {
+          tooltip.style.display = 'block';
+        }
+        console.log("yup");
+      });
     }
-    console.log(storedPlayer.boonArray.length);
+    // console.log(storedPlayer.boonArray.length);
   }
 });

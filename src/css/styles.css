@@ -714,3 +714,18 @@ input[type='number'] {
 .right{
   transform: rotateY(-20deg) translateZ(-50px);
 }
+
+.tooltip {
+  border: solid red;
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  /* width: 50%;
+  height: 50%; */
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
+}

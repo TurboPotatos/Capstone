@@ -18,6 +18,30 @@ export class Player {
   // Active boons
   estusFlask = false;
 
+  constructor(player) {
+
+    if (player !== undefined) {
+      // Player properties
+      this.currency = player.currency;
+      this.stamina = player.stamina;
+      this.score = player.score;
+      
+      // Array of dice
+      this.diceArray = player.diceArray;
+
+      // Array of dice sides
+      this.diceSideArray = player.diceSideArray;
+
+      // Arrays of Collectibles
+      this.boonArray = player.boonArray;
+      this.items = player.items;
+
+      // Active boons
+      this.estusFlask = player.estusFlask;
+    }
+  }
+
+
   addItem(item) {
     if (!this.items[item.name]) {
       this.items[item.name] = [];

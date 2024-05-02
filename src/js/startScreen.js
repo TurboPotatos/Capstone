@@ -108,7 +108,7 @@ gameSettingsForm.addEventListener("submit", function(event) {
   if (totalDice < 2) {
     alert("Please select two or more dice before proceeding!");
   } else {
-    window.location.href = "http://127.0.0.1:5500/game.html";
+    window.location.href = "game.html";
   }
   // How to redirect someone
 });
