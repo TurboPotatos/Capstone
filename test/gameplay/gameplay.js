@@ -5,8 +5,7 @@ import { boonArray } from "../../src/js/Boon.js";
 import { Dice } from "../../src/js/Dice.js";
 
 
-const storedPlayerJSON = localStorage.getItem('player');
-const storedPlayer = JSON.parse(storedPlayerJSON);
+const storedPlayer = JSON.parse(localStorage.getItem('player'));
 
 let rollBonus = false;
 let wave = 0;
@@ -217,7 +216,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // }
 
   function populateBoons() {
+<<<<<<< Updated upstream
     console.log(storedPlayer.boonArray.length);
+=======
+>>>>>>> Stashed changes
     for (var i = 0; i < storedPlayer.boonArray.length; i++) {
 
       let newImgTag = document.createElement('img');
@@ -233,6 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
       collectibleEffects.appendChild(newImgTag);
       console.log(newImgTag);
     }
-    console.log(player.boonArray.length);
+    console.log(storedPlayer.boonArray.length);
   }
 });

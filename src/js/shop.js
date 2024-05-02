@@ -9,6 +9,8 @@ let activeBoon = new Boon("", "", "", "");
 
 const shopContent = document.querySelectorAll('.slot');
 
+player.addBoon(boonArray['crowbar']);
+
 let bannedArray = [];
 for (let i = 0; i < player.boonArray.length; i++) {
   bannedArray.push(player.boonArray[i]);
