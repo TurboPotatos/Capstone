@@ -18,7 +18,7 @@ body {
   border: none;
   /* padding: 0; */
   background: transparent;
-  /* background-image: url(../../src/media/d20.png); */
+  /* background-image: url(../../src/media/Dice/d20.png); */
   background-size: contain; /* Adjusts the image size to cover the entire button */
   background-position: center; /* Centers the image within the button */
   background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -96,28 +96,28 @@ body {
   padding-top: 1rem;
 }
 .d4:after {
-  background-image: url(../../src/media/d4.png);
-  mask-image: url(../../src/media/background_d4.png);
+  background-image: url(../../src/media/Dice/d4.png);
+  mask-image: url(../../src/media/Dice/background_d4.png);
 }
 .d6:after {
-  background-image: url(../../src/media/d6.png);
-  mask-image: url(../../src/media/background_d6.png);
+  background-image: url(../../src/media/Dice/d6.png);
+  mask-image: url(../../src/media/Dice/background_d6.png);
 }
 .d8:after {
-  background-image: url(../../src/media/d8.png);
-  mask-image: url(../../src/media/background_d8.png);
+  background-image: url(../../src/media/Dice/d8.png);
+  mask-image: url(../../src/media/Dice/background_d8.png);
 }
 .d10:after {
-  background-image: url(../../src/media/d10.png);
-  mask-image: url(../../src/media/background_d10.png);
+  background-image: url(../../src/media/Dice/d10.png);
+  mask-image: url(../../src/media/Dice/background_d10.png);
 }
 .d12:after {
-  background-image: url(../../src/media/d12.png);
-  mask-image: url(../../src/media/background_d12.png);
+  background-image: url(../../src/media/Dice/d12.png);
+  mask-image: url(../../src/media/Dice/background_d12.png);
 }
 .d20:after {
-  background-image: url(../../src/media/d20.png);
-  mask-image: url(../../src/media/background_d20.png);
+  background-image: url(../../src/media/Dice/d20.png);
+  mask-image: url(../../src/media/Dice/background_d20.png);
 }
 
 .cube-container {
@@ -188,7 +188,7 @@ body {
   height: 100%;
   width: 100%;
   z-index: -5;
-  /* background-image: url(../../src/media/background_d20.png); */
+  /* background-image: url(../../src/media/Dice/background_d20.png); */
   background-size: contain;
   background-color: gray;
   mask-repeat: no-repeat;
@@ -197,47 +197,47 @@ body {
   opacity: .5;
 }
 .d4:disabled:before {
-  background-image: url(../../src/media/d4.png);
-  mask-image: url(../../src/media/background_d4.png);
+  background-image: url(../../src/media/Dice/d4.png);
+  mask-image: url(../../src/media/Dice/background_d4.png);
 }
 .d6:disabled:before {
-  background-image: url(../../src/media/d6.png);
-  mask-image: url(../../src/media/background_d6.png);
+  background-image: url(../../src/media/Dice/d6.png);
+  mask-image: url(../../src/media/Dice/background_d6.png);
 }
 .d8:disabled:before {
-  background-image: url(../../src/media/d8.png);
-  mask-image: url(../../src/media/background_d8.png);
+  background-image: url(../../src/media/Dice/d8.png);
+  mask-image: url(../../src/media/Dice/background_d8.png);
 }
 .d10:disabled:before {
-  background-image: url(../../src/media/d10.png);
-  mask-image: url(../../src/media/background_d10.png);
+  background-image: url(../../src/media/Dice/d10.png);
+  mask-image: url(../../src/media/Dice/background_d10.png);
 }
 .d12:disabled:before {
-  background-image: url(../../src/media/d12.png);
-  mask-image: url(../../src/media/background_d12.png);
+  background-image: url(../../src/media/Dice/d12.png);
+  mask-image: url(../../src/media/Dice/background_d12.png);
 }
 .d20:disabled:before {
-  background-image: url(../../src/media/d20.png);
-  mask-image: url(../../src/media/background_d20.png);
+  background-image: url(../../src/media/Dice/d20.png);
+  mask-image: url(../../src/media/Dice/background_d20.png);
 }
 
 .d4:disabled {
-  background-image: url(../../src/media/d4.png);
+  background-image: url(../../src/media/Dice/d4.png);
 }
 .d6:disabled {
-  background-image: url(../../src/media/d6.png);
+  background-image: url(../../src/media/Dice/d6.png);
 }
 .d8:disabled {
-  background-image: url(../../src/media/d8.png);
+  background-image: url(../../src/media/Dice/d8.png);
 }
 .d10:disabled {
-  background-image: url(../../src/media/d10.png);
+  background-image: url(../../src/media/Dice/d10.png);
 }
 .d12:disabled {
-  background-image: url(../../src/media/d12.png);
+  background-image: url(../../src/media/Dice/d12.png);
 }
 .d20:disabled {
-  background-image: url(../../src/media/d20.png);
+  background-image: url(../../src/media/Dice/d20.png);
 }
 
 .success:disabled {

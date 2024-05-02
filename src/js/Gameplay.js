@@ -1,16 +1,15 @@
-import { Henchmen } from "../../src/js/Henchman.js";
-import { Player } from "../../src/js/Player.js";
-import { Boon } from "../../src/js/Boon.js";
-import { boonArray } from "../../src/js/Boon.js";
-import { Dice } from "../../src/js/Dice.js";
+import { Henchmen } from "./Henchman.js";
+import { Player } from "./Player.js";
+import { Boon } from "./Boon.js";
+import { boonArray } from "./Boon.js";
+import { Dice } from "./Dice.js";
 
 
-let storedPlayer = JSON.parse(localStorage.getItem('player'));
+const storedPlayer = new Player(JSON.parse(localStorage.getItem('player')));
 
 let rollBonus = false;
 let wave = 0;
-let henchman = new Henchmen("Goomba " + wave, wave);
-storedPlayer = new Player(storedPlayer);
+let henchman = new Henchmen(document.querySelector('#henchName').innerHTML, wave);
 
 // let tempDice = new Dice("d4");
 // player.addDice(tempDice);

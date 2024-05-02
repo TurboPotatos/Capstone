@@ -1,8 +1,8 @@
-import { Collectibles } from "./Collectibles.js";
-import { Dice } from "./Dice.js";
-import { Game } from "./Game.js";
-import { Henchmen } from "./Henchman.js";
-import { Player } from "./Player.js";
+import { Collectibles } from "../src/js/Collectibles.js";
+import { Dice } from "../src/js/Dice.js";
+import { Game } from "../src/js/Game.js";
+import { Henchmen } from "../src/js/Henchman.js";
+import { Player } from "../src/js/Player.js";
 
 function init() {
 

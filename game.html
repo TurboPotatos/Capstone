@@ -3,8 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script type="module" src="src/js/test.js"></script> -->
-    <script type="module" src="src/js/test.js"></script>
 
     <link rel="stylesheet" href="src/css/styles.css">
     <link rel="stylesheet" href="src/css/dice.css">
@@ -81,19 +79,19 @@
               <td><br /></td>
             </tr>
             <tr>
-              <td>Threshold: 7</td>
+              <td id="threshold">Threshold: </td>
             </tr>
             <tr>
-              <td><br /></td>
+              <td><br></td>
             </tr>
             <tr>
-              <td>Healing Factor: 15</td>
+              <td id="healingFactor">Healing Factor: </td>
             </tr>
             <tr>
-              <td><br /></td>
+              <td><br></td>
             </tr>
             <tr>
-              <td>Stamina Penalty: 10</td>
+              <td id="staminaPenalty">Stamina Penalty: </td>
             </tr>
             <tr>
               <td><br /></td>
@@ -166,7 +164,7 @@
               <td><br></td>
             </tr>
             <tr>
-              <td id="henchName">Grunt</td>
+              <td id="henchName">Next Up</td>
             </tr>
           </tbody>
         </table>
@@ -183,19 +181,19 @@
               <td><br></td>
             </tr>
             <tr>
-              <td id="threshold">Threshold: 10</td>
+              <td>Threshold: </td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td id="healingFactor">Healing Factor: 11</td>
+              <td>Healing Factor: </td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td id="staminaPenalty">Stamina Penalty: 15</td>
+              <td>Stamina Penalty: </td>
             </tr>
             <tr>
               <td><br></td>
@@ -287,227 +285,9 @@
       </div>
 
       <div id="collectibleEffects">
-        <!-- <span id="boonEffects">Boon effects: </span> -->
-        <!-- <span id="curseEffects">Curse effects: </span> -->
 
-        <!-- <img
-          src="src/media/boon_gloves.png"
-          class="boon"
-          alt="Gloves"
-          title="Gloves
-
-This is what Gloves does"
-        />
-        <img
-          src="src/media/boon_labCoat.png"
-          class="boon"
-          alt="Lab Coat"
-          title="Lab Coat
-      
-This is what Lab Coat does"
-        />
-        <img
-          src="src/media/boon_lollipops.png"
-          class="boon"
-          alt="Lollipops"
-          title="Lollipops
-      
-This is what Lollipops does"
-        />
-        <img
-          src="src/media/boon_mask.png"
-          class="boon"
-          alt="Mask"
-          title="Mask
-      
-This is what Mask does"
-        />
-        <img
-          src="src/media/boon_medicalBag.png"
-          class="boon"
-          alt="Medical Bag"
-          title="Medical Bag
-      
-This is what Medical Bag does"
-        />
-        <img
-          src="src/media/boon_pillBottle.png"
-          class="boon"
-          alt="Pill Bottle"
-          title="Pill Bottle
-      
-This is what Pill Bottle does"
-        />
-        <img
-          src="src/media/boon_reflexHammer.png"
-          class="boon"
-          alt="Reflex Hammer"
-          title="Reflex Hammer
-      
-This is what Reflex Hammer does"
-        />
-        <img
-          src="src/media/boon_rxPad.png"
-          class="boon"
-          alt="Rx Pad"
-          title="Rx Pad
-      
-This is what Rx Pad does"
-        />
-        <img
-          src="src/media/boon_scalpel.png"
-          class="boon"
-          alt="Scalpel"
-          title="Scalpel
-      
-This is what Scalpel does"
-        />
-        <img
-          src="src/media/boon_scrubs.png"
-          class="boon"
-          alt="Scrubs"
-          title="Scrubs
-      
-This is what Scrubs does"
-        />
-        <img
-          src="src/media/boon_thermometer.png"
-          class="boon"
-          alt="Thermometer"
-          title="Thermometer
-      
-This is what Thermometer does"
-        />
-        <img
-          src="src/media/boon_tongueDepressor.png"
-          class="boon"
-          alt="Tongue Depressor"
-          title="Tongue Depressor
-      
-This is what Tongue Depressor does"
-        />
-        <img
-          src="src/media/boon_beamSword.png"
-          class="boon"
-          alt="Beam Sword"
-          title="Beam Sword
-      
-This is what Beam Sword does"
-        />
-        <img
-          src="src/media/boon_chaosEmerald.png"
-          class="boon"
-          alt="Chaos Emerald"
-          title="Chaos Emerald
-      
-This is what Chaos Emerald does"
-        />
-        <img
-          src="src/media/boon_goggles.png"
-          class="boon"
-          alt="Goggles"
-          title="Goggles
-      
-This is what Goggles does"
-        />
-        <img
-          src="src/media/boon_pickaxe.png"
-          class="boon"
-          alt="Pickaxe"
-          title="Pickaxe
-      
-This is what Pickaxe does"
-        />
-        <img
-          src="src/media/boon_pokeball.png"
-          class="boon"
-          alt="Pokeball"
-          title="Pokeball
-      
-This is what Pokeball does"
-        />
-        <img
-          src="src/media/boon_portalGun.png"
-          class="boon"
-          alt="Portal Gun"
-          title="Portal Gun
-      
-This is what Portal Gun does"
-        />
-        <img
-          src="src/media/boon_star.png"
-          class="boon"
-          alt="Star"
-          title="Star
-      
-This is what Star does"
-        />
-        <img
-          src="src/media/boon_triforce.png"
-          class="boon"
-          alt="Triforce"
-          title="Triforce
-      
-This is what Triforce does"
-        />
-        <img
-          src="src/media/boon_mushroom.png"
-          class="boon"
-          alt="Mushroom"
-          title="Mushroom
-      
-This is what Mushroom does"
-        />
-        <img
-          src="src/media/boon_elderScroll.png"
-          class="boon"
-          alt="ElderScroll"
-          title="ElderScroll
-      
-This is what ElderScroll does"
-        />
-        <img
-          src="src/media/boon_companionCube.png"
-          class="boon"
-          alt="Companion Cube"
-          title="Companion Cube
-      
-This is what Companion Cube does"
-        />
-        <img
-          src="src/media/boon_estusFlask.png"
-          class="boon"
-          alt="Estus Flask"
-          title="Estus Flask
-      
-This is what Estus Flask does"
-        />
-        <img
-          src="src/media/boon_nukaCola.png"
-          class="boon"
-          alt="Nuka Cola"
-          title="Nuka Cola
-      
-This is what Nuka Cola does"
-          style="transform: rotate(-42deg)"
-        />
-        <img
-          src="src/media/boon_tetrisPiece.png"
-          class="boon"
-          alt="Tetris Piece"
-          title="Tetris Piece
-      
-This is what Tetris Piece does"
-        />
-        <img
-          src="src/media/boon_crowbar.png"
-          class="boon"
-          alt="Crowbar"
-          title="Crowbar
-      
-This is what Crowbar does"
-        /> -->
       </div>
+
       <div id="gameLogsTab" class="collapsed">Logs</div>
       <div id="gameLogs" class="collapsed">
         <span>Game logs:</span>
@@ -547,10 +327,10 @@ This is what Crowbar does"
       }
 
       function switchChart(chartId, activeTabId, inactiveTabId) {
-      var charts = document.querySelectorAll('.henchmenChart');
-      charts.forEach(function(chart) {
-        chart.style.display = 'none';
-      });
+        var charts = document.querySelectorAll('.henchmenChart');
+        charts.forEach(function(chart) {
+          chart.style.display = 'none';
+        });
       document.getElementById(chartId).style.display = 'block';
 
     }
@@ -582,28 +362,9 @@ This is what Crowbar does"
       henchNameArray.push(key);
     }
 
-    // const henchNameArray = [
-    //   "Beetle",
-    //   "Bokoblin",
-    //   "Ghost",
-    //   "Goomba",
-    //   "Grunt",
-    //   "Henchman 24",
-    //   "Iago",
-    //   "Pain and Panic",
-    //   "Koopa Troopa",
-    //   "Minion",
-    //   "Minion",
-    //   "Space Invader",
-    //   "Storm Trooper",
-    //   "Turret",
-    // ];
-
     const randomIndex = Math.floor(Math.random() * henchNameArray.length);
 
-    // henchman.style.border = "solid red";
     henchman.style.backgroundImage = henchArray[henchNameArray[randomIndex]];
-    // henchman.innerHTML = henchArray[randomHenchIndex];
 
     henchName.innerHTML = henchNameArray[randomIndex];
 
@@ -650,7 +411,7 @@ This is what Crowbar does"
   </script>
 
 
-  <script type="module" src="./test/gameplay/gameplay.js"></script>
+  <script type="module" src="src/js/Gameplay.js"></script>
 
   <button type="button" id="endTurnBtn">End Turn</button>
   <button type="button" id="fadeBtn">Pick Color</button>
