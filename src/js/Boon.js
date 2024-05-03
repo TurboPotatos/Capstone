@@ -31,7 +31,7 @@ const boonArray = {
   // "MONEY!": new Boon("MONEY!", "Chaos Emerald: <br><br>GET 10 MONEY!", { acquireCurrency: 10 }, "src/media/Boons/boon_beamSword.png"),
   // "Stamina Potion": new Boon("Stamina Potion", "Restores 50 stamina", { staminaRestore: 50 }, "src/media/Boons/boon_beamSword.png"),
 
-  "beamSword" : 
+  "beamSword" : // IMPLEMENTED
   new Boon( "beamSword", 
             "Beam Sword: <br><br>50% chance to heal for +5 when you exceed the threshold by a factor of 2", 
             {healChance: 0.5, thresholdFactor: 2, healAmount: 5}, 
@@ -43,43 +43,49 @@ const boonArray = {
             {faceValue: 7}, 
             "src/media/Boons/boon_chaosEmerald.png"),
 
-  "companionCube" : 
+  "companionCube" : // IMPLEMENTED
   new Boon( "companionCube", 
             "Companion Cube: <br><br>d4s roll double", 
             {d4Multiplier: 2}, 
             "src/media/Boons/boon_companionCube.png"),
 
-  "crowbar" : 
+  "crowbar" : // IMPLEMENTED
   new Boon( "crowbar", 
             "Crowbar: <br><br>If you would lose more than 10 stamina, you lose 10 instead", 
             {staminaLost: 10}, 
             "src/media/Boons/boon_crowbar.png"),
 
-  "elderScroll" : 
+  "diamondPickaxe" : // IMPLEMENTED
+  new Boon( "diamondPickaxe", 
+            "Diamond Pickaxe: <br><br>+5 to all rolls, but you can only roll 1 die at a time", 
+            {rollBonus: 5, MaxRolledDice: 1}, 
+            "src/media/Boons/boon_diamondPickaxe.png"),
+
+  "elderScroll" : // IMPLEMENTED
   new Boon( "elderScroll", 
             "Elder Scroll: <br><br>Henchman are worth +3 gold when fully healed", 
-            {goldBonus: 0}, 
+            {goldBonus: 3}, 
             "src/media/Boons/boon_elderScroll.png"),
 
-  "estusFlask" : 
+  "estusFlask" : // IMPLEMENTED
   new Boon( "estusFlask", 
             "Estus Flask: <br><br>+3 to your first roll after resetting your dice", 
-            {estusFlask: 3}, 
+            {rollBonus: 3, bonusActive: false}, 
             "src/media/Boons/boon_estusFlask.png"),
 
-  "gloves" : 
+  "gloves" : // IMPLEMENTED
   new Boon( "gloves", 
             "Gloves: <br><br>Overhealing a henchman recovers your stamina by half that amount", 
             {staminaRestore: 0.5}, 
             "src/media/Boons/boon_gloves.png"),
 
-  "goggles" : 
+  "goggles" : // IMPLEMENTED
   new Boon( "goggles", 
-            "Goggles: <br><br>d10 gets +1 to each roll", 
-            {d10Bonus: 1}, 
+            "Goggles: <br><br>d10s get +2 to each roll", 
+            {d10Bonus: 2}, 
             "src/media/Boons/boon_goggles.png"),
 
-  "labCoat" : 
+  "labCoat" : // IMPLEMENTED
   new Boon( "labCoat", 
             "Lab Coat: <br><br>When you only roll one die, you roll it twice and take the higher number", 
             {advantage: true}, 
@@ -103,7 +109,7 @@ const boonArray = {
             {maxStamina: 20}, 
             "src/media/Boons/boon_medicalBag.png"),
 
-  "mushroom" : 
+  "mushroom" : // IMPLEMENTED
   new Boon( "mushroom", 
             "Mushroom: <br><br>Henchmen start with +10 health", 
             {bonusHealth: 10}, 
@@ -115,15 +121,9 @@ const boonArray = {
             {ignoreCurses: 2}, 
             "src/media/Boons/boon_nukaCola.png"),
 
-  "pickaxe" : 
-  new Boon( "pickaxe", 
-            "Pickaxe: <br><br>+5 to all rolls, but you can only roll 1 die at a time", 
-            {rollBonus: 5, MaxRolledDice: 1}, 
-            "src/media/Boons/boon_pickaxe.png"),
-
-  "pillBottle" : 
+  "pillBottle" : //TODO
   new Boon( "pillBottle", 
-            "Pill Bottle: <br><br>If you roll doubles, double the value", 
+            "Pill Bottle: <br><br>If you roll doubles when rolling exactly 2 dice, double the value of each", 
             {rollMultiplier: 2}, 
             "src/media/Boons/boon_pillBottle.png"),
 
@@ -133,19 +133,19 @@ const boonArray = {
             {pokeball: true}, 
             "src/media/Boons/boon_pokeball.png"),
 
-  "portalGun" : 
+  "portalGun" : //TODO
   new Boon( "portalGun", 
             "Portal Gun: <br><br>Your dice roll for (13 minus the value of the roll)", 
             {inverse: 13}, 
             "src/media/Boons/boon_portalGun.png"),
 
-  "reflexHammer" : 
+  "reflexHammer" : //TODO
   new Boon( "reflexHammer", 
-            "Reflex Hammer: <br><br>If you roll 3 1s in a single roll (using exactly 3 dice), fully heal the henchman", 
+            "Reflex Hammer: <br><br>If you roll 3 1s in a single roll when rolling exactly 3 dice, fully heal the henchman", 
             {reflexHammer: true}, 
             "src/media/Boons/boon_reflexHammer.png"),
 
-  "rxPad" : 
+  "rxPad" : //TODO
   new Boon( "rxPad", 
             "RX Pad: <br><br>If you miss the threshold by over 10, reroll the dice you just rolled", 
             {lowRoll: 10}, 
@@ -157,9 +157,9 @@ const boonArray = {
             {extraDice: 1}, 
             "src/media/Boons/boon_scalpel.png"),
 
-  "scrubs" : 
+  "scrubs" : //TODO
   new Boon( "scrubs", 
-            "Scrubs: <br><br>+1 to henchman healing factor", 
+            "Scrubs: <br><br>+3 to henchman healing factor", 
             {healingFactor: 1}, 
             "src/media/Boons/boon_scrubs.png"),
 
@@ -181,7 +181,7 @@ const boonArray = {
             {syringe: true}, 
             "src/media/Boons/boon_syringe.png"),
 
-  "tetrisPiece" : 
+  "tetrisPiece" : //TODO
   new Boon( "tetrisPiece", 
             "Tetris Piece: <br><br>Henchman is considered healed if it's within 5% of its max health", 
             {henchIsHealed: 0.05}, 
@@ -205,7 +205,7 @@ const boonArray = {
             {bonusDieFaces: 2}, 
             "src/media/Boons/boon_triforce.png"),
 
-  "cuppaJoe" : 
+  "cuppaJoe" : //TODO
   new Boon( "cuppaJoe", 
             "Cuppa Joe: <br><br>Restores 50 stamina, increases price of duplicate purchases", 
             {coffeeStaminaRestore: 50}, 

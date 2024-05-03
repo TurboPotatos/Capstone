@@ -18,7 +18,7 @@ export class Henchmen {
   constructor(name, wave) { // Multipliers to be modified later
 
     this.name = name;
-    this.health = Math.floor(Math.random() * 9) + 1;
+    this.health = Math.floor(Math.random() * 9) + 50;
     this.threshold = 7 + wave;
     this.staminaPenalty = 10 + wave;
     this.healingFactor = 15;

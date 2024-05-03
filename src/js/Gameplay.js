@@ -20,6 +20,14 @@ const player = new Player(JSON.parse(localStorage.getItem('player')));
 let wave = 0;
 let henchman = new Henchmen(document.querySelector('#henchName').innerHTML, wave);
 
+//#region [mushroom]
+if (player.boonArray['mushroom']) {
+  henchman.health += player.boonArray['mushroom'].effects.bonusHealth;
+}
+//#endregion
+
+
+
 // console.log(player.boonArray);
 
 // let tempDice = new Dice("d4");
@@ -87,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
   threshold.innerHTML = "Threshold: " + henchman.threshold;
   staminaPenalty.innerHTML = "Stamina Penalty: " + henchman.staminaPenalty;
   healingFactor.innerHTML = "Healing Factor: " + henchman.healingFactor;
-//   currencyGiven.innerHTML = "Currency Given: " + henchman.currencyGiven;
+  //currencyGiven.innerHTML = "Currency Given: " + henchman.currencyGiven;
 
   btnRoll.addEventListener("click", (e) => {
     rollDice();
@@ -130,14 +138,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-  function rollResult(total, selectedDie) {
+  function rollResult(total, selectedDice) {
 
     if (henchman.threshold <= total) {
       henchman.health += henchman.healingFactor;
 
-      gameLog.innerHTML += "Healing for " + henchman.healingFactor;
+      gameLog.innerHTML += "Healing for: " + henchman.healingFactor;
 
-//#region [BeamSword]
+//#region [beamSword]
       if (player.boonArray['beamSword'] && 
       (henchman.threshold * player.boonArray['beamSword'].effects.thresholdFactor) <= total) {
         
@@ -151,10 +159,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 //#endregion
 
-      selectedDie.forEach(function(btn) {
-        // btn.style.color = "green";
-        // btn.style.textShadow = "2px 2px 0px black";
-        btn.classList.add("success");
+      selectedDice.forEach(function(dieBtn) {
+        // dieBtn.style.color = "green";
+        // dieBtn.style.textShadow = "2px 2px 0px black";
+        dieBtn.classList.add("success");
       });
 
       health.innerHTML = henchman.health + "/" + henchman.maxHealth;
@@ -164,16 +172,33 @@ document.addEventListener('DOMContentLoaded', function() {
         healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`;
       }
     } else {
-      selectedDie.forEach(function(btn) {
-        // btn.style.color = "red";
-        // btn.style.textShadow = "2px 2px 0px black";
-        btn.classList.add("failure");
+      selectedDice.forEach(function(dieBtn) {
+        // dieBtn.style.color = "red";
+        // dieBtn.style.textShadow = "2px 2px 0px black";
+        dieBtn.classList.add("failure");
       });
     }
 
     if (henchman.henchmenFull()) {
 
+//#region [gloves]
+if (player.boonArray['gloves'] && henchman.maxHealth < henchman.health) {
+  let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (henchman.health - henchman.maxHealth);
+  restoreStamina = Math.round(restoreStamina);
+  player.stamina += restoreStamina;
+
+  gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
+}
+//#endregion
+
       player.score += henchman.scoreGiven;
+
+//#region [elderScroll]
+      if (player.boonArray['elderScroll']) {
+        player.currency += player.boonArray['elderScroll'].effects.goldBonus;
+      }
+//#endregion
+
       player.currency += henchman.currencyGiven;
       wave++;
       player.stamina += 30;
@@ -191,54 +216,83 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function rollDice() {
-    var selectedDie = document.querySelectorAll('.die-btn.selected');
-    if (selectedDie.length === 0) {
+    var selectedDice = document.querySelectorAll('.die-btn.selected');
+
+    if (selectedDice.length === 0) {
       alert("Please select at least one die to roll.");
       return;
     }
 
+//#region [pickaxe]
+    if (player.boonArray['diamondPickaxe'] && selectedDice.length != 1) {
+      alert("Please select ONLY one die to roll (Diamond Pickaxe)");
+      return;
+    }
+//#endregion
+
     var totalResult = 0;
     var results = [];
-    selectedDie.forEach(function(btn) {
+    selectedDice.forEach(function(dieBtn) {
 
-      // console.log("player: ");
-      // console.log(player.diceArray[parseInt(btn.id.substring(4))]);
-      // console.log("player: ");
-      //console.log(player.diceArray[parseInt(btn.id.substring(4))]);
-
-      var dice = player.diceArray[parseInt(btn.id.substring(4))];
+      var dice = player.diceArray[parseInt(dieBtn.id.substring(4))];
 
       var result = dice.roll();
+
+//#region [labCoat]
+      if (player.boonArray['labCoat'] && selectedDice.length === 1) {
+        let advantageRoll = dice.roll();
+
+        if (result < advantageRoll) {
+          result = advantageRoll;
+          results.push("With help from Lab Coat:");
+        }
+      }
+//#endregion
       
 //#region [companionCube]
       if (player.boonArray['companionCube'] && dice.typeOf === "d4") {
         result *= player.boonArray['companionCube'].effects.d4Multiplier;
-        results.push("With help from Companion Cube");
+        results.push("With help from Companion Cube:");
+      }
+//#endregion
+
+//#region [goggles]
+      if (player.boonArray['goggles'] && dice.typeOf === "d10") {
+        result += player.boonArray['goggles'].effects.d10Bonus;
+        results.push("With help from Goggles:");
+      }
+//#endregion
+
+//#region [pickaxe]
+      if (player.boonArray['diamondPickaxe'] && selectedDice.length === 1) {
+        result += player.boonArray['diamondPickaxe'].effects.rollBonus;
+        results.push("With help from Diamond Pickaxe:");
       }
 //#endregion
 
       totalResult += result;
-      results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
-      btn.innerHTML = result;
+      results.push("You rolled " + result + " on a d" + dice.sides.length);
+      dieBtn.innerHTML = result;
     });
 
-
-    // if (rollBonus) {
-    //   rollBonus = false;
-    //   totalResult += player.estusFlask;
-    //   results.push("+3 from Estus Flask");
-    //   console.log("rollBonus: " + rollBonus);
-    // }
+//#region [estusFlask]
+    if (player.boonArray['estusFlask'] && player.boonArray['estusFlask'].effects.bonusActive == true) {
+      player.boonArray['estusFlask'].effects.bonusActive = false;
+      totalResult += player.boonArray['estusFlask'].effects.rollBonus;
+      results.push("+" + player.boonArray['estusFlask'].effects.rollBonus + " from Estus Flask");
+      // console.log("rollBonus: " + rollBonus);
+    }
+//#endregion
 
     gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult + "<br><br>";
     
     // Disable selected die buttons after rolling
-    selectedDie.forEach(function(btn) {
-      btn.classList.remove('selected');
-      btn.disabled = true;
+    selectedDice.forEach(function(dieBtn) {
+      dieBtn.classList.remove('selected');
+      dieBtn.disabled = true;
     });
     
-    rollResult(totalResult, selectedDie);
+    rollResult(totalResult, selectedDice);
   }
 
   function resetButtons() {
@@ -251,13 +305,24 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (!henchman.henchmenFull()) {
-      player.stamina -= henchman.staminaPenalty;
+
+      let staminaLost = henchman.staminaPenalty;
+
+//#region [crowbar]
+      if (player.boonArray['crowbar'] && player.boonArray['crowbar'].effects.staminaLost < staminaLost) {
+        staminaLost = player.boonArray['crowbar'].effects.staminaLost;
+      }
+//#endregion
+
+      player.stamina -= staminaLost;
       stamina.innerHTML = "Stamina: " + player.stamina;
     }
-    // if (player.estusFlask) {
-    //   rollBonus = true;
-    //   console.log("rollBonus: " + rollBonus);
-    // }
+//#region [estusFlask]
+    if (player.boonArray['estusFlask']) {
+      player.boonArray['estusFlask'].effects.bonusActive = true;
+      // console.log("rollBonus: " + rollBonus);
+    }
+//#endregion
   }
 
   // function allDisabled() {
