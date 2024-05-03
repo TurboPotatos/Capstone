@@ -145,7 +145,7 @@ diceBuys.forEach(function(diceBuy) {
 
     let typeOf = diceBuy.getAttribute('data-info');
 
-    diceBuy.max = maxes[typeOf + "s"];
+    diceBuy.max = maxes[typeOf];
 
     switch (typeOf) {
       case "d4":

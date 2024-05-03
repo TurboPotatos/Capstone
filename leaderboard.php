@@ -1,3 +1,9 @@
+<?php
+if (!session_id()) {
+  session_start();
+}
+
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,14 +75,24 @@ DATAROW;
     </div>
 
     <div id="history" class="tabcontent">
-      <h3>History Content</h3>
-      <div class="temp">
+      <h3>History Content</h3> <?php
+      if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+      }
+        if (!isset($username) || $username == "guest") {
+          ?> 
+      <h2>
+        Unfortunately, you are not signed in or are signed in as a guest. History is not available unless you are signed in with an account.
+      </h2><?php
+        } else {
+      ?> 
+      <!-- <div class="temp">
         <h3>Temporary Sign-In for Player History</h3>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <input type="text" name="username" placeholder="Username">
           <input type="submit" name="submit" value="See History">
         </form>
-      </div>
+      </div> -->
 
       <table class="history">
         <tr>
@@ -87,8 +103,6 @@ DATAROW;
       <?php 
         // Get user info from temp table 
         include "sanitize.php";
-        
-        $username = sanitizeString(INPUT_POST, "username");
         // TODO: Get user info from cookies
 
         if ($username) {
@@ -126,7 +140,9 @@ DATAROW;
         }
 
       ?> 
-      </table>
+      </table><?php 
+      } 
+      ?> 
     </div>
   </div>
 

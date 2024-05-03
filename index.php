@@ -1,3 +1,35 @@
+<?php
+if (!session_id()) {
+  session_start();
+}
+
+require 'sanitize.php';
+require 'dbQueries.php';
+
+function redirect($url) {
+  header('Location: '.$url);
+  die();
+}
+
+$logout = sanitizeString(INPUT_GET, 'logout');
+if (isset($logout)&& $logout == 1) {
+  // User wants to log out, destroy the $_SESSION['username']
+  unset($_SESSION['username']);
+}
+
+$guest = sanitizeString(INPUT_GET, 'guest');
+if (isset($guest)&& $guest == 1) {
+  // User wants to log out, destroy the $_SESSION['username']
+  $_SESSION['username'] = "guest";
+}
+
+if (isset($_SESSION['username'])){
+  // User is already signed in, redirect to startScreen
+  redirect('startScreen.html');
+}
+
+
+?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +58,6 @@
         <!-- <img src="src/media/potionDice_transparent.png" alt="placeholder"> -->
       </div>
       <div id="signIn"><?php 
-        require 'sanitize.php';
-        require 'dbQueries.php';
-
-        function redirect($url) {
-          header('Location: '.$url);
-          die();
-        }
 
         $pdo = dbConnect();
 
@@ -49,7 +74,8 @@
             // player exists, test password
 
             if ($player['password'] == $password) {
-              // Successful login, redirect user
+              // Successful login, save username and redirect
+              $_SESSION['username'] = $username;
               redirect("startScreen.html");
             } else {
               // Password incorrect, output error message
@@ -89,6 +115,7 @@
 
               if(insertQuery($pdo, "INSERT INTO players (username, password) VALUES (?, ?)", [$username, $password])) {
                 // if they get here, then insert succeeded, redirect
+                $_SESSION['username'] = $username;
                 redirect("startScreen.html");
               } else {
                 // insert failed, output error message
@@ -138,7 +165,7 @@
         
         <br><br><br>
         Or
-        <a href="startScreen.html">Play as Guest</a>
+        <a href="index.php?guest=1">Play as Guest</a>
         <?php 
         }
       ?> 
