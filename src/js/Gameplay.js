@@ -7,11 +7,20 @@ import { Dice } from "./Dice.js";
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
-let rollBonus = false;
+// if (player.boonArray['companionCube']) {
+//   console.log("has cube: ", player.boonArray['companionCube']);
+//   // console.log(player.boonArray['companionCube']);
+// }
+
+// if (player.boonArray['crowbar']) {
+//   console.log("has crowbar");
+// }
+
+// let rollBonus = false;
 let wave = 0;
 let henchman = new Henchmen(document.querySelector('#henchName').innerHTML, wave);
 
-console.log(player.boonArray);
+// console.log(player.boonArray);
 
 // let tempDice = new Dice("d4");
 // player.addDice(tempDice);
@@ -126,6 +135,22 @@ document.addEventListener('DOMContentLoaded', function() {
     if (henchman.threshold <= total) {
       henchman.health += henchman.healingFactor;
 
+      gameLog.innerHTML += "Healing for " + henchman.healingFactor;
+
+//#region [BeamSword]
+      if (player.boonArray['beamSword'] && 
+      (henchman.threshold * player.boonArray['beamSword'].effects.thresholdFactor) <= total) {
+        
+        if (Math.random() < player.boonArray['beamSword'].effects.healChance) {
+          henchman.health += player.boonArray['beamSword'].effects.healAmount;
+
+          gameLog.innerHTML += " And another" + player.boonArray['beamSword'].effects.healAmount + " from Beam Sword<br><br>";
+        } else {
+          gameLog.innerHTML += "<br><br>";
+        }
+      }
+//#endregion
+
       selectedDie.forEach(function(btn) {
         // btn.style.color = "green";
         // btn.style.textShadow = "2px 2px 0px black";
@@ -136,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if ((henchman.health / henchman.maxHealth) >= 1) {
         healthBar.style.width = '100%';
       } else {
-        healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`; 
+        healthBar.style.width = `${Math.ceil((henchman.health / henchman.maxHealth) * 100)}%`;
       }
     } else {
       selectedDie.forEach(function(btn) {
@@ -176,19 +201,27 @@ document.addEventListener('DOMContentLoaded', function() {
     var results = [];
     selectedDie.forEach(function(btn) {
 
-      console.log("player: ");
-      console.log(player.diceArray[parseInt(btn.id.substring(4))]);
-      console.log("player: ");
+      // console.log("player: ");
+      // console.log(player.diceArray[parseInt(btn.id.substring(4))]);
+      // console.log("player: ");
       //console.log(player.diceArray[parseInt(btn.id.substring(4))]);
 
-        var dice = player.diceArray[parseInt(btn.id.substring(4))];
+      var dice = player.diceArray[parseInt(btn.id.substring(4))];
 
+      var result = dice.roll();
+      
+//#region [companionCube]
+      if (player.boonArray['companionCube'] && dice.typeOf === "d4") {
+        result *= player.boonArray['companionCube'].effects.d4Multiplier;
+        results.push("With help from Companion Cube");
+      }
+//#endregion
 
-        var result = dice.roll();
-        totalResult += result;
-        results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
-        btn.innerHTML = result;
+      totalResult += result;
+      results.push("You rolled a " + result + " on a " + dice.sides.length + "-sided die.");
+      btn.innerHTML = result;
     });
+
 
     // if (rollBonus) {
     //   rollBonus = false;

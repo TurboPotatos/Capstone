@@ -31,20 +31,20 @@ export class Player {
       this.stamina = player.stamina;
       this.score = player.score;
 
-      console.log("player constructed");
-      console.log(player.diceArray.length);
+      // console.log("player constructed");
+      // console.log(player.diceArray.length);
       
       // Array of dice
       for (let i = 0; i < player.diceArray.length; i++) {
         // Make new dice from the info in the stored generic objects
         let newDice = new Dice(player.diceArray[i].typeOf);
 
-        console.log(player.diceArray[i].typeOf);
+        // console.log(player.diceArray[i].typeOf);
 
         for (let j = 0; j < player.diceArray[i].sides.length; j++) {
           let storedDiceSide = player.diceArray[i].sides[j];
 
-          console.log(storedDiceSide.value);
+          // console.log(storedDiceSide.value);
 
           let newDiceSide = new DiceSide(storedDiceSide.value, -1, storedDiceSide.cost);
 
@@ -86,7 +86,7 @@ export class Player {
       // }
 
       // Active boons
-      this.estusFlask = player.estusFlask;
+      // this.estusFlask = player.estusFlask;
     }
   }
 

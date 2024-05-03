@@ -34,7 +34,7 @@ const boonArray = {
   "beamSword" : 
   new Boon( "beamSword", 
             "Beam Sword: <br><br>50% chance to heal for +5 when you exceed the threshold by a factor of 2", 
-            {healChance: 0.5, ThresholdFactor: 2}, 
+            {healChance: 0.5, thresholdFactor: 2, healAmount: 5}, 
             "src/media/Boons/boon_beamSword.png"),
 
   "chaosEmerald" : 

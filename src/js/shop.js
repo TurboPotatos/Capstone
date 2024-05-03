@@ -14,8 +14,15 @@ document.querySelector("#currentCurrency").innerHTML = player.currency;
 // player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
-for (let i = 0; i < player.boonArray.length; i++) {
-  bannedArray.push(player.boonArray[i]);
+// for (let i = 0; i < player.boonArray.length; i++) {
+//   bannedArray.push(player.boonArray[i]);
+// }
+
+for (let key in player.boonArray) {
+  if (player.boonArray.hasOwnProperty(key)) {
+    let newBoon = boonArray[player.boonArray[key].name];
+    bannedArray.push(newBoon);
+  }
 }
 
 shopContent.forEach(shopItem => {
