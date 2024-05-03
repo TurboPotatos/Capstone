@@ -17,7 +17,7 @@ export class Player {
   diceSideArray = [];
 
   // Arrays of Collectibles
-  boonArray = [];
+  boonArray = {};
   items = [];
 
   // Active boons
@@ -64,11 +64,17 @@ export class Player {
 
       // Arrays of Collectibles
       // this.boonArray = player.boonArray;
-      for (let i = 0; i < player.boonArray.length; i++) {
-        // Make new boon from the generic object's stored property
-        let newBoon = boonArray[player.boonArray[i].name];
+      // for (let i = 0; i < player.boonArray.length; i++) {
+      //   // Make new boon from the generic object's stored property
+      //   let newBoon = boonArray[player.boonArray[i].name];
 
-        this.addBoon(newBoon);
+      //   this.addBoon(newBoon);
+      // }
+      for (let key in player.boonArray) {
+        if (player.boonArray.hasOwnProperty(key)) {
+          let newBoon = boonArray[player.boonArray[key].name];
+          this.addBoon(newBoon);
+        }
       }
 
       // this.items = player.items;
@@ -108,7 +114,8 @@ export class Player {
 
   addBoon(boon) {
     // (consumable.typeOf == "Virtue") ? this.virtueArray.push(consumable) : this.viceArray.push(consumable);
-    this.boonArray.push(boon);
+    // this.boonArray.push(boon);
+    this.boonArray[boon.name] = boon;
   }
 
   damageStamina(damage) {

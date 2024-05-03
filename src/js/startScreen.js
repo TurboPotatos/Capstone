@@ -101,7 +101,6 @@ gameSettingsForm.addEventListener("submit", function(event) {
 
   localStorage.setItem('game', JSON.stringify(game));
 
-
   
   
   // - Redirect user if they have more than one or zero dice

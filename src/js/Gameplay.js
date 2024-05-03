@@ -11,6 +11,8 @@ let rollBonus = false;
 let wave = 0;
 let henchman = new Henchmen(document.querySelector('#henchName').innerHTML, wave);
 
+console.log(player.boonArray);
+
 // let tempDice = new Dice("d4");
 // player.addDice(tempDice);
 // tempDice = new Dice("d6");
@@ -238,38 +240,46 @@ document.addEventListener('DOMContentLoaded', function() {
   // }
 
   function populateBoons() {
-    for (var i = 0; i < player.boonArray.length; i++) {
+    // for (var i = 0; i < player.boonArray.length; i++) {
+      for (let key in player.boonArray) {
+        if (player.boonArray.hasOwnProperty(key)) {
 
-      let newImgTag = document.createElement('img');
-      newImgTag.src = `../../${player.boonArray[i].filePath}`;
-      newImgTag.classList.add("boon");
+        
 
-      let newSpanTag = document.createElement('span');
-      newSpanTag.innerHTML = player.boonArray[i].description;
-      newSpanTag.classList.add("tooltip");
+        let newImgTag = document.createElement('img');
+        // newImgTag.src = `../../${player.boonArray[i].filePath}`;
+        newImgTag.src = `../../${player.boonArray[key].filePath}`;
+        newImgTag.classList.add("boon");
 
-      collectibleEffects.appendChild(newImgTag);
-      newImgTag.insertAdjacentElement('afterend', newSpanTag);
-      // newImgTag.appendChild(newSpanTag);
-      // console.log(newImgTag);
+        let newSpanTag = document.createElement('span');
+        // newSpanTag.innerHTML = player.boonArray[i].description;
+        newSpanTag.innerHTML = player.boonArray[key].description;
+        newSpanTag.classList.add("tooltip");
 
-      newImgTag.addEventListener("click", function() {
-        let tooltip = newSpanTag;
-        let alreadyDisplayed = (tooltip.style.display == "block");
-    
-        let allTooltips = document.querySelectorAll('.tooltip');
-        allTooltips.forEach(tip => {
-          tip.style.display = "none";
+        collectibleEffects.appendChild(newImgTag);
+        newImgTag.insertAdjacentElement('afterend', newSpanTag);
+        // newImgTag.appendChild(newSpanTag);
+        // console.log(newImgTag);
+
+        newImgTag.addEventListener("click", function() {
+          let tooltip = newSpanTag;
+          let alreadyDisplayed = (tooltip.style.display == "block");
+      
+          let allTooltips = document.querySelectorAll('.tooltip');
+          allTooltips.forEach(tip => {
+            tip.style.display = "none";
+          });
+      
+          if (alreadyDisplayed) {
+            tooltip.style.display = 'none';
+          } else {
+            tooltip.style.display = 'block';
+          }
+          console.log("yup");
         });
-    
-        if (alreadyDisplayed) {
-          tooltip.style.display = 'none';
-        } else {
-          tooltip.style.display = 'block';
-        }
-        console.log("yup");
-      });
+      }
     }
+    // }
     // console.log(player.boonArray.length);
   }
 });
