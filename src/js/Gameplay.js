@@ -55,7 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const diceArea = document.querySelector("#diceArea");
   const specialDiceArea = document.querySelector('#specialDice');
-//endregion
+
+  // const testDirectoryBtn = document.querySelector('#testDirectory');
+  const directoryCont = document.querySelector('#directoryContainer');
+
+  const regainStaminaBtn = document.querySelector('#regainStamina');
+  const visitShopBtn = document.querySelector('#visitShop');
+  const visitWorkshopBtn = document.querySelector('#visitWorkshop');
+  //endregion
 
   stamina.innerHTML = "Stamina: " + player.stamina;
   score.innerHTML = "Score: " + player.score;
@@ -65,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //#region [Wave of Henchmen]
   let waveHenchmen = [];
-  for (let i = 0; i < 10; i++){
+  for (let i = 0; i < 1; i++){
     let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
     let newHenchie = new Henchmen(randHenchName, player.wave);
 //#region [mushroom]
@@ -76,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
     waveHenchmen.push(newHenchie);
   }
   // Alter last to be stronger 'boss' henchmen with more health
-  waveHenchmen[waveHenchmen.length - 1].maxHealth *= 2.5;
+  waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
 
   // console.log(waveHenchmen);
   function updateHenchmen() {
@@ -146,6 +153,28 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('player', JSON.stringify(player));
     window.location.href = 'workshop.html';
   });
+
+  // testDirectoryBtn.addEventListener("click", (e) => {
+  //   if (directoryCont.style.display != 'block') {
+  //     directoryCont.style.display = 'block';
+  //   } else {
+  //     directoryCont.style.display = 'none';
+  //   }
+  // });
+  visitShopBtn.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'shop.html';
+  });
+  visitWorkshopBtn.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'workshop.html';
+  });
+  regainStaminaBtn.addEventListener("click", (e) => {
+    player.stamina = 100;
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'game.html';
+  });
+
 
 //   btnAddStamina.addEventListener("click", (e) => {
 //     boonArray["Stamina Potion"].applyEffects(player);
@@ -246,8 +275,7 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
         // Wave is finished, update wave and go to shop
         // TODO allow selection of shop, workshop, or stamina regain
         player.wave += 1;
-        localStorage.setItem('player', JSON.stringify(player));
-        window.location.href = 'shop.html';
+        directoryCont.style.display = 'block';
       }
     }
   }
