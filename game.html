@@ -164,7 +164,7 @@
               <td><br></td>
             </tr>
             <tr>
-              <td id="henchName">Next Up</td>
+              <td id="henchName2">Next Up</td>
             </tr>
           </tbody>
         </table>
@@ -181,19 +181,19 @@
               <td><br></td>
             </tr>
             <tr>
-              <td>Threshold: </td>
+              <td id="threshold2">Threshold: </td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td>Healing Factor: </td>
+              <td id="healingFactor2">Healing Factor: </td>
             </tr>
             <tr>
               <td><br></td>
             </tr>
             <tr>
-              <td>Stamina Penalty: </td>
+              <td id="staminaPenalty2">Stamina Penalty: </td>
             </tr>
             <tr>
               <td><br></td>
@@ -337,36 +337,7 @@
     </script>
 
   <script>
-    const henchman = document.querySelector('#henchman');
-    const henchName = document.querySelector('#henchName');
 
-    const henchArray = {
-      "Beetle" : "url(src/media/Henchmen/henchman_beetle.png), url(src/media/texture2.png)",
-      "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin.png), url(src/media/texture2.png)",
-      "Ghost" : "url(src/media/Henchmen/henchman_ghost.png), url(src/media/texture2.png)",
-      "Goomba" : "url(src/media/Henchmen/henchman_goomba.png), url(src/media/texture2.png)",
-      "Grunt" : "url(src/media/Henchmen/henchman_grunt.png), url(src/media/texture2.png)",
-      "Henchman 24" : "url(src/media/Henchmen/henchman_henchman24.png), url(src/media/texture2.png)",
-      "Iago" : "url(src/media/Henchmen/henchman_iago.png), url(src/media/texture2.png)",
-      "Pain and Panic" : "url(src/media/Henchmen/henchman_imps.png), url(src/media/texture2.png)",
-      "Koopa Troopa" : "url(src/media/Henchmen/henchman_koopaTroopa.png), url(src/media/texture2.png)",
-      "Minion" : "url(src/media/Henchmen/henchman_megaMinion.png), url(src/media/texture2.png)",
-      "Minion" : "url(src/media/Henchmen/henchman_minion.png), url(src/media/texture2.png)",
-      "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader.png), url(src/media/texture2.png)",
-      "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper.png), url(src/media/texture2.png)",
-      "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
-    };
-
-    let henchNameArray = [];
-    for (key in henchArray) {
-      henchNameArray.push(key);
-    }
-
-    const randomIndex = Math.floor(Math.random() * henchNameArray.length);
-
-    henchman.style.backgroundImage = henchArray[henchNameArray[randomIndex]];
-
-    henchName.innerHTML = henchNameArray[randomIndex];
 
   </script>
 

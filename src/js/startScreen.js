@@ -83,7 +83,7 @@ gameSettingsForm.addEventListener("submit", function(event) {
       player.addBoon(boonArray['goggles']); 
     break;
     case "trauma":
-      player.addBoon(boonArray['pickaxe']); 
+      player.addBoon(boonArray['diamondPickaxe']); 
     break;
     case "radiology":
       player.addBoon(boonArray['portalGun']); 

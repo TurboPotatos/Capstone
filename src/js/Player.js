@@ -9,7 +9,7 @@ export class Player {
   currency = 0;
   stamina = 50;
   score = 0;
-  
+  wave = 0;
   // Array of dice
   diceArray = [];
 
@@ -87,6 +87,8 @@ export class Player {
 
       // Active boons
       // this.estusFlask = player.estusFlask;
+
+      this.wave = player.wave;
     }
   }
 

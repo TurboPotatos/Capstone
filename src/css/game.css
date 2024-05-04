@@ -99,6 +99,10 @@ tr:nth-child(odd) {
   font-size: clamp(1rem, 3.3vw, 3.35rem);
 }
 
+#henchName2 {
+  font-size: clamp(1rem, 3.3vw, 3.35rem);
+}
+
 #henchmenHealth {
   border: .3rem solid black;
   position: absolute;
