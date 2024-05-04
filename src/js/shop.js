@@ -57,6 +57,7 @@ shopContent.forEach(shopItem => {
     <span class="tooltip">
     ${boon.description}
       <span class='cost'>
+        <br><br>
         Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}
       </span>
     </span>

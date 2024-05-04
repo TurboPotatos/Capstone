@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const regainStaminaBtn = document.querySelector('#regainStamina');
   const visitShopBtn = document.querySelector('#visitShop');
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
-  //endregion
+//endregion
 
   stamina.innerHTML = "Stamina: " + player.stamina;
   score.innerHTML = "Score: " + player.score;
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     waveHenchmen.push(newHenchie);
   }
   // Alter last to be stronger 'boss' henchmen with more health
-  waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
+  // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
 
   // console.log(waveHenchmen);
   function updateHenchmen() {
@@ -427,26 +427,25 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
   // }
 
   function populateBoons() {
-    // for (var i = 0; i < player.boonArray.length; i++) {
-      for (let key in player.boonArray) {
-        if (player.boonArray.hasOwnProperty(key)) {
-
-        
+    for (let key in player.boonArray) {
+      if (player.boonArray.hasOwnProperty(key)) {
 
         let newImgTag = document.createElement('img');
-        // newImgTag.src = `../../${player.boonArray[i].filePath}`;
-        newImgTag.src = `../../${player.boonArray[key].filePath}`;
+
+        if (key === 'cuppaJoe') {
+          newImgTag.src = `../../${player.boonArray[key][0].filePath}`;
+        } else {
+          newImgTag.src = `../../${player.boonArray[key].filePath}`;
+        }
+
         newImgTag.classList.add("boon");
 
         let newSpanTag = document.createElement('span');
-        // newSpanTag.innerHTML = player.boonArray[i].description;
         newSpanTag.innerHTML = player.boonArray[key].description;
         newSpanTag.classList.add("tooltip");
 
         collectibleEffects.appendChild(newImgTag);
         newImgTag.insertAdjacentElement('afterend', newSpanTag);
-        // newImgTag.appendChild(newSpanTag);
-        // console.log(newImgTag);
 
         newImgTag.addEventListener("click", function() {
           let tooltip = newSpanTag;

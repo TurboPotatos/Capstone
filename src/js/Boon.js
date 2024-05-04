@@ -85,6 +85,12 @@ const boonArray = {
             {d10Bonus: 2}, 
             "src/media/Boons/boon_goggles.png"),
 
+  "goldRing" : //TODO
+  new Boon( "goldRing", 
+            "Gold Ring: <br><br>Gotta go fast", 
+            {goldRing: 0}, 
+            "src/media/Boons/boon_goldRing.png"),
+
   "labCoat" : // IMPLEMENTED
   new Boon( "labCoat", 
             "Lab Coat: <br><br>When you only roll one die, you roll it twice and take the higher number", 
@@ -208,8 +214,8 @@ const boonArray = {
   "cuppaJoe" : //TODO
   new Boon( "cuppaJoe", 
             "Cuppa Joe: <br><br>Restores 50 stamina, increases price of duplicate purchases", 
-            {coffeeStaminaRestore: 50}, 
-            ""),
+            {coffeeStaminaRestore: 50, numOwned: 0}, 
+            "src/media/Boons/boon_cuppaJoe.png"),
 
 
   // Chance to heal for +5 when [condition]
