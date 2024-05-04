@@ -17,6 +17,8 @@ const shopContent = document.querySelectorAll('.slot');
 
 document.querySelector("#currentCurrency").innerHTML = player.currency;
 
+let playerDiceFacesDisplay = 'none';
+
 // player.currency = 15;
 
 // let tempDice = new Dice("d4");
@@ -93,7 +95,7 @@ document.querySelector("#buyItem").addEventListener("click", function() {
       newDiceSide.classList.add('diceSide');
       newDiceSide.classList.add('box');
       newDiceSide.draggable = true;
-      newDiceSide.style.display = document.querySelector('.playerDiceFaces .diceSide').style.display;
+      newDiceSide.style.display = playerDiceFacesDisplay;
 
       newDiceSide.setAttribute('data-info', player.diceSideArray.length - 1);
       
@@ -192,8 +194,10 @@ playerDiceSides.addEventListener("click", () => {
   playerDiceSides.querySelectorAll('.diceSide').forEach(diceSide => {
     if (diceSide.style.display != "block") {
       diceSide.style.display = "block";
+      playerDiceFacesDisplay = 'block';
     } else {
       diceSide.style.display = "none";
+      playerDiceFacesDisplay = 'none';
     }
   });
 });
