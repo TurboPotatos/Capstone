@@ -47,7 +47,7 @@ body {
 }
 
 .d4 {
-  background-image: url(../../src/media/d4.png);
+  background-image: url(../../src/media/dice/d4.png);
 }
 
 #d4left{
@@ -70,7 +70,7 @@ body {
 
 
 .d6 {
-  background-image: url(../../src/media/d6.png);
+  background-image: url(../../src/media/dice/d6.png);
   /* border: solid red; */
   /* position: relative; */
 }
@@ -157,7 +157,7 @@ body {
   transform: translateY(55px) translateX(-18px) rotateX(50deg) ;
 }
 .d8 {
-  background-image: url(../../src/media/d8.png);
+  background-image: url(../../src/media/dice/d8.png);
 }
 
 #d10center{
@@ -208,15 +208,161 @@ body {
 }
 
 .d10 {
-  background-image: url(../../src/media/d10.png);
+  background-image: url(../../src/media/dice/d10.png);
   padding-top: .6rem;
 }
+
+#d12top{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(16px) translateY(-36px);
+}
+
+#d12center{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(16px) translateY(28px);
+}
+
+#d12left{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(-12px) translateY(-53px) rotateX(30deg) rotateY(-45deg) rotateZ(10deg) skewY(40deg) skewX(-5deg);
+}
+
+#d12right{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(44px) translateY(-88px) rotateX(-30deg) rotateY(45deg) rotateZ(-10deg) skewY(-10deg) skewX(5deg);
+}
+
+#d12botLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(13px) translateY(-97px) rotateX(20deg) rotateY(35deg) rotateZ(-45deg) skewY(20deg) skewX(30deg);
+  font-size: 8px;
+}
+
+#d12botRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(18px) translateY(-135px) rotateX(10deg) rotateY(-30deg) rotateZ(45deg) skewY(-10deg) skewX(-30deg);
+  font-size: 8px;
+}
+
 .d12 {
-  background-image: url(../../src/media/d12.png);
+  background-image: url(../../src/media/dice/d12.png);
   padding-top: .7rem;
 }
+
+#d20center{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(17px) translateY(30px);
+}
+
+#d20top{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(17px) translateY(-30px) rotateX(30deg);
+}
+#d20topLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(-8px) translateY(-68px) rotateX(30deg) rotateY(55deg) rotateZ(10deg) skewY(10deg) skewX(-15deg);
+}
+#d20topRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(42px) translateY(-104px) rotateX(30deg) rotateY(-50deg) rotateZ(-15deg) skewY(-10deg) skewX(15deg);
+}
+
+#d20outerLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(-12px) translateY(-120px) rotateX(-20deg) rotateY(-65deg) rotateZ(-10deg) skewY(20deg) skewX(-10deg);
+}
+
+#d20outerRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(45px) translateY(-155px) rotateX(20deg) rotateY(-65deg) rotateZ(-20deg) skewY(10deg) skewX(-10deg);
+}
+
+#d20innerLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(0px) translateY(-175px) rotateX(-5deg) rotateY(-45deg) rotateZ(-11deg) skewY(20deg) skewX(5deg);
+}
+
+#d20innerRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(33px) translateY(-211px) rotateX(25deg) rotateY(-45deg) rotateZ(-10deg) skewY(15deg) skewX(-20deg);
+}
+
+#d20botLeft{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(19px) translateY(-232.5px) rotateX(-40deg) rotateY(-55deg) rotateZ(-25deg) skewY(-25deg) skewX(55deg);
+}
+
+#d20botRight{
+  position: relative;
+  float: left;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+  transform: translateX(17cd ../px) translateY(-267px) rotateX(25deg) rotateY(-62deg) rotateZ(65deg) skewY(-20deg) skewX(-25deg);
+}
+
 .d20 {
-  background-image: url(../../src/media/d20.png);
+  background-image: url(../../src/media/dice/d20.png);
   padding-top: .6rem;
 }
 
