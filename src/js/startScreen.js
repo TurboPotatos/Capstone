@@ -56,10 +56,27 @@ gameSettingsForm.addEventListener("submit", function(event) {
   let startBoon = formData.get('startBoon');
 
   // Create new objects
-  let game = new Game(difficulty);
+  // let game = new Game(difficulty);
   
   let player = new Player();
   player.currency = currency;
+  switch (difficulty) {
+    case "Easy":
+      player.difficulty = 1;
+      break;
+    case "Normal":
+      player.difficulty = 1.5;
+      break;
+    case "Hard":
+      player.difficulty = 3;
+      break;
+    case "Impossible":
+      player.difficulty = 6;
+      break;
+    default:
+      player.difficulty = 1;
+      break;
+  }
 
   // Total of all dice the player gets
   let totalDice = 0;
@@ -99,7 +116,7 @@ gameSettingsForm.addEventListener("submit", function(event) {
   // - Save all objects for transfer between pages
   localStorage.setItem('player', JSON.stringify(player));
 
-  localStorage.setItem('game', JSON.stringify(game));
+  // localStorage.setItem('game', JSON.stringify(game));
 
   
   

@@ -8,8 +8,10 @@ export class Player {
   // Player properties
   currency = 0;
   stamina = 50;
+  maxStamina = 150;
   score = 0;
   wave = 0;
+  difficulty = 0;
   // Array of dice
   diceArray = [];
 
@@ -17,6 +19,7 @@ export class Player {
   diceSideArray = [];
 
   // Arrays of Collectibles
+  boonArrayLength = 0;
   boonArray = {};
   items = {};
 
@@ -30,6 +33,7 @@ export class Player {
       this.currency = player.currency;
       this.stamina = player.stamina;
       this.score = player.score;
+      this.difficulty = player.difficulty;
 
       // console.log("player constructed");
       // console.log(player.diceArray.length);
@@ -72,8 +76,21 @@ export class Player {
       // }
       for (let key in player.boonArray) {
         if (player.boonArray.hasOwnProperty(key)) {
-          let newBoon = boonArray[player.boonArray[key].name];
-          this.addBoon(newBoon);
+          if (key != 'cuppaJoe') {
+            let newBoon = boonArray[player.boonArray[key].name];
+            this.addBoon(newBoon);
+          } else {
+            let newBoon = boonArray['cuppaJoe'];
+            for (let i = 0; i < player.boonArray['cuppaJoe'].length; i++) {
+              if (!this.boonArray[newBoon.name]) {
+                // First cuppaJoe
+                this.boonArray[newBoon.name] = [newBoon];
+              } else {
+                // Player already has a cuppaJoe
+                this.boonArray[newBoon.name].push(newBoon);
+              }
+            }
+          }
         }
       }
 
@@ -101,7 +118,6 @@ export class Player {
     }
   }
 
-
   addItem(item) {
     if (!this.items[item.name]) {
       this.items[item.name] = [];
@@ -126,7 +142,19 @@ export class Player {
   addBoon(boon) {
     // (consumable.typeOf == "Virtue") ? this.virtueArray.push(consumable) : this.viceArray.push(consumable);
     // this.boonArray.push(boon);
-    this.boonArray[boon.name] = boon;
+    if (boon.name != 'cuppaJoe') {
+      this.boonArray[boon.name] = boon;
+      this.boonArrayLength += 1;
+    } else {
+      // Boon is a cuppaJoe, add it to subarray so player can have multiple
+      if (!this.boonArray[boon.name]) {
+        // First cuppaJoe
+        this.boonArray[boon.name] = [boon];
+      } else {
+        // Player already has a cuppaJoe
+        this.boonArray[boon.name].push(boon);
+      }
+    }
   }
 
   damageStamina(damage) {
@@ -134,6 +162,18 @@ export class Player {
       // Too much damage, handle game ending
     } else {
       this.stamina -= damage;
+    }
+  }
+
+  changeStamina(delta) {
+    if (this.stamina + delta >= this.maxStamina) {
+      this.stamina = this.maxStamina;
+    } else if (this.stamina + delta <= 0) {
+      // Run ends, save player object and direct to gameOver screen
+      console.log("Player loses!");
+      this.stamina += delta;
+    } else {
+      this.stamina += delta;
     }
   }
 

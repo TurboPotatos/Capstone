@@ -12,15 +12,18 @@ let activeBoon = new Boon("", "", "", "");
 const shopContent = document.querySelectorAll('.slot');
 document.querySelector("#currentCurrency").innerHTML = player.currency;
 
+let coffeeMachine = document.querySelector(".coffeeMachine")
+let coffeeTooltip = coffeeMachine.querySelector(".tooltip");
+
 // player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
 // for (let i = 0; i < player.boonArray.length; i++) {
 //   bannedArray.push(player.boonArray[i]);
 // }
-
+bannedArray.push(boonArray['cuppaJoe']);
 for (let key in player.boonArray) {
-  if (player.boonArray.hasOwnProperty(key)) {
+  if (player.boonArray.hasOwnProperty(key) && key != 'cuppaJoe') {
     let newBoon = boonArray[player.boonArray[key].name];
     bannedArray.push(newBoon);
   }
@@ -53,9 +56,12 @@ shopContent.forEach(shopItem => {
   <img src="../../${boon.filePath}" class="boon">
     <span class="tooltip">
     ${boon.description}
+      <span class='cost'>
+        Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}
+      </span>
     </span>
-  `;
-
+    `;
+    
   shopItem.id = boon.name;
 
   shopItem.addEventListener("click", function() {
@@ -86,22 +92,43 @@ document.querySelector("#playerInfo").addEventListener("click", function() {
   console.log(player.currency);
 });
 
-// This currently works by replicating the boon used to populate the shotItem div. In order to correctly 
+// This currently works by replicating the boon used to populate the shopItem div. In order to correctly 
 // serve the player the correct item, the id is used to make a new one to give to the player. 
 // However, we'll need to refactor the contructor to allow for variable costed boons
 
 document.querySelector("#buyItem").addEventListener("click", function() {
   if (activeBoon.name != "") {
-    if (player.subtractCurrency(15)) {
-      document.querySelector("#currentCurrency").innerHTML = player.currency;
-      player.addBoon(activeBoon);
-      let selected = document.querySelector(`#${activeBoon.name}`);
-      if (selected) {
-        selected.style.opacity = 0;
-        selected.id = ``;
+    if (activeBoon.name != "cuppaJoe") {
+      // NOT buying coffee, use other cost calculation
+      if (player.subtractCurrency(Math.round(10*(.5 * player.boonArrayLength) * player.difficulty))) {
+        document.querySelector("#currentCurrency").innerHTML = player.currency;
+        player.addBoon(activeBoon);
+        let selected = document.querySelector(`#${activeBoon.name}`);
+        if (selected) {
+          selected.style.opacity = 0;
+          selected.id = ``;
+        } 
       }
-      activeBoon = new Boon("", "", "", "");
+    } else {
+      let coffeeCost = 0;
+      if (player.boonArray['cuppaJoe']){
+        coffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
+      } else {
+        coffeeCost = calculatePrice(player.wave, 0, player.difficulty, 10);
+      }
+      if (player.subtractCurrency(coffeeCost)) {
+        coffeeTooltip.style.display = 'none';
+        coffeeTooltip.querySelector('.cost').innerHTML = `Cost: ${coffeeCost}`;
+        document.querySelector("#currentCurrency").innerHTML = player.currency;
+        player.addBoon(activeBoon);
+      }
     }
+    activeBoon = new Boon("", "", "", "");
+
+    // Update tooltip costs
+    shopContent.forEach(shopItem => {
+      shopItem.querySelector('.cost').innerHTML = `Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}`;
+    });
   }
 });
 
@@ -111,15 +138,24 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
 });
 
 //#region [Coffee Machine]
-let coffeeMachine = document.querySelector(".coffeeMachine")
+
 
 coffeeMachine.addEventListener("click", function() {
   activeBoon = boonArray['cuppaJoe'];
-  
-  let tooltip = coffeeMachine.querySelector(".tooltip");
-  tooltip.innerHTML = `${activeBoon.name} <br><br> ${activeBoon.description}`;
 
-  let alreadyDisplayed = (tooltip.style.display == "block");
+  let coffeeCost = 0;
+  if (player.boonArray['cuppaJoe']){
+    coffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
+  } else {
+    coffeeCost = calculatePrice(player.wave, 0, player.difficulty, 10);
+  }
+
+  coffeeTooltip.innerHTML = `
+  ${activeBoon.name} <br><br> 
+  ${activeBoon.description}<br>
+  <span class='cost'>Cost: ${coffeeCost}</span>`;
+
+  let alreadyDisplayed = (coffeeTooltip.style.display == "block");
 
   let allTooltips = document.querySelectorAll('.tooltip');
   allTooltips.forEach(tip => {
@@ -127,9 +163,9 @@ coffeeMachine.addEventListener("click", function() {
   });
 
   if (alreadyDisplayed) {
-    tooltip.style.display = 'none';
+    coffeeTooltip.style.display = 'none';
   } else {
-    tooltip.style.display = 'block';
+    coffeeTooltip.style.display = 'block';
   }
    
 });
@@ -223,3 +259,19 @@ returnToGameBtn.addEventListener("click", (e) => {
   localStorage.setItem('player', JSON.stringify(player));
   window.location.href = 'game.html';
 });
+
+function calculatePrice(wave, count, difficulty, basePrice) {
+  // Increase in price per wave
+  const waveIncrease = (5 + (difficulty * 2)); // Adjust based on difficulty
+
+  // Increase in price per purchase
+  const purchaseIncrease = (count * 5); // Adjust based on count
+
+  // Calculate the total increase in price
+  const totalIncrease = (waveIncrease * wave) + purchaseIncrease;
+
+  // Apply the increase to the base price
+  const finalPrice = basePrice + totalIncrease;
+
+  return finalPrice;
+}

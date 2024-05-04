@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //#region [Wave of Henchmen]
   let waveHenchmen = [];
-  for (let i = 0; i < 2; i++){
+  for (let i = 0; i < 1; i++){
     let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
     let newHenchie = new Henchmen(randHenchName, player.wave);
 //#region [mushroom]
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     waveHenchmen.push(newHenchie);
   }
   // Alter last to be stronger 'boss' henchmen with more health
-  waveHenchmen[waveHenchmen.length - 1].maxHealth *= 1.5;
+  waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
 
   // console.log(waveHenchmen);
   function updateHenchmen() {
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'workshop.html';
   });
   regainStaminaBtn.addEventListener("click", (e) => {
-    player.stamina = 100;
+    player.changeStamina(100);
     localStorage.setItem('player', JSON.stringify(player));
     window.location.href = 'game.html';
   });
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', function() {
 if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
   let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
   restoreStamina = Math.round(restoreStamina);
-  player.stamina += restoreStamina;
+  player.changeStamina(restoreStamina);
 
   gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
 }
@@ -269,7 +269,7 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
 //#endregion
 
       player.currency += waveHenchmen[0].currencyGiven;
-      player.stamina += 30;
+      player.changeStamina(30);
       if (waveHenchmen.length > 1) {
         waveHenchmen.shift();
         gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
@@ -403,7 +403,7 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
       }
 //#endregion
 
-      player.stamina -= staminaLost;
+      player.changeStamina(-staminaLost);
       stamina.innerHTML = "Stamina: " + player.stamina;
     }
 //#region [estusFlask]
