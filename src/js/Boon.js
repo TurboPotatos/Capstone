@@ -157,10 +157,10 @@ const boonArray = {
             {extraDice: 1}, 
             "src/media/Boons/boon_scalpel.png"),
 
-  "scrubs" : //TODO
+  "scrubs" : // IMPLEMENTED
   new Boon( "scrubs", 
             "Scrubs: <br><br>+3 to henchman healing factor", 
-            {healingFactor: 1}, 
+            {healingFactor: 3}, 
             "src/media/Boons/boon_scrubs.png"),
 
   "star" : 
@@ -181,7 +181,7 @@ const boonArray = {
             {syringe: true}, 
             "src/media/Boons/boon_syringe.png"),
 
-  "tetrisPiece" : //TODO
+  "tetrisPiece" : // IMPLEMENTED
   new Boon( "tetrisPiece", 
             "Tetris Piece: <br><br>Henchman is considered healed if it's within 5% of its max health", 
             {henchIsHealed: 0.05}, 

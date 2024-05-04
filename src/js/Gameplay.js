@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //#region [Wave of Henchmen]
   let waveHenchmen = [];
-  for (let i = 0; i < 1; i++){
+  for (let i = 0; i < 2; i++){
     let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
     let newHenchie = new Henchmen(randHenchName, player.wave);
 //#region [mushroom]
@@ -80,10 +80,15 @@ document.addEventListener('DOMContentLoaded', function() {
       newHenchie.health += player.boonArray['mushroom'].effects.bonusHealth;
     }
 //#endregion
+//#region [scrubs]
+    if(player.boonArray['scrubs']) {
+      newHenchie.healingFactor += player.boonArray['scrubs'].effects.healingFactor;
+    }
+//#endregion
     waveHenchmen.push(newHenchie);
   }
   // Alter last to be stronger 'boss' henchmen with more health
-  waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
+  waveHenchmen[waveHenchmen.length - 1].maxHealth *= 1.5;
 
   // console.log(waveHenchmen);
   function updateHenchmen() {
@@ -241,7 +246,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    if (waveHenchmen[0].henchmenFull()) {
+    if (waveHenchmen[0].henchmenFull() || 
+    // Tetris Piece
+    (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
 //#region [gloves]
 if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
