@@ -24,9 +24,8 @@ const player = new Player(JSON.parse(localStorage.getItem('player')));
 
 
 document.addEventListener('DOMContentLoaded', function() {
-//   console.log("Has Estus Flask: " + player.estusFlask);
 
-//   const boonCollection = document.querySelector('#boonCollection');
+//region [Query Selectors]
   const collectibleEffects = document.querySelector('#collectibleEffects');
 
   const btnRoll = document.querySelector('#rollDiceBtn');
@@ -55,13 +54,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const currency = document.querySelector('#money');
 
   const diceArea = document.querySelector("#diceArea");
-  
-  populateBoons();
-  // console.log("boons");
+  const specialDiceArea = document.querySelector('#specialDice');
+//endregion
 
-  // create wave
+  stamina.innerHTML = "Stamina: " + player.stamina;
+  score.innerHTML = "Score: " + player.score;
+  currency.innerHTML = "Money: " + player.currency;
+
+  populateBoons();
+
+//#region [Wave of Henchmen]
   let waveHenchmen = [];
-  console.log(player.wave);
   for (let i = 0; i < 10; i++){
     let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
     let newHenchie = new Henchmen(randHenchName, player.wave);
@@ -98,16 +101,32 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   updateHenchmen();
+//#endregion
+
   // Add dice to the diceArea
   for (let i = 0; i < player.diceArray.length; i++) {
     diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
   }
+  // let testItem = new Dice('d8');
+  // testItem.name = testItem.typeOf;
+  // player.addItem(testItem);
 
-  stamina.innerHTML = "Stamina: " + player.stamina;
-  score.innerHTML = "Score: " + player.score;
-  currency.innerHTML = "Money: " + player.currency;
-
-
+  // console.log(player.items);
+  specialDiceArea.innerHTML = "";
+  // Add special dice to the specialDiceArea
+  for (let key in player.items) {
+    // console.log("test");
+    if (player.items.hasOwnProperty(key)) {
+      for (let i = 0; i < player.items[key].length; i++) {
+        let newItem = document.createElement('button');
+        newItem.id = "specialDice" + player.items[key][i].typeOf;
+        newItem.classList.add("die-btn", "temporary", player.items[key][i].typeOf);
+        newItem.setAttribute('data-info', i);
+        newItem.innerHTML = player.items[key][i].typeOf;
+        specialDiceArea.appendChild(newItem);
+      }
+    }
+  }
 
 
 
@@ -251,46 +270,52 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
     var totalResult = 0;
     var results = [];
     selectedDice.forEach(function(dieBtn) {
+      
+      var dice = "";
+      if (dieBtn.classList.contains('temporary')) {
+        dice = player.items[dieBtn.id.substring(11)][dieBtn.getAttribute('data-info')];
+      } else {
+        dice = player.diceArray[parseInt(dieBtn.id.substring(4))];
+      }
 
-    var dice = player.diceArray[parseInt(dieBtn.id.substring(4))];
 
-    var result = dice.roll();
+      var result = dice.roll();
 
 //#region [labCoat]
-    if (player.boonArray['labCoat'] && selectedDice.length === 1) {
-      let advantageRoll = dice.roll();
+      if (player.boonArray['labCoat'] && selectedDice.length === 1) {
+        let advantageRoll = dice.roll();
 
-      if (result < advantageRoll) {
-        result = advantageRoll;
-        results.push("With help from Lab Coat:");
+        if (result < advantageRoll) {
+          result = advantageRoll;
+          results.push("With help from Lab Coat:");
+        }
       }
-    }
 //#endregion
-      
+        
 //#region [companionCube]
-    if (player.boonArray['companionCube'] && dice.typeOf === "d4") {
-      result *= player.boonArray['companionCube'].effects.d4Multiplier;
-      results.push("With help from Companion Cube:");
-    }
+      if (player.boonArray['companionCube'] && dice.typeOf === "d4") {
+        result *= player.boonArray['companionCube'].effects.d4Multiplier;
+        results.push("With help from Companion Cube:");
+      }
 //#endregion
 
 //#region [goggles]
-    if (player.boonArray['goggles'] && dice.typeOf === "d10") {
-      result += player.boonArray['goggles'].effects.d10Bonus;
-      results.push("With help from Goggles:");
-    }
+      if (player.boonArray['goggles'] && dice.typeOf === "d10") {
+        result += player.boonArray['goggles'].effects.d10Bonus;
+        results.push("With help from Goggles:");
+      }
 //#endregion
 
 //#region [pickaxe]
-    if (player.boonArray['diamondPickaxe'] && selectedDice.length === 1) {
-      result += player.boonArray['diamondPickaxe'].effects.rollBonus;
-      results.push("With help from Diamond Pickaxe:");
-    }
+      if (player.boonArray['diamondPickaxe'] && selectedDice.length === 1) {
+        result += player.boonArray['diamondPickaxe'].effects.rollBonus;
+        results.push("With help from Diamond Pickaxe:");
+      }
 //#endregion
 
-    totalResult += result;
-    results.push("You rolled " + result + " on a d" + dice.sides.length);
-    dieBtn.innerHTML = result;
+      totalResult += result;
+      results.push("You rolled " + result + " on a d" + dice.sides.length);
+      dieBtn.innerHTML = result;
   });
 
 //#region [estusFlask]
@@ -316,6 +341,17 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
   function resetButtons() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i].classList.contains("temporary") && buttons[i].disabled == true) {
+        // remove all attributes to avoid conflicts
+        buttons[i].removeAttribute('data-info');
+        buttons[i].removeAttribute('id');
+        buttons[i].removeAttribute('class');
+        
+        // Use the item
+        player.useItem(buttons[i].id.substring(11));
+        buttons[i].remove();
+      }
+
       buttons[i].disabled = false;
       // buttons[i].style.color = "black";
       // buttons[i].style.textShadow = "none";

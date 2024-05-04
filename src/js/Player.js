@@ -18,7 +18,7 @@ export class Player {
 
   // Arrays of Collectibles
   boonArray = {};
-  items = [];
+  items = {};
 
   // Active boons
   estusFlask = false;
@@ -80,10 +80,19 @@ export class Player {
       // this.items = player.items;
       // for (let i = 0; i < player.items.length; i++) {
       //   // Make new boon from the generic object's stored property
-      //   let newBoon = boonArray[player.items[i].name];
-
-      //   this.addBoon(newBoon);
+      //   let newItem = new Dice(player.items[i].typeOf);
+      //   newItem.name = newItem.typeOf;
+      //   this.addItem(newItem);
       // }
+      for (let key in player.items) {
+        if (player.items.hasOwnProperty(key)) {
+          for (let i = 0; i < player.items[key].length; i++) {
+            let newItem = new Dice(player.items[key][i].typeOf);
+            newItem.name = newItem.typeOf;
+            this.addItem(newItem);
+          }
+        }
+      }
 
       // Active boons
       // this.estusFlask = player.estusFlask;
@@ -103,10 +112,10 @@ export class Player {
   useItem(itemName) {
     if (this.items[itemName] && this.items[itemName].length > 0) {
       const item = this.items[itemName].pop(); // Get and removes the item
-      item.applyEffects(this);
-      console.log(`${this.name} used ${item.name}.`);
+      // item.applyEffects(this);
+      // console.log(`${this.name} used ${item.name}.`);
     } else {
-      console.log(`No ${itemName} found in inventory.`);
+      // console.log(`No ${itemName} found in inventory.`);
     }
   }
 
