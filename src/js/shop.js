@@ -2,6 +2,7 @@ import { Player } from "./Player.js";
 import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
 import { boonNameArray } from "./Boon.js";
+import { Dice } from "./Dice.js";
 
 // let player = new Player();
 const player = new Player(JSON.parse(localStorage.getItem('player')));
@@ -109,6 +110,7 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
   document.querySelector("#currentCurrency").innerHTML = player.currency;
 });
 
+//#region [Coffee Machine]
 let coffeeMachine = document.querySelector(".coffeeMachine")
 
 coffeeMachine.addEventListener("click", function() {
@@ -131,19 +133,90 @@ coffeeMachine.addEventListener("click", function() {
   }
    
 });
+//#endregion
 
-const fadeBtn = document.querySelector('#fadeBtn');
+//#region [Dice Machine]
+const diceMachine = document.querySelector('#diceMachine');
 const backBtn = document.querySelector('#backBtn');
 const colorBox = document.querySelector('#diceBox');
+const buyDice = document.querySelector('#buyDice');
 colorBox.style.display = "none";
-fadeBtn.addEventListener("click", (e) => {
+
+diceMachine.addEventListener("click", (e) => {
   colorBox.style.display = "block";
-  // console.log("test");
 });
 
 backBtn.addEventListener("click", (e) => {
   colorBox.style.display = "none";
 });
+
+buyDice.addEventListener("click", (e) => {
+  // check if the player has enough funds
+  // TODO change hard coded cost 
+  if (player.subtractCurrency(15)) {
+    let diceOptions = document.querySelector("#diceOptions");
+    
+    // Generate three dice. One they will choose to keep permanently, the others are consumable
+    function generateRandomDice() {
+      let value = Math.ceil(Math.random() * 6);
+
+      switch (value) {
+        case 1:
+          return new Dice("d4");
+        case 2:
+          return new Dice("d6");
+        case 3:
+          return new Dice("d8");
+        case 4:
+          return new Dice("d10");
+        case 5:
+          return new Dice("d12");
+        case 6:
+          return new Dice("d20");
+        default: 
+          return new Dice("d6"); 
+      }
+    }
+
+    let diceChoice = {
+      choiceOne: generateRandomDice(),
+      choiceTwo: generateRandomDice(),
+      choiceThree: generateRandomDice()
+    };
+
+
+    // Add a div option for each of them
+    diceOptions.innerHTML = "<h2>Choose a dice to keep permanently. Others will be kept as consumables.</h2><br>";
+    diceOptions.innerHTML += `<button id="choiceOne"class="die-option ${diceChoice['choiceOne'].typeOf}">${diceChoice['choiceOne'].typeOf}</button>`;
+    diceOptions.innerHTML += `<button id="choiceTwo"class="die-option ${diceChoice['choiceTwo'].typeOf}">${diceChoice['choiceTwo'].typeOf}</button>`;
+    diceOptions.innerHTML += `<button id="choiceThree"class="die-option ${diceChoice['choiceThree'].typeOf}">${diceChoice['choiceThree'].typeOf}</button>`;
+
+    // Add event listeners to each of the dice
+    document.querySelectorAll(".die-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        // Add this specific dice to the player
+        player.addDice(diceChoice[option.id]);
+        delete diceChoice[option.id];
+        
+        // Add other dice as consumables
+        for (let key in diceChoice) {
+          if (diceChoice.hasOwnProperty(key)) {
+            // console.log(diceChoice[key]);
+            diceChoice[key].name = diceChoice[key].typeOf;
+            player.addItem(diceChoice[key]);
+          }
+        }
+
+        diceOptions.innerHTML = "";
+        backBtn.click();
+      });
+    })
+
+  } else {
+    diceOptions.innerHTML = "<h2 style=\"color: red\">You don't have enough funds!</h2>";
+  }
+});
+//#endregion
 
 const returnToGameBtn = document.querySelector('#returnToGameBtn');
 returnToGameBtn.addEventListener("click", (e) => {
