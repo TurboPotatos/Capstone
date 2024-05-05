@@ -81,6 +81,8 @@ export const henchArray = {
   "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader_hurt.png), url(src/media/texture2.png)",
   "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper.png), url(src/media/texture2.png)",
   "Turret" : "url(src/media/Henchmen/henchman_turret_hurt.png), url(src/media/texture2.png)",
+  // "Actually Satan" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
+  // "Actually Satan2" : "url(src/media/Henchmen/boss_actuallySatan.png), url(src/media/texture2.png)",
 };
 
 export let henchNameArray = [];
