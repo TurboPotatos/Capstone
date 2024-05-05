@@ -405,6 +405,9 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
 
       player.changeStamina(-staminaLost);
       stamina.innerHTML = "Stamina: " + player.stamina;
+        // if(player.stamina <= 0){
+        //   window.location.replace("gameOver.html");
+        // }
     }
 //#region [estusFlask]
     if (player.boonArray['estusFlask']) {

@@ -47,3 +47,9 @@ tr:nth-child(even) {
 tr:nth-child(odd) {
   background-color: #fff; /* Grey background for odd rows */
 }
+
+#playAgain{
+  position: absolute;
+  top: 60%;
+  left: 48%;
+}
