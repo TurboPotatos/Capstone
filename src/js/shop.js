@@ -144,9 +144,11 @@ const lcd = document.querySelector("#lcdScreen");
 document.querySelectorAll('.numPadInput').forEach((numBtn) => {
   // Add an event listener depending on the data-info
   let data = numBtn.getAttribute("data-info");
+
   numBtn.addEventListener("click", () => {
     // If it's not backspace or go, try to add the data-info to the LCD screen
     if (data != "backspace" && data != 'GO') {
+      lcd.style.fontSize = "1.8vw";
       // Check if the LCD has 2 digits
       if (lcd.textContent.length > 3) {
         lcd.textContent = "";
@@ -198,7 +200,8 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
               selected.id = ``;
             } 
           } else {
-            lcd.textContent = "U Broke"
+            lcd.textContent = "U Broke";
+            lcd.style.fontSize = "1.1vw";
           }
         }
       }
