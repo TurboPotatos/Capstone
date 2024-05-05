@@ -15,6 +15,17 @@ document.querySelector("#currentCurrency").innerHTML = player.currency;
 let coffeeMachine = document.querySelector(".coffeeMachine")
 let coffeeTooltip = coffeeMachine.querySelector(".tooltip");
 
+let initCoffeeCost = 0;
+if (player.boonArray['cuppaJoe']){
+  initCoffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
+} else {
+  initCoffeeCost = calculatePrice(player.wave, 0, player.difficulty, 10);
+}
+
+coffeeTooltip.innerHTML = `
+${activeBoon.name} <br><br> 
+${activeBoon.description}<br>
+<span class='cost'>Cost: ${initCoffeeCost}</span>`;
 // player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
@@ -97,20 +108,11 @@ document.querySelector("#playerInfo").addEventListener("click", function() {
 // serve the player the correct item, the id is used to make a new one to give to the player. 
 // However, we'll need to refactor the contructor to allow for variable costed boons
 
-document.querySelector("#buyItem").addEventListener("click", function() {
-  if (activeBoon.name != "") {
-    if (activeBoon.name != "cuppaJoe") {
-      // NOT buying coffee, use other cost calculation
-      if (player.subtractCurrency(Math.round(10*(.5 * player.boonArrayLength) * player.difficulty))) {
-        document.querySelector("#currentCurrency").innerHTML = player.currency;
-        player.addBoon(activeBoon);
-        let selected = document.querySelector(`#${activeBoon.name}`);
-        if (selected) {
-          selected.style.opacity = 0;
-          selected.id = ``;
-        } 
-      }
-    } else {
+const buyItem = document.querySelector("#buyItem");
+
+buyItem.addEventListener("click", function() {
+  activeBoon = boonArray['cuppaJoe'];
+  if (activeBoon.name == "cuppaJoe") {
       let coffeeCost = 0;
       if (player.boonArray['cuppaJoe']){
         coffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
@@ -123,7 +125,6 @@ document.querySelector("#buyItem").addEventListener("click", function() {
         document.querySelector("#currentCurrency").innerHTML = player.currency;
         player.addBoon(activeBoon);
       }
-    }
     activeBoon = new Boon("", "", "", "");
 
     // Update tooltip costs
@@ -138,9 +139,74 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
   document.querySelector("#currentCurrency").innerHTML = player.currency;
 });
 
+const lcd = document.querySelector("#lcdScreen");
+
+document.querySelectorAll('.numPadInput').forEach((numBtn) => {
+  // Add an event listener depending on the data-info
+  let data = numBtn.getAttribute("data-info");
+  numBtn.addEventListener("click", () => {
+    // If it's not backspace or go, try to add the data-info to the LCD screen
+    if (data != "backspace" && data != 'GO') {
+      // Check if the LCD has 2 digits
+      if (lcd.textContent.length > 3) {
+        lcd.textContent = "";
+      } 
+      if (lcd.textContent.length == 0 && ['1', '2', '3'].includes(data)){
+        lcd.textContent += data;
+      } else if (lcd.textContent.length == 1 && ['A', 'B', 'C', 'D'].includes(data)) {
+        lcd.textContent += data;
+      }
+    } else if (data == "backspace") {
+      if (lcd.textContent.length > 3) {
+        lcd.textContent = "";
+      } else {
+        lcd.textContent = lcd.textContent.slice(0, -1);
+      }
+    } else {
+      // User submit their input
+      if (lcd.textContent.length != 2) {
+        lcd.textContent = "";
+      } else {
+        // get the appropriate shop item
+        let class1 = lcd.textContent.substring(0, 1);
+        let class2 = lcd.textContent.substring(1);
+        switch (class2) {
+          case "A":
+            class2 = "row1";
+          break;
+          case "B":
+            class2 = "row2";
+          break;
+          case "C":
+            class2 = "row3";
+          break;
+          case "D":
+            class2 = "row4";
+          break;
+        }
+        lcd.textContent = "";
+        let selectedItem = document.querySelector(`.${class2} .col${class1}`);
+
+        if (selectedItem.id != "") {
+          activeBoon = boonArray[selectedItem.id];
+          if (player.subtractCurrency(Math.round(10*(.5 * player.boonArrayLength) * player.difficulty))) {
+            document.querySelector("#currentCurrency").innerHTML = player.currency;
+            player.addBoon(activeBoon);
+            let selected = document.querySelector(`#${activeBoon.name}`);
+            if (selected) {
+              selected.style.opacity = 0;
+              selected.id = ``;
+            } 
+          } else {
+            lcd.textContent = "U Broke"
+          }
+        }
+      }
+    }
+  });
+});
+
 //#region [Coffee Machine]
-
-
 coffeeMachine.addEventListener("click", function() {
   activeBoon = boonArray['cuppaJoe'];
 

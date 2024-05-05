@@ -19,13 +19,10 @@
   </div>
   <div class="wrapper">
     <div id="devTools">
-      <div id="buyItem">Buy Item</div>
       <div id="playerInfo">See Player Info</div>
       <div id="addMoneys">Aquire Currency</div>
       <div>Current Currency: <span id="currentCurrency">0</span></div>
     </div>
-
-    <button type="button" id="fadeBtn">Test Fade</button>
 
     <div id="coffeeWrapper">
       <div class="vendingMachine coffeeFront">
@@ -36,11 +33,11 @@
         
         <div class="vendingMachine coffeeKeypadFrame">
           <div class="vendingMachine lcdScreen">
-
+            
           </div>
 
           <div class="vendingMachine numPad">
-
+            <button id="buyItem">Buy Some Coffee!</button>
           </div>
         </div>
 
@@ -98,12 +95,26 @@
         </div>
 
         <div class="vendingMachine keypadFrame">
-          <div class="vendingMachine lcdScreen">
-
-          </div>
+          <div class="vendingMachine lcdScreen" id="lcdScreen"></div>
 
           <div class="vendingMachine numPad">
-
+            <table>
+              <tr class="row1">
+                <td class="col1 numPadInput" data-info="1">1</td>
+                <td class="col2 numPadInput" data-info="2">2</td>
+                <td class="col3 numPadInput" data-info="3">3</td>
+              </tr>
+              <tr class="row2">
+                <td class="col1 numPadInput" data-info="A">A</td>
+                <td class="col2 numPadInput" data-info="B">B</td>
+                <td class="col3 numPadInput" data-info="C">C</td>
+              </tr>
+              <tr class="row3">
+                <td class="col1 numPadInput" data-info="backspace">&lt;X</td>
+                <td class="col2 numPadInput" data-info="D">D</td>
+                <td class="col3 numPadInput" data-info="GO">GO</td>
+              </tr>
+            </table>
           </div>
         </div>
 
