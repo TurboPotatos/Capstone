@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henchmen Hospital</title>
+  <link rel="stylesheet" href="../../src/css/styles.css">
+  <link rel="stylesheet" href="../../src/css/startScreen.css">
+
+  <style>
+    .dieSelectWrapper {
+      /* border: solid red; */
+      width: 10rem;
+      /* margin: 1rem; */
+    }
+    .number-input-container {
+      /* border: solid red; */
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .number-input {
+      width: 2rem;
+      padding: 3px;
+      padding-left: 1rem;
+      font-size: 2rem;
+    }
+    .arrow-container {
+      display: flex;
+      flex-direction: column;
+      margin-left: 5px;
+    }
+    .arrow {
+      font-size: 2rem;
+      color: antiquewhite;
+      text-shadow: 0 0 5px black, 0 0 5px black;
+      cursor: pointer;
+    }
+
+    #diceSelect label {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .unselectable {
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none; /* Standard syntax */
+    }
+
+    #diceBox {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block; /* should be 'none' */
+      z-index: 1001;
+    }
+    #diceBox:before {
+      content: '';
+      position: absolute;
+      float: left;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8); /* Adjust darkness here */
+      z-index: -1;
+      /* display: block; */
+    }
+    #diceContainer {
+      border: 1.5rem solid black;
+      border-radius: 5%;
+      position: absolute;
+      float: left;
+      padding: 3rem;
+      height: 70%;
+      width: 60%;
+      top: 10%;
+      left: 20%;
+      /* background-image: url(../media/texture2.png); */
+      background-color: cadetblue;
+      background-size: cover;
+      box-sizing: border-box;
+      /* display: block; */
+      z-index: 1003;
+      /* overflow: scroll; */
+    }
+    #backBtn {
+      position: absolute;
+      height: 10%;
+      width: 20%;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    #buyDice {
+      font-size: 3rem;
+    }
+
+    #diceSelect {
+      position: absolute;
+      float: left;
+      padding: 2rem;
+      left: 15rem;
+      top: 0;
+    }
+
+    .dieSelectWrapperWrapper {
+      /* border: solid green; */
+      display: flex;
+      flex-wrap: wrap;
+      /* width: 45rem; */
+      width: 90%;
+      justify-content: space-between;
+
+    }
+
+    .costSpan,
+    .maxSpan {
+      font-size: 1.2rem;
+    }
+
+    #startBtn {
+      position: relative;
+      top: 3rem;
+      left: 13rem;
+      padding: .5rem;
+      font-size: 3rem;
+    }
+
+  </style>
+</head>
+<body>
+  
+  <div class="wrapper unselectable">
+    <div id="titleScreen">
+      
+      <h2>Henchmen Hospital</h2>
+      <h6 id="splashText"></h6>
+    </div>
+    <div id="menuDiv">
+
+      <h2>Game Settings</h2>
+
+
+
+      <br>
+      <button type="button" id="buyDice">Choose dice!</button>
+      
+    </div>
+
+    <div id="nav">
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="leaderboard.html?tab=history">History</a>
+      <a href="credits.html">Credits</a>
+      <br><br>
+      <a href="index.php?logout=1">Log Out</a>
+    </div>
+
+    <div id="diceBox">
+      <div id="diceContainer">
+
+        <form action="game.html" id="gameSettings">
+          <div id="menuDivDiv">
+            <label for="difficulty">Difficulty</label>
+            <br>
+            <input type="radio" name="difficulty" value="easy" required="yes" checked>
+            <label>Easy</label><br>
+            <input type="radio" name="difficulty" value="medium" required="yes">
+            <label>Medium</label><br>
+            <input type="radio" name="difficulty" value="hard" required="yes">
+            <label>Hard</label><br>
+            <input type="radio" name="difficulty" value="impossible" required="yes">
+            <label>Impossible</label>
+          </div>
+          <br><br>
+  
+          <div>
+            <label for="startBoon">Starting Specialization</label>
+            <br>
+            <input type="radio" name="startBoon" value="psychology" required="yes" checked>
+            <label>Psychology</label><br>
+            <input type="radio" name="startBoon" value="trauma" required="yes">
+            <label>Trauma</label><br>
+            <input type="radio" name="startBoon" value="radiology" required="yes">
+            <label>Radiology</label><br>
+            <input type="radio" name="startBoon" value="cosmetic" required="yes">
+            <label>Cosmetic</label><br>
+            <input type="radio" name="startBoon" value="surgeon" required="yes">
+            <label>Surgeon</label><br>
+            <input type="radio" name="startBoon" value="optometry" required="yes">
+            <label>Optometry</label>
+          </div>
+          <br><br>
+  
+          <div id="diceSelect">
+            <h1>Dice Select</h1>
+            <h2>Currency Left: <span id="currencyRemaining">50</span></h2>
+            <br>
+  
+            <div class="dieSelectWrapperWrapper">
+              <div class="dieSelectWrapper">
+                <label for="d4">d4:</label>
+                Cost: <span id="d4Cost" class="costSpan">10</span> Max: <span id="d4Max" class="maxSpan">4</span>
+                
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d4" class="number-input" value="0" name="d4Count" data-info="d4">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="dieSelectWrapper">
+                <label for="d6">d6:</label>
+                Cost: <span id="d6Cost" class="costSpan">10</span> Max: <span id="d6Max" class="maxSpan">4</span>
+      
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d6" class="number-input" value="0" name="d6Count" data-info="d6">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="dieSelectWrapper">
+                <label for="d8">d8:</label>
+                Cost: <span id="d8Cost" class="costSpan">10</span> Max: <span id="d8Max" class="maxSpan">4</span>
+      
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d8" class="number-input" value="0" name="d8Count" data-info="d8">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="dieSelectWrapper">
+                <label for="d10">d10:</label>
+                Cost: <span id="d10Cost" class="costSpan">10</span> Max: <span id="d10Max" class="maxSpan">4</span>
+      
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d10" class="number-input" value="0" name="d10Count" data-info="d10">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="dieSelectWrapper">
+                <label for="d12">d12:</label>
+                Cost: <span id="d12Cost" class="costSpan">10</span> Max: <span id="d12Max" class="maxSpan">4</span>
+      
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d12" class="number-input" value="0" name="d12Count" data-info="d12">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+    
+              <div class="dieSelectWrapper">
+                <label for="d20">d20:</label>
+                Cost: <span id="d20Cost" class="costSpan">10</span> Max: <span id="d20Max" class="maxSpan">4</span>
+      
+                <div class="number-input-container">
+                  <div>
+                    <input type="text" id="d20" class="number-input" value="0" name="d20Count" data-info="d20">
+                  </div>
+                  <div class="arrow-container">
+                    <span class="arrow up">▲</span>
+                    <span class="arrow down">▼</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+          </div>
+  
+          <input type="submit" name="start" value="Start Game" id="startBtn">
+  
+        </form>
+
+        <button id="backBtn">Back</button>
+    </div>
+
+  </div>
+
+
+  <script>
+    document.querySelectorAll('.arrow').forEach(function(arrow) {
+      arrow.addEventListener('click', function() {
+        var input = this.parentNode.parentNode.querySelector('.number-input');
+        var value = parseFloat(input.value);
+        if (this.classList.contains('up')) {
+          value += 1;
+        } else {
+          value -= 1;
+        }
+        input.value = value;
+      });
+    });
+
+    const diceBox = document.querySelector('#diceBox');
+    const backBtn = document.querySelector("#backBtn");
+    const buyDice = document.querySelector("#buyDice");
+
+    backBtn.addEventListener("click", (e) => {
+      diceBox.style.display = "none";
+    });
+
+    buyDice.addEventListener("click", (e) => {
+      diceBox.style.display = "block";
+    });
+
+  </script>
+
+  <script>
+    const splashText = document.querySelector('#splashText');
+    quipArray = [
+    "Henchin' Ain't easy",
+    "BANANA!!!",
+    "You know what separates henchmen from minions? Presentation!",
+    "Being a henchman is like being a sidekick with a cooler uniform and a higher risk of getting punched",
+    "In the world of henching, loyalty is everything",
+    "Being a henchman means always having a plan for when the hero shows up and not following through with that plan",
+    "You know you're a henchman when your job description includes 'menacing glare' and 'sinister laugh'",
+    "In the henchman handbook, chapter one is 'How to stand menacingly by the entrance'; there is no chapter two",
+    "Henchmen always seem to have impeccable dental hygiene. Evil dental plans must be amazing!",
+    "Being a henchman means mastering the art of evil laughter while maintaining a serious demeanor",
+    "Henchman rule number one: You take a punch, you go down. This job isn't worth your life",
+    "Never get attached to the evil lair, it's only a matter of time before somebody hits the self-destruct button",
+    "Taking on an unwinnable fight is what separates the henchmen from the henchboys",
+    "It beats working at McDonald's",
+    "You hear something? Eh, must've been the wind...",
+    "Survival is a roll of the dice",
+    "Never tell me the odds",
+    "No copyright infringement intended",
+    "News team... ASSEMBLE!!!",
+    "Rated #1 in Popular Henchmanics magazine!",
+    "Not all heroes wear capes, but all members of our staff do",
+    "They say laughter is the best medicine, but I say it's health potions",
+    "Remember: just because you're a bad guy, it doesn't mean you're a bad guy",
+
+    "May the fates conspire against thee, casting shadows upon thy path",
+    "May thine endeavors be met with frustration and thine efforts yield naught but disappointment",
+    "May thy days be filled with hardship, and thy nights be plagued with restlessness",
+    "May thy days be consumed by doubt, and thy nights be haunted by the specter of failure",
+    "May thy name be forgotten, lost to the sands of time, an echo of a whisper in the winds of history",
+    "May thy legacy be tarnished, and thine efforts be naught but dust in the annals of memory",
+    "May misfortune be thy constant companion, and despair thy closest confidant",
+    "May thy journey be long and arduous, fraught with trials and tribulations at every turn",
+    "May thy fortune wane and thy luck turn sour, as the cosmos bears witness to thy downfall",
+    "With every step, may obstacles rise to meet thee, a labyrinth of painful trials with no end in sight",
+    "May fortune forsake thee, hindering thy progress and sowing seeds of frustration",
+    "In thy darkest hour, may despair be thine only companion, leaving thee drowning in a sea of misery",
+    "May thine every scheme be as fleeting as the wind, dissipating into nothingness before bearing fruit",
+    "At every turn, may thy plans unravel, leaving thee grasping at the threads of hope",
+    "May thy name be soon forgotten to time, lost amidst the hordes of other pitiful souls",
+    "In the annals of history, may thy legacy fade into obscurity, a footnote in the pages of insignificance",
+    "May thy journey be fraught with misfortune, and the stars bear witness to thy plight",
+    "May thy bitter fate be sealed in the tapestry of destiny"
+    ];
+
+    randomQuipIndex = Math.floor(Math.random() * quipArray.length);
+
+    splashText.innerHTML = quipArray[randomQuipIndex];
+    // splashText.innerHTML = quipArray.length;
+
+  </script>
+  <script type="module" src="../../src/js/startScreen.js"></script>
+</body>
+</html>

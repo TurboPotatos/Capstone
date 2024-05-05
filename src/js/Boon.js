@@ -211,7 +211,7 @@ const boonArray = {
             {bonusDieFaces: 2}, 
             "src/media/Boons/boon_triforce.png"),
 
-  "cuppaJoe" : //TODO
+  "cuppaJoe" : // IMPLEMENTED
   new Boon( "cuppaJoe", 
             "Cuppa Joe: <br><br>Restores 50 stamina, increases price of duplicate purchases", 
             {coffeeStaminaRestore: 50, numOwned: 0}, 
