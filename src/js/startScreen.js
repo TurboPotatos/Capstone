@@ -11,7 +11,7 @@ let currencyRemaining = document.querySelector('#currencyRemaining');
 let gameSettingsForm = document.querySelector("#gameSettings");
 
 // Select dice buy inputs
-let diceBuys = document.querySelectorAll('input[type="number"]');
+let diceBuys = document.querySelectorAll('input[type="text"]');
 
 let costSpans = document.querySelectorAll('.costSpan');
 let maxSpans = document.querySelectorAll('.maxSpan');
@@ -149,80 +149,6 @@ function updateCurrency() {
   }
 }
 
-
-// Add event listeners to watch for changes to their values
-diceBuys.forEach(function(diceBuy) {
-  diceBuy.value = 0;
-
-  diceBuy.addEventListener('input', function() {
-
-    let newValue = diceBuy.value;
-
-    let oldValue = 0;
-
-    let typeOf = diceBuy.getAttribute('data-info');
-
-    diceBuy.max = maxes[typeOf];
-
-    switch (typeOf) {
-      case "d4":
-        oldValue = diceCount['d4'];
-        diceCount['d4'] = newValue;
-      break;
-      case "d6":
-        oldValue = diceCount['d6'];
-        diceCount['d6'] = newValue;
-      break;
-      case "d8":
-        oldValue = diceCount['d8'];
-        diceCount['d8'] = newValue;
-      break;
-      case "d10":
-        oldValue = diceCount['d10'];
-        diceCount['d10'] = newValue;
-      break;
-      case "d12":
-        oldValue = diceCount['d12'];
-        diceCount['d12'] = newValue;
-      break;
-      case "d20":
-        oldValue = diceCount['d20'];
-        diceCount['d20'] = newValue;
-      break;
-    } 
-
-    if (!updateCurrency()) {
-      // if the change will bring totals negative, change it back
-      switch (typeOf) {
-        case "d4":
-          diceCount['d4'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-        case "d6":
-          diceCount['d6'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-        case "d8":
-          diceCount['d8'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-        case "d10":
-          diceCount['d10'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-        case "d12":
-          diceCount['d12'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-        case "d20":
-          diceCount['d20'] = oldValue;
-          diceBuy.value = oldValue;
-        break;
-      } 
-    }
-  });
-});
-
 costSpans.forEach(function(costSpan) {
   switch (costSpan.id) {
     case "d4Cost":
@@ -267,4 +193,44 @@ maxSpans.forEach(function(maxSpan) {
       maxSpan.innerHTML = maxes["d20"];
     break;
   }
+});
+
+document.querySelectorAll('.arrow').forEach(function(arrow) {
+  arrow.addEventListener('click', function() {
+    var input = this.parentNode.parentNode.querySelector('.number-input');
+    let typeOf = input.getAttribute('data-info');
+    var value = parseFloat(input.value);
+    if (this.classList.contains('up')) {
+      if (value + 1 <= maxes[typeOf]) {
+        value += 1;
+        diceCount[typeOf] = value;
+        if (!updateCurrency()) { // revert changes
+          value -= 1
+          diceCount[typeOf] = value;
+        }
+      }
+    } else {
+      if (value - 1 >= 0) {
+        value -= 1;
+        diceCount[typeOf] = value;
+        if (!updateCurrency()) { // revert changes
+          value += 1
+          diceCount[typeOf] = value;
+        }
+      }
+    }
+    input.value = value;
+  });
+});
+
+const diceBox = document.querySelector('#diceBox');
+const backBtn = document.querySelector("#backBtn");
+const buyDice = document.querySelector("#buyDice");
+
+backBtn.addEventListener("click", (e) => {
+  diceBox.style.display = "none";
+});
+
+buyDice.addEventListener("click", (e) => {
+  diceBox.style.display = "block";
 });
