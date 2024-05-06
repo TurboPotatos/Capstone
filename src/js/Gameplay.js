@@ -207,10 +207,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function rollResult(total, selectedDice) {
 
-    if (waveHenchmen[0].threshold <= total) {
-      waveHenchmen[0].health += waveHenchmen[0].healingFactor;
+    if (waveHenchmen[0].threshold - waveHenchmen[0].range <= total && total <= waveHenchmen[0].threshold + waveHenchmen[0].range) { // Player must roll between the range
 
-      gameLog.innerHTML += "Healing for: " + waveHenchmen[0].healingFactor + "<br><br>";
+      let healAmount = waveHenchmen[0].healingFactor;
+
+      if (waveHenchmen[0].threshold == total) {
+        healAmount *= 2;
+        gameLog.innerHTML += "Critically healing for: " + healAmount + "<br><br>";
+      } else {
+        gameLog.innerHTML += "Healing for: " + healAmount + "<br><br>";
+      }
+
+      waveHenchmen[0].health += healAmount;
 
 //#region [beamSword]
       if (player.boonArray['beamSword'] && 
@@ -239,6 +247,8 @@ document.addEventListener('DOMContentLoaded', function() {
         healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
       }
     } else {
+      waveHenchmen[0].health -= waveHenchmen[0].damage;
+      updateHenchmen();
       selectedDice.forEach(function(dieBtn) {
         // dieBtn.style.color = "red";
         // dieBtn.style.textShadow = "2px 2px 0px black";

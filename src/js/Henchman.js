@@ -4,6 +4,7 @@ export class Henchmen {
 
   name = "";
   threshold = 0;
+  range = 0;
   staminaPenalty = 0;
   healingFactor = 0;
 
@@ -19,12 +20,13 @@ export class Henchmen {
 
     this.name = name;
     this.health = Math.floor(Math.random() * 9) + 50;
-    this.threshold = 7 + wave;
+    this.threshold = 10 + wave;
+    this.range = 3;
     this.staminaPenalty = 10 + wave;
     this.healingFactor = 15;
 
     this.maxHealth = 100 + wave;
-    this.damage = 10 + wave;
+    this.damage = 5;
     this.currencyGiven = 8 +(3 * wave);
     this.scoreGiven = 100 + (20 * wave);
   }
