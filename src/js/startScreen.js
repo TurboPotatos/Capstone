@@ -106,10 +106,10 @@ gameSettingsForm.addEventListener("submit", function(event) {
       player.addBoon(boonArray['portalGun']); 
     break;
     case "surgeon":
-      player.addBoon(boonArray['mushroom']); 
+      player.addBoon(boonArray['scalpel']); 
     break;
     case "cosmetic":
-      player.addBoon(boonArray['medicalBag']); 
+      player.addBoon(boonArray['syringe']); 
     break;
   }
 

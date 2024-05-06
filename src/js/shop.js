@@ -148,14 +148,14 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
   numBtn.addEventListener("click", () => {
     // If it's not backspace or go, try to add the data-info to the LCD screen
     if (data != "backspace" && data != 'GO') {
-      lcd.style.fontSize = "1.8vw";
+      lcd.style.fontSize = "2vw";
       // Check if the LCD has 2 digits
       if (lcd.textContent.length > 3) {
         lcd.textContent = "";
       } 
-      if (lcd.textContent.length == 0 && ['1', '2', '3'].includes(data)){
+      if (lcd.textContent.length == 0 && ['A', 'B', 'C'].includes(data)){
         lcd.textContent += data;
-      } else if (lcd.textContent.length == 1 && ['A', 'B', 'C', 'D'].includes(data)) {
+      } else if (lcd.textContent.length == 1 && ['1', '2', '3', '4'].includes(data)) {
         lcd.textContent += data;
       }
     } else if (data == "backspace") {
@@ -171,23 +171,34 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
       } else {
         // get the appropriate shop item
         let class1 = lcd.textContent.substring(0, 1);
-        let class2 = lcd.textContent.substring(1);
-        switch (class2) {
+        switch (class1) {
           case "A":
-            class2 = "row1";
+            class1 = ".col1";
           break;
           case "B":
-            class2 = "row2";
+            class1 = ".col2";
           break;
           case "C":
-            class2 = "row3";
+            class1 = ".col3";
           break;
-          case "D":
-            class2 = "row4";
+        }
+        let class2 = lcd.textContent.substring(1);
+        switch (class2) {
+          case "1":
+            class2 = ".row1";
+          break;
+          case "2":
+            class2 = ".row2";
+          break;
+          case "3":
+            class2 = ".row3";
+          break;
+          case "4":
+            class2 = ".row4";
           break;
         }
         lcd.textContent = "";
-        let selectedItem = document.querySelector(`.${class2} .col${class1}`);
+        let selectedItem = document.querySelector(`${class2} ${class1}`);
 
         if (selectedItem.id != "") {
           activeBoon = boonArray[selectedItem.id];
@@ -201,7 +212,7 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
             } 
           } else {
             lcd.textContent = "U Broke";
-            lcd.style.fontSize = "1.1vw";
+            lcd.style.fontSize = "1.3vw";
           }
         }
       }

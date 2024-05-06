@@ -227,7 +227,8 @@ tr:nth-child(odd) {
   background-color: cadetblue;
 }
 
-#diceArea {
+#diceArea,
+#specialDice {
   /* border: solid red; */
   background-image: url(../media/diceTray.png);
   background-size: 100% 100%;
@@ -254,22 +255,6 @@ tr:nth-child(odd) {
   left: 8%;
   color: rgb(0, 0, 0);
   font-size: 2rem;
-}
-#specialDice {
-  background-image: url(../media/diceTray.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-	border-style: solid;
-	/* border-image-source: url(../media/border3.png);
-	border-image-slice: 30;
-	border-image-width: 30px;
-	border-image-repeat: repeat;
-	border-image-outset: 10px; */
-	box-sizing: border-box; /* Include padding and border in the total width and height */
-  color: white;
-  height: 100%;
-  padding-left: 20px;
 }
 
 #rollDiceBtn {
@@ -354,4 +339,10 @@ tr:nth-child(odd) {
   background-color: rgba(0, 0, 0, .6);
   display: none;
   z-index: 9999999999998;
+}
+
+#buttonDiv {
+  /* border: solid red; */
+  position: absolute;
+  z-index: 1;
 }

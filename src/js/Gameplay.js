@@ -88,12 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
     henchName.innerHTML = waveHenchmen[0].name;
     health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
     healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`; 
-    threshold.innerHTML = "Threshold: " + waveHenchmen[0].threshold;
+    threshold.innerHTML = "Target: " + waveHenchmen[0].threshold;
     staminaPenalty.innerHTML = "Stamina Penalty: " + waveHenchmen[0].staminaPenalty;
     healingFactor.innerHTML = "Healing Factor: " + waveHenchmen[0].healingFactor;
 
     range.innerHTML = "Range: " + waveHenchmen[0].range;
-    damage.innerHTML = "Damage: " + waveHenchmen[0].damage;
+    damage.innerHTML = "Malpractice Damage: " + waveHenchmen[0].damage;
     currencyGiven.innerHTML = "Currency Given: " + waveHenchmen[0].currencyGiven;
 
     henchmanImage.style.backgroundImage = henchPicArray[waveHenchmen[0].name];
@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update the next-up henchman chart
     if (waveHenchmen.length > 1) {
       henchName2.innerHTML = waveHenchmen[1].name;
-      threshold2.innerHTML = "Threshold: " + waveHenchmen[1].threshold;
+      threshold2.innerHTML = "Target: " + waveHenchmen[1].threshold;
       staminaPenalty2.innerHTML = "Stamina Penalty: " + waveHenchmen[1].staminaPenalty;
       healingFactor2.innerHTML = "Healing Factor: " + waveHenchmen[1].healingFactor;
 
       range2.innerHTML = "Range: " + waveHenchmen[1].range;
-      damage2.innerHTML = "Damage: " + waveHenchmen[1].damage;
+      damage2.innerHTML = "Malpractice Damage: " + waveHenchmen[1].damage;
       currencyGiven2.innerHTML = "Currency Given: " + waveHenchmen[1].currencyGiven;
     }
 
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   btnEndTurn.addEventListener("click", (e) => {
-    resetButtons();
+    resetDice();
   });
 
   btnGoShop.addEventListener("click", (e) => {
@@ -248,6 +248,8 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
       player.score += waveHenchmen[0].scoreGiven;
+
+      gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
 
 //#region [elderScroll]
       if (player.boonArray['elderScroll']) {
@@ -359,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
     rollResult(totalResult, selectedDice);
   }
 
-  function resetButtons() {
+  function resetDice() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
       if (buttons[i].classList.contains("temporary") && buttons[i].disabled == true) {
@@ -382,6 +384,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!waveHenchmen[0].henchmenFull()) {
 
       let staminaLost = waveHenchmen[0].staminaPenalty;
+
+      gameLog.innerHTML += "Stamina lost at end of turn: " + waveHenchmen[0].staminaPenalty + "<br><br>";
 
 //#region [crowbar]
       if (player.boonArray['crowbar'] && player.boonArray['crowbar'].effects.staminaLost < staminaLost) {

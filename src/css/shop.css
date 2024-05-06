@@ -7,11 +7,12 @@
   border: solid red;
   width: 20%;
   background-color: cadetblue;
-  /* position: absolute; */
-  /* float: left; */
+  position: absolute;
+  float: left;
   font-size: 2rem;
   /* display: block; */
   cursor: pointer;
+  z-index: 1;
 }
 
 #coffeeWrapper {
@@ -19,6 +20,7 @@
   position: absolute;
   height: 70%;
   width: 23%;
+  bottom: 5%;
   left: 15%;
 }
 .coffeeFront {
@@ -74,8 +76,9 @@
 #vendWrapper {
   /* border: solid red; */
   position: absolute;
-  height: 70%;
+  height: 80%;
   width: 30%;
+  bottom: 5%;
   left: 40%;
 }
 .vendingMachine {
@@ -106,7 +109,7 @@
   border: .5rem solid rgb(69, 69, 69);
   background-color: black;
   top: 4%;
-  left: 5%;
+  left: 3%;
   width: 65%;
   height: 70%;
 }
@@ -125,7 +128,7 @@
   float: left;
   position: absolute;
   top: 4%;
-  left: 5%;
+  left: 3%;
   width: 65%;
   height: 70%;
   pointer-events: none;
@@ -137,18 +140,18 @@
   float: right;
   position: absolute;
   top: 10%;
-  right: 3%;
-  width: 24%;
-  height: 30%;
+  right: 2.5%;
+  width: 27%;
+  height: 35%;
 }
 .lcdScreen {
   /* border: solid purple; */
   border: .4rem solid black;
   background-color: rgb(85, 5, 5);
-  width: 80%;
+  width: 86%;
   height: 30%;
   top: 6%;
-  left: 10%;
+  left: 7%;
 }
 .numPad {
   /* border: solid teal; */
@@ -165,7 +168,7 @@
   /* border: solid violet; */
   background-color: rgb(20, 20, 20);
   float: right;
-  top: -24%;
+  top: -20%;
   right: 5%;
   width: 20%;
   height: 3.5%;
@@ -174,7 +177,7 @@
   /* border: solid pink; */
   background-color: rgb(20, 20, 20);
   float: right;
-  top: -18%;
+  top: -14%;
   right: -15%;
   width: 4%;
   height: 7%;
@@ -208,8 +211,8 @@
   float: right;
   /* top: 6%; */
   bottom: 5%;
-  left: 7%;
-  width: 60%;
+  left: 3%;
+  width: 65%;
   height: 18%;
 }
 
@@ -232,6 +235,7 @@ td img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
+  max-height: 11vh;
   height: auto;
   cursor: pointer;
 }
@@ -254,7 +258,7 @@ td img {
   position: absolute;
   height: 65%;
   width: 30%;
-  top: 16%;
+  bottom: 5%;
   right: 0;
 }
 #diceMachine {
@@ -372,10 +376,10 @@ td img {
   text-shadow: 0px 0px 5px white;
   /* width: 30%; */
   /* height: 23%; */
-  font-size: .8vw;
+  font-size: .9vw;
   font-weight: 800;
   /* vertical-align: middle; */
-  /* text-align: center;  */
+  text-align: center; 
   /* text-align: justify; */
 }
 

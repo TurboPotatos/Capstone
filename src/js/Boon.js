@@ -87,7 +87,7 @@ const boonArray = {
 
   "goldRing" : //TODO
   new Boon( "goldRing", 
-            "Gold Ring: <br><br>Gotta go fast", 
+            "Gold Ring: <br><br>Rolling a 1 on a die heals the henchman for 3", 
             {goldRing: 0}, 
             "src/media/Boons/boon_goldRing.png"),
 
@@ -121,10 +121,10 @@ const boonArray = {
             {bonusHealth: 10}, 
             "src/media/Boons/boon_mushroom.png"),
 
-  "nukaCola" : 
+  "nukaCola" : //TODO
   new Boon( "nukaCola", 
-            "Nuka Cola: <br><br>Ignore the next 2 curses", 
-            {ignoreCurses: 2}, 
+            "Nuka Cola: <br><br>Henchman range is increased by 1", 
+            {nukaCola: 0}, 
             "src/media/Boons/boon_nukaCola.png"),
 
   "pillBottle" : //TODO
@@ -133,9 +133,9 @@ const boonArray = {
             {rollMultiplier: 2}, 
             "src/media/Boons/boon_pillBottle.png"),
 
-  "pokeball" : 
+  "pokeball" : //TODO
   new Boon( "pokeball", 
-            "Pokeball: <br><br>Die faces fit any die", 
+            "Pokeball: <br><br>Henchmen take 50% less damage from malpractice", 
             {pokeball: true}, 
             "src/media/Boons/boon_pokeball.png"),
 
@@ -177,14 +177,14 @@ const boonArray = {
 
   "stethoscope" : 
   new Boon( "stethoscope", 
-            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 5 stamina", 
-            {staminaDamage: 5}, 
+            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 50% of your stamina", 
+            {staminaDamage: 0.5}, 
             "src/media/Boons/boon_stethoscope.png"),
 
-  "syringe" : 
+  "syringe" : //TODO
   new Boon( "syringe", 
-            "Syringe: <br><br>You can read redacted henchman charts", 
-            {syringe: true}, 
+            "Syringe: <br><br>Both healing factor and malpractice damage is increased by 50%", 
+            {syringe: 0.5}, 
             "src/media/Boons/boon_syringe.png"),
 
   "tetrisPiece" : // IMPLEMENTED
