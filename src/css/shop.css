@@ -313,6 +313,7 @@ td img {
   box-sizing: border-box;
   /* display: block; */
   z-index: 1003;
+  overflow-y: auto;
 }
 
 #diceOptions{
@@ -320,6 +321,17 @@ td img {
   top: 20%;
   text-align: center;
 }
+
+.die-option{
+  background-size: cover;
+}
+
+#diceOptions button{
+  margin-right: 2rem;
+  width: 90px;
+  height: 90px;
+}
+
 #backBtn {
   position: absolute;
   height: 10%;
@@ -411,8 +423,3 @@ td img {
   padding: 0 3px 0 0;
 }
 
-#diceOptions button{
-  margin-right: 2rem;
-  width: 90px;
-  height: 70px;
-}

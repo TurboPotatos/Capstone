@@ -309,9 +309,9 @@ buyDice.addEventListener("click", (e) => {
 
     // Add a div option for each of them
     diceOptions.innerHTML = "<h2>Choose a dice to keep permanently. Others will be kept as consumables.</h2><br>";
-    diceOptions.innerHTML += `<button id="choiceOne"class="die-option ${diceChoice['choiceOne'].typeOf}">${diceChoice['choiceOne'].typeOf}</button>`;
-    diceOptions.innerHTML += `<button id="choiceTwo"class="die-option ${diceChoice['choiceTwo'].typeOf}">${diceChoice['choiceTwo'].typeOf}</button>`;
-    diceOptions.innerHTML += `<button id="choiceThree"class="die-option ${diceChoice['choiceThree'].typeOf}">${diceChoice['choiceThree'].typeOf}</button>`;
+    diceOptions.innerHTML += `<button id="choiceOne"class="die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
+    diceOptions.innerHTML += `<button id="choiceTwo"class="die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
+    diceOptions.innerHTML += `<button id="choiceThree"class="die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
 
     // Add event listeners to each of the dice
     document.querySelectorAll(".die-option").forEach((option) => {
