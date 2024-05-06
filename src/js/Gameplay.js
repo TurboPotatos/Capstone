@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
 //endregion
 
-  stamina.innerHTML = "Stamina: " + player.stamina;
+  stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
   score.innerHTML = "Score: " + player.score;
   currency.innerHTML = "Money: " + player.currency;
 
@@ -139,8 +139,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-
-
 
   btnRoll.addEventListener("click", (e) => {
     rollDice();
@@ -264,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
         
         updateHenchmen();
-        stamina.innerHTML = "Stamina: " + player.stamina;
+        stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
         score.innerHTML = "Score: " + player.score;
         currency.innerHTML = "Money: " + player.currency;
       } else {
@@ -392,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
       player.changeStamina(-staminaLost);
-      stamina.innerHTML = "Stamina: " + player.stamina;
+      stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
         // if(player.stamina <= 0){
         //   window.location.replace("gameOver.html");
         // }

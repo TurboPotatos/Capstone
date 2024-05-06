@@ -1,5 +1,6 @@
 #devTools {
   border: solid red;
+  position: absolute;
   width: 20%;
   background-color: cadetblue;
   /* position: absolute; */
@@ -54,6 +55,8 @@ td::after{
 }
 .diceListWrapper {
   background-color: green;
+  position: relative;
+  z-index: 1;
 }
 
 .active {

@@ -11,7 +11,7 @@
     <title>Henchmen Hospital</title>
   </head>
   <body>
-    <div class="navBar">
+    <!-- <div class="navBar">
       <a href="index.php">Sign In</a>
       <a href="startScreen.html">Start Screen</a>
       <a href="leaderboard.html">Leaderboard/History</a>
@@ -19,25 +19,9 @@
       <a href="gameOver.html">Game Over</a>
       <a href="shop.html">Shop</a>
       <a href="workshop.html">Workshop</a>
-    </div>
+    </div> -->
 
-    <div class="wrapper" id="gameDiv">
-      <div id="colorBox">
-        <div id="colorPicker">
-          <div class="slider-container">
-            <label id="redRangeLabel" for="redRange">Red:</label>
-            <input id="redRange" type="range" min="0" max="255" value="0">
-            <br>
-            <label id="greenRangeLabel" for="greenRange">Green:</label>
-            <input id="greenRange" type="range" min="0" max="255" value="0">
-            <br>
-            <label id="blueRangeLabel" for="blueRange">Blue:</label>
-            <input id="blueRange" type="range" min="0" max="255" value="0">
-          </div>
-
-          <button id="backBtn">Back</button>
-      </div>  
-    </div>
+    <div class="wrapper unselectable" id="gameDiv">
       
       <div class="henchmenChart" id="medChart1">
         <div class="clientTabs" id="clientTab1">
@@ -296,15 +280,25 @@
         <br>
         <p id="logText"></p>
       </div>
-    </div>
-    <div id="directoryContainer">
-      <div id="directoryBox">
-        <h2>You have <span id="choicesLeft">2</span> choice(s) left! (Test - Multiple choices not functional)</h2><br>
-        <button id="regainStamina">Regain Stamina!</button>
-        <button id="visitWorkshop">Visit the Medicine Cabinet!</button>
-        <button id="visitShop">Visit the Break Room!</button>
+
+      <div id="directoryContainer">
+        <div id="directoryBox">
+          <h2>You have <span id="choicesLeft">2</span> choice(s) left! (Test - Multiple choices not functional)</h2><br>
+          <button id="regainStamina">Regain Stamina!</button>
+          <button id="visitWorkshop">Visit the Medicine Cabinet!</button>
+          <button id="visitShop">Visit the Break Room!</button>
+        </div>
+      </div> 
+
+      <div id="buttonDiv">
+        <button type="button" id="endTurnBtn">End Turn</button>
+        <!-- <button type="button" id="fadeBtn">Pick Color</button> -->
+        <button type="button" id="goShopBtn">Shop</button>
+        <button type="button" id="goWorkshopBtn">Workshop</button>
       </div>
-    </div> 
+
+    </div> <!-- END .wrapper -->
+    
     <!-- <button id="testDirectory">Test Directory</button> -->
 
     <script>
@@ -340,63 +334,53 @@
         charts.forEach(function(chart) {
           chart.style.display = 'none';
         });
-      document.getElementById(chartId).style.display = 'block';
-
-    }
+        document.getElementById(chartId).style.display = 'block';
+      }
     </script>
 
-  <script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const fadeBtn = document.querySelector('#fadeBtn');
+        const backBtn = document.querySelector('#backBtn');
+        const colorBox = document.querySelector('#colorBox');
 
-
-  </script>
-
-  <script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const fadeBtn = document.querySelector('#fadeBtn');
-      const backBtn = document.querySelector('#backBtn');
-      const colorBox = document.querySelector('#colorBox');
-
-      fadeBtn.addEventListener("click", (e) => {
-        colorBox.style.display = "block";
+        fadeBtn.addEventListener("click", (e) => {
+          colorBox.style.display = "block";
+        });
+        backBtn.addEventListener("click", (e) => {
+          colorBox.style.display = "none";
+        });
       });
-      backBtn.addEventListener("click", (e) => {
-        colorBox.style.display = "none";
-      });
-    });
 
-  </script>
-  <script>
-    const redRange = document.querySelector('#redRange');
-    const greenRange = document.querySelector('#greenRange');
-    const blueRange = document.querySelector('#blueRange');
-    const colorPicker = document.querySelector('#colorPicker');
+    </script>
 
-    function updateColor() {
-      const allDice = document.querySelectorAll('.die-btn');
-      const redValue = redRange.value;
-      const greenValue = greenRange.value;
-      const blueValue = blueRange.value;
-      const color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
-      colorPicker.style.backgroundColor = color;
+    <script>
+      const redRange = document.querySelector('#redRange');
+      const greenRange = document.querySelector('#greenRange');
+      const blueRange = document.querySelector('#blueRange');
+      const colorPicker = document.querySelector('#colorPicker');
 
-      for (var i = 0; i < allDice.length; i++) {
-        allDice[i].style.setProperty('--dieBtnAfterBGColor', color);
+      function updateColor() {
+        const allDice = document.querySelectorAll('.die-btn');
+        const redValue = redRange.value;
+        const greenValue = greenRange.value;
+        const blueValue = blueRange.value;
+        const color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
+        colorPicker.style.backgroundColor = color;
+
+        for (var i = 0; i < allDice.length; i++) {
+          allDice[i].style.setProperty('--dieBtnAfterBGColor', color);
+        }
       }
-    }
 
-    redRange.addEventListener('input', updateColor);
-    greenRange.addEventListener('input', updateColor);
-    blueRange.addEventListener('input', updateColor);
-  </script>
+      redRange.addEventListener('input', updateColor);
+      greenRange.addEventListener('input', updateColor);
+      blueRange.addEventListener('input', updateColor);
+    </script>
 
+    <script type="module" src="src/js/Gameplay.js"></script>
 
-  <script type="module" src="src/js/Gameplay.js"></script>
-
-  <button type="button" id="endTurnBtn">End Turn</button>
-  <button type="button" id="fadeBtn">Pick Color</button>
-  <button type="button" id="goShopBtn">Shop</button>
-  <button type="button" id="goWorkshopBtn">Workshop</button>
+    
 
   </body>
 </html>
