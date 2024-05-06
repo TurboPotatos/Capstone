@@ -1,6 +1,6 @@
-import { Henchmen } from "./Henchman.js";
+import { Henchmen, henchArray } from "./Henchman.js";
 import { henchNameArray } from "./Henchman.js";
-import { henchArray } from "./Henchman.js";
+import { henchPicArray } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
@@ -8,20 +8,6 @@ import { Dice } from "./Dice.js";
 
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
-
-// if (player.boonArray['companionCube']) {
-//   console.log("has cube: ", player.boonArray['companionCube']);
-//   // console.log(player.boonArray['companionCube']);
-// }
-
-// if (player.boonArray['crowbar']) {
-//   console.log("has crowbar");
-// }
-
-// let rollBonus = false;
-// let wave = 0;
-
-
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -38,16 +24,21 @@ document.addEventListener('DOMContentLoaded', function() {
   const henchName = document.querySelector('#henchName');
   const health = document.querySelector('#health');
   const healthBar = document.querySelector('#henchmenHealth2');
-  //   const damage = document.querySelector('#damage');
+
   const threshold = document.querySelector('#threshold');
+  const range = document.querySelector('#range');
   const staminaPenalty = document.querySelector('#staminaPenalty');
+  const damage = document.querySelector('#damage');
   const healingFactor = document.querySelector('#healingFactor');
-  //   const currencyGiven = document.querySelector('#currencyGiven');
+  const currencyGiven = document.querySelector('#currencyGiven');
   
   const henchName2 = document.querySelector('#henchName2');
   const threshold2 = document.querySelector('#threshold2');
+  const range2 = document.querySelector('#range2');
   const staminaPenalty2 = document.querySelector('#staminaPenalty2');
+  const damage2 = document.querySelector('#damage2');
   const healingFactor2 = document.querySelector('#healingFactor2');
+  const currencyGiven2 = document.querySelector('#currencyGiven2');
 
   const stamina = document.querySelector('#stamina');
   const score = document.querySelector('#score');
@@ -87,6 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
     waveHenchmen.push(newHenchie);
   }
+  waveHenchmen.push(henchArray['Grunt']);
+  // console.log(waveHenchmen);
   // Alter last to be stronger 'boss' henchmen with more health
   // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
 
@@ -98,9 +91,12 @@ document.addEventListener('DOMContentLoaded', function() {
     threshold.innerHTML = "Threshold: " + waveHenchmen[0].threshold;
     staminaPenalty.innerHTML = "Stamina Penalty: " + waveHenchmen[0].staminaPenalty;
     healingFactor.innerHTML = "Healing Factor: " + waveHenchmen[0].healingFactor;
-    //currencyGiven.innerHTML = "Currency Given: " + waveHenchmen[0].currencyGiven;
 
-    henchmanImage.style.backgroundImage = henchArray[waveHenchmen[0].name];
+    range.innerHTML = "Range: " + waveHenchmen[0].range;
+    damage.innerHTML = "Damage: " + waveHenchmen[0].damage;
+    currencyGiven.innerHTML = "Currency Given: " + waveHenchmen[0].currencyGiven;
+
+    henchmanImage.style.backgroundImage = henchPicArray[waveHenchmen[0].name];
 
     // Update the next-up henchman chart
     if (waveHenchmen.length > 1) {
@@ -108,6 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
       threshold2.innerHTML = "Threshold: " + waveHenchmen[1].threshold;
       staminaPenalty2.innerHTML = "Stamina Penalty: " + waveHenchmen[1].staminaPenalty;
       healingFactor2.innerHTML = "Healing Factor: " + waveHenchmen[1].healingFactor;
+
+      range2.innerHTML = "Range: " + waveHenchmen[1].range;
+      damage2.innerHTML = "Damage: " + waveHenchmen[1].damage;
+      currencyGiven2.innerHTML = "Currency Given: " + waveHenchmen[1].currencyGiven;
     }
 
   }
@@ -180,23 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'game.html';
   });
 
-
-//   btnAddStamina.addEventListener("click", (e) => {
-//     boonArray["Stamina Potion"].applyEffects(player);
-//     stamina.innerHTML = "Stamina: " + player.stamina;
-//   });
-//   btnAddCurrency.addEventListener("click", (e) => {
-//     boonArray["MONEY!"].applyEffects(player);
-//     currency.innerHTML = "Currency: " + player.currency;
-//     boonCollection.innerHTML += "<div id=\"boon\"><img src=\"../../src/media/boon_chaosEmerald.png\"><span class=\"tooltip\">" + boonArray["MONEY!"].description + "</span></div>";
-//     // boonCollection.innerHTML += "<img src='../../src/media/boon_chaosEmerald.png' + title=\"" + boonArray["MONEY!"].description + "\">";
-//   });
-//   btnEstusFlask.addEventListener("click", (e) => {
-//     boonArray["estusFlask"].applyEffects(player);
-//     boonCollection.innerHTML += "<div id=\"boon\"><img src=\"../../src/media/boon_estusFlask.png\"><span class=\"tooltip\">" + boonArray["estusFlask"].description + "</span></div>";
-//     console.log("Has Estus Flask: " + player.estusFlask);
-//   });
-
   var dieButtons = document.querySelectorAll('.die-btn');
   dieButtons.forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -235,8 +218,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
       selectedDice.forEach(function(dieBtn) {
-        // dieBtn.style.color = "green";
-        // dieBtn.style.textShadow = "2px 2px 0px black";
         dieBtn.classList.add("success");
       });
 
@@ -250,8 +231,6 @@ document.addEventListener('DOMContentLoaded', function() {
       waveHenchmen[0].health -= waveHenchmen[0].damage;
       updateHenchmen();
       selectedDice.forEach(function(dieBtn) {
-        // dieBtn.style.color = "red";
-        // dieBtn.style.textShadow = "2px 2px 0px black";
         dieBtn.classList.add("failure");
       });
     }
@@ -261,13 +240,13 @@ document.addEventListener('DOMContentLoaded', function() {
     (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
 //#region [gloves]
-if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
-  let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
-  restoreStamina = Math.round(restoreStamina);
-  player.changeStamina(restoreStamina);
+      if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
+        let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
+        restoreStamina = Math.round(restoreStamina);
+        player.changeStamina(restoreStamina);
 
-  gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
-}
+        gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
+      }
 //#endregion
 
       player.score += waveHenchmen[0].scoreGiven;
@@ -323,7 +302,6 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
         dice = player.diceArray[parseInt(dieBtn.id.substring(4))];
       }
 
-
       var result = dice.roll();
 
 //#region [labCoat]
@@ -361,7 +339,7 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
       totalResult += result;
       results.push("You rolled " + result + " on a d" + dice.sides.length);
       dieBtn.innerHTML = result;
-  });
+    });
 
 //#region [estusFlask]
     if (player.boonArray['estusFlask'] && player.boonArray['estusFlask'].effects.bonusActive == true) {
@@ -478,7 +456,5 @@ if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].he
         });
       }
     }
-    // }
-    // console.log(player.boonArray.length);
   }
 });

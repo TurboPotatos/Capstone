@@ -68,10 +68,10 @@ export class Henchmen {
   }
 }
 
-export const henchArray = {
+export const henchPicArray = {
   "Beetle" : "url(src/media/Henchmen/henchman_beetle_hurt.png), url(src/media/texture2.png)",
   "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin_hurt.png), url(src/media/texture2.png)",
-  "Ghost" : "url(src/media/Henchmen/henchman_ghost_hurt.png), url(src/media/texture2.png)",
+  "Pinky" : "url(src/media/Henchmen/henchman_ghost_hurt.png), url(src/media/texture2.png)",
   "Goomba" : "url(src/media/Henchmen/henchman_goomba_hurt.png), url(src/media/texture2.png)",
   "Grunt" : "url(src/media/Henchmen/henchman_grunt_hurt.png), url(src/media/texture2.png)",
   "Henchman 24" : "url(src/media/Henchmen/henchman_henchman24_hurt.png), url(src/media/texture2.png)",
@@ -79,7 +79,7 @@ export const henchArray = {
   "Pain and Panic" : "url(src/media/Henchmen/henchman_imps_hurt.png), url(src/media/texture2.png)",
   "Koopa Troopa" : "url(src/media/Henchmen/henchman_koopaTroopa_hurt.png), url(src/media/texture2.png)",
   "Minion" : "url(src/media/Henchmen/henchman_megaMinion_hurt.png), url(src/media/texture2.png)",
-  "Minion" : "url(src/media/Henchmen/henchman_minion_hurt.png), url(src/media/texture2.png)",
+  "Stuart the Minion" : "url(src/media/Henchmen/henchman_minion_hurt.png), url(src/media/texture2.png)",
   "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader_hurt.png), url(src/media/texture2.png)",
   "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper_hurt.png), url(src/media/texture2.png)",
   "Turret" : "url(src/media/Henchmen/henchman_turret_hurt.png), url(src/media/texture2.png)",
@@ -87,7 +87,28 @@ export const henchArray = {
   // "Actually Satan2" : "url(src/media/Henchmen/boss_actuallySatan.png), url(src/media/texture2.png)",
 };
 
+export let henchArray = {};
 export let henchNameArray = [];
-for (let key in henchArray) {
+for (let key in henchPicArray) {
   henchNameArray.push(key);
+  henchArray[key] = new Henchmen(key, 0);
 }
+
+
+function respecHenchman(henchman, threshold, range, staminaPenalty, healingFactor, health, maxHealth, damage, 
+                       scoreGiven, currencyGiven) {
+
+  henchman.threshold = threshold;
+  henchman.range = range;
+  henchman.staminaPenalty = staminaPenalty;
+  henchman.healingFactor = healingFactor;
+  henchman.health = health;
+  henchman.maxHealth = maxHealth;
+  henchman.damage = damage;
+  henchman.scoreGiven = scoreGiven;
+  henchman.currencyGiven = currencyGiven;
+}
+
+respecHenchman(henchArray['Grunt'], 15, 0, 5, 25, 25, 50, 5, 100, 20);
+
+// console.log(henchArray['Grunt']);
