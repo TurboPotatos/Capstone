@@ -275,6 +275,7 @@ backBtn.addEventListener("click", (e) => {
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
   // TODO change hard coded cost 
+  buyDice.style.display = "none"
   
     let diceOptions = document.querySelector("#diceOptions");
     
