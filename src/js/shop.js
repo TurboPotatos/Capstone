@@ -261,6 +261,11 @@ colorBox.style.display = "none";
 
 diceMachine.addEventListener("click", (e) => {
   colorBox.style.display = "block";
+  if (!player.subtractCurrency(15)) {
+    diceOptions.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
+    buyDice.style.display = "none";
+  }
+
 });
 
 backBtn.addEventListener("click", (e) => {
@@ -270,7 +275,7 @@ backBtn.addEventListener("click", (e) => {
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
   // TODO change hard coded cost 
-  if (player.subtractCurrency(15)) {
+  
     let diceOptions = document.querySelector("#diceOptions");
     
     // Generate three dice. One they will choose to keep permanently, the others are consumable
@@ -329,9 +334,7 @@ buyDice.addEventListener("click", (e) => {
       });
     })
 
-  } else {
-    diceOptions.innerHTML = "<h2 style=\"color: red\">You don't have enough funds!</h2>";
-  }
+  
 });
 //#endregion
 

@@ -314,6 +314,12 @@ td img {
   /* display: block; */
   z-index: 1003;
 }
+
+#diceOptions{
+  position: relative;
+  top: 20%;
+  text-align: center;
+}
 #backBtn {
   position: absolute;
   height: 10%;
@@ -403,4 +409,10 @@ td img {
   color: red;
   text-shadow: 0px 0px 5px black;
   padding: 0 3px 0 0;
+}
+
+#diceOptions button{
+  margin-right: 2rem;
+  width: 90px;
+  height: 70px;
 }
