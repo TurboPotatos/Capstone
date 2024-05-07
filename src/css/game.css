@@ -243,8 +243,9 @@ tr:nth-child(odd) {
 	box-sizing: border-box; /* Include padding and border in the total width and height */
   height: 100%;
   padding-left: 10%;
+  padding-right: 5%;
   padding-top: 7%;
-  z-index: -500;
+  /* z-index: -500; */
 }
 #diceArea span,
 #specialDice span {
@@ -327,7 +328,7 @@ tr:nth-child(odd) {
   background-size: cover;
   box-sizing: border-box;
   /* display: block; */
-  z-index: 9999999999999;
+  z-index: 1111;
 }
 
 #directoryContainer {
@@ -338,7 +339,7 @@ tr:nth-child(odd) {
   height: 100%;
   background-color: rgba(0, 0, 0, .6);
   display: none;
-  z-index: 9999999999998;
+  z-index: 1111;
 }
 
 #buttonDiv {
@@ -359,4 +360,23 @@ tr:nth-child(odd) {
 #autoEndTurnSpan {
   color: cadetblue;
   text-shadow: 1px 1px 1px black;
+}
+
+#gameOverMessage {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,.8);
+  z-index: 1112;
+  display: none;
+}
+#gameOverMessage span {
+  /* border: solid red; */
+  position: absolute;
+  color: cadetblue;
+  text-shadow: 7px 7px 0px #000;
+  font-size: clamp(11rem, 15vw, 35vh);
+  text-align: center;
+  width: 100%;
+  top: 20%;
 }

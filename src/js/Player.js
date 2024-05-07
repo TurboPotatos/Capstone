@@ -204,4 +204,8 @@ export class Player {
     }
     return playerConsumableCount;
   }
+
+  isOutOfStamina() {
+    return (this.stamina <= 0);
+  }
 }

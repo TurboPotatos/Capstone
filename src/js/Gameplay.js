@@ -418,6 +418,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       player.changeStamina(-staminaLost);
       stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
+
+      if (player.isOutOfStamina()) {
+        gameLog.innerHTML += "You're all tuckered out<br><br>";
+        document.querySelector("#gameOverMessage").style.display = "block";
+      }
         // if(player.stamina <= 0){
         //   window.location.replace("gameOver.html");
         // }
