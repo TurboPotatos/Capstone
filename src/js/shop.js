@@ -141,6 +141,38 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
 
 const lcd = document.querySelector("#lcdScreen");
 
+function getCodeItem(class1, class2) {
+  switch (class1) {
+    case "A":
+      class1 = ".col1";
+    break;
+    case "B":
+      class1 = ".col2";
+    break;
+    case "C":
+      class1 = ".col3";
+    break;
+  }
+
+  switch (class2) {
+    case "1":
+      class2 = ".row1";
+    break;
+    case "2":
+      class2 = ".row2";
+    break;
+    case "3":
+      class2 = ".row3";
+    break;
+    case "4":
+      class2 = ".row4";
+    break;
+  }
+  return document.querySelector(`${class2} ${class1}`);
+}
+
+let selectedItem;
+
 document.querySelectorAll('.numPadInput').forEach((numBtn) => {
   // Add an event listener depending on the data-info
   let data = numBtn.getAttribute("data-info");
@@ -158,12 +190,25 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
       } else if (lcd.textContent.length == 1 && ['1', '2', '3', '4'].includes(data)) {
         lcd.textContent += data;
       }
+
+      if (lcd.textContent.length == 2) {
+        let class1 = lcd.textContent.substring(0, 1);
+        let class2 = lcd.textContent.substring(1);
+        selectedItem = getCodeItem(class1, class2);
+
+        if (selectedItem.id != "") {
+          // console.log("test");
+          selectedItem.classList.add("selectedSlot");
+        }
+      }
+
     } else if (data == "backspace") {
       if (lcd.textContent.length > 3) {
         lcd.textContent = "";
       } else {
         lcd.textContent = lcd.textContent.slice(0, -1);
       }
+      selectedItem.classList.remove("selectedSlot");
     } else {
       // User submit their input
       if (lcd.textContent.length != 2) {
@@ -171,34 +216,11 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
       } else {
         // get the appropriate shop item
         let class1 = lcd.textContent.substring(0, 1);
-        switch (class1) {
-          case "A":
-            class1 = ".col1";
-          break;
-          case "B":
-            class1 = ".col2";
-          break;
-          case "C":
-            class1 = ".col3";
-          break;
-        }
+        
         let class2 = lcd.textContent.substring(1);
-        switch (class2) {
-          case "1":
-            class2 = ".row1";
-          break;
-          case "2":
-            class2 = ".row2";
-          break;
-          case "3":
-            class2 = ".row3";
-          break;
-          case "4":
-            class2 = ".row4";
-          break;
-        }
+        
         lcd.textContent = "";
-        let selectedItem = document.querySelector(`${class2} ${class1}`);
+        selectedItem = getCodeItem(class1, class2);
 
         if (selectedItem.id != "") {
           activeBoon = boonArray[selectedItem.id];
@@ -211,6 +233,7 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
               selected.id = ``;
             } 
           } else {
+            selectedItem.classList.remove("selectedSlot");
             lcd.textContent = "U Broke";
             lcd.style.fontSize = "1.3vw";
           }

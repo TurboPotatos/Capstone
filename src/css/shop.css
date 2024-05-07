@@ -460,3 +460,11 @@ td img {
   padding: 0 3px 0 0;
 }
 
+.selectedSlot {
+  background-color: rgba(200, 200, 200, .1);
+  border-image-source: url(../media/border_highlight2.png);
+	border-image-slice: 30;
+	border-image-width: 30px;
+	border-image-repeat: repeat;
+	/* border-image-outset: 10px; */
+}
