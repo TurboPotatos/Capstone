@@ -403,3 +403,7 @@ input[type='number'] {
   display: none;
   z-index: 1005;
 }
+
+button {
+  cursor: pointer;
+}

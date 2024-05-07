@@ -278,9 +278,11 @@ td img {
 }
 
 .buyDice{
+  position: relative;
   margin: 30% 40%;
   width: 8rem;
   height: 4rem;
+  z-index: 1;
 }
 
 #diceBox{
