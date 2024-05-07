@@ -314,7 +314,8 @@ td img {
   top: 10%;
   left: 25%;
   /* background-image: url(../media/texture2.png); */
-  background-color: cadetblue;
+  /* background-color: rgb(35, 52, 108); */
+  background-image: url(../media/background2.png);
   background-size: cover;
   box-sizing: border-box;
   /* display: block; */
