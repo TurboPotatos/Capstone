@@ -255,29 +255,34 @@ coffeeMachine.addEventListener("click", function() {
 //#region [Dice Machine]
 const diceMachine = document.querySelector('#diceMachine');
 const backBtn = document.querySelector('#backBtn');
-const colorBox = document.querySelector('#diceBox');
+const diceBox = document.querySelector('#diceBox');
 const buyDice = document.querySelector('#buyDice');
-colorBox.style.display = "none";
+const diceOptions = document.querySelector("#diceOptions");
+const message = document.querySelector("#message");
+diceBox.style.display = "none";
 
 diceMachine.addEventListener("click", (e) => {
-  colorBox.style.display = "block";
-  if (!player.subtractCurrency(15)) {
+  diceBox.style.display = "block";
+  buyDice.style.display = "block";
+  if (player.currency < 15) {
     diceOptions.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
     buyDice.style.display = "none";
+  } else {
+    buyDice.style.display = "block";
   }
 
 });
 
 backBtn.addEventListener("click", (e) => {
-  colorBox.style.display = "none";
+  diceBox.style.display = "none";
 });
 
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
   // TODO change hard coded cost 
-  buyDice.style.display = "none"
-  
-    let diceOptions = document.querySelector("#diceOptions");
+  if (player.subtractCurrency(15)) {
+    document.querySelector("#currentCurrency").innerHTML = player.currency;
+    buyDice.style.display = "none"
     
     // Generate three dice. One they will choose to keep permanently, the others are consumable
     function generateRandomDice() {
@@ -309,7 +314,7 @@ buyDice.addEventListener("click", (e) => {
 
 
     // Add a div option for each of them
-    diceOptions.innerHTML = "<h2>Choose a dice to keep permanently. Others will be kept as consumables.</h2><br>";
+    message.innerHTML = "<h2>Choose a die to keep permanently.<br>The other 2 will be kept as consumables.</h2><br>";
     diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
     diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
     diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
@@ -333,10 +338,9 @@ buyDice.addEventListener("click", (e) => {
         diceOptions.innerHTML = "";
         backBtn.click();
       });
-    })
-
-  
-});
+    });
+  } // END if player has enough money
+}); // END buyDice.addEventListener
 //#endregion
 
 const returnToGameBtn = document.querySelector('#returnToGameBtn');
