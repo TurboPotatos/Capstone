@@ -1,5 +1,5 @@
 #titleScreen {
-  border: solid green;
+  border: 10px solid black;
   position: absolute;
   width: 65%;
   left: 2.5rem;
@@ -9,13 +9,43 @@
   font-size: 3.5rem;
   text-shadow: black 2px 1px 1px;
   background-image: url(../media/otter-space.jpg);
+  /* background-image: url(../media/splashImage.png); */
   background-size: cover;
+  background-size: 200% 200%;
+  background-repeat: no-repeat;
   box-sizing: border-box; /* Include padding and border in the total width and height */
 	padding: 1.5rem;
 }
 
 #splashText {
+  position: relative;
   width: 60%;
+  z-index: 1;
+}
+
+#splashImage {
+  /* border: solid red; */
+  position: absolute;
+  background-image: url(../media/splashImage2.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  width: 92%;
+  height: 58%;
+  right: 0;
+  bottom: 0;
+}
+#glados {
+  /* border: solid red; */
+  position: absolute;
+  background-image: url(../media/Henchmen/boss_glados.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  width: 40%;
+  height: 50%;
+  right: -12%;
+  top: 0;
 }
 
 #menuDiv {
@@ -135,16 +165,12 @@
   z-index: 1003;
   /* overflow: scroll; */
 }
-#backBtn {
-  position: absolute;
-  height: 10%;
-  width: 20%;
-  bottom: 1rem;
-  right: 1rem;
-}
 
 #buyDice {
   font-size: 3rem;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 3px 3px 0px black;
 }
 
 #diceSelect {
@@ -174,6 +200,20 @@
   position: relative;
   top: 3rem;
   left: 13rem;
-  padding: .5rem;
   font-size: 3rem;
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 3px 3px 0px black;
+}
+#backBtn {
+  position: absolute;
+  height: 10%;
+  width: 20%;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0px black;
 }
