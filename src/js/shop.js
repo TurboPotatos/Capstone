@@ -283,15 +283,31 @@ const buyDice = document.querySelector('#buyDice');
 const diceOptions = document.querySelector("#diceOptions");
 const message = document.querySelector("#message");
 diceBox.style.display = "none";
+const buyConsumables = document.querySelector('#buyConsumables');
 
 diceMachine.addEventListener("click", (e) => {
   diceBox.style.display = "block";
   buyDice.style.display = "block";
+  backBtn.style.display = "block";
+  buyConsumables.style.display = "none";
+  message.style.display = 'none';
   if (player.currency < 15) {
-    diceOptions.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
+    message.style.display = "block";
+    message.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
     buyDice.style.display = "none";
   } else {
     buyDice.style.display = "block";
+    // Warn user if they will miss out on consumable dice
+    
+    if (player.getConsumableCount() >= player.maxConsumableDice) {
+      message.innerHTML = `
+      <h3>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h3>`;
+      message.style.display = 'block';
+    } else if (player.getConsumableCount() + 2 > player.maxConsumableDice) {
+      message.innerHTML = `
+      <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getConsumableCount()} consumable dice!</h3>`;
+      message.style.display = 'block';
+    }
   }
 
 });
@@ -300,69 +316,102 @@ backBtn.addEventListener("click", (e) => {
   diceBox.style.display = "none";
 });
 
+function generateRandomDice() {
+  let value = Math.ceil(Math.random() * 6);
+
+  switch (value) {
+    case 1:
+      return new Dice("d4");
+    case 2:
+      return new Dice("d6");
+    case 3:
+      return new Dice("d8");
+    case 4:
+      return new Dice("d10");
+    case 5:
+      return new Dice("d12");
+    case 6:
+      return new Dice("d20");
+    default: 
+      return new Dice("d6"); 
+  }
+}
+
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
   // TODO change hard coded cost 
-  if (player.subtractCurrency(15)) {
-    document.querySelector("#currentCurrency").innerHTML = player.currency;
-    buyDice.style.display = "none"
-    
-    // Generate three dice. One they will choose to keep permanently, the others are consumable
-    function generateRandomDice() {
-      let value = Math.ceil(Math.random() * 6);
+  if (player.diceArray.length + 1 <= player.maxDiceCount) {
+    // if the player buying more dice won't exceed maximum
+    let spare = player.maxConsumableDice - player.getConsumableCount();
 
-      switch (value) {
-        case 1:
-          return new Dice("d4");
-        case 2:
-          return new Dice("d6");
-        case 3:
-          return new Dice("d8");
-        case 4:
-          return new Dice("d10");
-        case 5:
-          return new Dice("d12");
-        case 6:
-          return new Dice("d20");
-        default: 
-          return new Dice("d6"); 
-      }
-    }
+    if (player.subtractCurrency(15)) {
+      document.querySelector("#currentCurrency").innerHTML = player.currency;
+      buyDice.style.display = "none"
+      backBtn.style.display = "none";
+      
+      // Generate three dice. One they will choose to keep permanently, the others are consumable
 
-    let diceChoice = {
-      choiceOne: generateRandomDice(),
-      choiceTwo: generateRandomDice(),
-      choiceThree: generateRandomDice()
-    };
+      let diceChoice = {
+        choiceOne: generateRandomDice(),
+        choiceTwo: generateRandomDice(),
+        choiceThree: generateRandomDice()
+      };
 
 
-    // Add a div option for each of them
-    message.innerHTML = "<h2>Choose a die to keep permanently.<br>The other 2 will be kept as consumables.</h2><br>";
-    diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
-    diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
-    diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
+      // Add a div option for each of them
+      message.style.display = "block";
+      message.innerHTML = "<h2>Choose a die to keep permanently.<br>The other 2 will be kept as consumables.</h2><br>";
+      
+      diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
+      diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
+      diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
 
-    // Add event listeners to each of the dice
-    document.querySelectorAll(".die-option").forEach((option) => {
-      option.addEventListener("click", () => {
-        // Add this specific dice to the player
-        player.addDice(diceChoice[option.id]);
-        delete diceChoice[option.id];
-        
-        // Add other dice as consumables
-        for (let key in diceChoice) {
-          if (diceChoice.hasOwnProperty(key)) {
-            // console.log(diceChoice[key]);
-            diceChoice[key].name = diceChoice[key].typeOf;
-            player.addItem(diceChoice[key]);
+      // Add event listeners to each of the dice
+      document.querySelectorAll(".die-option").forEach((option) => {
+        option.addEventListener("click", () => {
+          // Add this specific dice to the player
+          player.addDice(diceChoice[option.id]);
+          delete diceChoice[option.id];
+          
+          // Add other dice as consumables
+          for (let key in diceChoice) {
+            if (diceChoice.hasOwnProperty(key)) {
+              // console.log(diceChoice[key]);
+              diceChoice[key].name = diceChoice[key].typeOf;
+              player.addItem(diceChoice[key]);
+            }
           }
-        }
 
-        diceOptions.innerHTML = "";
-        backBtn.click();
+          diceOptions.innerHTML = "";
+          backBtn.click();
+        });
       });
-    });
-  } // END if player has enough money
+    } // END if player has enough money
+  } else if (player.getConsumableCount() < player.maxConsumableDice) {
+    buyDice.style.display = "none";
+    buyConsumables.style.display = 'block';
+    message.innerHTML = `
+    <h2 style=\"color: red; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">
+      You have too many dice to buy more!<br>
+      <span style=\"color: black; text-shadow: none; font-size:18px\">You can still buy consumables!</span>
+    </h2>
+    `;
+    if (player.getConsumableCount() + 3 > player.maxConsumableDice) {
+      // Adding more would go over the max, warn them they'll only go up to the max
+      message.innerHTML += `
+      <h3>Warning! You are near the maximum, if you buy more you will only get ${player.maxConsumableDice - player.getConsumableCount()} dice!</h3>`;
+    }
+    message.style.display = "block";
+  } else {
+    buyDice.style.display = "none";
+    buyConsumables.style.display = "none";
+    message.innerHTML = `
+    <h2 style=\"color: red; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">
+      You are full on both normal and consumable dice!
+    </h2>
+    `;
+    message.style.display = "block";
+  }
 }); // END buyDice.addEventListener
 //#endregion
 
@@ -387,3 +436,40 @@ function calculatePrice(wave, count, difficulty, basePrice) {
 
   return finalPrice;
 }
+
+
+
+buyConsumables.addEventListener("click", () => {
+
+  buyConsumables.style.display = "none"
+  backBtn.style.display = "none";
+
+  // Generate up to three dice and display them. On click of ANY of them, the player gets all of them
+  let diceChoice = {
+    choiceOne: generateRandomDice(),
+    choiceTwo: generateRandomDice(),
+    choiceThree: generateRandomDice()
+  };
+
+  message.innerHTML = "<h2>Collect your consumables!</h2><br>";
+  diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
+  diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
+  diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
+
+  // Add event listeners to each of the dice
+  document.querySelectorAll(".die-option").forEach((option) => {
+    option.addEventListener("click", () => {
+      // Add all dice to the player's items
+      for (let key in diceChoice) {
+        if (diceChoice.hasOwnProperty(key)) {
+          // console.log(diceChoice[key]);
+          diceChoice[key].name = diceChoice[key].typeOf;
+          player.addItem(diceChoice[key]);
+        }
+      }
+
+      diceOptions.innerHTML = "";
+      backBtn.click();
+    });
+  });
+});

@@ -14,6 +14,9 @@ export class Player {
   difficulty = 0;
   // Array of dice
   diceArray = [];
+  maxDiceCount = 8;
+  maxConsumableDice = 6;
+  maxOtherConsumables = 6;
 
   // Array of dice sides
   diceSideArray = [];
@@ -34,7 +37,9 @@ export class Player {
       this.stamina = player.stamina;
       this.score = player.score;
       this.difficulty = player.difficulty;
-
+      this.maxDiceCount = player.maxDiceCount;
+      this.maxConsumableDice = player.maxConsumableDice;
+      this.maxOtherConsumables = player.maxOtherConsumables;
       // console.log("player constructed");
       // console.log(player.diceArray.length);
       
@@ -186,5 +191,17 @@ export class Player {
     } else {
       return false;
     }
+  }
+
+  getConsumableCount() {
+    let playerConsumableCount = 0;
+    for (let key in this.items) {
+      if (this.items.hasOwnProperty(key)) {
+        for (let i = 0; i < this.items[key].length; i++) {
+          playerConsumableCount++;
+        }
+      }
+    }
+    return playerConsumableCount;
   }
 }

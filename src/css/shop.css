@@ -277,7 +277,7 @@ td img {
   cursor: pointer;
 }
 
-#buyDice{
+.buyDice{
   margin: 30% 40%;
   width: 8rem;
   height: 4rem;
