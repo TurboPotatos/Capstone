@@ -110,5 +110,11 @@ function respecHenchman(henchman, threshold, range, staminaPenalty, healingFacto
 }
 
 respecHenchman(henchArray['Grunt'], 15, 0, 5, 25, 25, 50, 5, 100, 20);
+respecHenchman(henchArray['Beetle'], 10, 4, 10, 20, 30, 80, 15, 100, 30);
+respecHenchman(henchArray['Bokoblin'], 7, 2, 8, 10, 25, 40, 10, 100, 20);
+respecHenchman(henchArray['Space Invader'], 15, 5, 15, 5, 5, 10, 5, 100, 20);
+respecHenchman(henchArray['Stuart the Minion'], 12, 3, 10, 12, 20, 100, 10, 100, 20);
+respecHenchman(henchArray['Turret'], 9, 3, 8, 10, 25, 75, 30, 100, 20);
+respecHenchman(henchArray['Koopa Troopa'], 5, 2, 10, 8, 30, 60, 10, 100, 20);
 
 // console.log(henchArray['Grunt']);
