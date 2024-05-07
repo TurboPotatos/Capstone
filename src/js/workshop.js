@@ -94,6 +94,7 @@ document.querySelector("#buyItem").addEventListener("click", function() {
       newDiceSide.textContent = boughtDiceSide.value;
       newDiceSide.classList.add('diceSide');
       newDiceSide.classList.add('box');
+      newDiceSide.classList.add('stored');
       newDiceSide.draggable = true;
       newDiceSide.style.display = playerDiceFacesDisplay;
 
@@ -151,6 +152,7 @@ document.querySelectorAll(".diceListItem").forEach(item => {
     newDiceSide.style.display = "none";
     newDiceSide.classList.add('diceSide');
     newDiceSide.classList.add('box');
+    newDiceSide.classList.add('used');
     newDiceSide.draggable = true;
 
     // set info for later use
@@ -181,6 +183,7 @@ for(let i = 0; i < player.diceSideArray.length; i++) {
   newDiceSide.textContent = player.diceSideArray[i].value;
   newDiceSide.classList.add('diceSide');
   newDiceSide.classList.add('box');
+  newDiceSide.classList.add('stored');
   newDiceSide.id = "arrayIndex_" + i;
   newDiceSide.draggable = true;
   newDiceSide.style.display = "none";
@@ -242,68 +245,38 @@ function handleDrop(e) {
   if (e.stopPropagation) {
     e.stopPropagation(); // stops the browser from redirecting.
   }
-  
-  if ((dragSrcEl != this)) {
+
+  if ((dragSrcEl != this) && (!dragSrcEl.classList.contains('used')) && (!this.classList.contains('stored'))) {
 
     // dragSrcEl is the OBJECT BEING DRAGGED
     // this is the OBJECT DRAGGED ONTO
-
-    // This works by using data-info as the INDEX of the diceSide in its parent array
-    // and, if the parent has an id (and is therefore one of the player's dice) then
-    // the id of its parents is the index of the dice in the player's diceArray[]
     
-    let parentDraggedDiceSide = dragSrcEl.parentNode;
+    // If function gets here, then the dragged element is NOT from the player's dice 
+    // NOR can the element being dragged over be from the player's spare sides
+    // Thus the dragged element has to be from the player's spare sides over a dice's side
+
+    // From here, use the data-info of the dragged element as the index within the player's diceSideArray
+    // The id of the draggedOnParent is the index of the dice in the player's diceArray
+    // The data-info of the dragged-on element (this) is the index of the side in the dice
+
     let draggedDiceSide;
-    let draggedDiceSideIndex = parseInt(dragSrcEl.getAttribute('data-info'));
-    let draggedSideStoredIn = "";
+    let draggedIndex = parseInt(dragSrcEl.getAttribute('data-info'));
     
-    let parentDraggedOnDiceSide = this.parentNode;
-    let draggedOnDiceSide;
-    let draggedOnDiceSideIndex = parseInt(this.getAttribute('data-info'));
-    let draggedOnSideStoredIn = "";
+    let draggedOnParent = this.parentNode;
+    let draggedOnIndex = parseInt(this.getAttribute('data-info'));
     
-    if (parentDraggedDiceSide.id != null && parentDraggedDiceSide.id != "") {
-      draggedDiceSide = player.diceArray[parseInt(parentDraggedDiceSide.id.substring(11))].sides[draggedDiceSideIndex];
-      draggedSideStoredIn = "player.diceArray";
-    } else {
-      draggedDiceSide = player.diceSideArray[draggedDiceSideIndex];
-      draggedSideStoredIn = "player.diceSideArray";
-    }
-    
-    if (parentDraggedOnDiceSide.id != null && parentDraggedOnDiceSide.id != "") {
-      draggedOnDiceSide = player.diceArray[parseInt(parentDraggedOnDiceSide.id.substring(11))].sides[draggedOnDiceSideIndex];
-      draggedOnSideStoredIn = "player.diceArray";
-    } else {
-      draggedOnDiceSide = player.diceSideArray[draggedOnDiceSideIndex];
-      draggedOnSideStoredIn = "player.diceSideArray";
-    }
-
+    draggedDiceSide = player.diceSideArray[draggedIndex];
 
     // Swapping values
-    let tempDiceSide = draggedOnDiceSide;
+    player.diceArray[parseInt(draggedOnParent.id.substring(11))].sides[draggedOnIndex] = draggedDiceSide;
     
-    if (draggedOnSideStoredIn == "player.diceArray") {
-      player.diceArray[parseInt(parentDraggedOnDiceSide.id.substring(11))].sides[draggedOnDiceSideIndex] = draggedDiceSide;
-    } else {
-      player.diceSideArray[draggedOnDiceSideIndex] = draggedDiceSide;
-    }
-    
-    if (draggedSideStoredIn == "player.diceArray") {
-      player.diceArray[parseInt(parentDraggedDiceSide.id.substring(11))].sides[draggedDiceSideIndex] = tempDiceSide;
-    } else {
-      player.diceSideArray[draggedDiceSideIndex] = tempDiceSide;
-    }
+    // Remove the diceSide from the player's diceSide array
+    player.diceSideArray.splice(draggedIndex, 1);
 
-    console.log(draggedDiceSide.value);
-    console.log(draggedOnDiceSide.value);
+    // Remove the element from the DOM
+    dragSrcEl.remove();
 
-    dragSrcEl.innerHTML = this.innerHTML;
     this.innerHTML = e.dataTransfer.getData('text/html');
-    
-    // contentArray[dragSrcEl.id] = dragSrcEl.innerHTML;
-    // contentArray[this.id] = this.innerHTML;
-
-    // console.log(contentArray);
   }
   
   return false;
