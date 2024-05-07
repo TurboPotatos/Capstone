@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const regainStaminaBtn = document.querySelector('#regainStamina');
   const visitShopBtn = document.querySelector('#visitShop');
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
+  
+  const autoEndCheckbox = document.querySelector('#autoEndTurn');
 //endregion
 
   stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
@@ -359,6 +361,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     rollResult(totalResult, selectedDice);
+
+    if (allDisabled() && autoEndCheckbox.checked) {
+      resetDice();
+    }
   }
 
   function resetDice() {
@@ -407,17 +413,17 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
   }
 
-  // function allDisabled() {
-  //   var buttons = document.querySelectorAll('.die-btn');
-  //   let result = true;
-  //   buttons.forEach(function (button) {
-  //     // console.log(button.disabled);
-  //     if (!button.disabled) {
-  //       result = false; // a #notdisabledbutton was detected
-  //     }
-  //   });
-  //   return result; // all dice used
-  // }
+  function allDisabled() {
+    var buttons = document.querySelectorAll('.die-btn:not(.temporary)');
+    let result = true;
+    buttons.forEach(function (button) {
+      // console.log(button.disabled);
+      if (!button.disabled) {
+        result = false; // a #notdisabledbutton was detected
+      }
+    });
+    return result; // all dice used
+  }
 
   function populateBoons() {
     for (let key in player.boonArray) {
