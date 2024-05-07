@@ -81,6 +81,12 @@ document.addEventListener('DOMContentLoaded', function() {
     waveHenchmen.push(newHenchie);
   }
   waveHenchmen.push(henchArray['Grunt']);
+  waveHenchmen.push(henchArray['Beetle']);
+  waveHenchmen.push(henchArray['Bokoblin']);
+  waveHenchmen.push(henchArray['Space Invader']);
+  waveHenchmen.push(henchArray['Stuart the Minion']);
+  waveHenchmen.push(henchArray['Turret']);
+  waveHenchmen.push(henchArray['Koopa Troopa']);
   // console.log(waveHenchmen);
   // Alter last to be stronger 'boss' henchmen with more health
   // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;

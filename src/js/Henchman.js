@@ -109,6 +109,7 @@ function respecHenchman(henchman, threshold, range, staminaPenalty, healingFacto
   henchman.currencyGiven = currencyGiven;
 }
 
+// threshold, range, staminaPenalty, healingFactor, health, maxHealth, damage, scoreGiven, currencyGiven
 respecHenchman(henchArray['Grunt'], 15, 0, 5, 25, 25, 50, 5, 100, 20);
 respecHenchman(henchArray['Beetle'], 10, 4, 10, 20, 30, 80, 15, 100, 30);
 respecHenchman(henchArray['Bokoblin'], 7, 2, 8, 10, 25, 40, 10, 100, 20);

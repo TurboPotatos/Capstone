@@ -385,7 +385,6 @@ input[type='number'] {
   height: 80px;
 }
 
-  
 .right{
   transform: rotateY(-20deg) translateZ(-50px);
 }
