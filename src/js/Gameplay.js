@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
     waveHenchmen.push(newHenchie);
   }
-  waveHenchmen.push(henchArray['Grunt']);
+  // waveHenchmen.push(henchArray['Grunt']);
   waveHenchmen.push(henchArray['Beetle']);
   waveHenchmen.push(henchArray['Bokoblin']);
   waveHenchmen.push(henchArray['Space Invader']);
@@ -235,13 +235,20 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     } else {
       waveHenchmen[0].health -= waveHenchmen[0].damage;
+
       updateHenchmen();
       selectedDice.forEach(function(dieBtn) {
         dieBtn.classList.add("failure");
       });
+
+      if (waveHenchmen[0].isDead()) {
+        gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
+        nextHenchman();
+      }
+
     }
 
-    if (waveHenchmen[0].henchmenFull() || 
+    if (waveHenchmen[0].isFullHealth() || 
     // Tetris Piece
     (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
@@ -268,13 +275,7 @@ document.addEventListener('DOMContentLoaded', function() {
       player.currency += waveHenchmen[0].currencyGiven;
       player.changeStamina(30);
       if (waveHenchmen.length > 1) {
-        waveHenchmen.shift();
-        gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
-        
-        updateHenchmen();
-        stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
-        score.innerHTML = "Score: " + player.score;
-        currency.innerHTML = "Money: " + player.currency;
+        nextHenchman();
       } else {
         // Wave is finished, update wave and go to shop
         // TODO allow selection of shop, workshop, or stamina regain
@@ -282,6 +283,16 @@ document.addEventListener('DOMContentLoaded', function() {
         directoryCont.style.display = 'block';
       }
     }
+  }
+
+  function nextHenchman() {
+    waveHenchmen.shift();
+    gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
+    
+    updateHenchmen();
+    stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
+    score.innerHTML = "Score: " + player.score;
+    currency.innerHTML = "Money: " + player.currency;
   }
 
   function rollDice() {
@@ -393,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
       buttons[i].classList.remove("success", "failure");
     }
 
-    if (!waveHenchmen[0].henchmenFull()) {
+    if (!waveHenchmen[0].isFullHealth()) {
 
       let staminaLost = waveHenchmen[0].staminaPenalty;
 

@@ -345,4 +345,18 @@ tr:nth-child(odd) {
   /* border: solid red; */
   position: absolute;
   z-index: 1;
+  font-size: 1.3rem;
+}
+#buttonDiv button {
+  /* border: solid red; */
+  /* position: absolute; */
+  /* z-index: 1; */
+  font-size: 1.3rem;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+#autoEndTurnSpan {
+  color: cadetblue;
+  text-shadow: 1px 1px 1px black;
 }

@@ -47,24 +47,19 @@ export class Henchmen {
 
       health += healing;
 
-      if (health >= maxHealth) {
+      if (this.isFullHealth()) {
         // henchman fully healed, handle that
-        this.henchmenFull();
       }
     }
 
   }
 
-  henchmenDies() {
-
+  isDead() {
+    return (this.health <= 0);
   }
 
-  henchmenFull() {
-    if (this.maxHealth <= this.health) {
-      return true;
-    } else {
-      return false;
-    }
+  isFullHealth() {
+    return (this.maxHealth <= this.health);
   }
 }
 
