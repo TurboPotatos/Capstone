@@ -176,8 +176,8 @@ document.querySelectorAll(".diceListDisplay").forEach(displayNode => {
   displayNode.addEventListener("click", () => {
     let parent = document.querySelector(`.${displayNode.classList[1]}.diceListItem`);
     parent.querySelectorAll(".diceSide").forEach(diceFace => {
-      if (diceFace.style.display != "inline") {
-        diceFace.style.display = "inline";
+      if (diceFace.style.display != "inline-block") {
+        diceFace.style.display = "inline-block";
       } else {
         diceFace.style.display = "none";
       }
