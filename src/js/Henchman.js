@@ -1,4 +1,4 @@
-export class Henchmen {
+export class Henchman {
   // TODO: Figure out making things private and make getters/setters
   // Figure out health and damage
 
@@ -86,7 +86,7 @@ export let henchArray = {};
 export let henchNameArray = [];
 for (let key in henchPicArray) {
   henchNameArray.push(key);
-  henchArray[key] = new Henchmen(key, 0);
+  henchArray[key] = new Henchman(key, 0);
 }
 
 

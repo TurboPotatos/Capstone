@@ -117,10 +117,12 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
 let diceList = document.querySelector(".diceList");
 
 for (let i = 0; i < player.diceArray.length; i++) {
+  // newDice is the li that will contain the diceSides
   let newDice = document.createElement('li');
   
   newDice.id = "arrayIndex_" + i;
 
+  // newDiceDisplay is the button (that looks like the dice) that will expand newDice
   let newDiceDisplay = document.createElement('li');
   newDiceDisplay.textContent = player.diceArray[i].typeOf;
   newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + newDiceDisplay.textContent + ".png')";
@@ -135,6 +137,7 @@ for (let i = 0; i < player.diceArray.length; i++) {
   newDiceDisplay.classList.add(player.diceArray[i].typeOf);
   newDice.classList.add(player.diceArray[i].typeOf);
 
+  // Add both to the diceList
   diceList.appendChild(newDiceDisplay);
   diceList.appendChild(newDice);
 }
@@ -154,8 +157,11 @@ modBackBtn.addEventListener("click", (e) => {
 
 document.querySelectorAll(".diceListItem").forEach(item => {
   // add all their dice sides as elements
+  
+  // the id is used here as the index of the dice in the player's diceArray[]
   let testDice = player.diceArray[parseInt(item.id.substring(11))];
   for(let i = 0; i < testDice.sides.length; i++) {
+    // loop through the sides array to make the new side elements
     let newDiceSide = document.createElement('div');
 
     newDiceSide.textContent = testDice.sides[i].value;
@@ -165,7 +171,7 @@ document.querySelectorAll(".diceListItem").forEach(item => {
     newDiceSide.classList.add('used');
     newDiceSide.draggable = true;
 
-    // set info for later use
+    // set info to be used to identify the index of the side within the dice's sides[] array
     newDiceSide.setAttribute('data-info', i);
 
     item.appendChild(newDiceSide);
@@ -173,9 +179,13 @@ document.querySelectorAll(".diceListItem").forEach(item => {
 });
 
 document.querySelectorAll(".diceListDisplay").forEach(displayNode => {
+  // Add an event listener to the die-btn to display the li children of the corresponding node
   displayNode.addEventListener("click", () => {
+    // get the parent of the clicked element
     let parent = document.querySelector(`.${displayNode.classList[1]}.diceListItem`);
+    // get the diceSide children of the parent
     parent.querySelectorAll(".diceSide").forEach(diceFace => {
+      // swap the display mode
       if (diceFace.style.display != "inline-block") {
         diceFace.style.display = "inline-block";
       } else {

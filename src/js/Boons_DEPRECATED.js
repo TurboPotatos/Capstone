@@ -1,4 +1,4 @@
-import { Collectibles } from "./Collectibles.js";
+import { Collectibles } from "./Collectibles_DEPRICATED.js";
 
 export class Boons extends Collectibles {
   // TODO: Figure out making things private and make getters/setters

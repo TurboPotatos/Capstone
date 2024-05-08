@@ -82,7 +82,8 @@ td::after{
 }
 
 .active {
-  color: white;
+  color: #eee;
+  text-shadow: 1px 1px 1px black;
 }
 
 .slot {

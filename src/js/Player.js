@@ -1,7 +1,7 @@
 import { DiceSide } from "./DiceSide.js";
 import { Dice } from "./Dice.js";
-import { Boon } from "./Boon.js";
-import { boonArray } from "./Boon.js";
+import { Boon, boonArray } from "./Boon.js";
+import { Consumable } from "./Consumable.js";
 
 export class Player {
 
@@ -16,7 +16,7 @@ export class Player {
   diceArray = [];
   maxDiceCount = 8;
   maxConsumableDice = 6;
-  maxOtherConsumables = 6;
+  maxSupplements = 6;
 
   // Array of dice sides
   diceSideArray = [];
@@ -108,10 +108,19 @@ export class Player {
       // }
       for (let key in player.items) {
         if (player.items.hasOwnProperty(key)) {
-          for (let i = 0; i < player.items[key].length; i++) {
-            let newItem = new Dice(player.items[key][i].typeOf);
-            newItem.name = newItem.typeOf;
-            this.addItem(newItem);
+          if (key != 'supplement') {
+            // If the subarray ISN'T of type supplement, it's a dice
+            for (let i = 0; i < player.items[key].length; i++) {
+              let newItem = new Dice(player.items[key][i].typeOf);
+              newItem.name = newItem.typeOf;
+              this.addItem(newItem);
+            }
+          } else {
+            // subarray is for type supplement
+            for (let i = 0; i < player.items[key].length; i++) {
+              let newSupplement = new Consumable(player.items[key][i].bonus);
+              this.addItem(newSupplement);
+            }
           }
         }
       }

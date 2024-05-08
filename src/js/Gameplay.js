@@ -1,13 +1,19 @@
-import { Henchmen, henchArray } from "./Henchman.js";
+import { Henchman, henchArray } from "./Henchman.js";
 import { henchNameArray } from "./Henchman.js";
 import { henchPicArray } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
 import { Dice } from "./Dice.js";
+import { Consumable } from "./Consumable.js";
 
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
+
+player.addItem(new Consumable(2));
+player.addItem(new Consumable(1));
+player.addItem(new Consumable(3));
+player.addItem(new Consumable(9));
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -55,6 +61,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
   
   const autoEndCheckbox = document.querySelector('#autoEndTurn');
+
+  const consumableBag = document.querySelector('#consumableBag');
 //endregion
 
   stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
@@ -67,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let waveHenchmen = [];
   for (let i = 0; i < 1; i++){
     let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
-    let newHenchie = new Henchmen(randHenchName, player.wave);
+    let newHenchie = new Henchman(randHenchName, player.wave);
 //#region [mushroom]
     if (player.boonArray['mushroom']) {
       newHenchie.health += player.boonArray['mushroom'].effects.bonusHealth;
@@ -137,16 +145,37 @@ document.addEventListener('DOMContentLoaded', function() {
   for (let key in player.items) {
     // console.log("test");
     if (player.items.hasOwnProperty(key)) {
-      for (let i = 0; i < player.items[key].length; i++) {
-        let newItem = document.createElement('button');
-        newItem.id = "specialDice" + player.items[key][i].typeOf;
-        newItem.classList.add("die-btn", "temporary", player.items[key][i].typeOf);
-        newItem.setAttribute('data-info', i);
-        newItem.innerHTML = player.items[key][i].typeOf;
-        specialDiceArea.appendChild(newItem);
+      if (key != 'supplement') {
+        // If the subarray isn't of type Consumable  
+        for (let i = 0; i < player.items[key].length; i++) {
+          let newItem = document.createElement('button');
+          newItem.id = "specialDice" + player.items[key][i].typeOf;
+          newItem.classList.add("die-btn", "temporary", player.items[key][i].typeOf);
+          newItem.setAttribute('data-info', i);
+          newItem.innerHTML = player.items[key][i].typeOf;
+          specialDiceArea.appendChild(newItem);
+        }
       }
     }
   }
+  
+
+  // Add consumables to the consumable area 
+  for (let key in player.items) {
+    // console.log("test");
+    if (player.items.hasOwnProperty(key)) {
+      if (key == 'supplement') {
+        // If the subarray isn't of type Consumable  
+        for (let i = 0; i < player.items[key].length; i++) {
+          let newConsumable = document.createElement("button");
+          newConsumable.innerHTML = `Add ${player.items[key][i].bonus} to your total!`;
+          consumableBag.appendChild(newConsumable);
+        }
+      }
+    }
+  }
+
+
 
   btnRoll.addEventListener("click", (e) => {
     rollDice();
