@@ -229,6 +229,15 @@
           </table>
         </div>
 
+        <div id="gameLogsTab">Logs</div>
+        <div id="logWrapper">
+          <div id="gameLogs">
+            <div id="logTextDiv">
+              <p id="logText"></p>
+            </div>
+          </div>
+        </div>
+
         <div id="henchmenHealth">
           <!-- Health -->
           <div id="henchmenHealth2"></div>
@@ -269,15 +278,6 @@
 
         </div>
 
-      <div id="gameLogsTab">Logs</div>
-      <div id="gameLogs">
-        <!-- <span>Game logs:</span>
-        <br> -->
-        <!-- <span id="average">Running Average:</span> -->
-        <br>
-        <p id="logText"></p>
-      </div>
-
       <div id="consumableBag">
       </div>
 
@@ -310,8 +310,8 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const gameLogs = document.getElementById("gameLogs");
-        const gameLogsTab = document.getElementById("gameLogsTab");
+        const gameLogs = document.querySelector("#gameLogs");
+        const gameLogsTab = document.querySelector("#gameLogsTab");
 
         gameLogsTab.addEventListener("click", function () {
           gameLogs.classList.toggle("collapsed");

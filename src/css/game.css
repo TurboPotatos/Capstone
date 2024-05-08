@@ -151,12 +151,19 @@ tr:nth-child(odd) {
   box-sizing: border-box;
 }
 
-#gameLogs {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: 45%;
+#logWrapper {
+  /* border: solid red; */
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  width: 29%;
   height: 35%;
+  overflow: hidden;
+}
+#gameLogs {
+  position: relative;
+  width: 100%;
+  height: 100%;
   background-image: url(../media/texture2.png);
 	border-style: solid;
 	border-image-source: url(../media/border4.png);
@@ -164,23 +171,41 @@ tr:nth-child(odd) {
 	border-image-width: 30px;
 	border-image-repeat: repeat;
 	box-sizing: border-box; /* Include padding and border in the total width and height */
-	padding: 1.5rem;
+	padding: .7rem;
+  padding-left: 1.5rem;
 	overflow-y: auto;
   overflow-x: hidden;
-  transition: right 0.5s;
+  transition: transform 0.5s ease;
   display: flex;
   flex-direction: column-reverse;
 }
-
 #gameLogs.collapsed {
-  right: -44%; /* Collapsed state */
+  /* right: -23.9%; */
+  transform: translateX(100%);
+}
+#logTextDiv {
+  /* border: solid red; */
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  /* z-index: 0; */
+}
+#logText {
+  /* border: solid blue; */
+  position: relative;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  /* z-index: 0; */
 }
 
 #gameLogsTab {
   background-color: salmon;
-  position: fixed;
-  bottom: 4%;
-  right: 44%;
+  position: absolute;
+  bottom: 10%;
+  right: 33%;
   transform: rotate(270deg);
   z-index: 500;
   font-size: 20px;
@@ -189,11 +214,7 @@ tr:nth-child(odd) {
   transition: right 0.5s;
 }
 #gameLogsTab.collapsed {
-  right: 0%;
-}
-
-#average {
-	float: left;
+  right: 4.06%;
 }
 
 #diceContainer {
