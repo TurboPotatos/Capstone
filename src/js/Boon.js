@@ -217,6 +217,12 @@ const boonArray = {
             {coffeeStaminaRestore: 50, numOwned: 0}, 
             "src/media/Boons/boon_cuppaJoe.png"),
 
+  "medicalLicense" : //TODO
+  new Boon( "medicalLicense", 
+            "Medical License: <br><br>Allows you to legally practice medicine", 
+            {canPracticeMedicine: true}, 
+            "src/media/Boons/boon_medicalLicense.png"),
+
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.

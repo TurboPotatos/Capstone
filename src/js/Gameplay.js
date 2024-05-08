@@ -17,20 +17,27 @@ player.addItem(new Consumable(9));
 
 document.addEventListener('DOMContentLoaded', function() {
 
-//region [Query Selectors]
-  const collectibleEffects = document.querySelector('#collectibleEffects');
+//#region [Query Selectors]
 
+  const collectibleEffects = document.querySelector('#collectibleEffects');
+  const gameLog = document.querySelector("#logText");
+
+  // Buttons
   const btnRoll = document.querySelector('#rollDiceBtn');
+  const btnResetDice = document.querySelector('#resetDiceBtn');
   const btnEndTurn = document.querySelector('#endTurnBtn');
   const btnGoShop = document.querySelector('#goShopBtn');
   const btnGoWorkshop = document.querySelector('#goWorkshopBtn');
-  const gameLog = document.querySelector("#logText");
+  const regainStaminaBtn = document.querySelector('#regainStamina');
+  const visitShopBtn = document.querySelector('#visitShop');
+  const visitWorkshopBtn = document.querySelector('#visitWorkshop');
+  const autoEndCheckbox = document.querySelector('#autoEndTurn');
 
+  // Henchmen Info
   const henchmanImage = document.querySelector('#henchman');
   const henchName = document.querySelector('#henchName');
   const health = document.querySelector('#health');
   const healthBar = document.querySelector('#henchmenHealth2');
-
   const threshold = document.querySelector('#threshold');
   const range = document.querySelector('#range');
   const staminaPenalty = document.querySelector('#staminaPenalty');
@@ -38,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const healingFactor = document.querySelector('#healingFactor');
   const currencyGiven = document.querySelector('#currencyGiven');
   
+  // Next Henchman Info
   const henchName2 = document.querySelector('#henchName2');
   const threshold2 = document.querySelector('#threshold2');
   const range2 = document.querySelector('#range2');
@@ -46,61 +54,119 @@ document.addEventListener('DOMContentLoaded', function() {
   const healingFactor2 = document.querySelector('#healingFactor2');
   const currencyGiven2 = document.querySelector('#currencyGiven2');
 
+  // Player Info
   const stamina = document.querySelector('#stamina');
   const score = document.querySelector('#score');
   const currency = document.querySelector('#money');
 
+  // Dice Area
   const diceArea = document.querySelector("#diceArea");
   const specialDiceArea = document.querySelector('#specialDice');
-
+  
+  // Directory
   // const testDirectoryBtn = document.querySelector('#testDirectory');
   const directoryCont = document.querySelector('#directoryContainer');
 
-  const regainStaminaBtn = document.querySelector('#regainStamina');
-  const visitShopBtn = document.querySelector('#visitShop');
-  const visitWorkshopBtn = document.querySelector('#visitWorkshop');
-  
-  const autoEndCheckbox = document.querySelector('#autoEndTurn');
-
   const consumableBag = document.querySelector('#consumableBag');
-//endregion
 
-  stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
-  score.innerHTML = "Score: " + player.score;
-  currency.innerHTML = "Money: " + player.currency;
+//#endregion
 
-  populateBoons();
-
-//#region [Wave of Henchmen]
+//#region [Variables]
   let waveHenchmen = [];
-  for (let i = 0; i < 1; i++){
-    let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
-    let newHenchie = new Henchman(randHenchName, player.wave);
-//#region [mushroom]
-    if (player.boonArray['mushroom']) {
-      newHenchie.health += player.boonArray['mushroom'].effects.bonusHealth;
-    }
+  let accumulatedTotal = 0;
 //#endregion
-//#region [scrubs]
-    if(player.boonArray['scrubs']) {
-      newHenchie.healingFactor += player.boonArray['scrubs'].effects.healingFactor;
-    }
-//#endregion
-    waveHenchmen.push(newHenchie);
-  }
-  // waveHenchmen.push(henchArray['Grunt']);
-  waveHenchmen.push(henchArray['Beetle']);
-  waveHenchmen.push(henchArray['Bokoblin']);
-  waveHenchmen.push(henchArray['Space Invader']);
-  waveHenchmen.push(henchArray['Stuart the Minion']);
-  waveHenchmen.push(henchArray['Turret']);
-  waveHenchmen.push(henchArray['Koopa Troopa']);
-  // console.log(waveHenchmen);
-  // Alter last to be stronger 'boss' henchmen with more health
-  // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
 
-  // console.log(waveHenchmen);
-  function updateHenchmen() {
+//#region [Initialize Game]
+  updatePlayerInfo();
+  populateBoons();
+  populateConsumables()
+  createHenchmenWave();
+  populateDiceArea();
+  const dieButtons = document.querySelectorAll('.die-btn');
+//#endregion
+
+//#region [Event Listeners]
+
+  btnRoll.addEventListener("click", (e) => {
+    rollDice();
+  });
+
+  btnResetDice.addEventListener("click", (e) => {
+    resetDice();
+  });
+
+  btnEndTurn.addEventListener("click", (e) => {
+    endTurn();
+  });
+
+  btnGoShop.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'shop.html';
+  });
+
+  btnGoWorkshop.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'workshop.html';
+  });
+
+  // testDirectoryBtn.addEventListener("click", (e) => {
+  //   if (directoryCont.style.display != 'block') {
+  //     directoryCont.style.display = 'block';
+  //   } else {
+  //     directoryCont.style.display = 'none';
+  //   }
+  // });
+
+  visitShopBtn.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'shop.html';
+  });
+  
+  visitWorkshopBtn.addEventListener("click", (e) => {
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'workshop.html';
+  });
+
+  regainStaminaBtn.addEventListener("click", (e) => {
+    player.changeStamina(100);
+    localStorage.setItem('player', JSON.stringify(player));
+    window.location.href = 'game.html';
+  });
+
+  dieButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      this.classList.toggle('selected');
+      this.classList.toggle('current');
+    });
+  });
+
+//#endregion
+
+//#region [functions]  
+
+  function populateConsumables() {
+    for (let key in player.items) {
+      // console.log("test");
+      if (player.items.hasOwnProperty(key)) {
+        if (key == 'supplement') {
+          // If the subarray isn't of type Consumable  
+          for (let i = 0; i < player.items[key].length; i++) {
+            let newConsumable = document.createElement("button");
+            newConsumable.innerHTML = `Add ${player.items[key][i].bonus} to your total!`;
+            consumableBag.appendChild(newConsumable);
+          }
+        }
+      }
+    }
+  }
+
+  function updatePlayerInfo() {
+    stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
+    score.innerHTML = "Score: " + player.score;
+    currency.innerHTML = "Money: " + player.currency;
+  }
+
+  function updateHenchmenInfo() {
     henchName.innerHTML = waveHenchmen[0].name;
     health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
     healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`; 
@@ -125,214 +191,18 @@ document.addEventListener('DOMContentLoaded', function() {
       damage2.innerHTML = "Malpractice Damage: " + waveHenchmen[1].damage;
       currencyGiven2.innerHTML = "Currency Given: " + waveHenchmen[1].currencyGiven;
     }
-
-  }
-
-  updateHenchmen();
-//#endregion
-
-  // Add dice to the diceArea
-  for (let i = 0; i < player.diceArray.length; i++) {
-    diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
-  }
-  // let testItem = new Dice('d8');
-  // testItem.name = testItem.typeOf;
-  // player.addItem(testItem);
-
-  // console.log(player.items);
-  specialDiceArea.innerHTML = "";
-  // Add special dice to the specialDiceArea
-  for (let key in player.items) {
-    // console.log("test");
-    if (player.items.hasOwnProperty(key)) {
-      if (key != 'supplement') {
-        // If the subarray isn't of type Consumable  
-        for (let i = 0; i < player.items[key].length; i++) {
-          let newItem = document.createElement('button');
-          newItem.id = "specialDice" + player.items[key][i].typeOf;
-          newItem.classList.add("die-btn", "temporary", player.items[key][i].typeOf);
-          newItem.setAttribute('data-info', i);
-          newItem.innerHTML = player.items[key][i].typeOf;
-          specialDiceArea.appendChild(newItem);
-        }
-      }
-    }
-  }
-  
-
-  // Add consumables to the consumable area 
-  for (let key in player.items) {
-    // console.log("test");
-    if (player.items.hasOwnProperty(key)) {
-      if (key == 'supplement') {
-        // If the subarray isn't of type Consumable  
-        for (let i = 0; i < player.items[key].length; i++) {
-          let newConsumable = document.createElement("button");
-          newConsumable.innerHTML = `Add ${player.items[key][i].bonus} to your total!`;
-          consumableBag.appendChild(newConsumable);
-        }
-      }
-    }
-  }
-
-
-
-  btnRoll.addEventListener("click", (e) => {
-    rollDice();
-  });
-
-  btnEndTurn.addEventListener("click", (e) => {
-    resetDice();
-  });
-
-  btnGoShop.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'shop.html';
-  });
-  btnGoWorkshop.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'workshop.html';
-  });
-
-  // testDirectoryBtn.addEventListener("click", (e) => {
-  //   if (directoryCont.style.display != 'block') {
-  //     directoryCont.style.display = 'block';
-  //   } else {
-  //     directoryCont.style.display = 'none';
-  //   }
-  // });
-  visitShopBtn.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'shop.html';
-  });
-  visitWorkshopBtn.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'workshop.html';
-  });
-  regainStaminaBtn.addEventListener("click", (e) => {
-    player.changeStamina(100);
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'game.html';
-  });
-
-  var dieButtons = document.querySelectorAll('.die-btn');
-  dieButtons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      this.classList.toggle('selected');
-    });
-  });
-
-
-  function rollResult(total, selectedDice) {
-
-    if (waveHenchmen[0].threshold - waveHenchmen[0].range <= total && total <= waveHenchmen[0].threshold + waveHenchmen[0].range) { // Player must roll between the range
-
-      let healAmount = waveHenchmen[0].healingFactor;
-
-      if (waveHenchmen[0].threshold == total) {
-        healAmount *= 2;
-        gameLog.innerHTML += "Critically healing for: " + healAmount + "<br><br>";
-      } else {
-        gameLog.innerHTML += "Healing for: " + healAmount + "<br><br>";
-      }
-
-      waveHenchmen[0].health += healAmount;
-
-//#region [beamSword]
-      if (player.boonArray['beamSword'] && 
-      (waveHenchmen[0].threshold * player.boonArray['beamSword'].effects.thresholdFactor) <= total) {
-        
-        if (Math.random() < player.boonArray['beamSword'].effects.healChance) {
-          waveHenchmen[0].health += player.boonArray['beamSword'].effects.healAmount;
-
-          gameLog.innerHTML += " And another" + player.boonArray['beamSword'].effects.healAmount + " from Beam Sword<br><br>";
-        } else {
-          gameLog.innerHTML += "<br><br>";
-        }
-      }
-//#endregion
-
-      selectedDice.forEach(function(dieBtn) {
-        dieBtn.classList.add("success");
-      });
-
-      health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
-      if ((waveHenchmen[0].health / waveHenchmen[0].maxHealth) >= 1) {
-        healthBar.style.width = '100%';
-      } else {
-        healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
-      }
-    } else {
-      waveHenchmen[0].health -= waveHenchmen[0].damage;
-
-      updateHenchmen();
-      selectedDice.forEach(function(dieBtn) {
-        dieBtn.classList.add("failure");
-      });
-
-      if (waveHenchmen[0].isDead()) {
-        gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
-        if (waveHenchmen.length > 1) {
-          nextHenchman();
-        } else {
-          // Wave is finished, update wave and go to shop
-          // TODO allow selection of shop, workshop, or stamina regain
-          player.wave += 1;
-          directoryCont.style.display = 'block';
-        }
-      }
-
-    }
-
-    if (waveHenchmen[0].isFullHealth() || 
-    // Tetris Piece
-    (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
-
-//#region [gloves]
-      if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
-        let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
-        restoreStamina = Math.round(restoreStamina);
-        player.changeStamina(restoreStamina);
-
-        gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
-      }
-//#endregion
-
-      player.score += waveHenchmen[0].scoreGiven;
-
-      gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
-
-//#region [elderScroll]
-      if (player.boonArray['elderScroll']) {
-        player.currency += player.boonArray['elderScroll'].effects.goldBonus;
-      }
-//#endregion
-
-      player.currency += waveHenchmen[0].currencyGiven;
-      player.changeStamina(30);
-      if (waveHenchmen.length > 1) {
-        nextHenchman();
-      } else {
-        // Wave is finished, update wave and go to shop
-        // TODO allow selection of shop, workshop, or stamina regain
-        player.wave += 1;
-        directoryCont.style.display = 'block';
-      }
-    }
   }
 
   function nextHenchman() {
     waveHenchmen.shift();
     gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
     
-    updateHenchmen();
-    stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
-    score.innerHTML = "Score: " + player.score;
-    currency.innerHTML = "Money: " + player.currency;
+    updateHenchmenInfo();
+    updatePlayerInfo();
   }
 
   function rollDice() {
-    var selectedDice = document.querySelectorAll('.die-btn.selected');
+    const selectedDice = document.querySelectorAll('.die-btn.selected.current');
 
     if (selectedDice.length === 0) {
       alert("Please select at least one die to roll.");
@@ -405,15 +275,141 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
-    gameLog.innerHTML += results.join('<br>') + "<br>Total: " + totalResult + "<br><br>";
-    
-    // Disable selected die buttons after rolling
+    accumulateTotal(totalResult);
+
     selectedDice.forEach(function(dieBtn) {
-      dieBtn.classList.remove('selected');
+      dieBtn.classList.remove('current');
       dieBtn.disabled = true;
     });
+
+    gameLog.innerHTML += results.join('<br>') + "<br>Current Total: " + accumulatedTotal + "<br><br>";
     
-    rollResult(totalResult, selectedDice);
+    // // Disable selected die buttons after rolling
+    // selectedDice.forEach(function(dieBtn) {
+    //   dieBtn.classList.remove('selected');
+    //   dieBtn.disabled = true;
+    // });
+    
+    // rollResult(totalResult, selectedDice);
+
+    // if (allDisabled() && autoEndCheckbox.checked) {
+    //   resetDice();
+    // }
+  }
+
+  function accumulateTotal(total) {
+    accumulatedTotal += total;
+  }
+
+  function rollResult(total, selectedDice) {
+
+    if (waveHenchmen[0].threshold - waveHenchmen[0].range <= total && total <= waveHenchmen[0].threshold + waveHenchmen[0].range) { // Player must roll between the range
+
+      let healAmount = waveHenchmen[0].healingFactor;
+
+      if (waveHenchmen[0].threshold == total) {
+        healAmount *= 2;
+        gameLog.innerHTML += "Critically healing for: " + healAmount + "<br><br>";
+      } else {
+        gameLog.innerHTML += "Healing for: " + healAmount + "<br><br>";
+      }
+
+      waveHenchmen[0].health += healAmount;
+
+//#region [beamSword]
+      if (player.boonArray['beamSword'] && 
+      (waveHenchmen[0].threshold * player.boonArray['beamSword'].effects.thresholdFactor) <= total) {
+        
+        if (Math.random() < player.boonArray['beamSword'].effects.healChance) {
+          waveHenchmen[0].health += player.boonArray['beamSword'].effects.healAmount;
+
+          gameLog.innerHTML += " And another" + player.boonArray['beamSword'].effects.healAmount + " from Beam Sword<br><br>";
+        } else {
+          gameLog.innerHTML += "<br><br>";
+        }
+      }
+//#endregion
+
+      selectedDice.forEach(function(dieBtn) {
+        dieBtn.classList.add("success");
+      });
+
+      health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
+      if ((waveHenchmen[0].health / waveHenchmen[0].maxHealth) >= 1) {
+        healthBar.style.width = '100%';
+      } else {
+        healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
+      }
+    } else {
+      waveHenchmen[0].health -= waveHenchmen[0].damage;
+
+      updateHenchmenInfo();
+      selectedDice.forEach(function(dieBtn) {
+        dieBtn.classList.add("failure");
+      });
+
+      if (waveHenchmen[0].isDead()) {
+        gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
+        if (waveHenchmen.length > 1) {
+          nextHenchman();
+        } else {
+          // Wave is finished, update wave and go to shop
+          // TODO allow selection of shop, workshop, or stamina regain
+          player.wave += 1;
+          directoryCont.style.display = 'block';
+        }
+      }
+
+    }
+
+    if (waveHenchmen[0].isFullHealth() || 
+    // Tetris Piece
+    (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
+
+//#region [gloves]
+      if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
+        let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
+        restoreStamina = Math.round(restoreStamina);
+        player.changeStamina(restoreStamina);
+
+        gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
+      }
+//#endregion
+
+      player.score += waveHenchmen[0].scoreGiven;
+
+      gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
+
+//#region [elderScroll]
+      if (player.boonArray['elderScroll']) {
+        player.currency += player.boonArray['elderScroll'].effects.goldBonus;
+      }
+//#endregion
+
+      player.currency += waveHenchmen[0].currencyGiven;
+      player.changeStamina(30);
+      if (waveHenchmen.length > 1) {
+        nextHenchman();
+      } else {
+        // Wave is finished, update wave and go to shop
+        // TODO allow selection of shop, workshop, or stamina regain
+        player.wave += 1;
+        directoryCont.style.display = 'block';
+      }
+    }
+  }
+
+  function endTurn() {
+    const selectedDice = document.querySelectorAll('.die-btn.selected');
+    
+    // Disable selected die buttons after ending turn
+    selectedDice.forEach(function(dieBtn) {
+      dieBtn.classList.remove('selected');
+    });
+
+    rollResult(accumulatedTotal, selectedDice);
+
+    accumulatedTotal = 0;
 
     if (allDisabled() && autoEndCheckbox.checked) {
       resetDice();
@@ -437,7 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
       buttons[i].disabled = false;
       // buttons[i].style.color = "black";
       // buttons[i].style.textShadow = "none";
-      buttons[i].classList.remove("success", "failure");
+      buttons[i].classList.remove("success", "failure", "selected", "current");
     }
 
     if (!waveHenchmen[0].isFullHealth()) {
@@ -445,6 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let staminaLost = waveHenchmen[0].staminaPenalty;
 
       gameLog.innerHTML += "Stamina lost at end of turn: " + waveHenchmen[0].staminaPenalty + "<br><br>";
+      gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
 
 //#region [crowbar]
       if (player.boonArray['crowbar'] && player.boonArray['crowbar'].effects.staminaLost < staminaLost) {
@@ -523,4 +520,66 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-});
+
+  function createHenchmenWave() {
+    for (let i = 0; i < 1; i++){
+      let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
+      let newHenchman = new Henchmen(randHenchName, player.wave);
+//#region [mushroom]
+      if (player.boonArray['mushroom']) {
+        newHenchman.health += player.boonArray['mushroom'].effects.bonusHealth;
+      }
+//#endregion
+//#region [scrubs]
+      if(player.boonArray['scrubs']) {
+        newHenchman.healingFactor += player.boonArray['scrubs'].effects.healingFactor;
+      }
+//#endregion
+      waveHenchmen.push(newHenchman);
+    }
+    // waveHenchmen.push(henchArray['Grunt']);
+    waveHenchmen.push(henchArray['Beetle']);
+    waveHenchmen.push(henchArray['Bokoblin']);
+    waveHenchmen.push(henchArray['Space Invader']);
+    waveHenchmen.push(henchArray['Stuart the Minion']);
+    waveHenchmen.push(henchArray['Turret']);
+    waveHenchmen.push(henchArray['Koopa Troopa']);
+    // console.log(waveHenchmen);
+    // Alter last to be stronger 'boss' henchmen with more health
+    // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
+  
+    // console.log(waveHenchmen);
+  
+    updateHenchmenInfo();
+  }
+
+  function populateDiceArea() {
+    for (let i = 0; i < player.diceArray.length; i++) {
+      diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
+    }
+    // let testItem = new Dice('d8');
+    // testItem.name = testItem.typeOf;
+    // player.addItem(testItem);
+
+    // console.log(player.items);
+    // console.log(player);
+    specialDiceArea.innerHTML = "";
+    // Add special dice to the specialDiceArea
+    for (let key in player.items) {
+      // console.log("test");
+      if (player.items.hasOwnProperty(key)) {
+        for (let i = 0; i < player.items[key].length; i++) {
+          let newItem = document.createElement('button');
+          newItem.id = "specialDice" + player.items[key][i].typeOf;
+          newItem.classList.add("die-btn", "temporary", player.items[key][i].typeOf);
+          newItem.setAttribute('data-info', i);
+          newItem.innerHTML = player.items[key][i].typeOf;
+          specialDiceArea.appendChild(newItem);
+        }
+      }
+    }
+  }
+
+//#endregion
+
+}); // END DOMContentLoaded
