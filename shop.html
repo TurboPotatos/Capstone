@@ -18,145 +18,148 @@
     <a href="shop.html">Shop</a>
     <a href="workshop.html">Workshop</a>
   </div> -->
-  <div class="wrapper unselectable">
-    <div id="devTools">
-      <div id="playerInfo">See Player Info</div>
-      <div id="addMoneys">Aquire Currency</div>
-      <div>Current Currency: <span id="currentCurrency">0</span></div>
-    </div>
-
-    <div id="coffeeWrapper">
-      <div class="vendingMachine coffeeFront">
-
-        <div class="vendingMachine coffeeDispenser coffeeMachine">
-          <span class="tooltip">Test</span>
-        </div>
-        
-        <div class="vendingMachine coffeeKeypadFrame">
-          <div class="vendingMachine lcdScreen">
-            
-          </div>
-
-          <div class="vendingMachine numPad">
-            <button id="buyItem">Buy Some Coffee!</button>
-          </div>
-        </div>
-
-        <div class="vendingMachine coffeeBillSlot">
-
-        </div>
-
-        <div class="vendingMachine coffeeCoinSlot">
-
-        </div>
-
-        <div class="vendingMachine changeReturn">
-          <div></div>
-        </div>
-
+  <div class="wrapperWrapper unselectable">
+    <div class="wrapper unselectable">
+      <div id="devTools">
+        <div id="playerInfo">See Player Info</div>
+        <div id="addMoneys">Aquire Currency</div>
+        <div>Current Currency: <span id="currentCurrency">0</span></div>
       </div>
-    </div>
 
-    <div id="vendWrapper">
-      <div class="vendingMachine front">
+      <div id="coffeeWrapper">
+        <div class="vendingMachine coffeeFront">
 
-        <div class="vendingMachine storage">
+          <div class="vendingMachine coffeeDispenser coffeeMachine">
+            <span class="tooltip">Test</span>
+          </div>
           
-          <div class="vendingMachine rows">
-            <table>
-              <tbody>
+          <div class="vendingMachine coffeeKeypadFrame">
+            <div class="vendingMachine lcdScreen">
+              
+            </div>
+
+            <div class="vendingMachine numPad">
+              <button id="buyItem">Buy Some Coffee!</button>
+            </div>
+          </div>
+
+          <div class="vendingMachine coffeeBillSlot">
+
+          </div>
+
+          <div class="vendingMachine coffeeCoinSlot">
+
+          </div>
+
+          <div class="vendingMachine changeReturn">
+            <div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="vendWrapper">
+        <div class="vendingMachine front">
+
+          <div class="vendingMachine storage">
+            
+            <div class="vendingMachine rows">
+              <table>
+                <tbody>
+                  <tr class="row1">
+                    <td class="col1 slot"></td>
+                    <td class="col2 slot"></td>
+                    <td class="col3 slot"></td>
+                  </tr>
+                  <tr class="row2">
+                    <td class="col1 slot"></td>
+                    <td class="col2 slot"></td>
+                    <td class="col3 slot"></td>
+                  </tr>
+                  <tr class="row3">
+                    <td class="col1 slot"></td>
+                    <td class="col2 slot"></td>
+                    <td class="col3 slot"></td>
+                  </tr>
+                  <tr class="row4">
+                    <td class="col1 slot"></td>
+                    <td class="col2 slot"></td>
+                    <td class="col3 slot"></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+          <div class="vendingMachine window">
+
+          </div>
+
+          <div class="vendingMachine keypadFrame">
+            <div class="vendingMachine lcdScreen" id="lcdScreen"></div>
+
+            <div class="vendingMachine numPad">
+              <table>
                 <tr class="row1">
-                  <td class="col1 slot"></td>
-                  <td class="col2 slot"></td>
-                  <td class="col3 slot"></td>
+                  <td class="col1 numPadInput" data-info="A">A</td>
+                  <td class="col2 numPadInput" data-info="B">B</td>
+                  <td class="col3 numPadInput" data-info="C">C</td>
                 </tr>
                 <tr class="row2">
-                  <td class="col1 slot"></td>
-                  <td class="col2 slot"></td>
-                  <td class="col3 slot"></td>
+                  <td class="col1 numPadInput" data-info="1">1</td>
+                  <td class="col2 numPadInput" data-info="2">2</td>
+                  <td class="col3 numPadInput" data-info="3">3</td>
                 </tr>
                 <tr class="row3">
-                  <td class="col1 slot"></td>
-                  <td class="col2 slot"></td>
-                  <td class="col3 slot"></td>
+                  <td class="col1 numPadInput" data-info="backspace">&lt;X</td>
+                  <td class="col2 numPadInput" data-info="4">4</td>
+                  <td class="col3 numPadInput" data-info="GO">GO</td>
                 </tr>
-                <tr class="row4">
-                  <td class="col1 slot"></td>
-                  <td class="col2 slot"></td>
-                  <td class="col3 slot"></td>
-                </tr>
-              </tbody>
-            </table>
+              </table>
+            </div>
+          </div>
+
+          <div class="vendingMachine billSlot">
+
+          </div>
+
+          <div class="vendingMachine coinSlot">
+
+          </div>
+
+          <div class="vendingMachine changeReturn">
+            <div></div>
+          </div>
+
+          <div class="vendingMachine itemRetrieval">
 
           </div>
 
         </div>
-        <div class="vendingMachine window">
+      </div> <!-- endingMachine -->
+
+      <div id="diceMachineWrapper">
+        <div id="diceMachine">
 
         </div>
-
-        <div class="vendingMachine keypadFrame">
-          <div class="vendingMachine lcdScreen" id="lcdScreen"></div>
-
-          <div class="vendingMachine numPad">
-            <table>
-              <tr class="row1">
-                <td class="col1 numPadInput" data-info="A">A</td>
-                <td class="col2 numPadInput" data-info="B">B</td>
-                <td class="col3 numPadInput" data-info="C">C</td>
-              </tr>
-              <tr class="row2">
-                <td class="col1 numPadInput" data-info="1">1</td>
-                <td class="col2 numPadInput" data-info="2">2</td>
-                <td class="col3 numPadInput" data-info="3">3</td>
-              </tr>
-              <tr class="row3">
-                <td class="col1 numPadInput" data-info="backspace">&lt;X</td>
-                <td class="col2 numPadInput" data-info="4">4</td>
-                <td class="col3 numPadInput" data-info="GO">GO</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-
-        <div class="vendingMachine billSlot">
-
-        </div>
-
-        <div class="vendingMachine coinSlot">
-
-        </div>
-
-        <div class="vendingMachine changeReturn">
-          <div></div>
-        </div>
-
-        <div class="vendingMachine itemRetrieval">
-
-        </div>
-
       </div>
-    </div> <!-- endingMachine -->
 
-    <div id="diceMachineWrapper">
-      <div id="diceMachine">
+      <button id="returnToGameBtn"><span>Back to work!</span></button>
 
+      <div id="diceBox">
+        <div id="diceContainer">
+          <span id="message"></span>
+          <button id="buyDice" class="buyDice">Buy a dice!</button>
+          <div id="diceOptions"></div>
+          <button id="buyConsumables" style="display: none;" class="buyDice">Buy some consumables!</button>
+          <button id="backBtn">Back</button>
+        </div>
       </div>
-    </div>
+        
+    </div> <!-- END wrapper -->
+  </div> <!-- END wrapperWrapper -->
 
-    <button id="returnToGameBtn"><span>Back to work!</span></button>
-
-    <div id="diceBox">
-      <div id="diceContainer">
-        <span id="message"></span>
-        <button id="buyDice" class="buyDice">Buy a dice!</button>
-        <div id="diceOptions"></div>
-        <button id="buyConsumables" style="display: none;" class="buyDice">Buy some consumables!</button>
-        <button id="backBtn">Back</button>
-      </div>
-    </div>
-      
-  </div> <!-- END wrapper -->
   
   <script src="src/js/shop.js" type="module"></script>
 </body>

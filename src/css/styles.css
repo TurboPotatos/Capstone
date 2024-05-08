@@ -23,15 +23,26 @@
   padding: 0px 20px;
 }
 
-.wrapper {
-	width: 100vw;
-  height: 100vh;
+.wrapperWrapper {
+  /* border: solid red; */
   background-image: url(../media/background2.png);
 	background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.wrapper {
+  /* border: solid red; */
+  position: absolute;
+  width: 104rem;
+  height: 48rem;
+  left: 1vw;
+  top: 1vh;
+  bottom: 1vh;
+  right: 1vw;
+  background: transparent;
   position: relative;
-  align-items: stretch;
 }
 
 .container {

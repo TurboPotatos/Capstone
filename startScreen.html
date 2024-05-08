@@ -11,25 +11,26 @@
 </head>
 <body>
   
-  <div class="wrapper unselectable">
-    <div id="titleScreen">
-      
-      <h2>Henchmen Hospital</h2>
-      <h6 id="splashText"></h6>
+  <div class="wrapperWrapper unselectable">
+    <div class="wrapper unselectable">
+      <div id="titleScreen">
+        
+        <h2>Henchmen Hospital</h2>
+        <h6 id="splashText"></h6>
 
-      <div id="glados"></div>
-      <div id="splashImage"></div>
-    </div>
-    <div id="menuDiv">
+        <div id="glados"></div>
+        <div id="splashImage"></div>
+      </div>
+      <div id="menuDiv">
 
-      <!-- <h2>Game Settings</h2> -->
+        <!-- <h2>Game Settings</h2> -->
 
 
 
-      <br>
-      <button type="button" id="buyDice">Choose dice!</button>
-      
-    </div>
+        <br>
+        <button type="button" id="buyDice">Choose dice!</button>
+        
+      </div>
 
     <div id="nav">
       <a id="leaderboard" href="leaderboard.html">Leaderboard</a>
@@ -40,152 +41,154 @@
       <a id="logout" href="index.php?logout=1">Log Out</a>
     </div>
 
-    <div id="diceBox">
-      <div id="diceContainer">
+      <div id="diceBox">
+        <div id="diceContainer">
 
-        <form action="game.html" id="gameSettings">
-          <div id="menuDivDiv">
-            <label for="difficulty">Difficulty</label>
-            <br>
-            <input type="radio" name="difficulty" value="easy" required="yes" checked>
-            <label>Easy</label><br>
-            <input type="radio" name="difficulty" value="medium" required="yes">
-            <label>Medium</label><br>
-            <input type="radio" name="difficulty" value="hard" required="yes">
-            <label>Hard</label><br>
-            <input type="radio" name="difficulty" value="impossible" required="yes">
-            <label>Impossible</label>
-          </div>
-          <br><br>
-  
-          <div id="startBoonContainer">
-            <label for="startBoon">Starting Specialization</label>
-            <br>
-            <input type="radio" name="startBoon" value="psychology" required="yes" checked>
-            <label>Psychology</label><br>
-            <input type="radio" name="startBoon" value="trauma" required="yes">
-            <label>Trauma</label><br>
-            <input type="radio" name="startBoon" value="radiology" required="yes">
-            <label>Radiology</label><br>
-            <input type="radio" name="startBoon" value="cosmetic" required="yes">
-            <label>Cosmetic</label><br>
-            <input type="radio" name="startBoon" value="surgeon" required="yes">
-            <label>Surgeon</label><br>
-            <input type="radio" name="startBoon" value="optometry" required="yes">
-            <label>Optometry</label>
-
-            <br><br>
-            <div class="displayBoon"></div>
-          </div>
-          <br><br>
-  
-          <div id="diceSelect">
-            <h1>Dice Select</h1>
-            <h2>Currency Left: <span id="currencyRemaining">50</span></h2>
-            <br>
-  
-            <div class="dieSelectWrapperWrapper">
-              <div class="dieSelectWrapper">
-                <label for="d4">d4:</label>
-                Cost: <span id="d4Cost" class="costSpan">10</span> Max: <span id="d4Max" class="maxSpan">4</span>
-                
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d4" class="number-input" value="0" name="d4Count" data-info="d4" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="dieSelectWrapper">
-                <label for="d6">d6:</label>
-                Cost: <span id="d6Cost" class="costSpan">10</span> Max: <span id="d6Max" class="maxSpan">4</span>
-      
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d6" class="number-input" value="0" name="d6Count" data-info="d6" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="dieSelectWrapper">
-                <label for="d8">d8:</label>
-                Cost: <span id="d8Cost" class="costSpan">10</span> Max: <span id="d8Max" class="maxSpan">4</span>
-      
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d8" class="number-input" value="0" name="d8Count" data-info="d8" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="dieSelectWrapper">
-                <label for="d10">d10:</label>
-                Cost: <span id="d10Cost" class="costSpan">10</span> Max: <span id="d10Max" class="maxSpan">4</span>
-      
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d10" class="number-input" value="0" name="d10Count" data-info="d10" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="dieSelectWrapper">
-                <label for="d12">d12:</label>
-                Cost: <span id="d12Cost" class="costSpan">10</span> Max: <span id="d12Max" class="maxSpan">4</span>
-      
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d12" class="number-input" value="0" name="d12Count" data-info="d12" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
-    
-              <div class="dieSelectWrapper">
-                <label for="d20">d20:</label>
-                Cost: <span id="d20Cost" class="costSpan">10</span> Max: <span id="d20Max" class="maxSpan">4</span>
-      
-                <div class="number-input-container">
-                  <div>
-                    <input type="text" id="d20" class="number-input" value="0" name="d20Count" data-info="d20" disabled>
-                  </div>
-                  <div class="arrow-container">
-                    <span class="arrow up">▲</span>
-                    <span class="arrow down">▼</span>
-                  </div>
-                </div>
-              </div>
+          <form action="game.html" id="gameSettings">
+            <div id="menuDivDiv">
+              <label for="difficulty">Difficulty</label>
+              <br>
+              <input type="radio" name="difficulty" value="easy" required="yes" checked>
+              <label>Easy</label><br>
+              <input type="radio" name="difficulty" value="medium" required="yes">
+              <label>Medium</label><br>
+              <input type="radio" name="difficulty" value="hard" required="yes">
+              <label>Hard</label><br>
+              <input type="radio" name="difficulty" value="impossible" required="yes">
+              <label>Impossible</label>
             </div>
+            <br><br>
+    
+            <div id="startBoonContainer">
+              <label for="startBoon">Starting Specialization</label>
+              <br>
+              <input type="radio" name="startBoon" value="psychology" required="yes" checked>
+              <label>Psychology</label><br>
+              <input type="radio" name="startBoon" value="trauma" required="yes">
+              <label>Trauma</label><br>
+              <input type="radio" name="startBoon" value="radiology" required="yes">
+              <label>Radiology</label><br>
+              <input type="radio" name="startBoon" value="cosmetic" required="yes">
+              <label>Cosmetic</label><br>
+              <input type="radio" name="startBoon" value="surgeon" required="yes">
+              <label>Surgeon</label><br>
+              <input type="radio" name="startBoon" value="optometry" required="yes">
+              <label>Optometry</label>
+
+              <br><br>
+              <div class="displayBoon"></div>
+            </div>
+            <br><br>
+    
+            <div id="diceSelect">
+              <h1>Dice Select</h1>
+              <h2>Currency Left: <span id="currencyRemaining">50</span></h2>
+              <br>
+    
+              <div class="dieSelectWrapperWrapper">
+                <div class="dieSelectWrapper">
+                  <label for="d4">d4:</label>
+                  Cost: <span id="d4Cost" class="costSpan">10</span> Max: <span id="d4Max" class="maxSpan">4</span>
+                  
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d4" class="number-input" value="0" name="d4Count" data-info="d4" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
       
-          </div>
-  
-          <input type="submit" name="start" value="Start Game" id="startBtn">
-  
-        </form>
+                <div class="dieSelectWrapper">
+                  <label for="d6">d6:</label>
+                  Cost: <span id="d6Cost" class="costSpan">10</span> Max: <span id="d6Max" class="maxSpan">4</span>
+        
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d6" class="number-input" value="0" name="d6Count" data-info="d6" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="dieSelectWrapper">
+                  <label for="d8">d8:</label>
+                  Cost: <span id="d8Cost" class="costSpan">10</span> Max: <span id="d8Max" class="maxSpan">4</span>
+        
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d8" class="number-input" value="0" name="d8Count" data-info="d8" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="dieSelectWrapper">
+                  <label for="d10">d10:</label>
+                  Cost: <span id="d10Cost" class="costSpan">10</span> Max: <span id="d10Max" class="maxSpan">4</span>
+        
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d10" class="number-input" value="0" name="d10Count" data-info="d10" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="dieSelectWrapper">
+                  <label for="d12">d12:</label>
+                  Cost: <span id="d12Cost" class="costSpan">10</span> Max: <span id="d12Max" class="maxSpan">4</span>
+        
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d12" class="number-input" value="0" name="d12Count" data-info="d12" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="dieSelectWrapper">
+                  <label for="d20">d20:</label>
+                  Cost: <span id="d20Cost" class="costSpan">10</span> Max: <span id="d20Max" class="maxSpan">4</span>
+        
+                  <div class="number-input-container">
+                    <div>
+                      <input type="text" id="d20" class="number-input" value="0" name="d20Count" data-info="d20" disabled>
+                    </div>
+                    <div class="arrow-container">
+                      <span class="arrow up">▲</span>
+                      <span class="arrow down">▼</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        
+            </div>
+    
+            <input type="submit" name="start" value="Start Game" id="startBtn">
+    
+          </form>
 
-        <button id="backBtn">Back</button>
-    </div>
+          <button id="backBtn">Back</button>
+        </div>
+      </div>
 
-  </div>
+    </div> <!-- END wrapper -->
+  </div> <!-- END wrapperWrapper -->
 
 
   <script>
@@ -214,6 +217,7 @@
     "Survival is a roll of the dice",
     "Never tell me the odds",
     "No copyright infringement intended",
+    "It's not a bug, it's a feature",
     "News team... ASSEMBLE!!!",
     "Rated #1 in Henchmaniacs magazine!",
     "Not all heroes wear capes, but all members of our staff do",
