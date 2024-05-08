@@ -227,3 +227,96 @@ td::after{
 #returnToGameBtn:hover span {
   display: inline;
 }
+
+.button-container {
+  border: solid blue;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  width: 90%;
+  height: 40%;
+  top: 10%;
+  left: 5%;
+  transform-style: preserve-3d;
+}
+.die-btn {
+  margin: 1.1%;
+  border: none;
+  /* padding: 0; */
+  background: transparent;
+  /* background-image: url(../../src/media/Dice/d20.png); */
+  background-size: contain; /* Adjusts the image size to cover the entire button */
+  background-position: center; /* Centers the image within the button */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  color: black;
+  /* font-family:; */
+  font-size: 2.4rem;
+  font-weight: bolder;
+  cursor: pointer;
+  /* width: 20%;
+  height: 80%; */
+  width: 80px;
+  height: 80px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  position: relative;
+  float: left;
+  /* box-sizing: border-box; */
+  background-blend-mode: overlay;
+  z-index: 1;
+}
+.die-btn:after {
+  content: '';
+  position: absolute;
+  float: left;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color: var(--dieBtnAfterBGColor, cadetblue);
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  z-index: -10;
+}
+
+.d4:after {
+  background-image: url(../../src/media/Dice/d4.png);
+  mask-image: url(../../src/media/Dice/background_d4.png);
+}
+.d6:after {
+  background-image: url(../../src/media/Dice/d6.png);
+  mask-image: url(../../src/media/Dice/background_d6.png);
+}
+.d8:after {
+  background-image: url(../../src/media/Dice/d8.png);
+  mask-image: url(../../src/media/Dice/background_d8.png);
+}
+.d10:after {
+  background-image: url(../../src/media/Dice/d10.png);
+  mask-image: url(../../src/media/Dice/background_d10.png);
+}
+.d12:after {
+  background-image: url(../../src/media/Dice/d12.png);
+  mask-image: url(../../src/media/Dice/background_d12.png);
+}
+.d20:after {
+  background-image: url(../../src/media/Dice/d20.png);
+  mask-image: url(../../src/media/Dice/background_d20.png);
+}
+
+.selected {
+  /* box-shadow: #25d34a 0 0 10px; */
+  color: blue;
+  font-size: 2.8rem;
+  text-shadow: 5px 5px 20px whitesmoke, 
+               -5px 5px 20px whitesmoke, 
+               5px -5px 20px whitesmoke, 
+               -5px -5px 20px whitesmoke;
+  top: -0.5rem;
+}
