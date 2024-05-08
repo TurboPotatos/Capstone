@@ -24,8 +24,6 @@
   display: none;
 }
 
-
-
 .clientTabs {
   position: absolute;
   top: 100px;
@@ -334,11 +332,11 @@ tr:nth-child(odd) {
 }
 
 #directoryContainer {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, .6);
   display: none;
   z-index: 1111;
@@ -365,9 +363,11 @@ tr:nth-child(odd) {
 }
 
 #gameOverMessage {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
   background-color: rgba(0,0,0,.8);
   z-index: 1112;
   display: none;
