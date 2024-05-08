@@ -125,15 +125,15 @@ for (let i = 0; i < player.diceArray.length; i++) {
   newDiceDisplay.textContent = player.diceArray[i].typeOf;
   newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + newDiceDisplay.textContent + ".png')";
   
-  newDiceDisplay.classList.add("die-btn");
-  newDiceDisplay.classList.add(player.diceArray[i].typeOf);
-  newDice.classList.add(player.diceArray[i].typeOf);
-
   newDiceDisplay.classList.add("diceListDisplay");
   newDice.classList.add("diceListItem");
 
   newDiceDisplay.classList.add('displayMatchClass_' + i);
   newDice.classList.add('displayMatchClass_' + i);
+  
+  newDiceDisplay.classList.add("die-btn");
+  newDiceDisplay.classList.add(player.diceArray[i].typeOf);
+  newDice.classList.add(player.diceArray[i].typeOf);
 
   diceList.appendChild(newDiceDisplay);
   diceList.appendChild(newDice);
