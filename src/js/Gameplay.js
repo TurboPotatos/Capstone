@@ -1,12 +1,6 @@
-import { Henchman, henchArray } from "./Henchman.js";
-import { henchNameArray } from "./Henchman.js";
-import { henchPicArray } from "./Henchman.js";
+import { Henchman, henchArray, henchNameArray, henchPicArray } from "./Henchman.js";
 import { Player } from "./Player.js";
-import { Boon } from "./Boon.js";
-import { boonArray } from "./Boon.js";
-import { Dice } from "./Dice.js";
 import { Consumable } from "./Consumable.js";
-
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
@@ -154,6 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
             let newConsumable = document.createElement("button");
             newConsumable.innerHTML = `Add ${player.items[key][i].bonus} to your total!`;
             consumableBag.appendChild(newConsumable);
+
+            newConsumable.addEventListener("click", (e) => {
+              accumulatedTotal += player.items[key][i].bonus;
+              gameLog.innerHTML += "Added " + player.items[key][i].bonus + " to Total<br>";
+              gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
+            });
           }
         }
       }
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function createHenchmenWave() {
     for (let i = 0; i < 1; i++){
       let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
-      let newHenchman = new Henchmen(randHenchName, player.wave);
+      let newHenchman = new Henchman(randHenchName, player.wave);
 //#region [mushroom]
       if (player.boonArray['mushroom']) {
         newHenchman.health += player.boonArray['mushroom'].effects.bonusHealth;

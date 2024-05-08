@@ -1,7 +1,5 @@
 import { Player } from "./Player.js";
-import { Boon } from "./Boon.js";
 import { boonArray } from "./Boon.js";
-import { Game } from "./Game.js";
 import { Dice } from "./Dice.js";
 
 let currency = 50;
@@ -11,7 +9,7 @@ let currencyRemaining = document.querySelector('#currencyRemaining');
 let gameSettingsForm = document.querySelector("#gameSettings");
 
 // Select dice buy inputs
-let diceBuys = document.querySelectorAll('input[type="text"]');
+// let diceBuys = document.querySelectorAll('input[type="text"]');
 
 let costSpans = document.querySelectorAll('.costSpan');
 let maxSpans = document.querySelectorAll('.maxSpan');

@@ -382,3 +382,17 @@ tr:nth-child(odd) {
   width: 100%;
   top: 20%;
 }
+
+#consumableBag {
+  border: 3px solid yellow;
+  position: absolute;
+  height: 18%;
+  width: 23%;
+  top: 30%;
+}
+#consumableBag button {
+  margin: 1rem;
+  padding: .5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+}
