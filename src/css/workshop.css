@@ -65,7 +65,6 @@ td::after{
 }
 .diceListWrapper {
   /* background-color: green; */
-  border-bottom: 1px solid rgba(68, 48, 17, 0.904);
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -106,7 +105,7 @@ td::after{
 }
 
 .shelf-table td {
-  border-bottom: 2px solid #ddd; 
+  border-bottom: 2px solid #ffffff; 
   height: 200px;
 }
 
@@ -156,7 +155,7 @@ td::after{
   position: relative;
   float: left;
   height: 70%;
-  width: 40%;
+  width: 50%;
   top: 10%;
   left: 25%;
   /* background-image: url(../media/texture2.png); */

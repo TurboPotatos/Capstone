@@ -170,6 +170,8 @@ tr:nth-child(odd) {
 	overflow-y: auto;
   overflow-x: hidden;
   transition: right 0.5s;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #gameLogs.collapsed {

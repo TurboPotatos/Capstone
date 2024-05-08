@@ -299,10 +299,10 @@ input[type='number'] {
 .left, .right {
   flex: 1;
   transform: rotateY(20deg) translateZ(-50px);
-  background-color: #8a6a41;
+  background-color: #dddcda;
 }
 .center {
-  background-color: #614828;
+  background-color: #fffbf6;
   flex: 2;
   margin-left: -10%; 
   margin-right: -10%;
