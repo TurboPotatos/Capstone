@@ -16,6 +16,66 @@ let diceBuys = document.querySelectorAll('input[type="text"]');
 let costSpans = document.querySelectorAll('.costSpan');
 let maxSpans = document.querySelectorAll('.maxSpan');
 
+let boonSelects = document.querySelectorAll('input[name^="startBoon"]');
+
+let displayBoon = document.querySelector(".displayBoon");
+
+displayBoon.addEventListener("click", () => {
+  let tooltip = displayBoon.querySelector('.tooltip')
+  if (tooltip.style.display != 'block'){
+    tooltip.style.display = 'block';
+  } else {
+    tooltip.style.display = 'none';
+  }
+});
+
+boonSelects.forEach((boonOption) => {
+  // Let selectedBoon become the selected value, if there is one
+  if (boonOption.checked) {
+    changeSelectedBoon(boonOption.value);
+  }
+  // Loop through and add an event listener to change selectedBoon if they are changed
+  boonOption.addEventListener('change', () => {
+    if (boonOption.checked) {
+      changeSelectedBoon(boonOption.value);
+    }
+  });
+});
+
+// Change the selected boon
+function changeSelectedBoon(boon) {
+  let selectedBoon;
+
+  switch (boon) {
+    case "psychology":
+      selectedBoon = boonArray['companionCube']; 
+    break;
+    case "optometry":
+      selectedBoon = boonArray['goggles']; 
+    break;
+    case "trauma":
+      selectedBoon = boonArray['diamondPickaxe']; 
+    break;
+    case "radiology":
+      selectedBoon = boonArray['portalGun']; 
+    break;
+    case "surgeon":
+      selectedBoon = boonArray['scalpel']; 
+    break;
+    case "cosmetic":
+      selectedBoon = boonArray['syringe']; 
+    break;
+  }
+
+  displayBoon.innerHTML = `
+  <h3>Selected Boon</h3><br>
+  <img src="../../${selectedBoon.filePath}" class="boon">
+    <span class="tooltip">
+    ${selectedBoon.description}
+    </span>
+  `;
+}
+
 // Store counts of how many of each dice
 let diceCount = {
   d4: 0,
