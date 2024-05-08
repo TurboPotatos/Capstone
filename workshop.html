@@ -19,27 +19,54 @@
     <a href="workshop.html">Workshop</a>
   </div> -->
   <div class="wrap">
-    <div class="left"></div>
-    <div class="center">
-      <table>
+    <div class="left">
+      <table class="shelf-table">
         <tr>
-          <td class="slot" id="slot1">Placeholder</td>
-          <td class="slot" id="slot2">Placeholder</td>
-          <td class="slot" id="slot3">Placeholder</td>          
+          <td><img src="src/media/Boons/boon_pillBottle.png" alt="pills"></td>
         </tr>
         <tr>
-          <td class="slot" id="slot4">Placeholder</td>
-          <td class="slot" id="slot5">Placeholder</td>
-          <td class="slot" id="slot6">Placeholder</td>          
+          <td><img src="src/media/Boons/boon_thermometer.png" alt=""></td>
         </tr>
         <tr>
-          <td class="slot" id="slot7">Placeholder</td>
-          <td class="slot" id="slot8">Placeholder</td>
-          <td class="slot" id="slot9">Placeholder</td>          
+          <td></td>
         </tr>
       </table>
     </div>
-    <div class="right"></div>
+    <div class="center">
+      <table>
+        <tr>
+          <td class="slot" id="slot1"></td>
+          <td class="slot" id="slot2"></td>
+          <td class="slot" id="slot3"></td>          
+        </tr>
+        <tr>
+          <td class="slot" id="slot4"></td>
+          <td class="slot" id="slot5"></td>
+          <td class="slot" id="slot6"></td>          
+        </tr>
+        <tr>
+          <td class="slot" id="slot7"></td>
+          <td class="slot" id="slot8"></td>
+          <td class="slot" id="slot9"></td>          
+        </tr>
+      </table>
+      <div class="diceListWrapper">
+        Modify Dice
+      </div>
+    </div>
+    <div class="right">
+      <table class="shelf-table">
+        <tr>
+          <td><img src="src/media/Boons/boon_tongueDepressor.png" alt=""></td>
+        </tr>
+        <tr>
+          <td><img src="src/media/Boons/boon_medicalBag.png" alt="med bag"></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+    </div>
 
     <div id="devTools">
       <div id="buyItem">Buy Item</div>
@@ -48,16 +75,19 @@
       <div id="playerInfo">See Player</div>
     </div>
 
-  </div>
 
-  <div class="diceListWrapper">
-    Modify Dice
+    <div id="modDiceBox">
+      <div id="modDiceContainer">
+        <div id="currentDice">
+          <ul class="diceList" style="display: none;"></ul>
+          <br><br><br><br><br>
+          <ul class="playerDiceFaces"><span id="playerFaces">Player Die Faces</span></ul>
+          <br><br><br><br><br><br>
+          <button id="modBackBtn">Back</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <ul class="diceList" style="display: none;"></ul>
-  <br>
-  <ul class="playerDiceFaces">Player Die Faces</ul>
-  <br><br><br><br><br><br>
-
   <button id="returnToGameBtn"><span>Back to Work!</span></button>
 
   <script src="./src/js/workshop.js" type="module"></script>

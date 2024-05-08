@@ -11,7 +11,7 @@
 }
 
 td{
-  border-bottom: 1px solid rgba(68, 48, 17, 0.904);
+  border-bottom: 2px solid #ddd;;
   text-align: center;
 }
 
@@ -33,14 +33,24 @@ td::after{
   cursor: pointer;
 }
 
+.diceList{
+  text-align: center;
+}
+
 .diceListDisplay {
   background-color: aliceblue;
   padding: 10px;
   margin: 5px;
-  border: 1px solid rgba(200, 200, 200, 1);
   display: inline-block;
   user-select: none;
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
 }
+
+
 .diceListDisplay:hover {
   cursor: pointer;
 }
@@ -54,9 +64,22 @@ td::after{
   user-select: none;
 }
 .diceListWrapper {
-  background-color: green;
-  position: relative;
+  /* background-color: green; */
+  border-bottom: 1px solid rgba(68, 48, 17, 0.904);
+  position: absolute;
   z-index: 1;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 25px;
+  margin-bottom: 10px;
+  
+}
+.diceListWrapper:hover{
+  cursor: pointer;
+  text-shadow: 2px 2px 5px rgb(136, 127, 100);
 }
 
 .active {
@@ -73,6 +96,25 @@ td::after{
   cursor: pointer;
 }
 
+.left, .right {
+  padding: 0 40px;
+  overflow-y: auto;
+}
+
+.shelf-table {
+  width: 90%;
+}
+
+.shelf-table td {
+  border-bottom: 2px solid #ddd; 
+  height: 200px;
+}
+
+.shelf-table td img{
+  max-width: 200px;
+  max-height: 200px;
+}
+
 .center td {
   /* position: relative; */
   /* top: 30%; */
@@ -83,7 +125,72 @@ td::after{
 .center > table {
   /* border: solid red; */
   position: relative;
+  height: 80%;
+}
+
+#modDiceBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 1007;
+}
+#modDiceBox:before {
+  content: '';
+  position: absolute;
+  float: left;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Adjust darkness here */
+  z-index: -1;
+  /* display: block; */
+}
+
+#modDiceContainer {
+  border: 1.5rem solid black;
+  border-radius: 5%;
+  position: relative;
+  float: left;
+  height: 70%;
+  width: 40%;
   top: 10%;
+  left: 25%;
+  /* background-image: url(../media/texture2.png); */
+  /* background-color: rgb(35, 52, 108); */
+  background-image: url(../media/background2.png);
+  background-size: cover;
+  box-sizing: border-box;
+  /* display: block; */
+  /* z-index: 1007; */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.playerDiceFaces{
+  position: absolute;
+  left: 40%;
+  color: white;
+  font-weight: 600;
+  font-size: large;
+}
+
+.playerDiceFaces>span:hover{
+  cursor: pointer;
+  border-bottom: 1px solid white;
+}
+
+
+#modBackBtn{
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
+  height: 8%;
+  width: 10%;
 }
 
 #returnToGameBtn {

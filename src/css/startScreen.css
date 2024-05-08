@@ -17,6 +17,53 @@
 	padding: 1.5rem;
 }
 
+#leaderboard{
+  color:midnightblue;
+  font-size: 30px;
+}
+#leaderboard:visited{
+  color:midnightblue;
+}
+#leaderboard:hover{
+  border-bottom: 1px solid midnightblue;
+}
+
+#history{
+  position: relative;
+  left: 2rem;
+  color:midnightblue;
+  font-size: 30px;
+}
+#history:hover{
+  border-bottom: 1px solid midnightblue;
+}
+
+#history:visited{
+  color:midnightblue;
+}
+
+#credits{
+  position: relative;
+  top: 2rem;
+  color:midnightblue;
+  font-size: 30px;
+}
+
+#credits:visited{
+  color:midnightblue;
+}
+
+#credits:hover{
+  border-bottom: 1px solid midnightblue;
+}
+
+#logout{
+  position: absolute;
+  bottom: 0;
+  color:navy;
+  font-size: 20px;
+}
+
 #splashText {
   position: relative;
   width: 60%;

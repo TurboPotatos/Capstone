@@ -123,6 +123,8 @@ for (let i = 0; i < player.diceArray.length; i++) {
 
   let newDiceDisplay = document.createElement('li');
   newDiceDisplay.textContent = player.diceArray[i].typeOf;
+  newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + newDiceDisplay.textContent + ".png')";
+  
 
   newDiceDisplay.classList.add("diceListDisplay");
   newDice.classList.add("diceListItem");
@@ -134,12 +136,17 @@ for (let i = 0; i < player.diceArray.length; i++) {
   diceList.appendChild(newDice);
 }
 
+const modDice = document.querySelector('#modDiceBox');
+const modBackBtn = document.querySelector('#modBackBtn');
+
 document.querySelector(".diceListWrapper").addEventListener("click", function() {
-  if (diceList.style.display != "block") {
-    diceList.style.display = "block";
-  } else {
-    diceList.style.display = "none";
-  }
+  modDice.style.display = "block";
+  diceList.style.display = "block";
+  
+});
+
+modBackBtn.addEventListener("click", (e) => {
+  modDice.style.display = "none";
 });
 
 document.querySelectorAll(".diceListItem").forEach(item => {
@@ -166,16 +173,17 @@ document.querySelectorAll(".diceListDisplay").forEach(displayNode => {
   displayNode.addEventListener("click", () => {
     let parent = document.querySelector(`.${displayNode.classList[1]}.diceListItem`);
     parent.querySelectorAll(".diceSide").forEach(diceFace => {
-      if (diceFace.style.display != "block") {
-        diceFace.style.display = "block";
+      if (diceFace.style.display != "inline") {
+        diceFace.style.display = "inline";
       } else {
         diceFace.style.display = "none";
       }
     });
-  })
+  });
 });
 
 let playerDiceSides = document.querySelector(".playerDiceFaces");
+let spanPlayerFaces = document.querySelector("#playerFaces");
 
 for(let i = 0; i < player.diceSideArray.length; i++) {
   // loop through and add all spare dice faces to the list, for dragging
@@ -193,7 +201,7 @@ for(let i = 0; i < player.diceSideArray.length; i++) {
   playerDiceSides.appendChild(newDiceSide);
 }
 
-playerDiceSides.addEventListener("click", () => {
+spanPlayerFaces.addEventListener("click", () => {
   playerDiceSides.querySelectorAll('.diceSide').forEach(diceSide => {
     if (diceSide.style.display != "block") {
       diceSide.style.display = "block";
