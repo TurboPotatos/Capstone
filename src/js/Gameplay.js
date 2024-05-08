@@ -243,7 +243,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (waveHenchmen[0].isDead()) {
         gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
-        nextHenchman();
+        if (waveHenchmen.length > 1) {
+          nextHenchman();
+        } else {
+          // Wave is finished, update wave and go to shop
+          // TODO allow selection of shop, workshop, or stamina regain
+          player.wave += 1;
+          directoryCont.style.display = 'block';
+        }
       }
 
     }
