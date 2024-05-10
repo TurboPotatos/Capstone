@@ -21,9 +21,21 @@
   <div class="wrapperWrapper unselectable">
     <div class="wrapper unselectable">
       <div id="devTools">
-        <div id="playerInfo">See Player Info</div>
+        <!-- <div id="playerInfo">See Player Info</div> -->
         <div id="addMoneys">Aquire Currency</div>
-        <div>Current Currency: <span id="currentCurrency">0</span></div>
+        <div id="boonBox">
+          <div id="leftArrow">◀</div>
+          <div id="rightArrow">▶</div>
+        </div>
+        <div id="playerData">
+          <div id="playerStamina">
+            <!-- Stamina -->
+            <div id="playerStaminaBar"></div>
+            <!-- BLue bar of stamina -->
+            <div id="stamina">Stamina: <span style="white-space: nowrap;">35/100</span></div>
+          </div>
+          <div id="currency">Current Currency: <span id="currentCurrency">0</span></div>
+        </div>
       </div>
 
       <div id="coffeeWrapper">
@@ -34,7 +46,7 @@
           </div>
           
           <div class="vendingMachine coffeeKeypadFrame">
-            <div class="vendingMachine lcdScreen">
+            <div class="vendingMachine lcdScreen coffeeLCD">
               
             </div>
 

@@ -15,6 +15,165 @@ document.querySelector("#currentCurrency").innerHTML = player.currency;
 let coffeeMachine = document.querySelector(".coffeeMachine")
 let coffeeTooltip = coffeeMachine.querySelector(".tooltip");
 
+// stamina is div for stamina TEXT
+const stamina = document.querySelector("#stamina");
+// visual bar stamina
+const staminaBar = document.querySelector("#playerStaminaBar");
+
+// box to contain player's boons
+const boonBox = document.querySelector("#boonBox");
+const leftArrow = boonBox.querySelector("#leftArrow");
+const rightArrow = boonBox.querySelector("#rightArrow")
+
+// leftArrow.style.display = "none";
+// rightArrow.style.display = "none";
+
+leftArrow.addEventListener("click", () => {scrollBoonBox("left")});
+rightArrow.addEventListener("click", () => {scrollBoonBox("right")});
+
+function scrollBoonBox(direction) {
+  // Scroll the container
+  const scrollAmount = boonBox.querySelector("img").width;
+
+  if (direction === 'left') {
+    boonBox.scrollLeft -= scrollAmount;
+  } else if (direction === 'right') {
+    boonBox.scrollLeft += scrollAmount;
+  }
+
+  // Move the arrows
+  leftArrow.style.left = `${boonBox.scrollLeft}px`;
+  rightArrow.style.right = `-${boonBox.scrollLeft}px`;
+
+  // Hide/Show boons based on if there's a need to scroll
+  if (boonBox.scrollWidth == boonBox.clientWidth) {
+    // Box is too small for a need to scroll
+    leftArrow.style.display = 'none';
+    rightArrow.style.display = 'none';
+  } else {
+    leftArrow.style.display = 'block';
+    rightArrow.style.display = 'block';
+  }
+}
+
+// populate boonBox
+for (let key in player.boonArray) {
+  if (player.boonArray.hasOwnProperty(key)) {
+
+    let newImgTag = document.createElement('img');
+
+    if (key === 'cuppaJoe') {
+      newImgTag.src = `../../${player.boonArray[key][0].filePath}`;
+    } else {
+      newImgTag.src = `../../${player.boonArray[key].filePath}`;
+    }
+
+    newImgTag.classList.add("boon");
+
+    let newSpanTag = document.createElement('span');
+    newSpanTag.innerHTML = player.boonArray[key].description;
+    newSpanTag.classList.add("tooltip");
+
+    boonBox.insertBefore(newImgTag, rightArrow);
+    newImgTag.insertAdjacentElement('afterend', newSpanTag);
+
+    newImgTag.addEventListener("click", function() {
+      boonBox.querySelectorAll(".active").forEach((active) => {
+        if (active != newImgTag) {
+          active.classList.remove("active");
+        }
+      });
+
+      if (newImgTag.classList.contains('active')) {
+        newImgTag.classList.remove('active');
+      } else {
+        newImgTag.classList.add('active');
+      }
+      let tooltip = newSpanTag;
+      let alreadyDisplayed = (tooltip.style.display == "block");
+  
+      let allTooltips = document.querySelectorAll('.tooltip');
+      allTooltips.forEach(tip => {
+        tip.style.display = "none";
+      });
+  
+      if (alreadyDisplayed) {
+        tooltip.style.display = 'none';
+      } else {
+        tooltip.style.display = 'block';
+      }
+    });
+  }
+
+}
+
+// Function for adding to boon box
+function addToBoonBox(boon) {
+  let newImgTag = document.createElement('img');
+
+  newImgTag.src = boon.filePath;
+
+  newImgTag.classList.add("boon");
+
+  let newSpanTag = document.createElement('span');
+  newSpanTag.innerHTML = boon.description;
+  newSpanTag.classList.add("tooltip");
+
+  boonBox.insertBefore(newImgTag, rightArrow);
+  newImgTag.insertAdjacentElement('afterend', newSpanTag);
+
+  newImgTag.addEventListener("click", function() {
+    boonBox.querySelectorAll(".active").forEach((active) => {
+      if (active != newImgTag) {
+        active.classList.remove("active");
+      }
+    });
+
+    if (newImgTag.classList.contains('active')) {
+      newImgTag.classList.remove('active');
+    } else {
+      newImgTag.classList.add('active');
+    }
+    let tooltip = newSpanTag;
+    let alreadyDisplayed = (tooltip.style.display == "block");
+
+    let allTooltips = document.querySelectorAll('.tooltip');
+    allTooltips.forEach(tip => {
+      tip.style.display = "none";
+    });
+
+    if (alreadyDisplayed) {
+      tooltip.style.display = 'none';
+    } else {
+      tooltip.style.display = 'block';
+    }
+  });
+
+  leftArrow.click();
+}
+
+// Fix the arrow positions onload
+boonBox.scrollLeft = 0;
+leftArrow.click();
+
+function updateStamina(delta) {
+  // Add to the stamina
+  player.changeStamina(delta);
+
+  // Update the text
+  stamina.querySelector("span").innerHTML = `${player.stamina} / ${player.maxStamina}`;
+
+  // Update the bar width
+  if (Math.round((player.stamina / player.maxStamina) * 100) >= 100) {
+    staminaBar.style.width = "100%";
+  } else {
+    staminaBar.style.width = (Math.round((player.stamina / player.maxStamina) * 100) + "%");
+  }
+}
+
+// Update the page
+updateStamina(0);
+
 let initCoffeeCost = 0;
 if (player.boonArray['cuppaJoe']){
   initCoffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
@@ -99,40 +258,10 @@ shopContent.forEach(shopItem => {
 });
 
 
-document.querySelector("#playerInfo").addEventListener("click", function() {
-  console.log(player.boonArray);
-  console.log(player.currency);
-});
-
-// This currently works by replicating the boon used to populate the shopItem div. In order to correctly 
-// serve the player the correct item, the id is used to make a new one to give to the player. 
-// However, we'll need to refactor the contructor to allow for variable costed boons
-
-const buyItem = document.querySelector("#buyItem");
-
-buyItem.addEventListener("click", function() {
-  activeBoon = boonArray['cuppaJoe'];
-  if (activeBoon.name == "cuppaJoe") {
-      let coffeeCost = 0;
-      if (player.boonArray['cuppaJoe']){
-        coffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
-      } else {
-        coffeeCost = calculatePrice(player.wave, 0, player.difficulty, 10);
-      }
-      if (player.subtractCurrency(coffeeCost)) {
-        coffeeTooltip.style.display = 'none';
-        coffeeTooltip.querySelector('.cost').innerHTML = `Cost: ${coffeeCost}`;
-        document.querySelector("#currentCurrency").innerHTML = player.currency;
-        player.addBoon(activeBoon);
-      }
-    activeBoon = new Boon("", "", "", "");
-
-    // Update tooltip costs
-    shopContent.forEach(shopItem => {
-      shopItem.querySelector('.cost').innerHTML = `Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}`;
-    });
-  }
-});
+// document.querySelector("#playerInfo").addEventListener("click", function() {
+//   console.log(player.boonArray);
+//   console.log(player.currency);
+// });
 
 document.querySelector("#addMoneys").addEventListener("click", function() {
   player.currency += 10;
@@ -225,16 +354,22 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
         if (selectedItem.id != "") {
           activeBoon = boonArray[selectedItem.id];
           if (player.subtractCurrency(Math.round(10*(.5 * player.boonArrayLength) * player.difficulty))) {
+            // player is buying the boon
             document.querySelector("#currentCurrency").innerHTML = player.currency;
+            addToBoonBox(activeBoon);
             player.addBoon(activeBoon);
             let selected = document.querySelector(`#${activeBoon.name}`);
             if (selected) {
               selected.style.opacity = 0;
               selected.id = ``;
             } 
+            lcd.innerHTML = "<span class=\"animatedText\">Thank You!</span>";
+            lcd.style.fontSize = "1.3vw";
+            activeBoon = new Boon("", "", "", "");
           } else {
+            // player doesn't have enough money
             selectedItem.classList.remove("selectedSlot");
-            lcd.textContent = "U Broke";
+            lcd.innerHTML = "<span class=\"animatedText\">You're Too Poor!</span>";
             lcd.style.fontSize = "1.3vw";
           }
         }
@@ -244,6 +379,43 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
 });
 
 //#region [Coffee Machine]
+const coffeeLCD = document.querySelector(".coffeeLCD");
+
+const buyItem = document.querySelector("#buyItem");
+
+buyItem.addEventListener("click", function() {
+  activeBoon = boonArray['cuppaJoe'];
+  if (activeBoon.name == "cuppaJoe") {
+    let coffeeCost = 0;
+    if (player.boonArray['cuppaJoe']){
+      coffeeCost = calculatePrice(player.wave, player.boonArray['cuppaJoe'].length, player.difficulty, 10);
+    } else {
+      coffeeCost = calculatePrice(player.wave, 0, player.difficulty, 10);
+    }
+
+    // If player can afford it
+    if (player.subtractCurrency(coffeeCost)) {
+      coffeeTooltip.style.display = 'none';
+      coffeeTooltip.querySelector('.cost').innerHTML = `Cost: ${coffeeCost}`;
+      document.querySelector("#currentCurrency").innerHTML = player.currency;
+      player.addBoon(activeBoon);
+      coffeeLCD.innerHTML = "<span class=\"animatedText\">Thank You!</span>";
+      addToBoonBox(activeBoon);
+      updateStamina(50);
+    } else {
+      coffeeLCD.innerHTML = "<span class=\"animatedText\">Too Expensive!</span>";
+    }
+
+
+    activeBoon = new Boon("", "", "", "");
+
+    // Update tooltip costs
+    shopContent.forEach(shopItem => {
+      shopItem.querySelector('.cost').innerHTML = `Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}`;
+    });
+  }
+});
+
 coffeeMachine.addEventListener("click", function() {
   activeBoon = boonArray['cuppaJoe'];
 
@@ -436,8 +608,6 @@ function calculatePrice(wave, count, difficulty, basePrice) {
 
   return finalPrice;
 }
-
-
 
 buyConsumables.addEventListener("click", () => {
 

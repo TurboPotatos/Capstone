@@ -3,17 +3,7 @@
   src: url('../fonts/sevenSegment.ttf') format('truetype');
 }
 
-#devTools {
-  border: solid red;
-  width: 20%;
-  background-color: cadetblue;
-  position: absolute;
-  float: left;
-  font-size: 2rem;
-  /* display: block; */
-  cursor: pointer;
-  z-index: 1;
-}
+
 
 #coffeeWrapper {
   /* border: solid blue; */
@@ -453,7 +443,7 @@ td img {
   cursor: pointer;
 }
 
-#lcdScreen {
+.lcdScreen {
   font-family: 'SevenSegment';
   font-size: 1.1vw;
   /* font-weight: bold; */
@@ -461,6 +451,23 @@ td img {
   color: red;
   text-shadow: 0px 0px 5px black;
   padding: 0 3px 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0 10px 0 10px;
+}
+
+.animatedText {
+  display: inline-block;
+  animation: scroll 5s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(105%);
+  }
+  100% {
+    transform:translateX(-105%); /* Scroll to the left infinitely */
+  }
 }
 
 .selectedSlot {
@@ -470,4 +477,120 @@ td img {
 	border-image-width: 30px;
 	border-image-repeat: repeat;
 	/* border-image-outset: 10px; */
+}
+
+#playerData {
+  /* position: relative; */
+  overflow: auto;
+}
+
+#playerStamina {
+  border: 2px solid black;
+  position: relative;
+  width: 75%;
+  background-color: red;
+  box-sizing: border-box;
+  z-index: -2;
+  margin-bottom: 1rem;
+}
+
+#playerStaminaBar {
+  /* border: 2px solid black; */
+  border-right: 2px solid black;
+  background-color: blue;
+  width: 60%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+#stamina {
+  text-align: center;
+  width: 100%;
+}
+
+#currency {
+  border: 1px dotted green;
+  margin-bottom: 1rem;
+}
+
+#boonBox {
+  max-height: 75%;
+  border: 3px solid #333;
+  box-shadow: 2px 2px 2px rgb(20, 20, 20);
+  background-color: rgba(20, 20, 20, .4);
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  margin-bottom: 1rem;
+  position: relative;
+  scroll-behavior: auto;
+}
+
+#boonBox .tooltip {
+  width: 30%;
+  /* top: 10%;
+  left: 10%; */
+  font-size: 18pt;
+}
+
+#leftArrow, #rightArrow {
+  position: absolute;
+  top: 25%;
+  /* transform: translateY(50%); */
+  color: #aaa;
+  /* border: 1px solid blue; */
+  z-index: 99;
+}
+
+#leftArrow {
+  left: 0;
+  scroll-snap-align: start;
+  text-shadow: 2px 2px 2px black;
+}
+
+#rightArrow {
+  right: 0;
+  /* right: calc(var(--scroll-offset)); */
+  text-shadow: -2px 2px 2px black;
+}
+
+.tooltip {
+  position: absolute;
+  /* top: 10%; */
+  /* left: 10%; */
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
+}
+
+
+#boonBox .boon {
+  max-width: 5rem;
+  /* border: 1px solid black; */
+  height: auto;
+}
+
+#boonBox .active {
+  background-color: rgba(35, 35, 35, .2);
+}
+
+#devTools {
+  border: solid red;
+  /* width: 20%; */
+  background-color: cadetblue;
+  position: absolute;
+  /* float: left; */
+  font-size: 2rem;
+  /* display: block; */
+  cursor: pointer;
+  z-index: 1;
+  overflow: auto;
+  max-width: 40%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
