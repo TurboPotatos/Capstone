@@ -41,6 +41,96 @@ let playerDiceFacesDisplay = 'none';
 //   player.diceSideArray.push(tempDiceSide);
 // }
 
+//#region [playerInfo Box]
+const boonBox = document.querySelector("#boonBox");
+const leftArrow = boonBox.querySelector("#leftArrow");
+const rightArrow = boonBox.querySelector("#rightArrow")
+
+leftArrow.addEventListener("click", () => {scrollBoonBox("left")});
+rightArrow.addEventListener("click", () => {scrollBoonBox("right")});
+
+function scrollBoonBox(direction) {
+  // Scroll the container
+  const scrollAmount = boonBox.querySelector("img").width;
+
+  if (direction === 'left') {
+    boonBox.scrollLeft -= scrollAmount;
+  } else if (direction === 'right') {
+    boonBox.scrollLeft += scrollAmount;
+  }
+
+  // Move the arrows
+  leftArrow.style.left = `${boonBox.scrollLeft}px`;
+  rightArrow.style.right = `-${boonBox.scrollLeft}px`;
+
+  // Hide/Show boons based on if there's a need to scroll
+  if (boonBox.scrollWidth == boonBox.clientWidth) {
+    // Box is too small for a need to scroll
+    leftArrow.style.display = 'none';
+    rightArrow.style.display = 'none';
+  } else {
+    leftArrow.style.display = 'block';
+    rightArrow.style.display = 'block';
+  }
+}
+
+// populate boonBox
+for (let key in player.boonArray) {
+  if (player.boonArray.hasOwnProperty(key)) {
+
+    let newImgTag = document.createElement('img');
+
+    if (key === 'cuppaJoe') {
+      newImgTag.src = `../../${player.boonArray[key][0].filePath}`;
+    } else {
+      newImgTag.src = `../../${player.boonArray[key].filePath}`;
+    }
+
+    newImgTag.classList.add("boon");
+
+    let newSpanTag = document.createElement('span');
+    newSpanTag.innerHTML = player.boonArray[key].description;
+    newSpanTag.classList.add("tooltip");
+
+    boonBox.insertBefore(newImgTag, rightArrow);
+    newImgTag.insertAdjacentElement('afterend', newSpanTag);
+
+    newImgTag.addEventListener("click", function() {
+      boonBox.querySelectorAll(".active").forEach((active) => {
+        if (active != newImgTag) {
+          active.classList.remove("active");
+        }
+      });
+
+      if (newImgTag.classList.contains('active')) {
+        newImgTag.classList.remove('active');
+      } else {
+        newImgTag.classList.add('active');
+      }
+      let tooltip = newSpanTag;
+      let alreadyDisplayed = (tooltip.style.display == "block");
+  
+      let allTooltips = document.querySelectorAll('.tooltip');
+      allTooltips.forEach(tip => {
+        tip.style.display = "none";
+      });
+  
+      if (alreadyDisplayed) {
+        tooltip.style.display = 'none';
+      } else {
+        tooltip.style.display = 'block';
+      }
+    });
+  }
+
+}
+
+// Fix the arrow positions onload
+boonBox.scrollLeft = 0;
+leftArrow.click();
+//#endregion
+
+
 shopContent.forEach(shopItem => {
   // Get random dice side
   let rand = Math.random();
@@ -111,6 +201,7 @@ document.querySelector("#buyItem").addEventListener("click", function() {
 document.querySelector("#addMoneys").addEventListener("click", function() {
   player.currency += 10;
   document.querySelector("#currentCurrency").innerHTML = player.currency;
+  console.log(boonBox.scrollWidth == boonBox.clientWidth);
 });
 
 // Populate the diceList to include all of the player's dice
@@ -327,4 +418,9 @@ const returnToGameBtn = document.querySelector('#returnToGameBtn');
 returnToGameBtn.addEventListener("click", (e) => {
   localStorage.setItem('player', JSON.stringify(player));
   window.location.href = 'game.html';
+});
+
+window.addEventListener('load', function() {
+  // Fix for scrolling 
+  leftArrow.click();
 });

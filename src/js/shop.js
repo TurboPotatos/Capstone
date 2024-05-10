@@ -20,13 +20,10 @@ const stamina = document.querySelector("#stamina");
 // visual bar stamina
 const staminaBar = document.querySelector("#playerStaminaBar");
 
-// box to contain player's boons
+//#region [playerInfo Box]
 const boonBox = document.querySelector("#boonBox");
 const leftArrow = boonBox.querySelector("#leftArrow");
 const rightArrow = boonBox.querySelector("#rightArrow")
-
-// leftArrow.style.display = "none";
-// rightArrow.style.display = "none";
 
 leftArrow.addEventListener("click", () => {scrollBoonBox("left")});
 rightArrow.addEventListener("click", () => {scrollBoonBox("right")});
@@ -155,6 +152,7 @@ function addToBoonBox(boon) {
 // Fix the arrow positions onload
 boonBox.scrollLeft = 0;
 leftArrow.click();
+//#endregion
 
 function updateStamina(delta) {
   // Add to the stamina

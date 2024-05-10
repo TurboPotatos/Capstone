@@ -461,6 +461,19 @@ td img {
   animation: scroll 5s linear infinite;
 }
 
+.tooltip {
+  position: absolute;
+  /* top: 10%; */
+  /* left: 10%; */
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(105%);
@@ -553,19 +566,6 @@ td img {
   right: 0;
   /* right: calc(var(--scroll-offset)); */
   text-shadow: -2px 2px 2px black;
-}
-
-.tooltip {
-  position: absolute;
-  /* top: 10%; */
-  /* left: 10%; */
-  width: 100%;
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: none;
-  z-index: 1005;
 }
 
 
