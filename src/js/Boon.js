@@ -253,6 +253,13 @@ const boonArray = {
   
   // Your first reset of a wave costs 0 stamina.
   // Dice from the dice machine come with 2 random faces.
+
+  // New ideas -----------------------------
+
+  // Rolling doubles allows you to heal one henchman for half their missing health.
+  // Henchmen heal 2 at the start of each turn.
+  // something about odds/evens
+  
 };
 
 // Export the boons

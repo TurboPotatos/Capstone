@@ -65,6 +65,7 @@ export class Henchman {
 
 export const henchPicArray = {
   "Beetle" : "url(src/media/Henchmen/henchman_beetle_hurt.png), url(src/media/texture2.png)",
+  "B1 Battle Droid" : "url(src/media/Henchmen/henchman_battleDroid_hurt.png), url(src/media/texture2.png)",
   "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin_hurt.png), url(src/media/texture2.png)",
   "Pinky" : "url(src/media/Henchmen/henchman_ghost_hurt.png), url(src/media/texture2.png)",
   "Goomba" : "url(src/media/Henchmen/henchman_goomba_hurt.png), url(src/media/texture2.png)",

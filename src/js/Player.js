@@ -26,9 +26,6 @@ export class Player {
   boonArray = {};
   items = {};
 
-  // Active boons
-  estusFlask = false;
-
   constructor(player) {
 
     if (player !== undefined) {

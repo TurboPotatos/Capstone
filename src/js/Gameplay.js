@@ -4,10 +4,14 @@ import { Consumable } from "./Consumable.js";
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
-player.addItem(new Consumable(2));
-player.addItem(new Consumable(1));
-player.addItem(new Consumable(3));
-player.addItem(new Consumable(9));
+if (!player.items["supplement"]) {
+  player.addItem(new Consumable(2));
+  player.addItem(new Consumable(1));
+  player.addItem(new Consumable(3));
+  player.addItem(new Consumable(9));
+}
+
+// console.log(player.items["supplement"].length);
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -567,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add special dice to the specialDiceArea
     for (let key in player.items) {
       // console.log("test");
-      if (player.items.hasOwnProperty(key)) {
+      if (player.items.hasOwnProperty(key) && key != "supplement") {
         for (let i = 0; i < player.items[key].length; i++) {
           let newItem = document.createElement('button');
           newItem.id = "specialDice" + player.items[key][i].typeOf;
