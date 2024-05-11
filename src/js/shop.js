@@ -23,6 +23,10 @@ document.querySelector("#currentCurrency").innerHTML = player.currency;
 let coffeeMachine = document.querySelector(".coffeeMachine")
 let coffeeTooltip = coffeeMachine.querySelector(".tooltip");
 
+const overlay = document.querySelector('#overlay');
+const front = document.querySelector('.front');
+const lcd = document.querySelector("#lcdScreen");
+
 // stamina is div for stamina TEXT
 const stamina = document.querySelector("#stamina");
 // visual bar stamina
@@ -41,6 +45,10 @@ const consumableBackBtn = document.querySelector("#consumableBackBtn");
 
 const viewDice = document.querySelector('#viewDice');
 const viewConsumables = document.querySelector('#viewConsumables');
+
+lcd.addEventListener("click", () => {
+  overlay.classList.toggle('hidden');
+});
 
 displayDice.addEventListener("click", () => {
   playerDice.style.display = "block";
@@ -577,8 +585,6 @@ document.querySelector("#addMoneys").addEventListener("click", function() {
   player.currency += 10;
   document.querySelector("#currentCurrency").innerHTML = player.currency;
 });
-
-const lcd = document.querySelector("#lcdScreen");
 
 function getCodeItem(class1, class2) {
   switch (class1) {

@@ -79,7 +79,24 @@
   position: relative;
   /* flex: 1; */
 }
-
+#overlay {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+/* #overlay:hover {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+} */
+.hidden {
+  display: none;
+}
 
 
 .vendingMachine td{
@@ -142,6 +159,7 @@
   height: 30%;
   top: 6%;
   left: 7%;
+  cursor: pointer;
 }
 .numPad {
   /* border: solid teal; */
