@@ -37,10 +37,10 @@ const boonArray = {
             {healChance: 0.5, thresholdFactor: 2, healAmount: 5}, 
             "src/media/Boons/boon_beamSword.png"),
 
-  "chaosEmerald" : 
+  "chaosEmerald" : // IMPLEMENTED
   new Boon( "chaosEmerald", 
-            "Chaos Emerald: <br><br>When buying a die face of 7 or below, you get an additional one", 
-            {faceValue: 7}, 
+            "Chaos Emerald: <br><br>Gain 15 currency whenever you enter the shop",
+            {currencyBonus: 15},
             "src/media/Boons/boon_chaosEmerald.png"),
 
   "companionCube" : // IMPLEMENTED
@@ -63,7 +63,7 @@ const boonArray = {
 
   "elderScroll" : // IMPLEMENTED
   new Boon( "elderScroll", 
-            "Elder Scroll: <br><br>Henchman are worth +3 gold when fully healed", 
+            "Elder Scroll: <br><br>Henchman are worth +3 currency when fully healed", 
             {goldBonus: 3}, 
             "src/media/Boons/boon_elderScroll.png"),
 
@@ -85,10 +85,10 @@ const boonArray = {
             {d10Bonus: 2}, 
             "src/media/Boons/boon_goggles.png"),
 
-  "goldRing" : //TODO
+  "goldRing" : // IMPLEMENTED
   new Boon( "goldRing", 
             "Gold Ring: <br><br>Rolling a 1 on a die heals the henchman for 3", 
-            {goldRing: 0}, 
+            {dieResult: 1, healAmount: 3}, 
             "src/media/Boons/boon_goldRing.png"),
 
   "labCoat" : // IMPLEMENTED
@@ -207,8 +207,8 @@ const boonArray = {
 
   "triforce" : 
   new Boon( "triforce", 
-            "Triforce: <br><br>Dice from the dice machine come with 2 random faces", 
-            {bonusDieFaces: 2}, 
+            "Triforce: <br><br>When buying a die face of 7 or below, you get an additional one", 
+            {faceValue: 7},
             "src/media/Boons/boon_triforce.png"),
 
   "cuppaJoe" : // IMPLEMENTED
@@ -228,7 +228,7 @@ const boonArray = {
   // When buying a die face of 7 or below, you get an additional one.
   // d4s roll double.
   // If you would lose more than 10 stamina, you lose 10 instead.
-  // Henchman are worth +3 gold when fully healed.
+  // Henchman are worth +3 currency when fully healed.
   // Overhealing a henchman recovers your stamina by half that amount.
   // d10 gets +1 to each roll.
   // When you only roll one die, you roll it twice and take the higher number.
@@ -259,6 +259,12 @@ const boonArray = {
   // Rolling doubles allows you to heal one henchman for half their missing health.
   // Henchmen heal 2 at the start of each turn.
   // something about odds/evens
+  // Whenever you lose stamina, you gain 1 currency
+  // Show henchman gold and score values
+  // You can no longer see henchman range
+  // You can no longer see henchman healing factor
+  // You can no longer see henchman stamina penalty
+  // Dice from the dice machine come with 2 random faces
   
 };
 

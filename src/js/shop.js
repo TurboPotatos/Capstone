@@ -7,6 +7,10 @@ import { Dice } from "./Dice.js";
 // let player = new Player();
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
+if (player.boonArray['chaosEmerald']) {
+  player.currency += 15;
+}
+
 let activeBoon = new Boon("", "", "", "");
 
 const shopContent = document.querySelectorAll('.slot');

@@ -1,4 +1,4 @@
-import { Henchman, henchArray, henchNameArray, henchPicArray } from "./Henchman.js";
+import { Henchman, henchArray, henchNameArray, henchPicArray, bossPicArray } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Consumable } from "./Consumable.js";
 
@@ -171,18 +171,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function updateHenchmenInfo() {
-    henchName.innerHTML = waveHenchmen[0].name;
-    health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
+    let myName = waveHenchmen[0].name;
+    let myHealth = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
+    let myTarget = waveHenchmen[0].threshold;
+    let myRange = waveHenchmen[0].range;
+    let lowerRange = (myTarget - myRange);
+    let upperRange = (myTarget + myRange);
+    let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
+    let myHealingFactor = waveHenchmen[0].healingFactor;
+    let mydamage = waveHenchmen[0].damage;
+    // let myCurrency = waveHenchmen[0].currencyGiven;
+    // let myScore = waveHenchmen[0].scoreGiven;
+
+    henchName.innerHTML = myName;
+    health.innerHTML = myHealth;
     healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`; 
-    threshold.innerHTML = "Target: " + waveHenchmen[0].threshold;
-    staminaPenalty.innerHTML = "Stamina Penalty: " + waveHenchmen[0].staminaPenalty;
-    healingFactor.innerHTML = "Healing Factor: " + waveHenchmen[0].healingFactor;
+    threshold.innerHTML = "Target: " + myTarget + " (" + lowerRange + " to " + upperRange + ")";
+    staminaPenalty.innerHTML = "Stamina Penalty: " + myStaminaPenalty;
+    healingFactor.innerHTML = "Healing Factor: " + myHealingFactor;
 
-    range.innerHTML = "Range: " + waveHenchmen[0].range;
-    damage.innerHTML = "Malpractice Damage: " + waveHenchmen[0].damage;
-    currencyGiven.innerHTML = "Currency Given: " + waveHenchmen[0].currencyGiven;
+    range.innerHTML = "Range: " + myRange;
+    damage.innerHTML = "Malpractice Damage: " + mydamage;
+    currencyGiven.innerHTML = "Currency Given: ?";
 
-    henchmanImage.style.backgroundImage = henchPicArray[waveHenchmen[0].name];
+    henchmanImage.style.backgroundImage = henchPicArray[myName];
 
     // Update the next-up henchman chart
     if (waveHenchmen.length > 1) {
@@ -268,6 +280,27 @@ document.addEventListener('DOMContentLoaded', function() {
       totalResult += result;
       results.push("You rolled " + result + " on a d" + dice.sides.length);
       dieBtn.innerHTML = result;
+
+//#region [goldRing]
+      if (player.boonArray['goldRing'] && result == player.boonArray['goldRing'].effects.dieResult) {
+        let healAmount = player.boonArray['goldRing'].effects.healAmount;
+        waveHenchmen[0].health += healAmount;
+        
+        results.push("+" + healAmount + " healing from Gold Ring");
+        
+        if (waveHenchmen[0].isFullHealth() || 
+        // Tetris Piece
+        (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
+
+          gameLog.innerHTML += results.join('<br>') + "<br>";
+          results = [];
+          handleFullHeal();
+          
+        } else {
+          updateHenchmenInfo();
+        }
+      }
+//#endregion
     });
 
 //#region [estusFlask]
@@ -345,7 +378,10 @@ document.addEventListener('DOMContentLoaded', function() {
         healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
       }
     } else {
-      waveHenchmen[0].health -= waveHenchmen[0].damage;
+      let malpractice = waveHenchmen[0].damage;
+      waveHenchmen[0].health -= malpractice;
+
+      gameLog.innerHTML += waveHenchmen[0].name + " took " + malpractice + " damage from Malpractice!<br><br>";
 
       updateHenchmenInfo();
       selectedDice.forEach(function(dieBtn) {
@@ -370,36 +406,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // Tetris Piece
     (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
-//#region [gloves]
-      if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
-        let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
-        restoreStamina = Math.round(restoreStamina);
-        player.changeStamina(restoreStamina);
+      handleFullHeal();
 
-        gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
-      }
+    }
+  }
+
+  function handleFullHeal() {
+//#region [gloves]
+    if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
+      let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
+      restoreStamina = Math.round(restoreStamina);
+      player.changeStamina(restoreStamina);
+
+      gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
+    }
 //#endregion
 
-      player.score += waveHenchmen[0].scoreGiven;
+    player.score += waveHenchmen[0].scoreGiven;
 
-      gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
+    gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
 
 //#region [elderScroll]
-      if (player.boonArray['elderScroll']) {
-        player.currency += player.boonArray['elderScroll'].effects.goldBonus;
-      }
+    if (player.boonArray['elderScroll']) {
+      player.currency += player.boonArray['elderScroll'].effects.goldBonus;
+    }
 //#endregion
 
-      player.currency += waveHenchmen[0].currencyGiven;
-      player.changeStamina(30);
-      if (waveHenchmen.length > 1) {
-        nextHenchman();
-      } else {
-        // Wave is finished, update wave and go to shop
-        // TODO allow selection of shop, workshop, or stamina regain
-        player.wave += 1;
-        directoryCont.style.display = 'block';
-      }
+    player.currency += waveHenchmen[0].currencyGiven;
+    player.changeStamina(30);
+    if (waveHenchmen.length > 1) {
+      nextHenchman();
+    } else {
+      // Wave is finished, update wave and go to shop
+      // TODO allow selection of shop, workshop, or stamina regain
+      player.wave += 1;
+      directoryCont.style.display = 'block';
     }
   }
 

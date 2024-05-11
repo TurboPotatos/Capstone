@@ -19,7 +19,8 @@ export class Henchman {
   constructor(name, wave) { // Multipliers to be modified later
 
     this.name = name;
-    this.health = Math.floor(Math.random() * 9) + 50;
+    // this.health = Math.floor(Math.random() * 9) + 50;
+    this.health = 97;
     this.threshold = 10 + wave;
     this.range = 3;
     this.staminaPenalty = 10 + wave;
@@ -79,8 +80,12 @@ export const henchPicArray = {
   "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader_hurt.png), url(src/media/texture2.png)",
   "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper_hurt.png), url(src/media/texture2.png)",
   "Turret" : "url(src/media/Henchmen/henchman_turret_hurt.png), url(src/media/texture2.png)",
-  // "Actually Satan" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
-  // "Actually Satan2" : "url(src/media/Henchmen/boss_actuallySatan.png), url(src/media/texture2.png)",
+};
+
+export const bossPicArray = {
+  "Satan Himself" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
+  "Bowser" : "url(src/media/Henchmen/boss_bowser_hurt.png), url(src/media/texture2.png)",
+  "GLaDOS" : "url(src/media/Henchmen/boss_glados_hurt.png), url(src/media/texture2.png)",
 };
 
 export let henchArray = {};
