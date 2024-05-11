@@ -68,12 +68,15 @@ if (isset($_SESSION['username'])){
           $username = sanitizeString(INPUT_POST, 'username');
           $password = sanitizeString(INPUT_POST, 'password');
 
-          $categoryResult = callQuery($pdo, "SELECT * FROM players WHERE username = '$username'", "Username not found");
+          $categoryResult = callQuery($pdo, "SELECT username FROM players WHERE username = '$username'", "Username not found");
 
-          if ($player = $categoryResult->fetch()) {
-            // player exists, test password
+          if ($player = $categoryResult->fetchColumn()) {
+            // player exists, get password
 
-            if ($player['password'] == $password) {
+            $categoryResult = callQuery($pdo, "SELECT password FROM players WHERE username = '$username'", "Password not found");
+            $hashedPassword = $categoryResult->fetchColumn();
+
+            if ($hashedPassword && password_verify($password, $hashedPassword)) {
               // Successful login, save username and redirect
               $_SESSION['username'] = $username;
               redirect("startScreen.html");
@@ -112,6 +115,7 @@ if (isset($_SESSION['username'])){
             } else {
               // use dbQueries insertQuery() to attempt insert
               // insertQuery() returns true if it succeeds so check that to proceed
+              $password = password_hash($password, PASSWORD_DEFAULT);
 
               if(insertQuery($pdo, "INSERT INTO players (username, password) VALUES (?, ?)", [$username, $password])) {
                 // if they get here, then insert succeeded, redirect
