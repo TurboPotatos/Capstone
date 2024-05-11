@@ -13,6 +13,18 @@ if (!player.items["supplement"]) {
   player.addItem(new Consumable(9));
 }
 
+//#region [star]
+if (player.boonArray['star']) {
+  player.boonArray['star'].effects.preventDamage = true;
+}
+//#endregion
+
+//#region [tongueDepressor]
+if (player.boonArray['tongueDepressor']) {
+  player.boonArray['tongueDepressor'].effects.preventLoss = true;
+}
+//#endregion
+
 // console.log(player.items["supplement"].length);
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -183,9 +195,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let myRange = waveHenchmen[0].range;
 
 //#region [nukaCola]
-if (player.boonArray['nukaCola']) {
-  myRange += player.boonArray['nukaCola'].effects.bonusRange;
-}
+    if (player.boonArray['nukaCola']) {
+      myRange += player.boonArray['nukaCola'].effects.bonusRange;
+    }
 //#endregion
 
     let lowerRange = (myTarget - myRange);
@@ -193,6 +205,14 @@ if (player.boonArray['nukaCola']) {
     let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
     let myHealingFactor = waveHenchmen[0].healingFactor;
     let mydamage = waveHenchmen[0].damage;
+
+//#region [syringe]
+    if (player.boonArray['syringe']) {
+      myHealingFactor += Math.ceil(myHealingFactor * player.boonArray['syringe'].effects.bonus);
+      mydamage += Math.ceil(mydamage * player.boonArray['syringe'].effects.bonus);
+    }
+//#endregion
+
     // let myCurrency = waveHenchmen[0].currencyGiven;
     // let myScore = waveHenchmen[0].scoreGiven;
 
@@ -229,6 +249,18 @@ if (player.boonArray['nukaCola']) {
     
     updateHenchmenInfo();
     updatePlayerInfo();
+
+//#region [star]
+    if (player.boonArray['star']) {
+      player.boonArray['star'].effects.preventDamage = true;
+    }
+//#endregion
+
+//#region [tongueDepressor]
+    if (player.boonArray['tongueDepressor']) {
+      player.boonArray['tongueDepressor'].effects.preventLoss = true;
+    }
+//#endregion
   }
 
   function rollDice() {
@@ -246,6 +278,7 @@ if (player.boonArray['nukaCola']) {
     }
 //#endregion
 
+    results = [];
     var dieResult = [];
     var totalResult = 0;
     selectedDice.forEach(function(dieBtn) {
@@ -279,8 +312,14 @@ if (player.boonArray['nukaCola']) {
         
 //#region [companionCube]
       if (player.boonArray['companionCube'] && dice.typeOf === "d4") {
-        result *= player.boonArray['companionCube'].effects.d4Multiplier;
-        results.push("With help from Companion Cube:");
+        if (Math.random() < player.boonArray['companionCube'].effects.odds) {
+          result *= player.boonArray['companionCube'].effects.d4Multiplier;
+          results.push("Companion Cube doubled the value:");
+        } else {
+          result = Math.ceil(result * player.boonArray['companionCube'].effects.otherwise);
+          results.push("Companion Cube halved the value:");
+        }
+        
       }
 //#endregion
 
@@ -320,27 +359,27 @@ if (player.boonArray['nukaCola']) {
       results.push("You rolled " + result + " on a d" + dice.sides.length);
       dieBtn.innerHTML = result;
 
-//#region [goldRing]
-      if (player.boonArray['goldRing'] && result == player.boonArray['goldRing'].effects.dieResult) {
-        let healAmount = player.boonArray['goldRing'].effects.healAmount;
+//#region [lollipops]
+      if (player.boonArray['lollipops'] && result == player.boonArray['lollipops'].effects.dieResult) {
+        let healAmount = player.boonArray['lollipops'].effects.healAmount;
         waveHenchmen[0].health += healAmount;
         
-        results.push("+" + healAmount + " healing from Gold Ring");
-        notesOutput.push("+" + healAmount + " healing from Gold Ring");
+        results.push("+" + healAmount + " healing from Lollipops");
+        notesOutput.push("+" + healAmount + " healing from Lollipops");
         
         fullHealthCheck();
       }
 //#endregion
 
-//#region [reflexHammer]
-      if (player.boonArray['reflexHammer'] && selectedDice.length == 3) {
+//#region [triforce]
+      if (player.boonArray['triforce'] && selectedDice.length == 3) {
         if (dieResult[0] == 1 && dieResult[1] == 1 && dieResult[2] == 1) {
           let remainingHealth = waveHenchmen[0].maxHealth - waveHenchmen[0].health;
           
           waveHenchmen[0].health += remainingHealth;
                 
-          results.push("Reflex Hammer healed " + waveHenchmen[0].name + " for: " + remainingHealth);
-          notesOutput.push("Reflex Hammer healed " + waveHenchmen[0].name + " for: " + remainingHealth);
+          results.push("Triforce healed " + waveHenchmen[0].name + " for: " + remainingHealth);
+          notesOutput.push("Triforce healed " + waveHenchmen[0].name + " for: " + remainingHealth);
           
           fullHealthCheck();
         }
@@ -428,8 +467,17 @@ if (player.boonArray['nukaCola']) {
     } else {
       let malpractice = waveHenchmen[0].damage;
 
+//#region [star]
+      if (player.boonArray['star'] && player.boonArray['star'].effects.preventDamage) {
+        player.boonArray['star'].effects.preventDamage = false;
+        malpractice = 0;
+
+        gameLog.innerHTML += "Malpractice damage prevented by Star<br>";
+      }
+//#endregion
+
 //#region [pokeball]
-      if (player.boonArray['pokeball']) {
+      if (player.boonArray['pokeball'] && malpractice > 0) {
         malpractice = Math.round(malpractice * player.boonArray['pokeball'].effects.damageReduction);
 
         gameLog.innerHTML += "Malpractice damage halved by Pokeball<br>";
@@ -447,8 +495,24 @@ if (player.boonArray['nukaCola']) {
       });
 
       if (waveHenchmen[0].isDead()) {
+        player.incrementKillCount();
         gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
         notesOutput.push(waveHenchmen[0].name + " didn't make it...");
+
+//#region [scalpel]
+        if (player.boonArray['scalpel']) {
+          player.addCurrency(waveHenchmen[0].currencyGiven);
+
+          let staminaLost = Math.ceil(player.stamina * player.boonArray['scalpel'].effects.percentLost);
+          staminaLost += player.boonArray['scalpel'].effects.flatLost;
+
+          player.changeStamina(-staminaLost);
+
+          gameLog.innerHTML += "You still got paid. But at what cost?<br>At least " + staminaLost + " stamina...";
+          notesOutput.push("You still got paid. But at what cost?<br>At least " + staminaLost + " stamina...");
+        }
+//#endregion
+
         if (waveHenchmen.length > 1) {
           nextHenchman();
         } else {
@@ -471,6 +535,7 @@ if (player.boonArray['nukaCola']) {
   }
 
   function handleFullHeal() {
+    player.incrementHealCount();
 //#region [gloves]
     if (player.boonArray['gloves'] && waveHenchmen[0].maxHealth < waveHenchmen[0].health) {
       let restoreStamina = player.boonArray['gloves'].effects.staminaRestore * (waveHenchmen[0].health - waveHenchmen[0].maxHealth);
@@ -487,13 +552,7 @@ if (player.boonArray['nukaCola']) {
     gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
     notesOutput.push(waveHenchmen[0].name + " was fully healed!");
 
-//#region [elderScroll]
-    if (player.boonArray['elderScroll']) {
-      player.currency += player.boonArray['elderScroll'].effects.goldBonus;
-    }
-//#endregion
-
-    player.currency += waveHenchmen[0].currencyGiven;
+    player.addCurrency(waveHenchmen[0].currencyGiven);
     player.changeStamina(30);
     if (waveHenchmen.length > 1) {
       nextHenchman();
@@ -552,6 +611,16 @@ if (player.boonArray['nukaCola']) {
       notesOutput.push("Stamina cost to reset: " + waveHenchmen[0].staminaPenalty);
       gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
 
+//#region [tongueDepressor]
+      if (player.boonArray['tongueDepressor'] && player.boonArray['tongueDepressor'].effects.preventLoss) {
+        player.boonArray['tongueDepressor'].effects.preventLoss = false;
+        staminaLost = 0;
+
+        gameLog.innerHTML += "Stamina loss prevented by Tongue Depressor<br>";
+        notesOutput.push("Stamina loss prevented by Tongue Depressor")
+      }
+//#endregion
+      
 //#region [crowbar]
       if (player.boonArray['crowbar'] && player.boonArray['crowbar'].effects.staminaLost < staminaLost) {
         staminaLost = player.boonArray['crowbar'].effects.staminaLost;
@@ -564,9 +633,25 @@ if (player.boonArray['nukaCola']) {
       stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
 
       if (player.isOutOfStamina()) {
-        gameLog.innerHTML += "You're all tuckered out<br><br>";
-        notesOutput.push("You're all tuckered out");
-        document.querySelector("#gameOverMessage").style.display = "block";
+//thermometer
+        if (player.boonArray['thermometer']) {
+          let regainStamina = Math.ceil(player.maxStamina * player.boonArray['thermometer'].effects.regainStamina);
+          regainStamina -= player.stamina;
+          player.changeStamina(regainStamina);
+
+          gameLog.innerHTML += "Your Thermometer broke!<br>You mercurialously recover thanks to the<br>healing properties its contents!<br><br>";
+          notesOutput.push("Your Thermometer broke!<br>You mercurialously recover thanks to the<br>healing properties its contents!");
+          delete player.boonArray['thermometer'];
+          const thermometer = document.querySelector('#thermometer');
+          const thermometerSpan = thermometer.nextElementSibling;
+          thermometer.parentElement.removeChild(thermometer);
+          thermometerSpan.parentElement.removeChild(thermometerSpan);
+          updatePlayerInfo();
+        } else {
+          gameLog.innerHTML += "You're all tuckered out<br><br>";
+          notesOutput.push("You're all tuckered out");
+          document.querySelector("#gameOverMessage").style.display = "block";
+        } 
       }
         // if(player.stamina <= 0){
         //   window.location.replace("gameOver.html");
@@ -618,6 +703,7 @@ if (player.boonArray['nukaCola']) {
         }
 
         newImgTag.classList.add("boon");
+        newImgTag.id = player.boonArray[key].name;
 
         let newSpanTag = document.createElement('span');
         newSpanTag.innerHTML = player.boonArray[key].description;
@@ -729,6 +815,8 @@ if (player.boonArray['nukaCola']) {
     chartNotes1.innerHTML = notesOutput.join('<br>') + "<br>";
 
     notesOutput = [];
+
+    updatePlayerInfo();
   }
 
 //#endregion

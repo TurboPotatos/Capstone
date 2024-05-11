@@ -12,6 +12,12 @@ export class Player {
   score = 0;
   wave = 0;
   difficulty = 0;
+
+  // Player stats
+  totalHealed = 0;
+  totalKilled = 0;
+  totalCurrency = 0;
+
   // Array of dice
   diceArray = [];
   maxDiceCount = 8;
@@ -46,7 +52,7 @@ export class Player {
         // Make new dice from the info in the stored generic objects
         let newDice = new Dice(player.diceArray[i].typeOf);
 
-        console.log(player.diceArray[i]);
+        // console.log(player.diceArray[i]);
 
         for (let j = 0; j < player.diceArray[i].sides.length; j++) {
           let storedDiceSide = player.diceArray[i].sides[j];
@@ -187,6 +193,22 @@ export class Player {
     } else {
       this.stamina += delta;
     }
+//#region [medicalLicense]
+    if (this.boonArray['medicalLicense'] && delta < 0) {
+      this.addCurrency(this.boonArray['medicalLicense'].effects.currencyGain);
+    }
+//#endregion
+  }
+
+  addCurrency(currencyToAdd) {
+//#region [elderScroll]
+    if (this.boonArray['elderScroll']) {
+      currencyToAdd += this.boonArray['elderScroll'].effects.goldBonus;
+    }
+//#endregion
+
+    this.currency += currencyToAdd;
+    this.incrementCurrencyCount(currencyToAdd);
   }
 
   subtractCurrency(toSubtract) {
@@ -214,5 +236,17 @@ export class Player {
 
   isOutOfStamina() {
     return (this.stamina <= 0);
+  }
+
+  incrementKillCount() {
+    this.totalKilled++;
+  }
+
+  incrementHealCount() {
+    this.totalHealed++;
+  }
+
+  incrementCurrencyCount(currencyGained) {
+    this.totalCurrency += currencyGained;
   }
 }

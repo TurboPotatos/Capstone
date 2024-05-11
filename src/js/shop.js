@@ -11,6 +11,10 @@ if (player.boonArray['chaosEmerald']) {
   player.currency += 15;
 }
 
+if (player.boonArray['goldRing']) {
+  player.currency += Math.floor(player.currency * player.boonArray['goldRing'].effects.interest);
+}
+
 let activeBoon = new Boon("", "", "", "");
 
 const shopContent = document.querySelectorAll('.slot');
@@ -670,6 +674,12 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
               let staminaBonus = player.boonArray['medicalBag'].effects.maxStamina;
               player.maxStamina += staminaBonus;
               updateStamina(staminaBonus);
+            }
+//#endregion
+
+//#region [stethoscope]
+            if (player.boonArray['stethoscope'] && activeBoon.name === 'stethoscope') {
+              player.maxDiceCount += player.boonArray['stethoscope'].effects.extraDice;
             }
 //#endregion
 

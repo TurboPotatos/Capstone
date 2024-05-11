@@ -45,13 +45,13 @@ const boonArray = {
 
   "companionCube" : // IMPLEMENTED
   new Boon( "companionCube", 
-            "Companion Cube: <br><br>d4s roll double", 
-            {d4Multiplier: 2}, 
+            "Companion Cube: <br><br>50% chance for d4s to roll double, otherwise they roll half", 
+            {d4Multiplier: 2, odds: 0.5, otherwise: 0.5}, 
             "src/media/Boons/boon_companionCube.png"),
 
   "crowbar" : // IMPLEMENTED
   new Boon( "crowbar", 
-            "Crowbar: <br><br>If you would lose more than 10 stamina, you lose 10 instead", 
+            "Crowbar: <br><br>If you would lose more than 10 stamina from resetting, you lose 10 instead", 
             {staminaLost: 10}, 
             "src/media/Boons/boon_crowbar.png"),
 
@@ -84,12 +84,6 @@ const boonArray = {
             "Goggles: <br><br>d10s get +2 to each roll", 
             {d10Bonus: 2}, 
             "src/media/Boons/boon_goggles.png"),
-
-  "goldRing" : // IMPLEMENTED
-  new Boon( "goldRing", 
-            "Gold Ring: <br><br>Rolling a 1 on a die heals the henchman for 3", 
-            {dieResult: 1, healAmount: 3}, 
-            "src/media/Boons/boon_goldRing.png"),
 
   "labCoat" : // IMPLEMENTED
   new Boon( "labCoat", 
@@ -133,22 +127,16 @@ const boonArray = {
             {inverse: 13}, 
             "src/media/Boons/boon_portalGun.png"),
 
-  "reflexHammer" : // IMPLEMENTED
-  new Boon( "reflexHammer", 
-            "Reflex Hammer: <br><br>If you roll 3 1s in a single roll when rolling exactly 3 dice, fully heal the henchman", 
-            {reflexHammer: true}, 
-            "src/media/Boons/boon_reflexHammer.png"),
-
-  "rxPad" : //TODO
+  "rxPad" : // IMPLEMENTED
   new Boon( "rxPad", 
             "Rx Pad: <br><br>Henchmen heal for 2 after you reset your dice", 
             {healAmount: 2}, 
             "src/media/Boons/boon_rxPad.png"),
 
-  "scalpel" : 
+  "scalpel" : // IMPLEMENTED
   new Boon( "scalpel", 
-            "Scalpel: <br><br>You can have +1 die in your dice tray", 
-            {extraDice: 1}, 
+            "Scalpel: <br><br>You still get paid when killing a henchman, but lose 50% of your stamina + 10", 
+            {percentLost: 0.5, flatLost: 10}, 
             "src/media/Boons/boon_scalpel.png"),
 
   "scrubs" : // IMPLEMENTED
@@ -157,22 +145,22 @@ const boonArray = {
             {healingFactor: 3}, 
             "src/media/Boons/boon_scrubs.png"),
 
-  "star" : 
-  new Boon( "star", 
+  "star" : // IMPLEMENTED
+  new Boon( "star",
             "Star: <br><br>Prevent the first time a henchman would lose health", 
-            {star: true}, 
+            {preventDamage: true}, 
             "src/media/Boons/boon_star.png"),
 
-  "stethoscope" : 
+  "stethoscope" : // IMPLEMENTED
   new Boon( "stethoscope", 
-            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 50% of your stamina + 5", 
-            {staminaDamage: 0.5}, 
+            "Stethoscope: <br><br>You can have +1 die in your dice tray", 
+            {extraDice: 1}, 
             "src/media/Boons/boon_stethoscope.png"),
 
-  "syringe" : //TODO
+  "syringe" : // IMPLEMENTED
   new Boon( "syringe", 
             "Syringe: <br><br>Both healing factor and malpractice damage is increased by 50%", 
-            {syringe: 0.5}, 
+            {bonus: 0.5}, 
             "src/media/Boons/boon_syringe.png"),
 
   "tetrisPiece" : // IMPLEMENTED
@@ -181,23 +169,17 @@ const boonArray = {
             {henchIsHealed: 0.05}, 
             "src/media/Boons/boon_tetrisPiece.png"),
 
-  "thermometer" : 
+  "thermometer" : // IMPLEMENTED
   new Boon( "thermometer", 
-            "Thermometer: <br><br>When you run out of stamina, gain 50% stamina, then this is destroyed", 
-            {thermometer: 0.5}, 
+            "Thermometer: <br><br>When you run out of stamina, gain 50% of your max stamina, then this is destroyed", 
+            {regainStamina: 0.5}, 
             "src/media/Boons/boon_thermometer.png"),
 
-  "tongueDepressor" : 
+  "tongueDepressor" : // IMPLEMENTED
   new Boon( "tongueDepressor", 
-            "Tongue Depressor: <br><br>Your first reset of a wave costs 0 stamina", 
-            {tongueDepressor: true}, 
+            "Tongue Depressor: <br><br>Your first dice reset for each henchman costs 0 stamina", 
+            {preventLoss: true}, 
             "src/media/Boons/boon_tongueDepressor.png"),
-
-  "triforce" : 
-  new Boon( "triforce", 
-            "Triforce: <br><br>When buying a die face of 7 or below, you get an additional one", 
-            {faceValue: 7},
-            "src/media/Boons/boon_triforce.png"),
 
   "cuppaJoe" : // IMPLEMENTED
   new Boon( "cuppaJoe", 
@@ -205,24 +187,41 @@ const boonArray = {
             {coffeeStaminaRestore: 50, numOwned: 0}, 
             "src/media/Boons/boon_cuppaJoe.png"),
 
-  "medicalLicense" : //TODO
+  "medicalLicense" : // IMPLEMENTED
   new Boon( "medicalLicense", 
-            "Medical License: <br><br>Allows you to legally practice medicine", 
-            {canPracticeMedicine: true}, 
+            "Medical License: <br><br>Allows you to legally practice medicine, and whenever you lose stamina, you gain 3 currency", 
+            {canPracticeMedicine: true, currencyGain: 3}, 
             "src/media/Boons/boon_medicalLicense.png"),
 
-  "lollipops" : 
+  "lollipops" : // IMPLEMENTED
   new Boon( "lollipops", 
-            "Lollipops: <br><br>Items in the vending machine cost 20% less", 
-            {vendingDiscount: 0.2}, 
+            "Lollipops: <br><br>Rolling a 1 on a die heals the henchman for 3", 
+            {dieResult: 1, healAmount: 3}, 
             "src/media/Boons/boon_lollipops.png"),
 
-  "mask" : 
+  "goldRing" : // IMPLEMENTED
+  new Boon( "goldRing", 
+            "Gold Ring: <br><br>Whenever you visit the shop, you gain 20% interest on your currency", 
+            {interest: 0.2},
+            "src/media/Boons/boon_goldRing.png"),
+
+  "triforce" : // IMPLEMENTED
+  new Boon( "triforce", 
+            "Triforce: <br><br>If you roll 3 1s in a single roll when rolling exactly 3 dice, fully heal the henchman", 
+            {Triforce: true},
+            "src/media/Boons/boon_triforce.png"),
+
+"mask" : 
   new Boon( "mask", 
             "Mask: <br><br>10% chance to get an additional item from the vending machine", 
             {bonusVendChance: 0.1}, 
             "src/media/Boons/boon_mask.png"),
 
+  "reflexHammer" :
+  new Boon( "reflexHammer", 
+            "Reflex Hammer: <br><br>Items in the vending machine cost 20% less", 
+            {vendingDiscount: 0.2}, 
+            "src/media/Boons/boon_reflexHammer.png"),
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.
@@ -266,6 +265,7 @@ const boonArray = {
   // Dice from the dice machine come with 2 random faces
   // 10% interest
   // If you miss the threshold by over 10, reroll the dice you just rolled
+  // When buying a die face of 7 or below, you get an additional one
   
 };
 
