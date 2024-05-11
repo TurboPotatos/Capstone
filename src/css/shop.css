@@ -296,7 +296,7 @@ td img {
   z-index: -1;
   /* display: block; */
 }
-#diceContainer {
+.diceContainer {
   border: 1.5rem solid black;
   border-radius: 5%;
   position: relative;
@@ -316,6 +316,7 @@ td img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 
@@ -362,12 +363,20 @@ td img {
   height: 90px;
 }
 
-#backBtn {
+.backBtn {
   position: absolute;
   height: 10%;
   width: 20%;
   bottom: 1rem;
   right: 1rem;
+}
+
+.viewBtn {
+  position: absolute;
+  height: 10%;
+  width: 20%;
+  bottom: 1rem;
+  left: 1rem;
 }
 
 #returnToGameBtn {
@@ -523,7 +532,7 @@ td img {
 }
 
 #currency {
-  border: 1px dotted green;
+  /* border: 1px dotted green; */
   margin-bottom: 1rem;
 }
 
@@ -593,4 +602,24 @@ td img {
   max-width: 40%;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.playerDataButton {
+  border: 2px solid #333;
+  max-width: 35%;
+  min-width: 20%;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 1rem;
+  background-color: #555;
+  color: #ddd;
+  text-shadow: 1px 1px 1px #111;
+  box-shadow: 2px 2px 4px #111;
+}
+
+#playerDice {
+ display: none; 
+}
+
+#playerConsumables {
+  display: none;
 }

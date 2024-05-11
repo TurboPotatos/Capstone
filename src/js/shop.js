@@ -25,6 +25,50 @@ const stamina = document.querySelector("#stamina");
 const staminaBar = document.querySelector("#playerStaminaBar");
 
 //#region [playerInfo Box]
+const displayDice = document.querySelector("#displayDice");
+const displayConsumables = document.querySelector("#displayConsumables");
+
+const playerDice = document.querySelector("#playerDice");
+const playerConsumables = document.querySelector("#playerConsumables");
+const diceContainer = document.querySelector("#diceContainer");
+
+const diceBackBtn = document.querySelector("#diceBackBtn");
+const consumableBackBtn = document.querySelector("#consumableBackBtn");
+
+const viewDice = document.querySelector('#viewDice');
+const viewConsumables = document.querySelector('#viewConsumables');
+
+displayDice.addEventListener("click", () => {
+  playerDice.style.display = "block";
+  diceBox.style.display = "block";
+  playerConsumables.style.display = "none";
+  diceContainer.style.display = "none";
+});
+
+displayConsumables.addEventListener("click", () => {
+  playerConsumables.style.display = "block";
+  diceBox.style.display = "block";
+  playerDice.style.display = "none";
+  diceContainer.style.display = "none";
+});
+
+diceBackBtn.addEventListener("click", () => {
+  diceBox.style.display = "none";
+});
+
+consumableBackBtn.addEventListener("click", () => {
+  diceBox.style.display = "none";
+});
+
+viewDice.addEventListener("click", () => {
+  displayDice.click();
+})
+
+viewConsumables.addEventListener("click", () => {
+  displayConsumables.click();
+})
+
+
 const boonBox = document.querySelector("#boonBox");
 const leftArrow = boonBox.querySelector("#leftArrow");
 const rightArrow = boonBox.querySelector("#rightArrow")
@@ -151,6 +195,174 @@ function addToBoonBox(boon) {
   });
 
   leftArrow.click();
+}
+
+// populate playerDice
+let playerDiceContainer = document.createElement("ul");
+playerDiceContainer.style.listStyleType = "none";
+playerDice.appendChild(playerDiceContainer);
+
+playerDiceContainer = playerDice.querySelector("ul");
+
+// Add new back button
+let newBack = document.createElement('button');
+newBack.textContent = "Back";
+newBack.id = "detailBack";
+newBack.style.display = 'none';
+newBack.classList.add("backBtn");
+
+newBack.addEventListener("click", () => {
+
+  // Display all dice
+  let allDice = playerDice.querySelectorAll("ul li");
+  allDice.forEach((dice) => {
+    dice.style.display = 'flex';
+  });
+
+  // Hide all dice sublists
+  let diceList = playerDice.querySelectorAll("ul li ul")
+  diceList.forEach((diceContent) => {
+    diceContent.style.display = 'none';
+  });
+
+  // hide this, display the regular back
+  diceBackBtn.style.display = "block";
+  newBack.style.display = "none";
+  viewConsumables.style.display = "block";
+});
+
+playerDice.appendChild(newBack);
+
+for (let i = 0; i < player.diceArray.length; i++) {
+  // Add each dice as a clickable element that displays the sides when clicked
+  let newDice = document.createElement('li');
+  newDice.textContent = player.diceArray[i].typeOf;
+
+  // Set styles
+  newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
+  newDice.style.display = "flex";
+  newDice.style.justifyContent = "center";
+  newDice.style.alignItems = "center";
+  newDice.style.position = "relative";
+  
+  newDice.classList.add("die-btn");
+  newDice.classList.add(player.diceArray[i].typeOf);
+  
+  // Give it a ul child populated by it's sides
+  let newDiceSides = document.createElement("ul");
+  newDiceSides.style.display = "none";
+  newDiceSides.style.listStyleType = "none";
+  newDiceSides.style.justifyContent = "space-around";
+  newDiceSides.style.alignItems = "center";
+  newDiceSides.style.position = "absolute";
+  newDiceSides.style.left = "100%";
+
+  
+  for (let j = 0; j < player.diceArray[i].sides.length; j++) {
+    // Populate the newDiceSides
+    let newDiceSide = document.createElement("li");
+    newDiceSide.textContent = player.diceArray[i].sides[j].value;
+
+    newDiceSide.style.padding = "10px";
+
+    // Add it to the ul
+    newDiceSides.appendChild(newDiceSide);
+  }
+
+  newDice.appendChild(newDiceSides);
+
+  // Make it clickable to display it's children
+  newDice.addEventListener("click", () => {
+    let diceList = newDice.querySelector("ul");
+    diceList.style.display = 'flex';
+
+    // hide the old back button and display new one
+    diceBackBtn.style.display = "none";
+    newBack.style.display = 'block';
+    
+    // Hide all other dice
+    let allDice = playerDice.querySelectorAll(".die-btn");
+    allDice.forEach((dice) => {
+      if (dice != newDice) {
+        dice.style.display = 'none';
+      }
+    });
+
+    // Hide the 'View Consumables' button
+    viewConsumables.style.display = "none";
+  });
+
+  // Add it to the ul
+  playerDiceContainer.appendChild(newDice);
+}
+
+function addPlayerDice(dice) {
+  // Add the dice as a clickable element that displays the sides when clicked
+  let newDice = document.createElement('li');
+  newDice.textContent = dice.typeOf;
+
+  // Set styles
+  newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
+  newDice.style.display = "flex";
+  newDice.style.justifyContent = "center";
+  newDice.style.alignItems = "center";
+  newDice.style.position = "relative";
+  
+  newDice.classList.add("die-btn");
+  newDice.classList.add(dice.typeOf);
+  
+  // Give it a ul child populated by it's sides
+  let newDiceSides = document.createElement("ul");
+  newDiceSides.style.display = "none";
+  newDiceSides.style.listStyleType = "none";
+  newDiceSides.style.justifyContent = "left";
+  newDiceSides.style.alignItems = "center";
+  newDiceSides.style.position = "absolute";
+  newDiceSides.style.left = "100%";
+  newDiceSides.style.width = (playerDice.clientWidth - (2 * newDice.clientWidth)) + "px";
+  newDiceSides.style.flexWrap = "wrap";
+
+  // console.log(playerDice.clientWidth);
+  
+  for (let i = 0; i < dice.sides.length; i++) {
+    // Populate the newDiceSides
+    let newDiceSide = document.createElement("li");
+    newDiceSide.textContent = dice.sides[i].value;
+
+    newDiceSide.style.padding = "10px";
+
+    // Add it to the ul
+    newDiceSides.appendChild(newDiceSide);
+  }
+
+  newDice.appendChild(newDiceSides);
+
+  // Make it clickable to display it's children
+  newDice.addEventListener("click", () => {
+    let diceList = newDice.querySelector("ul");
+    diceList.style.display = 'flex';
+
+    // hide the old back button and display new one
+    diceBackBtn.style.display = "none";
+    newBack.style.display = 'block';
+
+    // Fix diceList styles
+    diceList.style.width = (playerDice.clientWidth - (1.05 * newDice.clientWidth)) + "px";
+    
+    // Hide all other dice
+    let allDice = playerDice.querySelectorAll(".die-btn");
+    allDice.forEach((dice) => {
+      if (dice != newDice) {
+        dice.style.display = 'none';
+      }
+    });
+
+    // Hide the 'View Consumables' button
+    viewConsumables.style.display = "none";
+  });
+
+  // Add it to the ul
+  playerDiceContainer.appendChild(newDice);
 }
 
 // Fix the arrow positions onload
@@ -459,8 +671,12 @@ const message = document.querySelector("#message");
 diceBox.style.display = "none";
 const buyConsumables = document.querySelector('#buyConsumables');
 
+
 diceMachine.addEventListener("click", (e) => {
   diceBox.style.display = "block";
+  playerDice.style.display = "none";
+  playerConsumables.style.display = "none";
+  diceContainer.style.display = "block";
   buyDice.style.display = "block";
   backBtn.style.display = "block";
   buyConsumables.style.display = "none";
@@ -545,6 +761,7 @@ buyDice.addEventListener("click", (e) => {
         option.addEventListener("click", () => {
           // Add this specific dice to the player
           player.addDice(diceChoice[option.id]);
+          addPlayerDice(diceChoice[option.id]);
           delete diceChoice[option.id];
           
           // Add other dice as consumables
@@ -644,4 +861,9 @@ buyConsumables.addEventListener("click", () => {
       backBtn.click();
     });
   });
+});
+
+window.addEventListener('load', function() {
+  // Fix for scrolling 
+  leftArrow.click();
 });
