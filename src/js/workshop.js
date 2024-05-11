@@ -320,6 +320,8 @@ spanPlayerFaces.addEventListener("click", () => {
 prepareItems();
 
 var dragSrcEl = null;
+
+//#region [irrelevant drag functions]
   
 function handleDragStart(e) {
   // console.log("handleDragStart");
@@ -352,6 +354,8 @@ function handleDragLeave(e) {
   this.classList.remove('over');
 }
 
+//#endregion
+
 function handleDrop(e) {
   // console.log("handleDrop");
   if (e.stopPropagation) {
@@ -378,12 +382,21 @@ function handleDrop(e) {
     let draggedOnIndex = parseInt(this.getAttribute('data-info'));
     
     draggedDiceSide = player.diceSideArray[draggedIndex];
-
+    
     // Swapping values
     player.diceArray[parseInt(draggedOnParent.id.substring(11))].sides[draggedOnIndex] = draggedDiceSide;
     
     // Remove the diceSide from the player's diceSide array
     player.diceSideArray.splice(draggedIndex, 1);
+
+    // Update indexes of other stored dice sides
+    let storedDiceSide = document.querySelectorAll('.diceSide.box.stored');
+
+    storedDiceSide.forEach((diceSide) => {
+      if (parseInt(diceSide.getAttribute('data-info')) > draggedIndex) {
+        diceSide.setAttribute('data-info', parseInt(diceSide.getAttribute('data-info')) - 1);
+      }
+    });
 
     // Remove the element from the DOM
     dragSrcEl.remove();

@@ -19,7 +19,6 @@ if (isset($logout)&& $logout == 1) {
 
 $guest = sanitizeString(INPUT_GET, 'guest');
 if (isset($guest)&& $guest == 1) {
-  // User wants to log out, destroy the $_SESSION['username']
   $_SESSION['username'] = "guest";
 }
 
