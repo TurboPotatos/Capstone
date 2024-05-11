@@ -20,6 +20,11 @@
 	user-select: none;
 }
 
+#chartNotes1,
+#chartNotes2 {
+  height: 9rem;
+}
+
 #medChart2{
   display: none;
 }
@@ -78,7 +83,8 @@ th, td {
   /* border: 1px solid #ccc; */
   padding-left: 8px;
   text-align: left;
-  height: 2.5vh;
+  /* height: 2.5vh; */
+  height: 1.3rem;
   /* font-size: .3vh; */
 }
 th {
@@ -94,7 +100,8 @@ tr:nth-child(odd) {
   color: #b1b1b1;
 }
 #henchName {
-  font-size: clamp(1rem, 3.3vw, 3.35rem);
+  /* font-size: clamp(1rem, 3.3vw, 3.35rem); */
+  font-size: 3.35rem;
 }
 
 #henchName2 {
@@ -408,12 +415,12 @@ tr:nth-child(odd) {
   border: 3px solid yellow;
   position: absolute;
   height: 18%;
-  width: 23%;
+  width: 25%;
   top: 30%;
 }
 #consumableBag button {
   margin: 1rem;
   padding: .5rem;
-  font-size: 1rem;
+  font-size: .8rem;
   border-radius: 5px;
 }

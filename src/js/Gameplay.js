@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const collectibleEffects = document.querySelector('#collectibleEffects');
   const gameLog = document.querySelector("#logText");
+  const chartNotes1 = document.querySelector("#chartNotes1");
 
   // Buttons
   const btnRoll = document.querySelector('#rollDiceBtn');
@@ -70,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
 //#region [Variables]
+  let notesOutput = [];
   let waveHenchmen = [];
   let accumulatedTotal = 0;
 //#endregion
@@ -156,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
             newConsumable.addEventListener("click", (e) => {
               accumulatedTotal += player.items[key][i].bonus;
               gameLog.innerHTML += "Added " + player.items[key][i].bonus + " to Total<br>";
+              notesOutput.push("Added " + player.items[key][i].bonus + " to Total");
               gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
             });
           }
@@ -212,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function nextHenchman() {
     waveHenchmen.shift();
     gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
+    notesOutput.push(`${waveHenchmen.length} henchmen left!`);
     
     updateHenchmenInfo();
     updatePlayerInfo();
@@ -287,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
         waveHenchmen[0].health += healAmount;
         
         results.push("+" + healAmount + " healing from Gold Ring");
+        notesOutput.push("+" + healAmount + " healing from Gold Ring");
         
         if (waveHenchmen[0].isFullHealth() || 
         // Tetris Piece
@@ -320,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     gameLog.innerHTML += results.join('<br>') + "<br>Current Total: " + accumulatedTotal + "<br><br>";
+    updateChartNotes();
     
     // // Disable selected die buttons after rolling
     // selectedDice.forEach(function(dieBtn) {
@@ -347,8 +353,10 @@ document.addEventListener('DOMContentLoaded', function() {
       if (waveHenchmen[0].threshold == total) {
         healAmount *= 2;
         gameLog.innerHTML += "Critically healing for: " + healAmount + "<br><br>";
+        notesOutput.push("Critically healed " + waveHenchmen[0].name + " for: " + healAmount);
       } else {
         gameLog.innerHTML += "Healing for: " + healAmount + "<br><br>";
+        notesOutput.push("Healed " + waveHenchmen[0].name + " for: " + healAmount);
       }
 
       waveHenchmen[0].health += healAmount;
@@ -382,6 +390,7 @@ document.addEventListener('DOMContentLoaded', function() {
       waveHenchmen[0].health -= malpractice;
 
       gameLog.innerHTML += waveHenchmen[0].name + " took " + malpractice + " damage from Malpractice!<br><br>";
+      notesOutput.push(waveHenchmen[0].name + " took " + malpractice + " damage from Malpractice!");
 
       updateHenchmenInfo();
       selectedDice.forEach(function(dieBtn) {
@@ -390,6 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (waveHenchmen[0].isDead()) {
         gameLog.innerHTML += waveHenchmen[0].name + " didn't make it...<br><br>";
+        notesOutput.push(waveHenchmen[0].name + " didn't make it...");
         if (waveHenchmen.length > 1) {
           nextHenchman();
         } else {
@@ -419,12 +429,14 @@ document.addEventListener('DOMContentLoaded', function() {
       player.changeStamina(restoreStamina);
 
       gameLog.innerHTML += "<br>Stamina recovered by Gloves: " + restoreStamina + "<br><br>";
+      notesOutput.push("Stamina recovered by Gloves: " + restoreStamina);
     }
 //#endregion
 
     player.score += waveHenchmen[0].scoreGiven;
 
     gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
+    notesOutput.push(waveHenchmen[0].name + " was fully healed!");
 
 //#region [elderScroll]
     if (player.boonArray['elderScroll']) {
@@ -459,6 +471,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (allDisabled() && autoEndCheckbox.checked) {
       resetDice();
     }
+
+    updateChartNotes();
   }
 
   function resetDice() {
@@ -485,7 +499,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       let staminaLost = waveHenchmen[0].staminaPenalty;
 
-      gameLog.innerHTML += "Stamina lost at end of turn: " + waveHenchmen[0].staminaPenalty + "<br><br>";
+      gameLog.innerHTML += "Stamina cost to reset: " + waveHenchmen[0].staminaPenalty + "<br><br>";
+      notesOutput.push("Stamina cost to reset: " + waveHenchmen[0].staminaPenalty);
       gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
 
 //#region [crowbar]
@@ -499,6 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (player.isOutOfStamina()) {
         gameLog.innerHTML += "You're all tuckered out<br><br>";
+        notesOutput.push("You're all tuckered out");
         document.querySelector("#gameOverMessage").style.display = "block";
       }
         // if(player.stamina <= 0){
@@ -511,6 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // console.log("rollBonus: " + rollBonus);
     }
 //#endregion
+    updateChartNotes();
   }
 
   function allDisabled() {
@@ -623,6 +640,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     }
+  }
+
+  function updateChartNotes() {
+
+    if (notesOutput.length == 0) {
+      notesOutput.push("Current Total: " + accumulatedTotal);
+    } else {
+      notesOutput.push("<br>Current Total: " + accumulatedTotal);
+    }
+
+    chartNotes1.innerHTML = notesOutput.join('<br>') + "<br>";
+
+    notesOutput = [];
   }
 
 //#endregion
