@@ -4,6 +4,8 @@ import { Consumable } from "./Consumable.js";
 
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
+// console.log(player);
+
 if (!player.items["supplement"]) {
   player.addItem(new Consumable(2));
   player.addItem(new Consumable(1));
@@ -178,6 +180,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let myHealth = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
     let myTarget = waveHenchmen[0].threshold;
     let myRange = waveHenchmen[0].range;
+
+//#region [nukaCola]
+if (player.boonArray['nukaCola']) {
+  myRange += player.boonArray['nukaCola'].effects.bonusRange;
+}
+//#endregion
+
     let lowerRange = (myTarget - myRange);
     let upperRange = (myTarget + myRange);
     let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
@@ -236,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
+    var dieResult = [];
     var totalResult = 0;
     var results = [];
     selectedDice.forEach(function(dieBtn) {
@@ -278,6 +288,34 @@ document.addEventListener('DOMContentLoaded', function() {
       if (player.boonArray['diamondPickaxe'] && selectedDice.length === 1) {
         result += player.boonArray['diamondPickaxe'].effects.rollBonus;
         results.push("With help from Diamond Pickaxe:");
+      }
+//#endregion
+
+      dieResult.push(result);
+      // console.log(dieResult[0]);
+      // console.log(dieResult[1]);
+
+//#region [pillBottle]
+      if (player.boonArray['pillBottle'] && selectedDice.length == player.boonArray['pillBottle'].effects.numDice && dieResult[0] == dieResult[1]) {
+        let remainingHealth = waveHenchmen[0].maxHealth - waveHenchmen[0].health;
+        let healAmount = Math.round(remainingHealth * player.boonArray['pillBottle'].effects.healFor);
+        
+        waveHenchmen[0].health += healAmount;
+              
+        results.push("+" + healAmount + " healing from Pill Bottle");
+        notesOutput.push("+" + healAmount + " healing from Pill Bottle");
+        
+        if (waveHenchmen[0].isFullHealth() || 
+        // Tetris Piece
+        (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
+
+          gameLog.innerHTML += results.join('<br>') + "<br>";
+          results = [];
+          handleFullHeal();
+          
+        } else {
+          updateHenchmenInfo();
+        }
       }
 //#endregion
 
@@ -457,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function endTurn() {
-    const selectedDice = document.querySelectorAll('.die-btn.selected');
+    const selectedDice = document.querySelectorAll('.die-btn.selected:disabled');
     
     // Disable selected die buttons after ending turn
     selectedDice.forEach(function(dieBtn) {

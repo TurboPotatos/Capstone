@@ -664,6 +664,15 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
             document.querySelector("#currentCurrency").innerHTML = player.currency;
             addToBoonBox(activeBoon);
             player.addBoon(activeBoon);
+
+//#region [medicalBag]
+            if (player.boonArray['medicalBag'] && activeBoon.name === 'medicalBag') {
+              let staminaBonus = player.boonArray['medicalBag'].effects.maxStamina;
+              player.maxStamina += staminaBonus;
+              updateStamina(staminaBonus);
+            }
+//#endregion
+
             let selected = document.querySelector(`#${activeBoon.name}`);
             if (selected) {
               selected.style.opacity = 0;

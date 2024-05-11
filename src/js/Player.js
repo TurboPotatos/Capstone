@@ -32,6 +32,7 @@ export class Player {
       // Player properties
       this.currency = player.currency;
       this.stamina = player.stamina;
+      this.maxStamina = player.maxStamina;
       this.score = player.score;
       this.difficulty = player.difficulty;
       this.maxDiceCount = player.maxDiceCount;

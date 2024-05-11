@@ -97,19 +97,7 @@ const boonArray = {
             {advantage: true}, 
             "src/media/Boons/boon_labCoat.png"),
 
-  "lollipops" : 
-  new Boon( "lollipops", 
-            "Lollipops: <br><br>Items in the vending machine cost 20% less", 
-            {vendingDiscount: 0.2}, 
-            "src/media/Boons/boon_lollipops.png"),
-
-  "mask" : 
-  new Boon( "mask", 
-            "Mask: <br><br>10% chance to get an additional item from the vending machine", 
-            {bonusVendChance: 0.1}, 
-            "src/media/Boons/boon_mask.png"),
-
-  "medicalBag" : 
+  "medicalBag" : // IMPLEMENTED
   new Boon( "medicalBag", 
             "Medical Bag: <br><br>+20 max stamina", 
             {maxStamina: 20}, 
@@ -121,16 +109,16 @@ const boonArray = {
             {bonusHealth: 10}, 
             "src/media/Boons/boon_mushroom.png"),
 
-  "nukaCola" : //TODO
+  "nukaCola" : // IMPLEMENTED
   new Boon( "nukaCola", 
             "Nuka Cola: <br><br>Henchman range is increased by 1", 
-            {nukaCola: 0}, 
+            {bonusRange: 1}, 
             "src/media/Boons/boon_nukaCola.png"),
 
   "pillBottle" : //TODO
   new Boon( "pillBottle", 
-            "Pill Bottle: <br><br>If you roll doubles when rolling exactly 2 dice, double the value of each", 
-            {rollMultiplier: 2}, 
+            "Pill Bottle: <br><br>If you roll doubles when rolling exactly 2 dice, heal the henchman for 75% of its missing health", 
+            {numDice: 2, healFor: 0.75}, 
             "src/media/Boons/boon_pillBottle.png"),
 
   "pokeball" : //TODO
@@ -177,7 +165,7 @@ const boonArray = {
 
   "stethoscope" : 
   new Boon( "stethoscope", 
-            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 50% of your stamina", 
+            "Stethoscope: <br><br>You still get paid when killing a henchman, but lose 50% of your stamina + 5", 
             {staminaDamage: 0.5}, 
             "src/media/Boons/boon_stethoscope.png"),
 
@@ -223,6 +211,18 @@ const boonArray = {
             {canPracticeMedicine: true}, 
             "src/media/Boons/boon_medicalLicense.png"),
 
+  "lollipops" : 
+  new Boon( "lollipops", 
+            "Lollipops: <br><br>Items in the vending machine cost 20% less", 
+            {vendingDiscount: 0.2}, 
+            "src/media/Boons/boon_lollipops.png"),
+
+  "mask" : 
+  new Boon( "mask", 
+            "Mask: <br><br>10% chance to get an additional item from the vending machine", 
+            {bonusVendChance: 0.1}, 
+            "src/media/Boons/boon_mask.png"),
+
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.
@@ -265,6 +265,7 @@ const boonArray = {
   // You can no longer see henchman healing factor
   // You can no longer see henchman stamina penalty
   // Dice from the dice machine come with 2 random faces
+  // 10% interest
   
 };
 
