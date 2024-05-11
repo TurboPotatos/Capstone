@@ -382,9 +382,9 @@ td img {
 #returnToGameBtn {
   position: absolute;
   height: 10%;
-  width: 8%;
-  bottom: 50%;
-  left: 1rem;
+  width: 12%;
+  bottom: 3%;
+  left: 3%;
   padding-left: 50px; 
   background-color: transparent;
   color: white;

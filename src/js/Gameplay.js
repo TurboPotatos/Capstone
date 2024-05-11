@@ -73,9 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
 //#region [Variables]
-  let notesOutput = [];
-  let waveHenchmen = [];
-  let accumulatedTotal = 0;
+  var results = [];
+  var notesOutput = [];
+  var waveHenchmen = [];
+  var accumulatedTotal = 0;
 //#endregion
 
 //#region [Initialize Game]
@@ -247,7 +248,6 @@ if (player.boonArray['nukaCola']) {
 
     var dieResult = [];
     var totalResult = 0;
-    var results = [];
     selectedDice.forEach(function(dieBtn) {
       
       var dice = "";
@@ -258,6 +258,13 @@ if (player.boonArray['nukaCola']) {
       }
 
       var result = dice.roll();
+
+//#region [portalGun]
+      if (player.boonArray['portalGun']) {
+        results.push("Portal gun affected your " + result);
+        result = player.boonArray['portalGun'].effects.inverse - result;
+      }
+//#endregion
 
 //#region [labCoat]
       if (player.boonArray['labCoat'] && selectedDice.length === 1) {
@@ -305,17 +312,7 @@ if (player.boonArray['nukaCola']) {
         results.push("+" + healAmount + " healing from Pill Bottle");
         notesOutput.push("+" + healAmount + " healing from Pill Bottle");
         
-        if (waveHenchmen[0].isFullHealth() || 
-        // Tetris Piece
-        (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
-
-          gameLog.innerHTML += results.join('<br>') + "<br>";
-          results = [];
-          handleFullHeal();
-          
-        } else {
-          updateHenchmenInfo();
-        }
+        fullHealthCheck();
       }
 //#endregion
 
@@ -331,16 +328,21 @@ if (player.boonArray['nukaCola']) {
         results.push("+" + healAmount + " healing from Gold Ring");
         notesOutput.push("+" + healAmount + " healing from Gold Ring");
         
-        if (waveHenchmen[0].isFullHealth() || 
-        // Tetris Piece
-        (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
+        fullHealthCheck();
+      }
+//#endregion
 
-          gameLog.innerHTML += results.join('<br>') + "<br>";
-          results = [];
-          handleFullHeal();
+//#region [reflexHammer]
+      if (player.boonArray['reflexHammer'] && selectedDice.length == 3) {
+        if (dieResult[0] == 1 && dieResult[1] == 1 && dieResult[2] == 1) {
+          let remainingHealth = waveHenchmen[0].maxHealth - waveHenchmen[0].health;
           
-        } else {
-          updateHenchmenInfo();
+          waveHenchmen[0].health += remainingHealth;
+                
+          results.push("Reflex Hammer healed " + waveHenchmen[0].name + " for: " + remainingHealth);
+          notesOutput.push("Reflex Hammer healed " + waveHenchmen[0].name + " for: " + remainingHealth);
+          
+          fullHealthCheck();
         }
       }
 //#endregion
@@ -425,6 +427,15 @@ if (player.boonArray['nukaCola']) {
       }
     } else {
       let malpractice = waveHenchmen[0].damage;
+
+//#region [pokeball]
+      if (player.boonArray['pokeball']) {
+        malpractice = Math.round(malpractice * player.boonArray['pokeball'].effects.damageReduction);
+
+        gameLog.innerHTML += "Malpractice damage halved by Pokeball<br>";
+      }
+//#endregion
+
       waveHenchmen[0].health -= malpractice;
 
       gameLog.innerHTML += waveHenchmen[0].name + " took " + malpractice + " damage from Malpractice!<br><br>";
@@ -544,6 +555,8 @@ if (player.boonArray['nukaCola']) {
 //#region [crowbar]
       if (player.boonArray['crowbar'] && player.boonArray['crowbar'].effects.staminaLost < staminaLost) {
         staminaLost = player.boonArray['crowbar'].effects.staminaLost;
+
+        gameLog.innerHTML += "Crowbar reduced stamina lost to" + staminaLost + "<br><br>";
       }
 //#endregion
 
@@ -562,9 +575,21 @@ if (player.boonArray['nukaCola']) {
 //#region [estusFlask]
     if (player.boonArray['estusFlask']) {
       player.boonArray['estusFlask'].effects.bonusActive = true;
-      // console.log("rollBonus: " + rollBonus);
     }
 //#endregion
+
+//#region [rxPad]
+    if (player.boonArray['rxPad']) {
+      let healAmount = player.boonArray['rxPad'].effects.healAmount;
+      waveHenchmen[0].health += healAmount;
+                
+      results.push("Rx Pad healed " + waveHenchmen[0].name + " for: " + healAmount);
+      notesOutput.push("Rx Pad healed " + waveHenchmen[0].name + " for: " + healAmount);
+      
+      fullHealthCheck();
+    }
+//#endregion
+
     updateChartNotes();
   }
 
@@ -680,8 +705,21 @@ if (player.boonArray['nukaCola']) {
     }
   }
 
-  function updateChartNotes() {
+  function fullHealthCheck() {
+    if (waveHenchmen[0].isFullHealth() || 
+    // Tetris Piece
+    (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
+      gameLog.innerHTML += results.join('<br>') + "<br>";
+      results = [];
+      handleFullHeal();
+      
+    } else {
+      updateHenchmenInfo();
+    }
+  }
+
+  function updateChartNotes() {
     if (notesOutput.length == 0) {
       notesOutput.push("Current Total: " + accumulatedTotal);
     } else {

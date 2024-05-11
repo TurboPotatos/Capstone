@@ -99,13 +99,10 @@ tr:nth-child(odd) {
 .Placeholder {
   color: #b1b1b1;
 }
-#henchName {
+#henchName,
+#henchName2 {
   /* font-size: clamp(1rem, 3.3vw, 3.35rem); */
   font-size: 3.35rem;
-}
-
-#henchName2 {
-  font-size: clamp(1rem, 3.3vw, 3.35rem);
 }
 
 #henchmenHealth {

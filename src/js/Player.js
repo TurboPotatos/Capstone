@@ -46,12 +46,12 @@ export class Player {
         // Make new dice from the info in the stored generic objects
         let newDice = new Dice(player.diceArray[i].typeOf);
 
-        // console.log(player.diceArray[i].typeOf);
+        console.log(player.diceArray[i]);
 
         for (let j = 0; j < player.diceArray[i].sides.length; j++) {
           let storedDiceSide = player.diceArray[i].sides[j];
 
-          // console.log(storedDiceSide.value);
+          // console.log(storedDiceSide);
 
           let newDiceSide = new DiceSide(storedDiceSide.value, -1, storedDiceSide.cost);
 

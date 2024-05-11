@@ -115,25 +115,25 @@ const boonArray = {
             {bonusRange: 1}, 
             "src/media/Boons/boon_nukaCola.png"),
 
-  "pillBottle" : //TODO
+  "pillBottle" : // IMPLEMENTED
   new Boon( "pillBottle", 
             "Pill Bottle: <br><br>If you roll doubles when rolling exactly 2 dice, heal the henchman for 75% of its missing health", 
             {numDice: 2, healFor: 0.75}, 
             "src/media/Boons/boon_pillBottle.png"),
 
-  "pokeball" : //TODO
+  "pokeball" : // IMPLEMENTED
   new Boon( "pokeball", 
             "Pokeball: <br><br>Henchmen take 50% less damage from malpractice", 
-            {pokeball: true}, 
+            {damageReduction: 0.5}, 
             "src/media/Boons/boon_pokeball.png"),
 
-  "portalGun" : //TODO
+  "portalGun" : // IMPLEMENTED
   new Boon( "portalGun", 
-            "Portal Gun: <br><br>Your dice roll for (13 minus the value of the roll)", 
+            "Portal Gun: <br><br>Your dice roll for 13 minus the value of the roll (can be negative)", 
             {inverse: 13}, 
             "src/media/Boons/boon_portalGun.png"),
 
-  "reflexHammer" : //TODO
+  "reflexHammer" : // IMPLEMENTED
   new Boon( "reflexHammer", 
             "Reflex Hammer: <br><br>If you roll 3 1s in a single roll when rolling exactly 3 dice, fully heal the henchman", 
             {reflexHammer: true}, 
@@ -141,8 +141,8 @@ const boonArray = {
 
   "rxPad" : //TODO
   new Boon( "rxPad", 
-            "RX Pad: <br><br>If you miss the threshold by over 10, reroll the dice you just rolled", 
-            {lowRoll: 10}, 
+            "Rx Pad: <br><br>Henchmen heal for 2 after you reset your dice", 
+            {healAmount: 2}, 
             "src/media/Boons/boon_rxPad.png"),
 
   "scalpel" : 
@@ -257,7 +257,6 @@ const boonArray = {
   // New ideas -----------------------------
 
   // Rolling doubles allows you to heal one henchman for half their missing health.
-  // Henchmen heal 2 at the start of each turn.
   // something about odds/evens
   // Whenever you lose stamina, you gain 1 currency
   // Show henchman gold and score values
@@ -266,6 +265,7 @@ const boonArray = {
   // You can no longer see henchman stamina penalty
   // Dice from the dice machine come with 2 random faces
   // 10% interest
+  // If you miss the threshold by over 10, reroll the dice you just rolled
   
 };
 
