@@ -211,6 +211,7 @@ newBack.id = "detailBack";
 newBack.style.display = 'none';
 newBack.classList.add("backBtn");
 
+//#region [View Player Dice]
 newBack.addEventListener("click", () => {
 
   // Display all dice
@@ -364,6 +365,97 @@ function addPlayerDice(dice) {
   // Add it to the ul
   playerDiceContainer.appendChild(newDice);
 }
+//#endregion
+
+//#region [View Player Consumables]
+
+let consumableList = document.createElement("ul");
+consumableList.style.listStyleType = "none";
+
+// populate playerConsumables' ul with li's of the player's consumables
+for (let key in player.items) {
+  if (player.items.hasOwnProperty(key)) {
+    if (key != 'supplement') {
+      // If the subarray ISN'T of type supplement, it's a dice. Add classes respectively
+      for (let i = 0; i < player.items[key].length; i++) {
+        let newConsumable = document.createElement('li');
+        newConsumable.textContent = player.items[key][i].typeOf;
+        // Set styles & classes
+        newConsumable.style.backgroundImage = "url('src/media/Dice/" + newConsumable.textContent + ".png')";
+        newConsumable.style.display = "flex";
+        newConsumable.style.justifyContent = "center";
+        newConsumable.style.alignItems = "center";
+        newConsumable.classList.add("die-btn");
+        newConsumable.classList.add(player.items[key][i].typeOf);
+
+        // Add it to the consumableList
+        consumableList.appendChild(newConsumable);
+      }
+    } else {
+      // subarray is for type supplement
+      for (let i = 0; i < player.items[key].length; i++) {
+        let newConsumable = document.createElement('li');
+        newConsumable.textContent = player.items[key][i].bonus;
+      
+        // Set styles & classes
+        newConsumable.style.display = "flex";
+        newConsumable.style.justifyContent = "center";
+        newConsumable.style.alignItems = "center";
+
+        // TODO - get finalized backgroundImage and classes for supplements
+        newConsumable.classList.add("die-btn");
+        newConsumable.classList.add("d4");
+        newConsumable.style.backgroundImage = "url('src/media/Dice/d4.png')";
+
+
+        // Add it to the consumableList
+        consumableList.appendChild(newConsumable);
+      }
+    }
+  }
+}
+
+// Add the ul to playerConsumables
+playerConsumables.appendChild(consumableList);
+
+// function to add more to playerConsumables
+function addPlayerConsumables(consumable) {
+  let consumableList = playerConsumables.querySelector("ul");
+  if (consumable.bonus == null || consumable.bonus == undefined) {
+    let newConsumable = document.createElement('li');
+    newConsumable.textContent = consumable.typeOf;
+    // Set styles & classes
+    newConsumable.style.backgroundImage = "url('src/media/Dice/" + newConsumable.textContent + ".png')";
+    newConsumable.style.display = "flex";
+    newConsumable.style.justifyContent = "center";
+    newConsumable.style.alignItems = "center";
+    newConsumable.classList.add("die-btn");
+    newConsumable.classList.add(consumable.typeOf);
+
+    // Add it to the consumableList
+    consumableList.appendChild(newConsumable);
+  } else { 
+    // Consumable is a flat bonus
+    let newConsumable = document.createElement('li');
+    newConsumable.textContent = consumable.bonus;
+  
+    // Set styles & classes
+    newConsumable.style.display = "flex";
+    newConsumable.style.justifyContent = "center";
+    newConsumable.style.alignItems = "center";
+
+    // TODO - get finalized backgroundImage and classes for supplements
+    newConsumable.classList.add("die-btn");
+    newConsumable.classList.add("d4");
+    newConsumable.style.backgroundImage = "url('src/media/Dice/d4.png')";
+
+
+    // Add it to the consumableList
+    consumableList.appendChild(newConsumable);
+  }
+}
+
+//#endregion
 
 // Fix the arrow positions onload
 boonBox.scrollLeft = 0;
@@ -770,6 +862,7 @@ buyDice.addEventListener("click", (e) => {
               // console.log(diceChoice[key]);
               diceChoice[key].name = diceChoice[key].typeOf;
               player.addItem(diceChoice[key]);
+              addPlayerConsumables(diceChoice[key]);
             }
           }
 
