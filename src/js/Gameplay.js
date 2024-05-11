@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var notesOutput = [];
   var waveHenchmen = [];
   var accumulatedTotal = 0;
+  var endTurnForReal = 2;
 //#endregion
 
 //#region [Initialize Game]
@@ -569,6 +570,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function endTurn() {
     const selectedDice = document.querySelectorAll('.die-btn.selected:disabled');
+    if (selectedDice.length == 0 && endTurnForReal > 0) {
+      let times = "times";
+      if (endTurnForReal == 1) {
+        times = "time";
+      }
+      alert("Usually you'd want to roll some dice first,\nbut if you try again " + endTurnForReal + " more " + times + "...\nI'll allow it.");
+      endTurnForReal--;
+      return;
+    } else {
+      endTurnForReal = 2;
+    }
     
     // Disable selected die buttons after ending turn
     selectedDice.forEach(function(dieBtn) {
