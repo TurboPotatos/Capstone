@@ -211,17 +211,18 @@ const boonArray = {
             {Triforce: true},
             "src/media/Boons/boon_triforce.png"),
 
-"mask" : 
-  new Boon( "mask", 
-            "Mask: <br><br>10% chance to get an additional item from the vending machine", 
-            {bonusVendChance: 0.1}, 
-            "src/media/Boons/boon_mask.png"),
+  // "mask" : 
+  // new Boon( "mask", 
+  //           "Mask: <br><br>10% chance to get an additional item from the vending machine", 
+  //           {bonusVendChance: 0.1}, 
+  //           "src/media/Boons/boon_mask.png"),
 
-  "reflexHammer" :
-  new Boon( "reflexHammer", 
-            "Reflex Hammer: <br><br>Items in the vending machine cost 20% less", 
-            {vendingDiscount: 0.2}, 
-            "src/media/Boons/boon_reflexHammer.png"),
+  // "reflexHammer" :
+  // new Boon( "reflexHammer", 
+  //           "Reflex Hammer: <br><br>Items in the vending machine cost 20% less", 
+  //           {vendingDiscount: 0.2}, 
+  //           "src/media/Boons/boon_reflexHammer.png"),
+  
 
   // Chance to heal for +5 when [condition]
   // When buying a die face of 7 or below, you get an additional one.

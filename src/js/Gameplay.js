@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
               gameLog.innerHTML += "Added " + player.items[key][i].bonus + " to Total<br>";
               notesOutput.push("Added " + player.items[key][i].bonus + " to Total");
               gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
+              updateChartNotes();
             });
           }
         }
