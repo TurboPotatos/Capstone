@@ -84,6 +84,24 @@ export const henchPicArray = {
   "Turret" : "url(src/media/Henchmen/henchman_turret_hurt.png), url(src/media/texture2.png)",
 };
 
+export const healedPicArray = {
+  "Beetle" : "url(src/media/Henchmen/henchman_beetle.png), url(src/media/texture2.png)",
+  "B1 Battle Droid" : "url(src/media/Henchmen/henchman_battleDroid.png), url(src/media/texture2.png)",
+  "Bokoblin" : "url(src/media/Henchmen/henchman_bokoblin.png), url(src/media/texture2.png)",
+  "Pinky" : "url(src/media/Henchmen/henchman_ghost.png), url(src/media/texture2.png)",
+  "Goomba" : "url(src/media/Henchmen/henchman_goomba.png), url(src/media/texture2.png)",
+  "Grunt" : "url(src/media/Henchmen/henchman_grunt.png), url(src/media/texture2.png)",
+  "Henchman 24" : "url(src/media/Henchmen/henchman_henchman24.png), url(src/media/texture2.png)",
+  "Iago" : "url(src/media/Henchmen/henchman_iago.png), url(src/media/texture2.png)",
+  "Pain and Panic" : "url(src/media/Henchmen/henchman_imps.png), url(src/media/texture2.png)",
+  "Koopa Troopa" : "url(src/media/Henchmen/henchman_koopaTroopa.png), url(src/media/texture2.png)",
+  "Minion" : "url(src/media/Henchmen/henchman_megaMinion.png), url(src/media/texture2.png)",
+  "Stuart the Minion" : "url(src/media/Henchmen/henchman_minion.png), url(src/media/texture2.png)",
+  "Space Invader" : "url(src/media/Henchmen/henchman_spaceInvader.png), url(src/media/texture2.png)",
+  "Storm Trooper" : "url(src/media/Henchmen/henchman_stormtrooper.png), url(src/media/texture2.png)",
+  "Turret" : "url(src/media/Henchmen/henchman_turret.png), url(src/media/texture2.png)",
+};
+
 export const bossPicArray = {
   "Satan Himself" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
   "Bowser" : "url(src/media/Henchmen/boss_bowser_hurt.png), url(src/media/texture2.png)",

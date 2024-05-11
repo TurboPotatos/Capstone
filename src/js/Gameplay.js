@@ -1,4 +1,4 @@
-import { Henchman, henchArray, henchNameArray, henchPicArray, bossPicArray } from "./Henchman.js";
+import { Henchman, henchArray, henchNameArray, henchPicArray, healedPicArray, bossPicArray } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Consumable } from "./Consumable.js";
 
@@ -244,6 +244,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function nextHenchman() {
+    
     waveHenchmen.shift();
     gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
     notesOutput.push(`${waveHenchmen.length} henchmen left!`);
@@ -556,7 +557,8 @@ document.addEventListener('DOMContentLoaded', function() {
     player.addCurrency(waveHenchmen[0].currencyGiven);
     player.changeStamina(30);
     if (waveHenchmen.length > 1) {
-      nextHenchman();
+      henchmanImage.style.backgroundImage = healedPicArray[waveHenchmen[0].name];
+      setTimeout(nextHenchman, 4000);
     } else {
       // Wave is finished, update wave and go to shop
       // TODO allow selection of shop, workshop, or stamina regain
