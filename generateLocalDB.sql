@@ -17,6 +17,9 @@ CREATE TABLE `runs` (
   `score` int(11),
   `playerId` int(11), 
   `waveReached` int(11),
+  `henchmenHealed` int(11),
+  `totalMoneyEarned` int(11),
+  `difficulty` int(11),
   PRIMARY KEY (`runId`),
   FOREIGN KEY (`playerId`) REFERENCES players(`playerId`)
 );
