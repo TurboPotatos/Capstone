@@ -44,20 +44,14 @@ export class Player {
       this.maxDiceCount = player.maxDiceCount;
       this.maxConsumableDice = player.maxConsumableDice;
       this.maxSupplements = player.maxSupplements;
-      // console.log("player constructed");
-      // console.log(player.diceArray.length);
       
       // Array of dice
       for (let i = 0; i < player.diceArray.length; i++) {
         // Make new dice from the info in the stored generic objects
         let newDice = new Dice(player.diceArray[i].typeOf);
 
-        // console.log(player.diceArray[i]);
-
         for (let j = 0; j < player.diceArray[i].sides.length; j++) {
           let storedDiceSide = player.diceArray[i].sides[j];
-
-          // console.log(storedDiceSide);
 
           let newDiceSide = new DiceSide(storedDiceSide.value, -1, storedDiceSide.cost);
 
@@ -75,14 +69,6 @@ export class Player {
         this.diceSideArray.push(newDiceSide);
       }
 
-      // Arrays of Collectibles
-      // this.boonArray = player.boonArray;
-      // for (let i = 0; i < player.boonArray.length; i++) {
-      //   // Make new boon from the generic object's stored property
-      //   let newBoon = boonArray[player.boonArray[i].name];
-
-      //   this.addBoon(newBoon);
-      // }
       for (let key in player.boonArray) {
         if (player.boonArray.hasOwnProperty(key)) {
           if (key != 'cuppaJoe') {
@@ -103,13 +89,6 @@ export class Player {
         }
       }
 
-      // this.items = player.items;
-      // for (let i = 0; i < player.items.length; i++) {
-      //   // Make new boon from the generic object's stored property
-      //   let newItem = new Dice(player.items[i].typeOf);
-      //   newItem.name = newItem.typeOf;
-      //   this.addItem(newItem);
-      // }
       for (let key in player.items) {
         if (player.items.hasOwnProperty(key)) {
           if (key != 'supplement') {
@@ -132,9 +111,6 @@ export class Player {
         }
       }
 
-      // Active boons
-      // this.estusFlask = player.estusFlask;
-
       this.wave = player.wave;
       this.totalHealed = player.totalHealed;
       this.totalKilled = player.totalKilled;
@@ -152,10 +128,8 @@ export class Player {
   useItem(itemName) {
     if (this.items[itemName] && this.items[itemName].length > 0) {
       const item = this.items[itemName].pop(); // Get and removes the item
-      // item.applyEffects(this);
-      // console.log(`${this.name} used ${item.name}.`);
     } else {
-      // console.log(`No ${itemName} found in inventory.`);
+      console.log(`No ${itemName} found in inventory.`);
     }
   }
 
@@ -164,8 +138,6 @@ export class Player {
   }
 
   addBoon(boon) {
-    // (consumable.typeOf == "Virtue") ? this.virtueArray.push(consumable) : this.viceArray.push(consumable);
-    // this.boonArray.push(boon);
     if (boon.name != 'cuppaJoe') {
       this.boonArray[boon.name] = boon;
       this.boonArrayLength += 1;

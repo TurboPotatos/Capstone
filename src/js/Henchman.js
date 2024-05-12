@@ -1,6 +1,4 @@
 export class Henchman {
-  // TODO: Figure out making things private and make getters/setters
-  // Figure out health and damage
 
   name = "";
   threshold = 0;
@@ -12,12 +10,10 @@ export class Henchman {
   health = 0;
   maxHealth = 0;
   damage = 0;
-  scoreGiven = 0; // Could decrease as the player takes more damage, as a 'penalty'
+  scoreGiven = 0;
   currencyGiven = 0;
-  // typeOf = ""; // To be implimented later for the optional rock-paper-scissors
-  weakness = 0; // A possible number that would damage the minion rather than heal
 
-  constructor(name, wave) { // Multipliers to be modified later
+  constructor(name, wave) {
 
     this.name = name;
     // this.health = Math.floor(Math.random() * 9) + 50;
@@ -32,29 +28,6 @@ export class Henchman {
     this.damage = 5;
     this.currencyGiven = 8 +(3 * wave);
     this.scoreGiven = 100 + (20 * wave);
-  }
-
-  healingAmount(typeOf, healing) {
-    // typeOf to be implimented later as types of damage
-
-    if (healing == weakness) {
-      // If the attempted healing is their weakness
-      
-      if (health - healing <= 0) {
-        // henchman dies, handle that
-        this.henchmenDies();
-      } else {
-        health -= healing;
-      }
-    } else {
-
-      health += healing;
-
-      if (this.isFullHealth()) {
-        // henchman fully healed, handle that
-      }
-    }
-
   }
 
   isDead() {
@@ -139,5 +112,3 @@ respecHenchman(henchArray['Space Invader'], 15, 5, 15, 5, 5, 10, 5, 100, 20, 30)
 respecHenchman(henchArray['Stuart the Minion'], 12, 3, 10, 12, 20, 100, 10, 100, 20, 30);
 respecHenchman(henchArray['Turret'], 9, 3, 8, 10, 25, 75, 30, 100, 20, 30);
 respecHenchman(henchArray['Koopa Troopa'], 5, 2, 10, 8, 30, 60, 10, 100, 20, 30);
-
-// console.log(henchArray['Grunt']);

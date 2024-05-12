@@ -1,15 +1,9 @@
 .henchmenChart {
   height: clamp(37rem, 50rem, 95%);
-  /* height: 80%; */
   width: 31%;
   position: absolute;
   right: 4%;
   top: 2%;
-	/* background-image: url(../media/clipboard.png); */
-  /* background-size: contain; */
-  /* background-repeat: no-repeat; */
-  /* background-position: center; */
-  /* background-position: 4rem -4rem; */
 	background-color: white;
   border-style: solid;
 	border-image-source: url(../media/border_clipboard.png);
@@ -49,7 +43,6 @@
   background-color: rgb(236, 169, 169);
 }
 
-
 #box {
   position: absolute;
   background-color: #b1b1b1;
@@ -59,9 +52,6 @@
   left: 9%;
   background: url(../media/profilePic.png) no-repeat;
   background-size: contain;
-  /* background-position: -200px -300px;
-  background-size: contain;
-  background-size: 1000px 1000px; */
 }
 #table1 {
   width: 48%;
@@ -69,7 +59,6 @@
   position: absolute;
   top: 7%;
   right: 9%;
-  /* table-layout: fixed; */
 }
 #table2 {
   width: 82%;
@@ -77,15 +66,12 @@
   position: absolute;
   top: 35%;
   left: 9%;
-  /* table-layout: fixed; */
 }
 th, td {
   /* border: 1px solid #ccc; */
   padding-left: 8px;
   text-align: left;
-  /* height: 2.5vh; */
   height: 1.3rem;
-  /* font-size: .3vh; */
 }
 th {
   background-color: #b1b1b1; /* Grey background for header */
@@ -101,7 +87,6 @@ tr:nth-child(odd) {
 }
 #henchName,
 #henchName2 {
-  /* font-size: clamp(1rem, 3.3vw, 3.35rem); */
   font-size: 3.35rem;
 }
 
@@ -126,7 +111,6 @@ tr:nth-child(odd) {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* right: 0; */
   font-size: 2.2rem;
   font-weight: bolder;
   font-family: 'Courier New', Courier, monospace;
@@ -143,7 +127,6 @@ tr:nth-child(odd) {
 #henchman {
   border: solid black;
   background-image: none;
-  /* background-image: url(../media/henchman_goomba.png), url(../media/texture2.png); */
   background-size: contain, cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -184,7 +167,6 @@ tr:nth-child(odd) {
   flex-direction: column-reverse;
 }
 #gameLogs.collapsed {
-  /* right: -23.9%; */
   transform: translateX(100%);
 }
 #logTextDiv {
@@ -193,7 +175,6 @@ tr:nth-child(odd) {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  /* z-index: 0; */
 }
 #logText {
   /* border: solid blue; */
@@ -202,7 +183,6 @@ tr:nth-child(odd) {
   width: 100%;
   box-sizing: border-box;
   overflow-y: auto;
-  /* z-index: 0; */
 }
 
 #gameLogsTab {
@@ -227,7 +207,6 @@ tr:nth-child(odd) {
   left: 1%;
   height: 35%;
   width: 45%;
-  /* z-index: 2; */
 }
 
 .diceTabs {
@@ -239,9 +218,6 @@ tr:nth-child(odd) {
   width: 50%;
   border-bottom: 2px solid transparent;
   border-radius: 2px;
-  /* top: .8rem; */
-  /* left: 5%; */
-  /* z-index: 0; */
 }
 
 .diceTabs:hover {
@@ -260,17 +236,11 @@ tr:nth-child(odd) {
   background-repeat: no-repeat;
   background-position: center;
 	border-style: solid;
-	/* border-image-source: url(../media/border3.png);
-	border-image-slice: 30;
-	border-image-width: 30px;
-	border-image-repeat: repeat;
-	border-image-outset: 10px; */
 	box-sizing: border-box; /* Include padding and border in the total width and height */
   height: 100%;
   padding-left: 10%;
   padding-right: 5%;
   padding-top: 7%;
-  /* z-index: -500; */
 }
 #diceArea span,
 #specialDice span {
@@ -348,11 +318,9 @@ tr:nth-child(odd) {
   width: 40%;
   top: 10%;
   left: 25%;
-  /* background-image: url(../media/texture2.png); */
   background-color: cadetblue;
   background-size: cover;
   box-sizing: border-box;
-  /* display: block; */
   z-index: 1111;
 }
 
@@ -375,8 +343,6 @@ tr:nth-child(odd) {
 }
 #buttonDiv button {
   /* border: solid red; */
-  /* position: absolute; */
-  /* z-index: 1; */
   font-size: 1.3rem;
   padding: 2px;
   border-radius: 4px;
@@ -461,10 +427,7 @@ tr:nth-child(odd) {
 .tooltip {
   border: solid red;
   position: absolute;
-  /* top: 0;
-  left: 0; */
   width: 16rem;
-  /* height: 50%; */
   font-size: 1.2rem;
   background-color: black;
   color: rgb(207, 207, 207);

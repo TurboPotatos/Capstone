@@ -1,7 +1,6 @@
 import { DiceSide } from "./DiceSide.js";
 
 export class Dice {
-  // TODO: Figure out making things private and make getters/setters
 
   static diceOptions = ["d4", "d6", "d8", "d10", "d12", "d20"];
 
