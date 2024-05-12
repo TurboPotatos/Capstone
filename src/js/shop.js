@@ -47,7 +47,7 @@ const viewDice = document.querySelector('#viewDice');
 const viewConsumables = document.querySelector('#viewConsumables');
 
 lcd.addEventListener("click", () => {
-  overlay.classList.toggle('hidden');
+  overlay.classList.toggle('hidden'); 
 });
 
 displayDice.addEventListener("click", () => {
@@ -326,24 +326,11 @@ function addPlayerDice(dice) {
   
   // Give it a ul child populated by it's sides
   let newDiceSides = document.createElement("ul");
-  // newDiceSides.style.display = "none";
-  // newDiceSides.style.listStyleType = "none";
-  // newDiceSides.style.justifyContent = "left";
-  // newDiceSides.style.alignItems = "center";
-  // newDiceSides.style.position = "absolute";
-  // newDiceSides.style.left = "100%";
-  // newDiceSides.style.top = "2rem";
-  // newDiceSides.style.width = (playerDice.clientWidth - (2 * newDice.clientWidth)) + "px";
-  // newDiceSides.style.flexWrap = "wrap";
-
-  // console.log(playerDice.clientWidth);
   
   for (let i = 0; i < dice.sides.length; i++) {
     // Populate the newDiceSides
     let newDiceSide = document.createElement("li");
     newDiceSide.textContent = dice.sides[i].value;
-
-    // newDiceSide.style.padding = "10px";
 
     // Add it to the ul
     newDiceSides.appendChild(newDiceSide);
@@ -360,9 +347,6 @@ function addPlayerDice(dice) {
     diceBackBtn.style.display = "none";
     newBack.style.display = 'block';
 
-    // Fix diceList styles
-    // diceList.style.width = (playerDice.clientWidth - (1.05 * newDice.clientWidth)) + "px";
-    
     // Hide all other dice
     let allDice = playerDice.querySelectorAll(".die-btn");
     allDice.forEach((dice) => {
@@ -507,9 +491,6 @@ ${activeBoon.description}<br>
 // player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
-// for (let i = 0; i < player.boonArray.length; i++) {
-//   bannedArray.push(player.boonArray[i]);
-// }
 bannedArray.push(boonArray['cuppaJoe']);
 for (let key in player.boonArray) {
   if (player.boonArray.hasOwnProperty(key) && key != 'cuppaJoe') {
@@ -518,7 +499,26 @@ for (let key in player.boonArray) {
   }
 }
 
-shopContent.forEach(shopItem => {
+// Get number of elements in shopContent
+const indexes = Array.from({ length: shopContent.length }, (_, index) => index);
+
+for (let i = indexes.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+}
+
+// Shuffle the array of indexes with this fun code
+for (let i = indexes.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+}
+
+// drop half the indexes
+const selectedIndexes = indexes.slice(0, Math.round(indexes.length / 2));
+
+shopContent.forEach((shopItem, index) => {
+  if (selectedIndexes.includes(index)) {
+  
   // Get random boon
   
   let boon = "";
@@ -573,7 +573,36 @@ shopContent.forEach(shopItem => {
     }
 
   });
+  } else {
+    // Populate the slot with junk
+    shopItem.innerHTML = `
+    <img src="../../src/media/Boons/boon_junk.png" class="boon" style="opacity: 0.7;">
+      <span class="tooltip">
+      Just some junk. Don't buy this.
+      </span>
+    `;
 
+    shopItem.classList.add("junk");
+
+    shopItem.addEventListener("click", function() {
+      activeBoon = new Boon("", "", "", "");
+  
+      let tooltip = shopItem.querySelector(".tooltip");
+      let alreadyDisplayed = (tooltip.style.display == "block");
+  
+      let allTooltips = document.querySelectorAll('.tooltip');
+      allTooltips.forEach(tip => {
+        tip.style.display = "none";
+      });
+  
+  
+      if (alreadyDisplayed) {
+        tooltip.style.display = 'none';
+      } else {
+        tooltip.style.display = 'block';
+      }
+    });
+  }
 });
 
 
@@ -642,7 +671,7 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
         let class2 = lcd.textContent.substring(1);
         selectedItem = getCodeItem(class1, class2);
 
-        if (selectedItem.id != "") {
+        if (selectedItem.id != "" || selectedItem.classList.contains("junk")) {
           // console.log("test");
           selectedItem.classList.add("selectedSlot");
         }
@@ -704,7 +733,12 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
             lcd.innerHTML = "<span class=\"animatedText\">You're Too Poor!</span>";
             lcd.style.fontSize = "1.3vw";
           }
-        }
+        } else if (selectedItem.classList.contains("junk")) {
+          // player is buying junk
+          selectedItem.classList.remove("selectedSlot");
+          lcd.innerHTML = "<span class=\"animatedText\">Don't buy junk!</span>";
+          lcd.style.fontSize = "1.3vw";
+        } 
       }
     }
   });
