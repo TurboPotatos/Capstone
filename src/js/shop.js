@@ -354,7 +354,7 @@ function addPlayerDice(dice) {
   // Make it clickable to display it's children
   newDice.addEventListener("click", () => {
     let diceList = newDice.querySelector("ul");
-    diceList.style.display = 'flex';
+    diceList.style.display = 'block';
 
     // hide the old back button and display new one
     diceBackBtn.style.display = "none";
@@ -804,17 +804,39 @@ diceMachine.addEventListener("click", (e) => {
     message.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
     buyDice.style.display = "none";
   } else {
-    buyDice.style.display = "block";
-    // Warn user if they will miss out on consumable dice
-    
-    if (player.getSpecialDiceCount() >= player.maxConsumableDice) {
-      message.innerHTML = `
-      <h3>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h3>`;
-      message.style.display = 'block';
-    } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice) {
-      message.innerHTML = `
-      <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h3>`;
-      message.style.display = 'block';
+    if (player.diceArray.length < player.maxDiceCount) {
+
+      buyDice.style.display = "block";
+      // Warn user if they will miss out on consumable dice
+      console.log(player.diceArray.length, player.maxDiceCount);
+
+      if (player.getSpecialDiceCount() >= player.maxConsumableDice) {
+        message.innerHTML = `
+        <h3>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h3>`;
+        message.style.display = 'block';
+      } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice) {
+        message.innerHTML = `
+        <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h3>`;
+        message.style.display = 'block';
+      }
+    } else {
+      // Player has too many regular dice, warn them they will only get consumables
+      buyDice.style.display = "block";
+
+      message.innerHTML = `<h1>You have reached the maximum number of permanent dice! You will only be buying consumable dice!</h1>`
+      // Warn user if they will miss out on consumable dice
+      
+      if (player.getSpecialDiceCount() >= player.maxConsumableDice) {
+        // Player can't buy anything
+        buyDice.style.display = "none";
+        message.innerHTML = `
+        <h2>You have full capacity on both types of dice!</h2>`;
+        message.style.display = 'block';
+      } else if (player.getSpecialDiceCount() + 3 > player.maxConsumableDice) {
+        message.innerHTML += `
+        <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h3>`;
+        message.style.display = 'block';
+      }
     }
   }
 
@@ -848,16 +870,17 @@ function generateRandomDice() {
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
   // TODO change hard coded cost 
-  if (player.diceArray.length + 1 <= player.maxDiceCount) {
+  if (player.diceArray.length < player.maxDiceCount) {
     // if the player buying more dice won't exceed maximum
     let spare = player.maxConsumableDice - player.getSpecialDiceCount();
+    let room = (player.maxDiceCount > player.diceArray.length);
 
     if (player.subtractCurrency(15)) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
       buyDice.style.display = "none"
       backBtn.style.display = "none";
       
-      // Generate three dice. One they will choose to keep permanently, the others are consumable
+      // Generate three dice. One they will choose to keep permanently, the others will be turned to consumables, if there's room
 
       let diceChoice = {
         choiceOne: generateRandomDice(),
@@ -878,17 +901,21 @@ buyDice.addEventListener("click", (e) => {
       document.querySelectorAll(".die-option").forEach((option) => {
         option.addEventListener("click", () => {
           // Add this specific dice to the player
-          player.addDice(diceChoice[option.id]);
-          addPlayerDice(diceChoice[option.id]);
-          delete diceChoice[option.id];
+          if (room) {
+            player.addDice(diceChoice[option.id]);
+            addPlayerDice(diceChoice[option.id]);
+            delete diceChoice[option.id];
+          }
           
           // Add other dice as consumables
           for (let key in diceChoice) {
             if (diceChoice.hasOwnProperty(key)) {
-              // console.log(diceChoice[key]);
-              diceChoice[key].name = diceChoice[key].typeOf;
-              player.addItem(diceChoice[key]);
-              addPlayerConsumables(diceChoice[key]);
+              if (spare > 0) {
+                diceChoice[key].name = diceChoice[key].typeOf;
+                player.addItem(diceChoice[key]);
+                addPlayerConsumables(diceChoice[key]);
+                spare--;
+              }
             }
           }
 
