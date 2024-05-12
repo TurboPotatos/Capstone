@@ -122,6 +122,7 @@ export class Player {
           } else {
             // subarray is for type supplement
             for (let i = 0; i < player.items[key].length; i++) {
+              // console.log(player.items[key]);
               let newSupplement = new Consumable(player.items[key][i].bonus);
               this.addItem(newSupplement);
             }

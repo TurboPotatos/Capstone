@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var waveHenchmen = [];
   var accumulatedTotal = 0;
   var endTurnForReal = 2;
+  var consumableID = 0;
 //#endregion
 
 //#region [Initialize Game]
@@ -160,25 +161,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //#region [functions]  
 
+  function createConsumableButton(consumableValue) {
+    let newConsumable = document.createElement("button");
+    newConsumable.innerHTML = consumableValue;
+    newConsumable.id = "consumable_" + consumableID++;
+    consumableBag.appendChild(newConsumable);
+
+    newConsumable.addEventListener("click", (e) => {
+      accumulatedTotal += consumableValue;
+      gameLog.innerHTML += "Added " + consumableValue + " to Total<br>";
+      notesOutput.push("Added " + consumableValue + " to Total");
+      gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
+      // console.log(e.target.id);
+      // console.log(e.target.id.substring(11));
+      // console.log(player.items['supplement'][e.target.id.substring(11)]);
+      // console.log(player.items['supplement']);
+      player.items['supplement'].splice(e.target.id.substring(11), 1);
+      // console.log(player.items['supplement']);
+      e.target.parentElement.removeChild(e.target);
+      updateChartNotes();
+    });
+  }
+
   function populateConsumables() {
     for (let key in player.items) {
       // console.log("test");
-      if (player.items.hasOwnProperty(key)) {
-        if (key == 'supplement') {
-          // If the subarray isn't of type Consumable  
-          for (let i = 0; i < player.items[key].length; i++) {
-            let newConsumable = document.createElement("button");
-            newConsumable.innerHTML = player.items[key][i].bonus;
-            consumableBag.appendChild(newConsumable);
-
-            newConsumable.addEventListener("click", (e) => {
-              accumulatedTotal += player.items[key][i].bonus;
-              gameLog.innerHTML += "Added " + player.items[key][i].bonus + " to Total<br>";
-              notesOutput.push("Added " + player.items[key][i].bonus + " to Total");
-              gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
-              updateChartNotes();
-            });
-          }
+      if (player.items.hasOwnProperty(key) && key == 'supplement') { 
+        for (let i = 0; i < player.items[key].length; i++) {
+          createConsumableButton(player.items[key][i].bonus);
         }
       }
     }
@@ -550,13 +560,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
-    player.score += waveHenchmen[0].scoreGiven;
+    // Add a consumable to the player's inventory 60% of the time
+    if (Math.random() < 0.6) {
+      let consumableValue = Math.floor(Math.random() * 9) + 1;
+      player.addItem(new Consumable(consumableValue));
+      createConsumableButton(consumableValue);
+    }
 
+    player.score += waveHenchmen[0].scoreGiven;
+    player.addCurrency(waveHenchmen[0].currencyGiven);
+    player.changeStamina(waveHenchmen[0].staminaReward);
+    
     gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
     notesOutput.push(waveHenchmen[0].name + " was fully healed!");
 
-    player.addCurrency(waveHenchmen[0].currencyGiven);
-    player.changeStamina(waveHenchmen[0].staminaReward);
     if (waveHenchmen.length > 1) {
       henchmanImage.style.backgroundImage = healedPicArray[waveHenchmen[0].name];
       setTimeout(nextHenchman, 4000);

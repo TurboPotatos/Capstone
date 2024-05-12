@@ -431,18 +431,17 @@ tr:nth-child(odd) {
 
 
 #consumableBag {
-  border: 3px solid yellow;
+  /* border: 3px solid yellow; */
   position: absolute;
   height: 15rem;
   width: 11rem;
   bottom: 0%;
-  left: 47rem;
+  left: 48rem;
 }
 #consumableBag button {
+  /* border: solid red; */
   position: relative;
   float: left;
-  /* top: 0; */
-  /* left: 0; */
   width: 4rem;
   height: 4rem;
   margin: .5rem;
@@ -452,11 +451,11 @@ tr:nth-child(odd) {
   background-position: center;
   background-image: url(../media/consumableCoin.png);
   background-color: transparent;
-  font-family: serif;
-  font-size: 2.6rem;
-  font-weight: bolder;
-  /* border-radius: 5px; */
-  /* background-image: url(../media/consumableCoin.png); */
+  font-family: unset;
+  font-size: 3.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tooltip {
