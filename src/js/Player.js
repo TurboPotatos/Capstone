@@ -133,6 +133,9 @@ export class Player {
       // this.estusFlask = player.estusFlask;
 
       this.wave = player.wave;
+      this.totalHealed = player.totalHealed;
+      this.totalKilled = player.totalKilled;
+      this.totalCurrency = player.totalCurrency;
     }
   }
 

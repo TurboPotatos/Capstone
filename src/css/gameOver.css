@@ -1,7 +1,19 @@
+body {
+  background-image: url(../media/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
 #gameOver {
   color: white;
+  text-shadow: 2px 2px 2px #111;
   text-align: center;
   padding: 1.4rem 0;
+  font-size: 3rem;
+  font-weight: 900;
 }
 
 #statsTable {
@@ -9,6 +21,8 @@
   width: 38%;
   margin-top: 2%;
   left: 10%;
+  border: 3px solid #222;
+  background-color: #222;
 }
 
 #infoTable {
@@ -16,6 +30,8 @@
   width: 38%;
   margin-top: 2%;
   right: 10%;
+  border: 3px solid #222;
+  background-color: #222;
 }
 
 #statsTable th {
@@ -24,6 +40,7 @@
 
 #statsTable td {
   height: 3rem;
+  padding: 0 1rem 0 1rem;
 }
 
 #statsTable span {
@@ -32,6 +49,7 @@
 
 #infoTable td {
   height: 6.1rem;
+  padding: 0 1rem 0 1rem;
 }
 
 #infoTable img {
@@ -48,8 +66,34 @@ tr:nth-child(odd) {
   background-color: #fff; /* Grey background for odd rows */
 }
 
-#playAgain{
+#buttonDiv {
+  /* border: 3px solid blue; */
   position: absolute;
-  top: 60%;
-  left: 48%;
+  top: 65%;
+  width: 90%;
+  margin-top: 6rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+#buttonDiv button {
+  /* border: 2px solid green; */
+  width: 30%;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #555;
+  color: #ddd;
+  box-shadow: 2px 2px 2px #222;
+}
+
+#buttonDiv button:hover {
+  background-color: #666;
+}
+
+#buttonDiv button:disabled {
+  background-color: #777;
+  cursor: default;
 }
