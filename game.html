@@ -11,15 +11,6 @@
     <title>Henchmen Hospital</title>
   </head>
   <body>
-    <!-- <div class="navBar">
-      <a href="index.php">Sign In</a>
-      <a href="startScreen.html">Start Screen</a>
-      <a href="leaderboard.html">Leaderboard/History</a>
-      <a href="game.html">Game</a>
-      <a href="gameOverMessage.html">Game Over</a>
-      <a href="shop.html">Shop</a>
-      <a href="workshop.html">Workshop</a>
-    </div> -->
 
     <div class="wrapperWrapper unselectable" id="gameDiv">
       <div class="wrapper unselectable" id="gameDiv">
@@ -55,7 +46,6 @@
           <table id="table2">
             <thead>
               <tr>
-                <!-- <th class="Placeholder">******************</th> -->
                 <th>Patient Information:</th>
                 <th></th>
               </tr>
@@ -103,27 +93,6 @@
               <tr>
                 <td id="chartNotes1"></td>
               </tr>
-              <!-- <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr> -->
             </tbody>
           </table>
         </div>
@@ -158,7 +127,6 @@
           <table id="table2">
             <thead>
               <tr>
-                <!-- <th class="Placeholder">******************</th> -->
                 <th>Patient Information:</th>
                 <th></th>
               </tr>
@@ -206,27 +174,6 @@
               <tr>
                 <td id="chartNotes2"></td>
               </tr>
-              <!-- <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr>
-              <tr>
-                <td><br /></td>
-              </tr> -->
             </tbody>
           </table>
         </div>
@@ -294,11 +241,9 @@
 
         <div id="buttonDiv">
           <button type="button" id="endTurnBtn">End Turn</button>
-          <!-- <button type="button" id="fadeBtn">Pick Color</button> -->
           <button type="button" id="goShopBtn">Shop</button>
           <button type="button" id="goWorkshopBtn">Workshop</button>
           <button type="button" id="resetDiceBtn">Reset Dice</button>
-          <input type="checkbox" id="autoEndTurn"><span id="autoEndTurnSpan">Auto Reset</span>
         </div>
 
         <div id="gameOverMessage">
@@ -307,8 +252,6 @@
 
       </div> <!-- END wrapper -->
     </div> <!-- END wrapperWrapper -->
-    
-    <!-- <button id="testDirectory">Test Directory</button> -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -347,49 +290,7 @@
       }
     </script>
 
-    <!-- <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const fadeBtn = document.querySelector('#fadeBtn');
-        const backBtn = document.querySelector('#backBtn');
-        const colorBox = document.querySelector('#colorBox');
-
-        fadeBtn.addEventListener("click", (e) => {
-          colorBox.style.display = "block";
-        });
-        backBtn.addEventListener("click", (e) => {
-          colorBox.style.display = "none";
-        });
-      });
-
-    </script>
-
-    <script>
-      const redRange = document.querySelector('#redRange');
-      const greenRange = document.querySelector('#greenRange');
-      const blueRange = document.querySelector('#blueRange');
-      const colorPicker = document.querySelector('#colorPicker');
-
-      function updateColor() {
-        const allDice = document.querySelectorAll('.die-btn');
-        const redValue = redRange.value;
-        const greenValue = greenRange.value;
-        const blueValue = blueRange.value;
-        const color = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
-        colorPicker.style.backgroundColor = color;
-
-        for (var i = 0; i < allDice.length; i++) {
-          allDice[i].style.setProperty('--dieBtnAfterBGColor', color);
-        }
-      }
-
-      redRange.addEventListener('input', updateColor);
-      greenRange.addEventListener('input', updateColor);
-      blueRange.addEventListener('input', updateColor);
-    </script> -->
-
     <script type="module" src="src/js/Gameplay.js"></script>
-
-    
 
   </body>
 </html>

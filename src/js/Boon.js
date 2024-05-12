@@ -63,7 +63,7 @@ const boonArray = {
 
   "elderScroll" : // IMPLEMENTED
   new Boon( "elderScroll", 
-            "Elder Scroll: <br><br>Henchman are worth +3 currency when fully healed", 
+            "Elder Scroll: <br><br>Henchmen are worth +3 currency when fully healed", 
             {goldBonus: 3}, 
             "src/media/Boons/boon_elderScroll.png"),
 
@@ -165,7 +165,7 @@ const boonArray = {
 
   "tetrisPiece" : // IMPLEMENTED
   new Boon( "tetrisPiece", 
-            "Tetris Piece: <br><br>Henchman is considered healed if it's within 5% of its max health", 
+            "Tetris Piece: <br><br>A henchman is considered healed if it's within 5% of its max health", 
             {henchIsHealed: 0.05}, 
             "src/media/Boons/boon_tetrisPiece.png"),
 
@@ -211,11 +211,11 @@ const boonArray = {
             {Triforce: true},
             "src/media/Boons/boon_triforce.png"),
 
-  // "mask" : 
-  // new Boon( "mask", 
-  //           "Mask: <br><br>10% chance to get an additional item from the vending machine", 
-  //           {bonusVendChance: 0.1}, 
-  //           "src/media/Boons/boon_mask.png"),
+  "mask" : // IMPLEMENTED
+  new Boon( "mask", 
+            "Mask: <br><br>You can see the currency reward value of the current henchman", 
+            {mask: true}, 
+            "src/media/Boons/boon_mask.png"),
 
   // "reflexHammer" :
   // new Boon( "reflexHammer", 

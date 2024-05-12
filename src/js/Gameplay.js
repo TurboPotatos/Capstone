@@ -2,9 +2,8 @@ import { Henchman, henchArray, henchNameArray, henchPicArray, healedPicArray, bo
 import { Player } from "./Player.js";
 import { Consumable } from "./Consumable.js";
 
+// Load the player object from local storage
 const player = new Player(JSON.parse(localStorage.getItem('player')));
-
-// console.log(player);
 
 if (!player.items["supplement"]) {
   player.addItem(new Consumable(2));
@@ -15,12 +14,14 @@ if (!player.items["supplement"]) {
 
 //#region [star]
 if (player.boonArray['star']) {
+  // Prerequisite for star functionality
   player.boonArray['star'].effects.preventDamage = true;
 }
 //#endregion
 
 //#region [tongueDepressor]
 if (player.boonArray['tongueDepressor']) {
+  // Prerequisite for tongueDepressor functionality
   player.boonArray['tongueDepressor'].effects.preventLoss = true;
 }
 //#endregion
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const regainStaminaBtn = document.querySelector('#regainStamina');
   const visitShopBtn = document.querySelector('#visitShop');
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
-  const autoEndCheckbox = document.querySelector('#autoEndTurn');
 
   // Henchmen Info
   const henchmanImage = document.querySelector('#henchman');
@@ -75,22 +75,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Dice Area
   const diceArea = document.querySelector("#diceArea");
   const specialDiceArea = document.querySelector('#specialDice');
+  const consumableBag = document.querySelector('#consumableBag');
   
   // Directory
-  // const testDirectoryBtn = document.querySelector('#testDirectory');
   const directoryCont = document.querySelector('#directoryContainer');
-
-  const consumableBag = document.querySelector('#consumableBag');
 
 //#endregion
 
 //#region [Variables]
-  var results = [];
-  var notesOutput = [];
-  var waveHenchmen = [];
-  var accumulatedTotal = 0;
-  var endTurnForReal = 2;
-  var consumableID = 0;
+  var results = []; // for the logs
+  var notesOutput = []; // for the henchman chart
+  var waveHenchmen = []; // array of henchmen
+  var accumulatedTotal = 0; // current total of all rolls and consumable effects
+  var endTurnForReal = 2; // tracks the number of times player tries to end turn without rolling
+  var consumableID = 0; // incremented when new consumables are created
 //#endregion
 
 //#region [Initialize Game]
@@ -126,14 +124,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.location.href = 'workshop.html';
   });
 
-  // testDirectoryBtn.addEventListener("click", (e) => {
-  //   if (directoryCont.style.display != 'block') {
-  //     directoryCont.style.display = 'block';
-  //   } else {
-  //     directoryCont.style.display = 'none';
-  //   }
-  // });
-
   visitShopBtn.addEventListener("click", (e) => {
     localStorage.setItem('player', JSON.stringify(player));
     window.location.href = 'shop.html';
@@ -165,27 +155,30 @@ document.addEventListener('DOMContentLoaded', function() {
     let newConsumable = document.createElement("button");
     newConsumable.innerHTML = consumableValue;
     newConsumable.id = "consumable_" + consumableID++;
+
+    // Adds the consumable to the player's inventory
     consumableBag.appendChild(newConsumable);
 
+    // Removes the consumable from the player's inventory and applies its effect
     newConsumable.addEventListener("click", (e) => {
       accumulatedTotal += consumableValue;
-      gameLog.innerHTML += "Added " + consumableValue + " to Total<br>";
+
       notesOutput.push("Added " + consumableValue + " to Total");
-      gameLog.innerHTML += "Current Total: " + accumulatedTotal + "<br><br>";
-      // console.log(e.target.id);
-      // console.log(e.target.id.substring(11));
-      // console.log(player.items['supplement'][e.target.id.substring(11)]);
-      // console.log(player.items['supplement']);
-      player.items['supplement'].splice(e.target.id.substring(11), 1);
-      // console.log(player.items['supplement']);
-      e.target.parentElement.removeChild(e.target);
+      gameLog.innerHTML += "Added " + consumableValue + " to Total<br>" +
+                           "Current Total: " + accumulatedTotal + "<br><br>";
       updateChartNotes();
+
+      // e.target.id example: consumable_3
+      delete player.items['supplement'][e.target.id.substring(11)];
+      // e.target is the consumable the player clicked on
+      e.target.parentElement.removeChild(e.target);
     });
   }
 
+  // for each supplement (consumable) in the player's inventory, create an element on screen
   function populateConsumables() {
     for (let key in player.items) {
-      // console.log("test");
+      
       if (player.items.hasOwnProperty(key) && key == 'supplement') { 
         for (let i = 0; i < player.items[key].length; i++) {
           createConsumableButton(player.items[key][i].bonus);
@@ -194,12 +187,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // Refreshes the player's main stats
   function updatePlayerInfo() {
     stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
     score.innerHTML = "Score: " + player.score;
     currency.innerHTML = "Money: " + player.currency;
   }
 
+  // Gets henchman stats from the first henchman in the wave and displays them
+  // Also applies boon effects and updates the information of the second henchman
+  // in the wave (if there is one)
   function updateHenchmenInfo() {
     let myName = waveHenchmen[0].name;
     let myHealth = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
@@ -217,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
     let myHealingFactor = waveHenchmen[0].healingFactor;
     let mydamage = waveHenchmen[0].damage;
+    let myCurrency = waveHenchmen[0].currencyGiven;
 
 //#region [syringe]
     if (player.boonArray['syringe']) {
@@ -225,20 +223,26 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
-    // let myCurrency = waveHenchmen[0].currencyGiven;
-    // let myScore = waveHenchmen[0].scoreGiven;
+    if ((waveHenchmen[0].health / waveHenchmen[0].maxHealth) >= 1) {
+      healthBar.style.width = '100%';
+    } else {
+      healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
+    }
 
     henchName.innerHTML = myName;
     health.innerHTML = myHealth;
-    healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`; 
     threshold.innerHTML = "Target: " + myTarget + " (" + lowerRange + " to " + upperRange + ")";
     staminaPenalty.innerHTML = "Stamina Penalty: " + myStaminaPenalty;
     healingFactor.innerHTML = "Healing Factor: " + myHealingFactor;
-
     range.innerHTML = "Range: " + myRange;
     damage.innerHTML = "Malpractice Damage: " + mydamage;
     currencyGiven.innerHTML = "Currency Given: ?";
 
+//#region [mask]
+    if (player.boonArray['mask']) {
+      currencyGiven.innerHTML = "Currency Given: " + myCurrency;
+    }
+//#endregion
     henchmanImage.style.backgroundImage = henchPicArray[myName];
 
     // Update the next-up henchman chart
@@ -250,10 +254,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       range2.innerHTML = "Range: " + waveHenchmen[1].range;
       damage2.innerHTML = "Malpractice Damage: " + waveHenchmen[1].damage;
-      currencyGiven2.innerHTML = "Currency Given: " + waveHenchmen[1].currencyGiven;
+      currencyGiven2.innerHTML = "Currency Given: ?";
     }
   }
 
+  // Removes the current henchman from the wave array and updates the display
   function nextHenchman() {
     
     waveHenchmen.shift();
@@ -265,17 +270,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //#region [star]
     if (player.boonArray['star']) {
+      // Prerequisite for star functionality
       player.boonArray['star'].effects.preventDamage = true;
     }
 //#endregion
 
 //#region [tongueDepressor]
     if (player.boonArray['tongueDepressor']) {
+      // Prerequisite for tongueDepressor functionality
       player.boonArray['tongueDepressor'].effects.preventLoss = true;
     }
 //#endregion
   }
 
+  // For when dice are rolled
   function rollDice() {
     const selectedDice = document.querySelectorAll('.die-btn.selected.current');
 
@@ -291,12 +299,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
-    results = [];
-    var dieResult = [];
-    var totalResult = 0;
+    results = []; // for the logs
+    var dieResult = []; // Stores each roll value
+    var totalResult = 0; // Total of dice rolled simultaneously
     selectedDice.forEach(function(dieBtn) {
       
-      var dice = "";
+      var dice = ""; // the type of die eg. "d4"
       if (dieBtn.classList.contains('temporary')) {
         dice = player.items[dieBtn.id.substring(11)][dieBtn.getAttribute('data-info')];
       } else {
@@ -350,9 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 //#endregion
 
-      dieResult.push(result);
-      // console.log(dieResult[0]);
-      // console.log(dieResult[1]);
+      dieResult.push(result); // Store the roll result in dieResult array
 
 //#region [pillBottle]
       if (player.boonArray['pillBottle'] && selectedDice.length == player.boonArray['pillBottle'].effects.numDice && dieResult[0] == dieResult[1]) {
@@ -418,30 +424,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     gameLog.innerHTML += results.join('<br>') + "<br>Current Total: " + accumulatedTotal + "<br><br>";
     updateChartNotes();
-    
-    // // Disable selected die buttons after rolling
-    // selectedDice.forEach(function(dieBtn) {
-    //   dieBtn.classList.remove('selected');
-    //   dieBtn.disabled = true;
-    // });
-    
-    // rollResult(totalResult, selectedDice);
-
-    // if (allDisabled() && autoEndCheckbox.checked) {
-    //   resetDice();
-    // }
   }
 
+  // Keeps a running total of roll/consumable values until end of turn
   function accumulateTotal(total) {
     accumulatedTotal += total;
   }
 
+  // The total has been submitted, rollResult checks to see whether the roll was a success or a failure
+  // then applies the consequences
   function rollResult(total, selectedDice) {
 
     if (waveHenchmen[0].threshold - waveHenchmen[0].range <= total && total <= waveHenchmen[0].threshold + waveHenchmen[0].range) { // Player must roll between the range
 
       let healAmount = waveHenchmen[0].healingFactor;
 
+      // Hitting the target exactly results in bonus healing
       if (waveHenchmen[0].threshold == total) {
         healAmount *= 2;
         gameLog.innerHTML += "Critically healing for: " + healAmount + "<br><br>";
@@ -451,6 +449,7 @@ document.addEventListener('DOMContentLoaded', function() {
         notesOutput.push("Healed " + waveHenchmen[0].name + " for: " + healAmount);
       }
 
+      // The henchman is healed
       waveHenchmen[0].health += healAmount;
 
 //#region [beamSword]
@@ -467,16 +466,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 //#endregion
 
+      // The 'success' class is added to each rolled die
       selectedDice.forEach(function(dieBtn) {
         dieBtn.classList.add("success");
       });
 
-      health.innerHTML = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
-      if ((waveHenchmen[0].health / waveHenchmen[0].maxHealth) >= 1) {
-        healthBar.style.width = '100%';
-      } else {
-        healthBar.style.width = `${Math.ceil((waveHenchmen[0].health / waveHenchmen[0].maxHealth) * 100)}%`;
-      }
+      updateHenchmenInfo();
+
     } else {
       let malpractice = waveHenchmen[0].damage;
 
@@ -560,6 +556,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 //#endregion
 
+    if ( waveHenchmen[0].health > waveHenchmen[0].maxHealth) {
+      waveHenchmen[0].health = waveHenchmen[0].maxHealth;
+      updateHenchmenInfo();
+    }
+
     // Add a consumable to the player's inventory 60% of the time
     if (Math.random() < 0.6) {
       let consumableValue = Math.floor(Math.random() * 9) + 1;
@@ -571,22 +572,28 @@ document.addEventListener('DOMContentLoaded', function() {
     player.addCurrency(waveHenchmen[0].currencyGiven);
     player.changeStamina(waveHenchmen[0].staminaReward);
     
-    gameLog.innerHTML += waveHenchmen[0].name + " was fully healed!<br><br>";
-    notesOutput.push(waveHenchmen[0].name + " was fully healed!");
+    gameLog.innerHTML +=  + "You fully healed " + waveHenchmen[0].name + "!<br><br>";
+    notesOutput.push("You fully healed " + waveHenchmen[0].name + "!");
+
+    // Show the healed henchman
+    henchmanImage.style.backgroundImage = healedPicArray[waveHenchmen[0].name];
 
     if (waveHenchmen.length > 1) {
-      henchmanImage.style.backgroundImage = healedPicArray[waveHenchmen[0].name];
       setTimeout(nextHenchman, 4000);
     } else {
       // Wave is finished, update wave and go to shop
       // TODO allow selection of shop, workshop, or stamina regain
+      setTimeout(updatePlayerInfo, 4000);
       player.wave += 1;
       directoryCont.style.display = 'block';
     }
   }
 
+  // Submit your total for judgement
   function endTurn() {
     const selectedDice = document.querySelectorAll('.die-btn.selected:disabled');
+
+    // Check if the player rolled any dice this turn, and if not, make sure they really want to end the turn
     if (selectedDice.length == 0 && endTurnForReal > 0) {
       let times = "times";
       if (endTurnForReal == 1) {
@@ -608,13 +615,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     accumulatedTotal = 0;
 
-    if (allDisabled() && autoEndCheckbox.checked) {
-      resetDice();
-    }
-
     updateChartNotes();
   }
 
+  // All dice are no longer disabled, and the player takes the henchman's stamina penalty
   function resetDice() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
@@ -665,8 +669,8 @@ document.addEventListener('DOMContentLoaded', function() {
       stamina.innerHTML = "Stamina: " + player.stamina + "/" + player.maxStamina;
 
       if (player.isOutOfStamina()) {
-//thermometer
         if (player.boonArray['thermometer']) {
+//#region [thermometer]
           let regainStamina = Math.ceil(player.maxStamina * player.boonArray['thermometer'].effects.regainStamina);
           regainStamina -= player.stamina;
           player.changeStamina(regainStamina);
@@ -679,6 +683,7 @@ document.addEventListener('DOMContentLoaded', function() {
           thermometer.parentElement.removeChild(thermometer);
           thermometerSpan.parentElement.removeChild(thermometerSpan);
           updatePlayerInfo();
+//#endregion
         } else {
           gameLog.innerHTML += "You're all tuckered out<br><br>";
           notesOutput.push("You're all tuckered out");
@@ -739,15 +744,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           gameOverScreen.appendChild(fadeGameOver);
           gameOverScreen.appendChild(goToGameOver);
-
-          
         } 
-
-
       }
-        // if(player.stamina <= 0){
-        //   window.location.replace("gameOver.html");
-        // }
     }
 //#region [estusFlask]
     if (player.boonArray['estusFlask']) {
@@ -768,18 +766,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //#endregion
 
     updateChartNotes();
-  }
-
-  function allDisabled() {
-    var buttons = document.querySelectorAll('.die-btn:not(.temporary)');
-    let result = true;
-    buttons.forEach(function (button) {
-      // console.log(button.disabled);
-      if (!button.disabled) {
-        result = false; // a #notdisabledbutton was detected
-      }
-    });
-    return result; // all dice used
   }
 
   function populateBoons() {
@@ -818,14 +804,13 @@ document.addEventListener('DOMContentLoaded', function() {
           } else {
             tooltip.style.display = 'block';
           }
-          console.log("yup");
         });
       }
     }
   }
 
   function createHenchmenWave() {
-    for (let i = 0; i < 1; i++){
+    for (let i = 0; i < 1; i++) {
       let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
       let newHenchman = new Henchman(randHenchName, player.wave);
 //#region [mushroom]
@@ -833,25 +818,25 @@ document.addEventListener('DOMContentLoaded', function() {
         newHenchman.health += player.boonArray['mushroom'].effects.bonusHealth;
       }
 //#endregion
+
 //#region [scrubs]
       if(player.boonArray['scrubs']) {
         newHenchman.healingFactor += player.boonArray['scrubs'].effects.healingFactor;
       }
 //#endregion
+
       waveHenchmen.push(newHenchman);
     }
-    // waveHenchmen.push(henchArray['Grunt']);
+    waveHenchmen.push(henchArray['Grunt']);
     waveHenchmen.push(henchArray['Beetle']);
     waveHenchmen.push(henchArray['Bokoblin']);
     waveHenchmen.push(henchArray['Space Invader']);
     waveHenchmen.push(henchArray['Stuart the Minion']);
     waveHenchmen.push(henchArray['Turret']);
     waveHenchmen.push(henchArray['Koopa Troopa']);
-    // console.log(waveHenchmen);
+
     // Alter last to be stronger 'boss' henchmen with more health
     // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
-  
-    // console.log(waveHenchmen);
   
     updateHenchmenInfo();
   }
@@ -859,18 +844,12 @@ document.addEventListener('DOMContentLoaded', function() {
   function populateDiceArea() {
     for (let i = 0; i < player.diceArray.length; i++) {
       diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}"></button>`;
-      // diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
     }
-    // let testItem = new Dice('d8');
-    // testItem.name = testItem.typeOf;
-    // player.addItem(testItem);
 
-    // console.log(player.items);
-    // console.log(player);
     specialDiceArea.innerHTML = "";
+
     // Add special dice to the specialDiceArea
     for (let key in player.items) {
-      // console.log("test");
       if (player.items.hasOwnProperty(key) && key != "supplement") {
         for (let i = 0; i < player.items[key].length; i++) {
           let newItem = document.createElement('button');
@@ -886,7 +865,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function fullHealthCheck() {
     if (waveHenchmen[0].isFullHealth() || 
-    // Tetris Piece
+// Tetris Piece
     (player.boonArray['tetrisPiece'] && (Math.abs((waveHenchmen[0].maxHealth - waveHenchmen[0].health) / waveHenchmen[0].maxHealth) * 100) <= 5)) {
 
       gameLog.innerHTML += results.join('<br>') + "<br>";
