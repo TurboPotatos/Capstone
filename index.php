@@ -138,8 +138,8 @@ if (isset($_SESSION['username'])){
         <h3>Create an Account!</h3> <br><br>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <input type="text" name="username" placeholder="Username"><br><br>
-          <input type="text" name="password" placeholder="Password"><br><br>
-          <input type="text" name="passwordTwo" placeholder="Re-Enter Password"><br><br>
+          <input type="password" name="password" placeholder="Password"><br><br>
+          <input type="password" name="passwordTwo" placeholder="Re-Enter Password"><br><br>
           <input type="hidden" name="newAccount" value="newAccount">
           <input type="submit" name="create" value="Create Account!"><br>
         </form>
