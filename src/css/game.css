@@ -258,7 +258,7 @@ tr:nth-child(odd) {
   position: absolute;
   left: 33%;
   bottom: 5%;
-  height: 5%;
+  height: 6%;
   width: 10%;
   /* padding: .5rem; */
   font-size: 2rem;
@@ -401,17 +401,17 @@ tr:nth-child(odd) {
   /* border: 3px solid yellow; */
   position: absolute;
   height: 15rem;
-  width: 11rem;
-  bottom: 0%;
-  left: 48rem;
+  width: 12.5rem;
+  bottom: 5%;
+  left: 47rem;
 }
 #consumableBag button {
   /* border: solid red; */
   position: relative;
   float: left;
-  width: 4rem;
-  height: 4rem;
-  margin: .5rem;
+  width: 5rem;
+  height: 5rem;
+  margin: .2rem;
   margin-left: .7rem;
   background-repeat: no-repeat;
   background-size: contain;
@@ -419,7 +419,8 @@ tr:nth-child(odd) {
   background-image: url(../media/consumableCoin.png);
   background-color: transparent;
   font-family: unset;
-  font-size: 3.8rem;
+  font-size: 4rem;
+  font-weight: bolder;
   display: flex;
   justify-content: center;
   align-items: center;

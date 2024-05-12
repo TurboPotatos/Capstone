@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePlayerInfo();
   populateBoons();
   populateConsumables()
-  createHenchmenWave(0);
+  createHenchmenWave(player.wave);
   populateDiceArea();
   const dieButtons = document.querySelectorAll('.die-btn');
 
@@ -211,33 +211,12 @@ document.addEventListener('DOMContentLoaded', function() {
     let myHealth = waveHenchmen[0].health + "/" + waveHenchmen[0].maxHealth;
     let myTarget = waveHenchmen[0].threshold;
     let myRange = waveHenchmen[0].range;
-
-//#region [nukaCola]
-    if (player.boonArray['nukaCola']) {
-      myRange += player.boonArray['nukaCola'].effects.bonusRange;
-    }
-//#endregion
-
     let lowerRange = (myTarget - myRange);
     let upperRange = (myTarget + myRange);
     let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
     let myHealingFactor = waveHenchmen[0].healingFactor;
-
-//#region [scrubs]
-    if(player.boonArray['scrubs']) {
-      myHealingFactor += player.boonArray['scrubs'].effects.healingFactor;
-    }
-//#endregion
-
     let mydamage = waveHenchmen[0].damage;
     let myCurrency = waveHenchmen[0].currencyGiven;
-
-//#region [syringe]
-    if (player.boonArray['syringe']) {
-      myHealingFactor += Math.ceil(myHealingFactor * player.boonArray['syringe'].effects.bonus);
-      mydamage += Math.ceil(mydamage * player.boonArray['syringe'].effects.bonus);
-    }
-//#endregion
 
     if ((waveHenchmen[0].health / waveHenchmen[0].maxHealth) >= 1) {
       healthBar.style.width = '100%';
@@ -259,6 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
       currencyGiven.innerHTML = "Currency Given: " + myCurrency;
     }
 //#endregion
+
     henchmanImage.style.backgroundImage = henchPicArray[myName];
 
     // Update the next-up henchman chart
@@ -584,7 +564,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add a consumable to the player's inventory 60% of the time
-    if (Math.random() < 0.6) {
+    if (player.items['supplement'].length < player.maxSupplements && Math.random() < 0.6) {
       let consumableValue = Math.floor(Math.random() * 9) + 1;
       player.addItem(new Consumable(consumableValue));
       createConsumableButton(consumableValue);
@@ -594,7 +574,8 @@ document.addEventListener('DOMContentLoaded', function() {
     player.addCurrency(waveHenchmen[0].currencyGiven);
     player.changeStamina(waveHenchmen[0].staminaReward);
     
-    gameLog.innerHTML +=  + "You fully healed " + waveHenchmen[0].name + "!<br><br>";
+    gameLog.innerHTML += "You fully healed " + waveHenchmen[0].name + "!<br>You recovered " + 
+                         waveHenchmen[0].staminaReward + " stamina<br><br>";
     notesOutput.push("You fully healed " + waveHenchmen[0].name + "!");
 
     // Show the healed henchman
@@ -834,6 +815,29 @@ document.addEventListener('DOMContentLoaded', function() {
   function createHenchmenWave(waveNumber) {
 
     waves[waveNumber].forEach((henchman) => {
+
+//#region [nukaCola]
+      if (player.boonArray['nukaCola']) {
+        henchArray[henchman].range += player.boonArray['nukaCola'].effects.bonusRange;
+      }
+//#endregion
+
+//#region [scrubs]
+      if(player.boonArray['scrubs']) {
+        henchArray[henchman].healingFactor += player.boonArray['scrubs'].effects.healingFactor;
+      }
+//#endregion
+
+//#region [syringe]
+      if (player.boonArray['syringe']) {
+        henchArray[henchman].healingFactor += 
+        Math.ceil(henchArray[henchman].healingFactor * player.boonArray['syringe'].effects.bonus);
+
+        henchArray[henchman].damage += 
+        Math.ceil(henchArray[henchman].damage * player.boonArray['syringe'].effects.bonus);
+      }
+//#endregion
+
       waveHenchmen.push(henchArray[henchman]);
     });
   
