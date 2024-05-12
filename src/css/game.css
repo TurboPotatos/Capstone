@@ -254,20 +254,21 @@ tr:nth-child(odd) {
 }
 
 #rollDiceBtn {
+  border: solid black;
   position: absolute;
-  left: 40%;
-  bottom: 15%;
+  left: 33%;
+  bottom: 5%;
   height: 5%;
-  width: 15%;
-  color: blue;
-  background-color: #fafd35;
-  font-size: 40px;
+  width: 10%;
+  /* padding: .5rem; */
+  font-size: 2rem;
   transition-duration: .2s;
-  transform: rotate(-90deg);
+  border-radius: 5px;
+  /* box-sizing: border-box; */
 }
 #rollDiceBtn:hover {
   background-color: yellow;
-  box-shadow: -5px 5px 20px blue;
+  box-shadow: 0px 0px 20px blue;
 }
 
 

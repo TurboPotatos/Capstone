@@ -1,4 +1,6 @@
-import { Henchman, henchArray, henchNameArray, henchPicArray, healedPicArray, bossPicArray } from "./Henchman.js";
+import { Henchman, henchArray, henchNameArray, henchPicArray, healedPicArray } from "./Henchman.js";
+import {           bossArray, bossNameArray, bossPicArray, healedBossPicArray } from "./Henchman.js";
+import { wave1, wave2, wave3, waves } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Consumable } from "./Consumable.js";
 
@@ -95,9 +97,16 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePlayerInfo();
   populateBoons();
   populateConsumables()
-  createHenchmenWave();
+  createHenchmenWave(0);
   populateDiceArea();
   const dieButtons = document.querySelectorAll('.die-btn');
+
+//#region [mushroom]
+  if (player.boonArray['mushroom']) {
+    waveHenchmen[0].health += player.boonArray['mushroom'].effects.bonusHealth;
+  }
+//#endregion
+
 //#endregion
 
 //#region [Event Listeners]
@@ -213,6 +222,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let upperRange = (myTarget + myRange);
     let myStaminaPenalty = waveHenchmen[0].staminaPenalty;
     let myHealingFactor = waveHenchmen[0].healingFactor;
+
+//#region [scrubs]
+    if(player.boonArray['scrubs']) {
+      myHealingFactor += player.boonArray['scrubs'].effects.healingFactor;
+    }
+//#endregion
+
     let mydamage = waveHenchmen[0].damage;
     let myCurrency = waveHenchmen[0].currencyGiven;
 
@@ -264,6 +280,12 @@ document.addEventListener('DOMContentLoaded', function() {
     waveHenchmen.shift();
     gameLog.innerHTML += `${waveHenchmen.length} henchmen left!<br><br>`;
     notesOutput.push(`${waveHenchmen.length} henchmen left!`);
+
+//#region [mushroom]
+    if (player.boonArray['mushroom']) {
+      waveHenchmen[0].health += player.boonArray['mushroom'].effects.bonusHealth;
+    }
+//#endregion
     
     updateHenchmenInfo();
     updatePlayerInfo();
@@ -809,34 +831,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  function createHenchmenWave() {
-    for (let i = 0; i < 1; i++) {
-      let randHenchName = henchNameArray[Math.floor(Math.random() * henchNameArray.length)];
-      let newHenchman = new Henchman(randHenchName, player.wave);
-//#region [mushroom]
-      if (player.boonArray['mushroom']) {
-        newHenchman.health += player.boonArray['mushroom'].effects.bonusHealth;
-      }
-//#endregion
+  function createHenchmenWave(waveNumber) {
 
-//#region [scrubs]
-      if(player.boonArray['scrubs']) {
-        newHenchman.healingFactor += player.boonArray['scrubs'].effects.healingFactor;
-      }
-//#endregion
-
-      waveHenchmen.push(newHenchman);
-    }
-    waveHenchmen.push(henchArray['Grunt']);
-    waveHenchmen.push(henchArray['Beetle']);
-    waveHenchmen.push(henchArray['Bokoblin']);
-    waveHenchmen.push(henchArray['Space Invader']);
-    waveHenchmen.push(henchArray['Stuart the Minion']);
-    waveHenchmen.push(henchArray['Turret']);
-    waveHenchmen.push(henchArray['Koopa Troopa']);
-
-    // Alter last to be stronger 'boss' henchmen with more health
-    // waveHenchmen[waveHenchmen.length - 1].maxHealth *= .5;
+    waves[waveNumber].forEach((henchman) => {
+      waveHenchmen.push(henchArray[henchman]);
+    });
   
     updateHenchmenInfo();
   }

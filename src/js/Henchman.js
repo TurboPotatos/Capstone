@@ -76,9 +76,15 @@ export const healedPicArray = {
 };
 
 export const bossPicArray = {
-  "Satan Himself" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
   "Bowser" : "url(src/media/Henchmen/boss_bowser_hurt.png), url(src/media/texture2.png)",
   "GLaDOS" : "url(src/media/Henchmen/boss_glados_hurt.png), url(src/media/texture2.png)",
+  "Satan Himself" : "url(src/media/Henchmen/boss_actuallySatan_hurt.png), url(src/media/texture2.png)",
+};
+
+export const healedBossPicArray = {
+  "Bowser" : "url(src/media/Henchmen/boss_bowser.png), url(src/media/texture2.png)",
+  "GLaDOS" : "url(src/media/Henchmen/boss_glados.png), url(src/media/texture2.png)",
+  "Satan Himself" : "url(src/media/Henchmen/boss_actuallySatan.png), url(src/media/texture2.png)",
 };
 
 export let henchArray = {};
@@ -86,6 +92,13 @@ export let henchNameArray = [];
 for (let key in henchPicArray) {
   henchNameArray.push(key);
   henchArray[key] = new Henchman(key, 0);
+}
+
+export let bossArray = {};
+export let bossNameArray = [];
+for (let key in bossPicArray) {
+  bossNameArray.push(key);
+  bossArray[key] = new Henchman(key, 0);
 }
 
 
@@ -104,11 +117,31 @@ function respecHenchman(henchman, threshold, range, staminaPenalty, healingFacto
   henchman.staminaReward = staminaReward;
 }
 
-// threshold, range, staminaPenalty, healingFactor, health, maxHealth, damage, scoreGiven, currencyGiven, staminaReward
-respecHenchman(henchArray['Grunt'], 15, 0, 5, 25, 25, 50, 5, 100, 20, 30);
-respecHenchman(henchArray['Beetle'], 10, 4, 10, 20, 30, 80, 15, 100, 30, 30);
-respecHenchman(henchArray['Bokoblin'], 7, 2, 8, 10, 25, 40, 10, 100, 20, 30);
-respecHenchman(henchArray['Space Invader'], 15, 5, 15, 5, 5, 10, 5, 100, 20, 30);
-respecHenchman(henchArray['Stuart the Minion'], 12, 3, 10, 12, 20, 100, 10, 100, 20, 30);
-respecHenchman(henchArray['Turret'], 9, 3, 8, 10, 25, 75, 30, 100, 20, 30);
-respecHenchman(henchArray['Koopa Troopa'], 5, 2, 10, 8, 30, 60, 10, 100, 20, 30);
+// 1 threshold, 2 range,
+// 3 staminaPenalty, 4 healingFactor, 
+// 5 health, 6 maxHealth, 
+// 7 damage, 
+// 8 scoreGiven, 9 currencyGiven, 10 staminaReward
+respecHenchman(henchArray["Goomba"],             5, 3,    5, 5,     3, 15,     2,    100, 10, 10); 
+respecHenchman(henchArray["Bokoblin"],           7, 2,    8, 12,    6, 25,     10,   110, 11, 20); 
+respecHenchman(henchArray["Stuart the Minion"],  12, 3,   15, 12,   12, 30,    5,    120, 13, 20); 
+respecHenchman(henchArray["Beetle"],             10, 4,   10, 20,   20, 50,    15,   130, 17, 25); 
+respecHenchman(henchArray["Space Invader"],      15, 5,   15, 5,    5, 10,     5,    150, 25, 30); 
+
+respecHenchman(henchArray["Koopa Troopa"],       15, 1,   20, 10,   30, 60,    11,   140, 20, 35); 
+respecHenchman(henchArray["Grunt"],              15, 0,   5, 24,    40, 80,    10,   160, 25, 40); 
+respecHenchman(henchArray["B1 Battle Droid"],    20, 4,   19, 10,   12, 50,    1,    170, 30, 20); 
+respecHenchman(henchArray["Pinky"],              25, 3,   15, 5,    1, 20,     7,    180, 31, 50);
+respecHenchman(henchArray["Pain and Panic"],     22, 1,   10, 20,   20, 150,   15,   190, 34, 30);
+
+respecHenchman(henchArray["Turret"],             30, 3,   15, 25,   25, 75,    30,   200, 40, 30);
+respecHenchman(henchArray["Storm Trooper"],      25, 1,   25, 19,   20, 100,   20,   210, 42, 30);
+respecHenchman(henchArray["Iago"],               40, 2,   20, 5,    3, 25,     7,    220, 45, 40);
+respecHenchman(henchArray["Minion"],             50, 3,   15, 99,   100, 500,  50,   230, 50, 40); 
+respecHenchman(henchArray["Henchman 24"],        24, 2,   24, 24,   24, 240,   24,   240, 48, 24); 
+
+export const wave1 = ["Goomba","Bokoblin","Stuart the Minion","Beetle","Space Invader"];
+export const wave2 = ["Koopa Troopa","Grunt","B1 Battle Droid","Pinky","Pain and Panic"];
+export const wave3 = ["Turret","Storm Trooper","Iago","Minion","Henchman 24"];
+
+export const waves = [wave1, wave2, wave3];
