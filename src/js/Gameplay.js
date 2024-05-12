@@ -28,8 +28,6 @@ if (player.boonArray['tongueDepressor']) {
 }
 //#endregion
 
-// console.log(player.items["supplement"].length);
-
 document.addEventListener('DOMContentLoaded', function() {
 
 //#region [Query Selectors]
@@ -238,8 +236,11 @@ document.addEventListener('DOMContentLoaded', function() {
       currencyGiven.innerHTML = "Currency Given: " + myCurrency;
     }
 //#endregion
-
-    henchmanImage.style.backgroundImage = henchPicArray[myName];
+    if (henchArray.hasOwnProperty(waveHenchmen[0].name)) {
+      henchmanImage.style.backgroundImage = henchPicArray[myName];
+    } else {
+      henchmanImage.style.backgroundImage = bossPicArray[myName];
+    }
 
     // Update the next-up henchman chart
     if (waveHenchmen.length > 1) {
@@ -413,7 +414,6 @@ document.addEventListener('DOMContentLoaded', function() {
       player.boonArray['estusFlask'].effects.bonusActive = false;
       totalResult += player.boonArray['estusFlask'].effects.rollBonus;
       results.push("+" + player.boonArray['estusFlask'].effects.rollBonus + " from Estus Flask");
-      // console.log("rollBonus: " + rollBonus);
     }
 //#endregion
 
@@ -557,7 +557,6 @@ document.addEventListener('DOMContentLoaded', function() {
       notesOutput.push("Stamina recovered by Gloves: " + restoreStamina);
     }
 //#endregion
-
     if ( waveHenchmen[0].health > waveHenchmen[0].maxHealth) {
       waveHenchmen[0].health = waveHenchmen[0].maxHealth;
       updateHenchmenInfo();
@@ -814,10 +813,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function createHenchmenWave(waveNumber) {
     // Make waveNumber cycle 1-3
-    // console.log(waveNumber);
     if (waveNumber > 2) {
       waveNumber = (waveNumber % 3);
-      // console.log(waveNumber);
 
       // Make henchmen more difficult 
       for (let key in henchArray) {
@@ -835,12 +832,29 @@ document.addEventListener('DOMContentLoaded', function() {
             henchman.damage * 1.5, henchman.scoreGiven * 1.2, // Increase damage henchmen takes and score given
             henchman.currencyGiven * 1.2, henchman.staminaReward); // Increase currency a little bit
         }
-        // console.log(henchArray[key]);
+      }
+
+      // Make bosses more difficult
+      for (let key in bossArray) {
+        if (bossArray.hasOwnProperty(key)) {
+        // 1 threshold, 2 range,
+        // 3 staminaPenalty, 4 healingFactor, 
+        // 5 health, 6 maxHealth, 
+        // 7 damage, 
+        // 8 scoreGiven, 9 currencyGiven, 10 staminaReward
+        let boss = bossArray[key];
+          respecHenchman(bossArray[key], 
+            boss.threshold, (boss.range >= 2) ? (boss.range - 1) : boss.range, // Reduce range by 1, min 1
+            boss.staminaPenalty + 10, boss.healingFactor, // Increase penalty by 10
+            boss.health, boss.maxHealth * 2, // Increase max health
+            boss.damage * 2, boss.scoreGiven * 2, // Increase damage henchmen takes and score given
+            boss.currencyGiven * 1.5, boss.staminaReward); // Increase currency a little bit
+        }
       }
 
     }
     waves[waveNumber].forEach((henchman) => {
-
+      if (henchArray.hasOwnProperty(henchman)) {
 //#region [nukaCola]
       if (player.boonArray['nukaCola']) {
         henchArray[henchman].range += player.boonArray['nukaCola'].effects.bonusRange;
@@ -857,13 +871,38 @@ document.addEventListener('DOMContentLoaded', function() {
       if (player.boonArray['syringe']) {
         henchArray[henchman].healingFactor += 
         Math.ceil(henchArray[henchman].healingFactor * player.boonArray['syringe'].effects.bonus);
-
+        
         henchArray[henchman].damage += 
         Math.ceil(henchArray[henchman].damage * player.boonArray['syringe'].effects.bonus);
       }
+      
+//#endregion
+        waveHenchmen.push(henchArray[henchman]);
+      } else {
+//#region [nukaCola2]
+      if (player.boonArray['nukaCola']) {
+        bossArray[henchman].range += player.boonArray['nukaCola'].effects.bonusRange;
+      }
 //#endregion
 
-      waveHenchmen.push(henchArray[henchman]);
+//#region [scrubs2]
+      if(player.boonArray['scrubs']) {
+        bossArray[henchman].healingFactor += player.boonArray['scrubs'].effects.healingFactor;
+      }
+//#endregion
+
+//#region [syringe2]
+      if (player.boonArray['syringe']) {
+        bossArray[henchman].healingFactor += 
+        Math.ceil(bossArray[henchman].healingFactor * player.boonArray['syringe'].effects.bonus);
+        
+        bossArray[henchman].damage += 
+        Math.ceil(bossArray[henchman].damage * player.boonArray['syringe'].effects.bonus);
+      }
+      
+//#endregion
+        waveHenchmen.push(bossArray[henchman]);
+      }
     });
   
     updateHenchmenInfo();

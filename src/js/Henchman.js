@@ -140,8 +140,20 @@ respecHenchman(henchArray["Iago"],               40, 2,   20, 5,    3, 25,     7
 respecHenchman(henchArray["Minion"],             50, 3,   15, 99,   100, 500,  50,   230, 50, 40); 
 respecHenchman(henchArray["Henchman 24"],        24, 2,   24, 24,   24, 240,   24,   240, 48, 24); 
 
-export const wave1 = ["Goomba","Bokoblin","Stuart the Minion","Beetle","Space Invader"];
-export const wave2 = ["Koopa Troopa","Grunt","B1 Battle Droid","Pinky","Pain and Panic"];
-export const wave3 = ["Turret","Storm Trooper","Iago","Minion","Henchman 24"];
+
+// Fill out bosses
+// 1 threshold, 2 range,
+// 3 staminaPenalty, 4 healingFactor, 
+// 5 health, 6 maxHealth, 
+// 7 damage, 
+// 8 scoreGiven, 9 currencyGiven, 10 staminaReward
+respecHenchman(bossArray["Bowser"],               15, 2,   18, 24,   3,  300,   17,   350, 75, 40); 
+respecHenchman(bossArray["GLaDOS"],               18, 4,   18, 24,   45, 260,   30,   310, 68, 40); 
+respecHenchman(bossArray["Satan Himself"],        30, 6,   18, 24,   15, 320,   48,   370, 85, 40); 
+
+
+export const wave1 = ["Goomba","Bokoblin","Stuart the Minion","Beetle","Space Invader", "GLaDOS"];
+export const wave2 = ["Koopa Troopa","Grunt","B1 Battle Droid","Pinky","Pain and Panic", "Satan Himself"];
+export const wave3 = ["Turret","Storm Trooper","Iago","Minion","Henchman 24", "Bowser"];
 
 export const waves = [wave1, wave2, wave3];
