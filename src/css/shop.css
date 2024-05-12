@@ -325,7 +325,7 @@ td img {
   height: 70%;
   width: 40%;
   top: 10%;
-  left: 25%;
+  left: 30%;
   /* background-image: url(../media/texture2.png); */
   /* background-color: rgb(35, 52, 108); */
   background-image: url(../media/background2.png);
@@ -384,20 +384,30 @@ td img {
   height: 90px;
 }
 
+#diceBox .backBtn,
+#diceBox .viewBtn {
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background-color: #dedede;
+}
+
 .backBtn {
-  position: absolute;
+  position: fixed;
   height: 10%;
   width: 20%;
-  bottom: 1rem;
-  right: 1rem;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 2;
 }
 
 .viewBtn {
-  position: absolute;
+  position: fixed;
   height: 10%;
   width: 20%;
-  bottom: 1rem;
-  left: 1rem;
+  bottom: 3rem;
+  left: 3rem;
+  z-index: 2;
 }
 
 #returnToGameBtn {
@@ -623,6 +633,7 @@ td img {
 
 #playerConsumables {
   display: none;
+  overflow-y: scroll;
 }
 
 .consumable {

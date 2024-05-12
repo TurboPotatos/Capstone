@@ -436,9 +436,9 @@ function addPlayerConsumables(consumable) {
   let consumableList = playerConsumables.querySelector("ul");
   if (consumable.bonus == null || consumable.bonus == undefined) {
     let newConsumable = document.createElement('li');
-    newConsumable.textContent = consumable.typeOf;
+    // newConsumable.textContent = consumable.typeOf;
     // Set styles & classes
-    newConsumable.style.backgroundImage = "url('src/media/Dice/" + newConsumable.textContent + ".png')";
+    newConsumable.style.backgroundImage = "url('src/media/Dice/" + consumable.typeOf + ".png')";
     newConsumable.style.display = "flex";
     newConsumable.style.justifyContent = "center";
     newConsumable.style.alignItems = "center";
@@ -870,9 +870,9 @@ buyDice.addEventListener("click", (e) => {
       message.style.display = "block";
       message.innerHTML = "<h2>Choose a die to keep permanently.<br>The other 2 will be kept as consumables.</h2><br>";
       
-      diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)">${diceChoice['choiceOne'].typeOf}</button>`;
-      diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)">${diceChoice['choiceTwo'].typeOf}</button>`;
-      diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)">${diceChoice['choiceThree'].typeOf}</button>`;
+      diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)"></button>`;
+      diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)"></button>`;
+      diceOptions.innerHTML += `<button id="choiceThree" class="die-btn die-option ${diceChoice['choiceThree'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceThree'].typeOf}.png)"></button>`;
 
       // Add event listeners to each of the dice
       document.querySelectorAll(".die-option").forEach((option) => {
