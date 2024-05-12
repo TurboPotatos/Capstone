@@ -1,5 +1,5 @@
 import { Henchman, henchArray, henchNameArray, henchPicArray, healedPicArray } from "./Henchman.js";
-import {           bossArray, bossNameArray, bossPicArray, healedBossPicArray } from "./Henchman.js";
+import {           bossArray, bossNameArray, bossPicArray, healedBossPicArray, respecHenchman } from "./Henchman.js";
 import { wave1, wave2, wave3, waves } from "./Henchman.js";
 import { Player } from "./Player.js";
 import { Consumable } from "./Consumable.js";
@@ -14,6 +14,7 @@ if (!player.items["supplement"]) {
   player.addItem(new Consumable(9));
 }
 
+player.wave = 3;
 //#region [star]
 if (player.boonArray['star']) {
   // Prerequisite for star functionality
@@ -813,7 +814,32 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function createHenchmenWave(waveNumber) {
+    // Make waveNumber cycle 1-3
+    // console.log(waveNumber);
+    if (waveNumber > 2) {
+      waveNumber = (waveNumber % 3);
+      // console.log(waveNumber);
 
+      // Make henchmen more difficult 
+      for (let key in henchArray) {
+        if (henchArray.hasOwnProperty(key)) {
+        // 1 threshold, 2 range,
+        // 3 staminaPenalty, 4 healingFactor, 
+        // 5 health, 6 maxHealth, 
+        // 7 damage, 
+        // 8 scoreGiven, 9 currencyGiven, 10 staminaReward
+        let henchman = henchArray[key];
+          respecHenchman(henchArray[key], 
+            henchman.threshold, (henchman.range >= 3) ? (henchman.range - 1) : henchman.range, // Reduce range by 1, min 2
+            henchman.staminaPenalty + 5, henchman.healingFactor, // Increase penalty by 5
+            henchman.health, henchman.maxHealth * 1.4, // Increase max health
+            henchman.damage * 1.5, henchman.scoreGiven * 1.2, // Increase damage henchmen takes and score given
+            henchman.currencyGiven * 1.2, henchman.staminaReward); // Increase currency a little bit
+        }
+        // console.log(henchArray[key]);
+      }
+
+    }
     waves[waveNumber].forEach((henchman) => {
 
 //#region [nukaCola]

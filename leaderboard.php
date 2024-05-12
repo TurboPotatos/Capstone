@@ -37,8 +37,8 @@ if (!session_id()) {
 
       $pdo = dbConnect();
 
-      $query = "SELECT username, score, waveReached FROM players, runs
-                WHERE runs.playerId = players.playerId ORDER BY score LIMIT 50";
+      $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty  FROM players, runs
+                WHERE runs.playerId = players.playerId ORDER BY score DESC LIMIT 50";
 
       $errorMessage = "Error fetching leaderboard";
 
@@ -50,12 +50,19 @@ if (!session_id()) {
           <th>Username</th>
           <th>Score</th>
           <th>Wave Reached</th>
+          <th>Total Money Earned</th>
+          <th>Total of Healed Henchmen</th>
+          <th>Difficulty</th>
         </tr>
     <?php
       while ($row = $leaderboardResult->fetch()) {
         $playerName = $row['username'];
         $score = $row['score'];
         $waveReached = $row['waveReached'];
+        $totalCurrency = $row['totalMoneyEarned'];
+        $totalHealed = $row['henchmenHealed'];
+        $difficulty = $row['difficulty'];
+
 
 
         $dataRow = <<<DATAROW
@@ -64,6 +71,9 @@ if (!session_id()) {
           <td>$playerName</td>
           <td>$score</td>
           <td>$waveReached</td>
+          <td>$totalCurrency</td>
+          <td>$totalHealed</td>
+          <td>$difficulty</td>
         </tr>
 DATAROW;
         echo $dataRow;
@@ -86,19 +96,15 @@ DATAROW;
       </h2><?php
         } else {
       ?> 
-      <!-- <div class="temp">
-        <h3>Temporary Sign-In for Player History</h3>
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
-          <input type="text" name="username" placeholder="Username">
-          <input type="submit" name="submit" value="See History">
-        </form>
-      </div> -->
 
       <table class="history">
-        <tr>
+      <tr>
           <th>Username</th>
           <th>Score</th>
           <th>Wave Reached</th>
+          <th>Total Money Earned</th>
+          <th>Total of Healed Henchmen</th>
+          <th>Difficulty</th>
         </tr>
       <?php 
         // Get user info from temp table 
@@ -113,7 +119,7 @@ DATAROW;
           if ($player = $categoryResult->fetch()) {
             // Get history info and output as a table
 
-            $query = "SELECT username, score, waveReached FROM players, runs WHERE runs.playerId = players.playerId AND username = '$username' ORDER BY runId";
+            $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty FROM players, runs WHERE runs.playerId = players.playerId AND username = '$username' ORDER BY runId";
             $error = "Error fetching player history";
 
             $historyResult = callQuery($pdo, $query, $error);
@@ -122,6 +128,9 @@ DATAROW;
               $playerName = $row['username'];
               $score = $row['score'];
               $waveReached = $row['waveReached'];
+              $totalCurrency = $row['totalMoneyEarned'];
+              $totalHealed = $row['henchmenHealed'];
+              $difficulty = $row['difficulty'];
       
       
               $dataRow = <<<DATAROW
@@ -130,6 +139,9 @@ DATAROW;
           <td>$playerName</td>
           <td>$score</td>
           <td>$waveReached</td>
+          <td>$totalCurrency</td>
+          <td>$totalHealed</td>
+          <td>$difficulty</td>
         </tr>
 DATAROW;
               echo $dataRow;

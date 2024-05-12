@@ -102,7 +102,7 @@ for (let key in bossPicArray) {
 }
 
 
-function respecHenchman(henchman, threshold, range, staminaPenalty, healingFactor, health, maxHealth, damage, 
+export function respecHenchman(henchman, threshold, range, staminaPenalty, healingFactor, health, maxHealth, damage, 
                        scoreGiven, currencyGiven, staminaReward) {
 
   henchman.threshold = threshold;
