@@ -726,7 +726,17 @@ document.querySelectorAll('.numPadInput').forEach((numBtn) => {
             } 
             lcd.innerHTML = "<span class=\"animatedText\">Thank You!</span>";
             lcd.style.fontSize = "1.3vw";
-            activeBoon = new Boon("", "", "", "");
+            activeBoon = new Boon("", "", "", ""); 
+
+            // Update prices of spans
+            shopContent.forEach((shopItem) => {
+              if (!shopItem.classList.contains("junk")) {
+                shopItem.querySelector(".cost").innerHTML =`
+                  <br><br>
+                  Cost: ${Math.round(10*(.5 * player.boonArrayLength) * player.difficulty)}
+                `; 
+              }
+            });
           } else {
             // player doesn't have enough money
             selectedItem.classList.remove("selectedSlot");
