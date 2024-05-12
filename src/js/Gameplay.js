@@ -665,25 +665,65 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           gameLog.innerHTML += "You're all tuckered out<br><br>";
           notesOutput.push("You're all tuckered out");
-          document.querySelector("#gameOverMessage").style.display = "block";
+          let gameOverScreen = document.querySelector("#gameOverMessage"); 
+          gameOverScreen.style.display = "flex";
           
-          // TODO set delay so user gets game over screen for a bit before being redirected
-          // Create form to send player to php with get data
-          var hiddenForm = document.createElement("form");
-          hiddenForm.method = "post";
-          hiddenForm.action = "gameOver.php";
-          hiddenForm.style.display = "none";
-  
-          var input = document.createElement('input');
-          input.type = 'hidden';
-          input.name = 'myData';
-          input.value = JSON.stringify(player);
-  
-          hiddenForm.appendChild(input);
-  
-          document.body.appendChild(hiddenForm);
-  
-          hiddenForm.submit();
+          // Create two buttons for the "Game Ober" screen
+          let fadeGameOver = document.createElement('button');
+          let goToGameOver = document.createElement('button');
+
+          // Clicking the button will also trigger the parent's click
+          // This is a switch to prevent that
+          let doubleClickSwitch = false;
+
+          fadeGameOver.addEventListener("click", () => {
+            // Fade the game over screen
+            gameOverScreen.style.opacity = 0.2;
+            gameOverScreen.querySelectorAll("button").forEach((button) => {
+              button.style.display = "none";
+            });
+
+            doubleClickSwitch = true;
+          });
+          
+          // Add an event listener to reveal gameOverScreen
+          gameOverScreen.addEventListener("click", () => {
+            if (!doubleClickSwitch){
+              gameOverScreen.style.opacity = 1;
+              gameOverScreen.querySelectorAll("button").forEach((button) => {
+                button.style.display = "block";
+              });
+            } else {
+              doubleClickSwitch = false;
+            }
+          });
+          fadeGameOver.textContent = "See Game State";
+
+          goToGameOver.addEventListener("click", () => {
+            // Create form to send player to php with get data
+            var hiddenForm = document.createElement("form");
+            hiddenForm.method = "post";
+            hiddenForm.action = "gameOver.php";
+            hiddenForm.style.display = "none";
+
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'myData';
+            input.value = JSON.stringify(player);
+
+            hiddenForm.appendChild(input);
+
+            document.body.appendChild(hiddenForm);
+
+            hiddenForm.submit();
+          });
+
+          goToGameOver.textContent = "Go To End Screen";
+          
+          gameOverScreen.appendChild(fadeGameOver);
+          gameOverScreen.appendChild(goToGameOver);
+
+          
         } 
 
 

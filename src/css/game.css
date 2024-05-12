@@ -396,7 +396,10 @@ tr:nth-child(odd) {
   background-color: rgba(0,0,0,.8);
   z-index: 1112;
   display: none;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
+
 #gameOverMessage span {
   /* border: solid red; */
   position: absolute;
@@ -407,6 +410,25 @@ tr:nth-child(odd) {
   width: 100%;
   top: 20%;
 }
+
+#gameOverMessage button {
+  margin: 13rem 5rem 0 5rem;
+  width: 30%;
+  padding: 1rem;
+  background-color: #555;
+  color: #ddd;
+  box-shadow: 2px 2px 2px #222;
+}
+
+#gameOverMessage button:hover {
+  background-color: #666;
+}
+
+#gameOverMessage button:disabled {
+  background-color: #777;
+  cursor: default;
+}
+
 
 #consumableBag {
   border: 3px solid yellow;
