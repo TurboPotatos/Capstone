@@ -806,13 +806,13 @@ diceMachine.addEventListener("click", (e) => {
     buyDice.style.display = "block";
     // Warn user if they will miss out on consumable dice
     
-    if (player.getConsumableCount() >= player.maxConsumableDice) {
+    if (player.getSpecialDiceCount() >= player.maxConsumableDice) {
       message.innerHTML = `
       <h3>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h3>`;
       message.style.display = 'block';
-    } else if (player.getConsumableCount() + 2 > player.maxConsumableDice) {
+    } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice) {
       message.innerHTML = `
-      <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getConsumableCount()} consumable dice!</h3>`;
+      <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h3>`;
       message.style.display = 'block';
     }
   }

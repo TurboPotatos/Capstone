@@ -43,7 +43,7 @@ export class Player {
       this.difficulty = player.difficulty;
       this.maxDiceCount = player.maxDiceCount;
       this.maxConsumableDice = player.maxConsumableDice;
-      this.maxOtherConsumables = player.maxOtherConsumables;
+      this.maxSupplements = player.maxSupplements;
       // console.log("player constructed");
       // console.log(player.diceArray.length);
       
@@ -222,10 +222,22 @@ export class Player {
     }
   }
 
-  getConsumableCount() {
+  getSupplementCount() {
     let playerConsumableCount = 0;
     for (let key in this.items) {
-      if (this.items.hasOwnProperty(key)) {
+      if (this.items.hasOwnProperty(key) && key == "supplement") {
+        for (let i = 0; i < this.items[key].length; i++) {
+          playerConsumableCount++;
+        }
+      }
+    }
+    return playerConsumableCount;
+  }
+
+  getSpecialDiceCount() {
+    let playerConsumableCount = 0;
+    for (let key in this.items) {
+      if (this.items.hasOwnProperty(key) && key != "supplement") {
         for (let i = 0; i < this.items[key].length; i++) {
           playerConsumableCount++;
         }

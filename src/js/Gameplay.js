@@ -666,7 +666,27 @@ document.addEventListener('DOMContentLoaded', function() {
           gameLog.innerHTML += "You're all tuckered out<br><br>";
           notesOutput.push("You're all tuckered out");
           document.querySelector("#gameOverMessage").style.display = "block";
+          
+          // TODO set delay so user gets game over screen for a bit before being redirected
+          // Create form to send player to php with get data
+          var hiddenForm = document.createElement("form");
+          hiddenForm.method = "post";
+          hiddenForm.action = "gameOver.php";
+          hiddenForm.style.display = "none";
+  
+          var input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'myData';
+          input.value = JSON.stringify(player);
+  
+          hiddenForm.appendChild(input);
+  
+          document.body.appendChild(hiddenForm);
+  
+          hiddenForm.submit();
         } 
+
+
       }
         // if(player.stamina <= 0){
         //   window.location.replace("gameOver.html");

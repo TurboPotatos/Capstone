@@ -6,6 +6,26 @@ if (!session_id()) {
 require 'sanitize.php';
 require 'dbQueries.php';
 
+$myData = json_decode($_POST['myData'], true);
+
+// Process the data as needed
+echo "Data received: ";
+// print_r($myData);
+
+$currency = $myData['currency'];
+$waveReached = $myData['wave'];
+$maxStamina = $myData['maxStamina'];
+$score = $myData['score'];
+$difficulty = $myData['difficulty'];
+
+echo $currency . "<br>" . 
+$waveReached . "<br>" .
+$maxStamina . "<br>" .
+$score . "<br>" .
+$difficulty;
+
+// TODO alter database to store totalCurrency, henchmenHealed, and difficulty
+
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,11 +72,11 @@ require 'dbQueries.php';
         <td>Specialization: <span>.</span></td>
       </tr>
       <tr>
-        <td>Boons Collected: <span id="collectedBoons"><img src="src/media/boon_labCoat.png"></span></td>
+        <td>Boons Collected: <span id="collectedBoons"><img src="src/media/Boons/boon_labCoat.png"></span></td>
       </tr>
     </table>
     
-    <a id="playAgain" href="index.php" style="color: white;">Play Again!</a>
+    <a id="playAgain" href="index.php" style="color: green;">Play Again!</a>
   </div>
 </body>
 </html>
