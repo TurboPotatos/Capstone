@@ -249,13 +249,16 @@ td img {
 }
 
 .tooltip {
+  border: solid red;
   position: absolute;
-  /* top: 10%; */
-  /* left: 10%; */
-  width: 100%;
+  /* top: 0;
+  left: 0; */
+  width: 16rem;
+  /* height: 50%; */
+  font-size: 1.2rem;
   background-color: black;
-  color: white;
-  padding: 5px;
+  color: rgb(207, 207, 207);
+  padding: .6rem;
   border-radius: 5px;
   display: none;
   z-index: 1005;
@@ -488,19 +491,6 @@ td img {
   animation: scroll 5s linear infinite;
 }
 
-.tooltip {
-  position: absolute;
-  /* top: 10%; */
-  /* left: 10%; */
-  width: 100%;
-  background-color: black;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  display: none;
-  z-index: 1005;
-}
-
 @keyframes scroll {
   0% {
     transform: translateX(105%);
@@ -565,13 +555,6 @@ td img {
   margin-bottom: 1rem;
   position: relative;
   scroll-behavior: auto;
-}
-
-#boonBox .tooltip {
-  width: 30%;
-  /* top: 10%;
-  left: 10%; */
-  font-size: 18pt;
 }
 
 #leftArrow, #rightArrow {
@@ -640,4 +623,57 @@ td img {
 
 #playerConsumables {
   display: none;
+}
+
+.consumable {
+  position: relative;
+  float: left;
+  margin-left: 3.4rem;
+  margin-top: 1.4rem;
+  background-image: url(../media/consumableCoin.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 7rem;
+  font-size: 5rem;
+  font-weight: bolder;
+  /* color: rgb(196, 196, 31); */
+  color: black;
+  text-shadow: 2px 2px 3px whitesmoke;
+}
+
+#playerDice .die-btn {
+  position: relative;
+  float: left;
+  margin-left: 3.4rem;
+  margin-top: 1.4rem;
+  width: 7rem;
+  height: 7rem;
+  /* font-size: 0%; */
+}
+
+.die-btn ul {
+  border: solid green;
+  position: absolute;
+  width: 7rem;
+  height: 7rem;
+  top: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.die-btn li { 
+  border: solid red;
+  position: relative;
+  float: left;
+  /* margin: .1rem; */
+  font-size: 2rem;
+  /* display: none; */
+  list-style-type: none;
+  justify-content: space-around;
+  align-items: center;
+  left: 100%;
+  /* top: 2rem; */
+  width: 2.5rem;
+  height: 2.5rem;
 }

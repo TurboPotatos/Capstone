@@ -253,22 +253,22 @@ for (let i = 0; i < player.diceArray.length; i++) {
 
   // Set styles
   newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
-  newDice.style.display = "flex";
-  newDice.style.justifyContent = "center";
-  newDice.style.alignItems = "center";
-  newDice.style.position = "relative";
+  // newDice.style.display = "flex";
+  // newDice.style.justifyContent = "center";
+  // newDice.style.alignItems = "center";
+  // newDice.style.position = "relative";
   
   newDice.classList.add("die-btn");
   newDice.classList.add(player.diceArray[i].typeOf);
   
   // Give it a ul child populated by it's sides
   let newDiceSides = document.createElement("ul");
-  newDiceSides.style.display = "none";
-  newDiceSides.style.listStyleType = "none";
-  newDiceSides.style.justifyContent = "space-around";
-  newDiceSides.style.alignItems = "center";
-  newDiceSides.style.position = "absolute";
-  newDiceSides.style.left = "100%";
+  // newDiceSides.style.display = "none";
+  // newDiceSides.style.listStyleType = "none";
+  // newDiceSides.style.justifyContent = "space-around";
+  // newDiceSides.style.alignItems = "center";
+  // newDiceSides.style.position = "absolute";
+  // newDiceSides.style.left = "100%";
 
   
   for (let j = 0; j < player.diceArray[i].sides.length; j++) {
@@ -276,7 +276,7 @@ for (let i = 0; i < player.diceArray.length; i++) {
     let newDiceSide = document.createElement("li");
     newDiceSide.textContent = player.diceArray[i].sides[j].value;
 
-    newDiceSide.style.padding = "10px";
+    // newDiceSide.style.padding = "10px";
 
     // Add it to the ul
     newDiceSides.appendChild(newDiceSide);
@@ -316,24 +316,25 @@ function addPlayerDice(dice) {
 
   // Set styles
   newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
-  newDice.style.display = "flex";
-  newDice.style.justifyContent = "center";
-  newDice.style.alignItems = "center";
-  newDice.style.position = "relative";
+  // newDice.style.display = "flex";
+  // newDice.style.justifyContent = "center";
+  // newDice.style.alignItems = "center";
+  // newDice.style.position = "relative";
   
   newDice.classList.add("die-btn");
   newDice.classList.add(dice.typeOf);
   
   // Give it a ul child populated by it's sides
   let newDiceSides = document.createElement("ul");
-  newDiceSides.style.display = "none";
-  newDiceSides.style.listStyleType = "none";
-  newDiceSides.style.justifyContent = "left";
-  newDiceSides.style.alignItems = "center";
-  newDiceSides.style.position = "absolute";
-  newDiceSides.style.left = "100%";
-  newDiceSides.style.width = (playerDice.clientWidth - (2 * newDice.clientWidth)) + "px";
-  newDiceSides.style.flexWrap = "wrap";
+  // newDiceSides.style.display = "none";
+  // newDiceSides.style.listStyleType = "none";
+  // newDiceSides.style.justifyContent = "left";
+  // newDiceSides.style.alignItems = "center";
+  // newDiceSides.style.position = "absolute";
+  // newDiceSides.style.left = "100%";
+  // newDiceSides.style.top = "2rem";
+  // newDiceSides.style.width = (playerDice.clientWidth - (2 * newDice.clientWidth)) + "px";
+  // newDiceSides.style.flexWrap = "wrap";
 
   // console.log(playerDice.clientWidth);
   
@@ -342,7 +343,7 @@ function addPlayerDice(dice) {
     let newDiceSide = document.createElement("li");
     newDiceSide.textContent = dice.sides[i].value;
 
-    newDiceSide.style.padding = "10px";
+    // newDiceSide.style.padding = "10px";
 
     // Add it to the ul
     newDiceSides.appendChild(newDiceSide);
@@ -353,14 +354,14 @@ function addPlayerDice(dice) {
   // Make it clickable to display it's children
   newDice.addEventListener("click", () => {
     let diceList = newDice.querySelector("ul");
-    diceList.style.display = 'flex';
+    diceList.style.display = 'block';
 
     // hide the old back button and display new one
     diceBackBtn.style.display = "none";
     newBack.style.display = 'block';
 
     // Fix diceList styles
-    diceList.style.width = (playerDice.clientWidth - (1.05 * newDice.clientWidth)) + "px";
+    // diceList.style.width = (playerDice.clientWidth - (1.05 * newDice.clientWidth)) + "px";
     
     // Hide all other dice
     let allDice = playerDice.querySelectorAll(".die-btn");
@@ -415,9 +416,9 @@ for (let key in player.items) {
         newConsumable.style.alignItems = "center";
 
         // TODO - get finalized backgroundImage and classes for supplements
-        newConsumable.classList.add("die-btn");
-        newConsumable.classList.add("d4");
-        newConsumable.style.backgroundImage = "url('src/media/Dice/d4.png')";
+        newConsumable.classList.add("consumable");
+        // newConsumable.classList.add("d4");
+        // newConsumable.style.backgroundImage = "url('src/media/Dice/d4.png')";
 
 
         // Add it to the consumableList
@@ -849,7 +850,7 @@ buyDice.addEventListener("click", (e) => {
   // TODO change hard coded cost 
   if (player.diceArray.length + 1 <= player.maxDiceCount) {
     // if the player buying more dice won't exceed maximum
-    let spare = player.maxConsumableDice - player.getConsumableCount();
+    let spare = player.maxConsumableDice - player.getSpecialDiceCount();
 
     if (player.subtractCurrency(15)) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;

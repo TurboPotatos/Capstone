@@ -66,7 +66,7 @@ function changeSelectedBoon(boon) {
   }
 
   displayBoon.innerHTML = `
-  <h3>Selected Boon</h3><br>
+  <h3>Selected Boon</h3>
   <img src="../../${selectedBoon.filePath}" class="boon">
     <span class="tooltip">
     ${selectedBoon.description}

@@ -210,7 +210,7 @@
   box-sizing: border-box;
   /* display: block; */
   z-index: 1003;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 #buyDice {
@@ -221,10 +221,12 @@
 }
 
 #diceSelect {
+  /* border: solid red; */
   position: absolute;
   float: left;
-  padding: 2rem;
-  left: 15rem;
+  padding-top: 2rem;
+  width: 35rem;
+  right: -1.5rem;
   top: 0;
 }
 
@@ -246,8 +248,8 @@
 #startBtn {
   position: absolute;
   bottom: 1rem;
-  right: 25rem;
-  font-size: 3rem;
+  right: 21rem;
+  font-size: 2.5rem;
   padding: 1rem;
   border-radius: 15px;
   box-shadow: 3px 3px 0px black;
@@ -265,16 +267,19 @@
   box-shadow: 3px 3px 0px black;
 }
 .displayBoon {
-  border: 1px solid #333;
-  position: relative;
-  box-shadow: 1px 1px 1px 1px #222;
-  /* height: 10%; */
-  /* width: 15%; */
-  background-color: #454;
-  /* display: none; */
+  /* border: solid blue; */
+  /* border: 1px solid #333; */
+  position: absolute;
+  float: left;
+  top: 9rem;
+  left: 10.5rem;
+  font-size: 1.1rem;
+  /* box-shadow: 1px 1px 1px 1px #222; */
+  height: 7.5rem;
+  width: 7.5rem;
+  /* background-color: #454; */
   padding: 3px;
   text-align: center;
-  /* display: none; */
 }
 
 .displayBoon img{
@@ -286,5 +291,22 @@
 }
 
 #startBoonContainer {
+  /* border: solid red; */
   width: 15%;
+}
+
+.tooltip {
+  border: solid red;
+  position: absolute;
+  /* top: 0;
+  left: 0; */
+  width: 16rem;
+  /* height: 50%; */
+  font-size: 1.2rem;
+  background-color: black;
+  color: rgb(207, 207, 207);
+  padding: .6rem;
+  border-radius: 5px;
+  display: none;
+  z-index: 1005;
 }

@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', function() {
     notesOutput.push(waveHenchmen[0].name + " was fully healed!");
 
     player.addCurrency(waveHenchmen[0].currencyGiven);
-    player.changeStamina(30);
+    player.changeStamina(waveHenchmen[0].staminaReward);
     if (waveHenchmen.length > 1) {
       henchmanImage.style.backgroundImage = healedPicArray[waveHenchmen[0].name];
       setTimeout(nextHenchman, 4000);
@@ -841,6 +841,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function populateDiceArea() {
     for (let i = 0; i < player.diceArray.length; i++) {
+      // diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}"></button>`;
       diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
     }
     // let testItem = new Dice('d8');
