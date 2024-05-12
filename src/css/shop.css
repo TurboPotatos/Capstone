@@ -648,32 +648,43 @@ td img {
   margin-left: 3.4rem;
   margin-top: 1.4rem;
   width: 7rem;
+  /* (playerDice.clientWidth - (2 * newDice.clientWidth)) + "px"; */
   height: 7rem;
   /* font-size: 0%; */
+  text-align: center;
+  align-items: center;
 }
 
-.die-btn ul {
-  border: solid green;
+.die-btn ul{
+  /* border: solid green; */
   position: absolute;
-  width: 7rem;
-  height: 7rem;
-  top: 0;
-  display: flex;
+  width: 325%;
+  /*height: 7rem; */
+  top: 10%;
+  left: 100%;
+  display: none;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+  
 }
+
 .die-btn li { 
-  border: solid red;
+  /* border: solid red; */
   position: relative;
-  float: left;
+  /* float: left; */
   /* margin: .1rem; */
   font-size: 2rem;
   /* display: none; */
   list-style-type: none;
   justify-content: space-around;
   align-items: center;
-  left: 100%;
+  text-align: center;
+  /* left: 100%; */
   /* top: 2rem; */
   width: 2.5rem;
   height: 2.5rem;
+  background-color: #666;
+  border: 3px solid #333;
 }

@@ -249,10 +249,10 @@ playerDice.appendChild(newBack);
 for (let i = 0; i < player.diceArray.length; i++) {
   // Add each dice as a clickable element that displays the sides when clicked
   let newDice = document.createElement('li');
-  newDice.textContent = player.diceArray[i].typeOf;
+  // newDice.textContent = player.diceArray[i].typeOf;
 
   // Set styles
-  newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
+  newDice.style.backgroundImage = "url('src/media/Dice/" + player.diceArray[i].typeOf + ".png')";
   // newDice.style.display = "flex";
   // newDice.style.justifyContent = "center";
   // newDice.style.alignItems = "center";
@@ -312,10 +312,10 @@ for (let i = 0; i < player.diceArray.length; i++) {
 function addPlayerDice(dice) {
   // Add the dice as a clickable element that displays the sides when clicked
   let newDice = document.createElement('li');
-  newDice.textContent = dice.typeOf;
+  // newDice.textContent = dice.typeOf;
 
   // Set styles
-  newDice.style.backgroundImage = "url('src/media/Dice/" + newDice.textContent + ".png')";
+  newDice.style.backgroundImage = "url('src/media/Dice/" + dice.typeOf + ".png')";
   // newDice.style.display = "flex";
   // newDice.style.justifyContent = "center";
   // newDice.style.alignItems = "center";
@@ -354,7 +354,7 @@ function addPlayerDice(dice) {
   // Make it clickable to display it's children
   newDice.addEventListener("click", () => {
     let diceList = newDice.querySelector("ul");
-    diceList.style.display = 'block';
+    diceList.style.display = 'flex';
 
     // hide the old back button and display new one
     diceBackBtn.style.display = "none";
