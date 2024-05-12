@@ -14,7 +14,6 @@ if (!player.items["supplement"]) {
   player.addItem(new Consumable(9));
 }
 
-player.wave = 3;
 //#region [star]
 if (player.boonArray['star']) {
   // Prerequisite for star functionality

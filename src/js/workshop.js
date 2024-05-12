@@ -19,27 +19,12 @@ document.querySelector("#currentCurrency").innerHTML = player.currency;
 
 let playerDiceFacesDisplay = 'none';
 
-// player.currency = 15;
+let priceSpan = document.querySelector("#price");
 
-// let tempDice = new Dice("d4");
-// player.addDice(tempDice);
-// tempDice = new Dice("d6");
-// player.addDice(tempDice);
-// tempDice = new Dice("d8");
-// player.addDice(tempDice);
-// tempDice = new Dice("d10");
-// player.addDice(tempDice);
-// tempDice = new Dice("d12");
-// player.addDice(tempDice);
-// tempDice = new Dice("d20");
-// player.addDice(tempDice);
+// Counter for how many die faces player bought this visit
+let totalBought = 0;
 
-// for (let i = 0; i < 5; i++) {
-//   let rand = Math.ceil(Math.random() * 20);
-//   let tempDiceSide = new DiceSide(rand, 1);
-
-//   player.diceSideArray.push(tempDiceSide);
-// }
+priceSpan.innerHTML = calculatePrice(player.wave, totalBought, player.difficulty, 10);
 
 //#region [playerInfo Box]
 const boonBox = document.querySelector("#boonBox");
@@ -146,13 +131,21 @@ shopContent.forEach(shopItem => {
 
   shopItem.addEventListener("click", function() {
     // TODO fix difficulty
-    boughtDiceSide = new DiceSide(parseInt(shopItem.id.substring(6)), 1);
+    boughtDiceSide = new DiceSide(parseInt(shopItem.id.substring(6)), player.difficulty);
+
+    let isActive = shopItem.classList.contains("active");
 
     shopContent.forEach(shopItem => {
       shopItem.classList.remove('active');
     })
-    
+
     shopItem.classList.add('active');
+    
+    // Remove boughtDiceSide info and active class if the dice is being deselected
+    if (isActive) {
+      shopItem.classList.remove('active');
+      boughtDiceSide.value = -1;
+    }
   });
 
 });
@@ -165,13 +158,15 @@ document.querySelector("#playerInfo").addEventListener("click", function() {
   console.log(player.diceArray);
 });
 
-document.querySelector("#buyItem").addEventListener("click", function() {
+const buyBtn = document.querySelector("#buyItem");
+buyBtn.addEventListener("click", function() {
   if (boughtDiceSide.value != -1) {
-    if (player.subtractCurrency(15)) {
+    if (player.subtractCurrency(calculatePrice(player.wave, totalBought, player.difficulty, 10))) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
       player.diceSideArray.push(boughtDiceSide);
-
-      // console.log(boughtDiceSide.value);
+      totalBought++;
+      console.log(calculatePrice(player.wave, totalBought, player.difficulty, 10));
+      priceSpan.innerHTML = calculatePrice(player.wave, totalBought, player.difficulty, 10);
 
       let selected = document.querySelector('.active');
       if (selected) {
@@ -437,3 +432,22 @@ window.addEventListener('load', function() {
   // Fix for scrolling 
   leftArrow.click();
 });
+
+function calculatePrice(wave, count, difficulty, basePrice) {
+  // 10 base price, increase based on wave and difficulty
+  // Increase in price per wave
+  wave++; // Account for wave being zero-based
+  let waveIncrease = (5 + (difficulty * 2)); // Adjust based on difficulty
+
+  if (count >= 1) {
+    waveIncrease += (5 * count); // Increase price a lot by how many they've bought so far
+  }
+
+  // Calculate the total increase in price
+  let totalIncrease = (waveIncrease * wave);
+
+  // Apply the increase to the base price
+  const finalPrice = basePrice + totalIncrease;
+
+  return finalPrice;
+}
