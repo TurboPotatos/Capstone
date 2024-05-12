@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // If the subarray isn't of type Consumable  
           for (let i = 0; i < player.items[key].length; i++) {
             let newConsumable = document.createElement("button");
-            newConsumable.innerHTML = `Add ${player.items[key][i].bonus} to your total!`;
+            newConsumable.innerHTML = player.items[key][i].bonus;
             consumableBag.appendChild(newConsumable);
 
             newConsumable.addEventListener("click", (e) => {
@@ -841,8 +841,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function populateDiceArea() {
     for (let i = 0; i < player.diceArray.length; i++) {
-      // diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}"></button>`;
-      diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
+      diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}"></button>`;
+      // diceArea.innerHTML += `<button id="dice${i}"class="die-btn ${player.diceArray[i].typeOf}">${player.diceArray[i].typeOf}</button>`;
     }
     // let testItem = new Dice('d8');
     // testItem.name = testItem.typeOf;

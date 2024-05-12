@@ -642,7 +642,8 @@ td img {
   text-shadow: 2px 2px 3px whitesmoke;
 }
 
-#playerDice .die-btn {
+#playerDice .die-btn,
+#playerConsumables .die-btn {
   position: relative;
   float: left;
   margin-left: 3.4rem;

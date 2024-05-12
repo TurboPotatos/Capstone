@@ -392,9 +392,9 @@ for (let key in player.items) {
       // If the subarray ISN'T of type supplement, it's a dice. Add classes respectively
       for (let i = 0; i < player.items[key].length; i++) {
         let newConsumable = document.createElement('li');
-        newConsumable.textContent = player.items[key][i].typeOf;
+        // newConsumable.textContent = player.items[key][i].typeOf;
         // Set styles & classes
-        newConsumable.style.backgroundImage = "url('src/media/Dice/" + newConsumable.textContent + ".png')";
+        newConsumable.style.backgroundImage = "url('src/media/Dice/" + player.items[key][i].typeOf + ".png')";
         newConsumable.style.display = "flex";
         newConsumable.style.justifyContent = "center";
         newConsumable.style.alignItems = "center";
