@@ -625,13 +625,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const buttons = document.querySelectorAll('.die-btn');
     for (var i = 0; i < buttons.length; i++) {
       if (buttons[i].classList.contains("temporary") && buttons[i].disabled == true) {
+        // Store the id
+        let tempId = buttons[i].id.substring(11);
+        
         // remove all attributes to avoid conflicts
         buttons[i].removeAttribute('data-info');
         buttons[i].removeAttribute('id');
         buttons[i].removeAttribute('class');
         
         // Use the item
-        player.useItem(buttons[i].id.substring(11));
+        player.useItem(tempId);
         buttons[i].remove();
       }
 

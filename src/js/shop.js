@@ -852,15 +852,14 @@ diceMachine.addEventListener("click", (e) => {
 
       buyDice.style.display = "block";
       // Warn user if they will miss out on consumable dice
-      console.log(player.diceArray.length, player.maxDiceCount);
 
       if (player.getSpecialDiceCount() >= player.maxConsumableDice) {
         message.innerHTML = `
-        <h3>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h3>`;
+        <h2>Warning! You have the maximum stored consumable dice! You will not get any consumable dice!</h2>`;
         message.style.display = 'block';
       } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice) {
         message.innerHTML = `
-        <h3>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h3>`;
+        <h2>Warning! You are near the maximum, if you buy dice, you will get ${player.maxConsumableDice - player.getSpecialDiceCount()} consumable dice!</h2>`;
         message.style.display = 'block';
       }
     } else {
@@ -935,7 +934,33 @@ buyDice.addEventListener("click", (e) => {
 
       // Add a div option for each of them
       message.style.display = "block";
-      message.innerHTML = "<h2>Choose a die to keep permanently.<br>The other 2 will be kept as consumables.</h2><br>";
+      if (player.diceArray.length == player.maxDiceCount && player.getSpecialDiceCount() + 3 < player.maxConsumableDice) {
+        // Get all
+        message.innerHTML = "<h2>You will recieve all three of these dice as consumables.</h2><br>";
+
+      } else if (player.getSpecialDiceCount() == player.maxConsumableDice && player.diceArray.length < player.maxDiceCount) {
+        // get one
+        message.innerHTML = "<h2>Chose a die to keep permanently.<br>You will not recieve the others.</h2><br>";
+
+      } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice && player.getSpecialDiceCount() < player.maxConsumableDice && player.diceArray.length < player.maxDiceCount) {
+        // get some
+        message.innerHTML = `<h2>Pick a die to keep permanently.<br>You will recieve the leftmost die you did not pick as well as a consumable</h2><br>`
+        
+      } else if (player.diceArray.length < player.maxDiceCount && player.getSpecialDiceCount() + 2 < player.maxConsumableDice) {
+        // normal
+        message.innerHTML = "<h2>Chose a die to keep permanently.<br>You recieve the others as consumables.</h2><br>";
+        
+      } else if (player.getSpecialDiceCount() + 3 > player.maxConsumableDice && player.getSpecialDiceCount() < player.maxConsumableDice && player.diceArray.length == player.maxDiceCount) {
+        // custom
+        if (player.maxConsumableDice - player.getSpecialDiceCount() == 1) {
+          message.innerHTML = `<h2>Pick any die to get as a consumable!<br>You will not get any others.</h2><br>`;
+        
+        } else if (player.maxConsumableDice - player.getSpecialDiceCount() == 2) {
+          message.innerHTML = `<h2>Pick any die to get as a consumable!<br>You will recieve the leftmost die you did not pick as well as a consumable</h2><br>`;
+
+        }
+
+      }
       
       diceOptions.innerHTML += `<button id="choiceOne" class="die-btn die-option ${diceChoice['choiceOne'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceOne'].typeOf}.png)"></button>`;
       diceOptions.innerHTML += `<button id="choiceTwo" class="die-btn die-option ${diceChoice['choiceTwo'].typeOf}" style="background-image: url(src/media/Dice/${diceChoice['choiceTwo'].typeOf}.png)"></button>`;
