@@ -1,6 +1,7 @@
 import { Player } from "./Player.js";
 import { boonArray } from "./Boon.js";
 import { Dice } from "./Dice.js";
+import { Consumable } from "./Consumable.js";
 
 let currency = 50;
 let currencyRemaining = document.querySelector('#currencyRemaining');
@@ -166,6 +167,10 @@ gameSettingsForm.addEventListener("submit", function(event) {
       player.addBoon(boonArray['syringe']); 
     break;
   }
+
+  // Add a single example supplement
+  let consumableValue = Math.floor(Math.random() * 9) + 1;
+  player.addItem(new Consumable(consumableValue));
 
   // - Save all objects for transfer between pages
   localStorage.setItem('player', JSON.stringify(player));

@@ -619,6 +619,20 @@ td img {
   padding-left: 1rem;
   padding-right: 1rem;
   box-shadow: 2px 2px 5px #333;
+  transition: transform 0.5s ease;
+}
+#devTools.collapsed {
+  transform: translateY(-100%);
+}
+
+#slidePlayerInfo {
+  position: absolute;
+  left: 50%;
+  z-index: 99999999999999;
+}
+
+#slidePlayerInfo.collapsed {
+  color: green;
 }
 
 .playerDataButton {

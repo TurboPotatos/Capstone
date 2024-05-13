@@ -7,13 +7,6 @@ import { Consumable } from "./Consumable.js";
 // Load the player object from local storage
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
-if (!player.items["supplement"]) {
-  player.addItem(new Consumable(2));
-  player.addItem(new Consumable(1));
-  player.addItem(new Consumable(3));
-  player.addItem(new Consumable(9));
-}
-
 //#region [star]
 if (player.boonArray['star']) {
   // Prerequisite for star functionality
@@ -40,8 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const btnRoll = document.querySelector('#rollDiceBtn');
   const btnResetDice = document.querySelector('#resetDiceBtn');
   const btnEndTurn = document.querySelector('#endTurnBtn');
-  const btnGoShop = document.querySelector('#goShopBtn');
-  const btnGoWorkshop = document.querySelector('#goWorkshopBtn');
   const regainStaminaBtn = document.querySelector('#regainStamina');
   const visitShopBtn = document.querySelector('#visitShop');
   const visitWorkshopBtn = document.querySelector('#visitWorkshop');
@@ -119,16 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   btnEndTurn.addEventListener("click", (e) => {
     endTurn();
-  });
-
-  btnGoShop.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'shop.html';
-  });
-
-  btnGoWorkshop.addEventListener("click", (e) => {
-    localStorage.setItem('player', JSON.stringify(player));
-    window.location.href = 'workshop.html';
   });
 
   visitShopBtn.addEventListener("click", (e) => {

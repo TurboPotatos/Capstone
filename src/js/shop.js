@@ -983,3 +983,13 @@ window.addEventListener('load', function() {
   // Fix for scrolling 
   leftArrow.click();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const gameLogs = document.querySelector("#devTools");
+  const gameLogsTab = document.querySelector("#slidePlayerInfo");
+
+  gameLogsTab.addEventListener("click", function () {
+    gameLogs.classList.toggle("collapsed");
+    gameLogsTab.classList.toggle("collapsed");
+  });
+});
