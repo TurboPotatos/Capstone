@@ -310,32 +310,6 @@ tr:nth-child(odd) {
   position: relative;
 }
 
-#directoryBox {
-  border: 1.5rem solid black;
-  border-radius: 5%;
-  position: absolute;
-  float: left;
-  height: 70%;
-  width: 40%;
-  top: 10%;
-  left: 25%;
-  background-color: cadetblue;
-  background-size: cover;
-  box-sizing: border-box;
-  z-index: 1111;
-}
-
-#directoryContainer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, .6);
-  display: none;
-  z-index: 1111;
-}
-
 #buttonDiv {
   /* border: solid red; */
   position: absolute;
@@ -437,4 +411,73 @@ tr:nth-child(odd) {
   border-radius: 5px;
   display: none;
   z-index: 1005;
+}
+/*
+<div id="directoryContainer">
+  <div id="directoryBox">
+    <h2>Choose where to go!</h2><br>
+    <button id="regainStamina">Regain Stamina!</button><br>
+    <button id="visitWorkshop">Visit the Medicine Cabinet to customize your dice!</button><br>
+    <button id="visitShop">Visit the Break Room to purchase dice and boons!</button>
+  </div>
+</div> 
+*/
+
+#directoryBox {
+  border: 1.5rem solid black;
+  background-image: url(../media/background2.png);
+  background-size: cover;
+  border-radius: 5%;
+  position: absolute;
+  float: left;
+  height: 70%;
+  width: 40%;
+  top: 10%;
+  left: 25%;
+  background-size: cover;
+  box-sizing: border-box;
+  z-index: 1111;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+}
+
+#directoryBox h2 {
+  color: #aaa;
+  position: absolute;
+  width: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+  text-align: center;
+  text-shadow: 1px 1px 2px #222;
+  padding: 1rem;
+  border: 3px solid #777;
+  background-color: #222;
+}
+
+#directoryBox button {
+  width: 33%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: #aaa;
+  background-color: #444;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 2px #222;
+ 
+}
+
+#directoryBox button:hover {
+  background-color: #666;
+}
+
+#directoryContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .6);
+  display: none;
+  z-index: 1111;  
 }

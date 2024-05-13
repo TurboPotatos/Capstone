@@ -95,7 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
   updatePlayerInfo();
   populateBoons();
   populateConsumables()
-  createHenchmenWave(player.wave);
+  // createHenchmenWave(player.wave);
+  waveHenchmen.push(henchArray["Goomba"]);
+  updateHenchmenInfo();
   populateDiceArea();
   const dieButtons = document.querySelectorAll('.die-btn');
 
