@@ -627,12 +627,22 @@ td img {
 
 #slidePlayerInfo {
   position: absolute;
-  left: 50%;
-  z-index: 99999999999999;
+  top: 47%;
+  z-index: 99;
+  transition: transform 0.5s ease;
+  background-color: salmon;
+  padding: 1rem;
+  left: 1rem;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 2px #222;
 }
 
 #slidePlayerInfo.collapsed {
-  color: green;
+  transform: translateY(-680%);
+}
+
+#slidePlayerInfo:hover {
+  background-color: rgba(250, 180, 180, 1)
 }
 
 .playerDataButton {
