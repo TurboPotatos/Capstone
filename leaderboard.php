@@ -10,151 +10,143 @@ if (!session_id()) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/leaderboard.css">
 </head>
 <body>
-<div class="navBar">
-    <a href="index.php">Sign In</a>
-    <a href="startScreen.html">Start Screen</a>
-    <a href="leaderboard.html">Leaderboard/History</a>
-    <a href="game.html">Game</a>
-    <a href="gameOver.html">Game Over</a>
-    <a href="shop.html">Shop</a>
-    <a href="workshop.html">Workshop</a>
-  </div>
   <div class="wrapper" style="flex-direction: column;">
     <div class="tab">
-      <a href="startScreen.html">Back to Start</a>
       <button class="tablinks" onclick="openTab(event, 'leaderboard')" id="defaultOpen">Leaderboard</button>
       <button class="tablinks" onclick="openTab(event, 'history')">History</button>
     </div>
+    <div id="tableWrap">
+      <div id="leaderboard" class="tabcontent">
+        <?php 
+        // Get leaderboard info and output as a table
+        include 'dbQueries.php';
 
-    <div id="leaderboard" class="tabcontent">
-      <h3>Leaderboard Content</h3>
-      <?php 
-      // Get leaderboard info and output as a table
-      include 'dbQueries.php';
+        $pdo = dbConnect();
 
-      $pdo = dbConnect();
+        $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty  FROM players, runs
+                  WHERE runs.playerId = players.playerId ORDER BY score DESC LIMIT 50";
 
-      $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty  FROM players, runs
-                WHERE runs.playerId = players.playerId ORDER BY score DESC LIMIT 50";
+        $errorMessage = "Error fetching leaderboard";
 
-      $errorMessage = "Error fetching leaderboard";
-
-      $leaderboardResult = callQuery($pdo, $query, $errorMessage);
-
-    ?> 
-      <table class="leaderboard">
-        <tr>
-          <th>Username</th>
-          <th>Score</th>
-          <th>Wave Reached</th>
-          <th>Total Money Earned</th>
-          <th>Total of Healed Henchmen</th>
-          <th>Difficulty</th>
-        </tr>
-    <?php
-      while ($row = $leaderboardResult->fetch()) {
-        $playerName = $row['username'];
-        $score = $row['score'];
-        $waveReached = $row['waveReached'];
-        $totalCurrency = $row['totalMoneyEarned'];
-        $totalHealed = $row['henchmenHealed'];
-        $difficulty = $row['difficulty'];
-
-
-
-        $dataRow = <<<DATAROW
-
-        <tr>
-          <td>$playerName</td>
-          <td>$score</td>
-          <td>$waveReached</td>
-          <td>$totalCurrency</td>
-          <td>$totalHealed</td>
-          <td>$difficulty</td>
-        </tr>
-DATAROW;
-        echo $dataRow;
-      }
+        $leaderboardResult = callQuery($pdo, $query, $errorMessage);
 
       ?> 
+        <table class="leaderboard">
+          <tr>
+            <th>Username</th>
+            <th>Score</t>
+            <th>Wave Reached</th>
+            <th>Total Money Earned</th>
+            <th>Total of Healed Henchmen</th>
+            <th>Difficulty</th>
+          </tr>
+      <?php
+        while ($row = $leaderboardResult->fetch()) {
+          $playerName = $row['username'];
+          $score = $row['score'];
+          $waveReached = $row['waveReached'];
+          $totalCurrency = $row['totalMoneyEarned'];
+          $totalHealed = $row['henchmenHealed'];
+          $difficulty = $row['difficulty'];
 
-      </table>
-    </div>
 
-    <div id="history" class="tabcontent">
-      <h3>History Content</h3> <?php
-      if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
-      }
-        if (!isset($username) || $username == "guest") {
-          ?> 
-      <h2>
-        Unfortunately, you are not signed in or are signed in as a guest. History is not available unless you are signed in with an account.
-      </h2><?php
-        } else {
-      ?> 
 
-      <table class="history">
-      <tr>
-          <th>Username</th>
-          <th>Score</th>
-          <th>Wave Reached</th>
-          <th>Total Money Earned</th>
-          <th>Total of Healed Henchmen</th>
-          <th>Difficulty</th>
-        </tr>
-      <?php 
-        // Get user info from temp table 
-        include "sanitize.php";
-        // TODO: Get user info from cookies
+          $dataRow = <<<DATAROW
 
-        if ($username) {
-          
-          // Make sure user exists
-          $categoryResult = callQuery($pdo, "SELECT * FROM players WHERE username = '$username'", "Username not found");
-
-          if ($player = $categoryResult->fetch()) {
-            // Get history info and output as a table
-
-            $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty FROM players, runs WHERE runs.playerId = players.playerId AND username = '$username' ORDER BY runId";
-            $error = "Error fetching player history";
-
-            $historyResult = callQuery($pdo, $query, $error);
-
-            while ($row = $historyResult->fetch()) {
-              $playerName = $row['username'];
-              $score = $row['score'];
-              $waveReached = $row['waveReached'];
-              $totalCurrency = $row['totalMoneyEarned'];
-              $totalHealed = $row['henchmenHealed'];
-              $difficulty = $row['difficulty'];
-      
-      
-              $dataRow = <<<DATAROW
-      
-        <tr>
-          <td>$playerName</td>
-          <td>$score</td>
-          <td>$waveReached</td>
-          <td>$totalCurrency</td>
-          <td>$totalHealed</td>
-          <td>$difficulty</td>
-        </tr>
+          <tr>
+            <td>$playerName</td>
+            <td>$score</td>
+            <td>$waveReached</td>
+            <td>$totalCurrency</td>
+            <td>$totalHealed</td>
+            <td>$difficulty</td>
+          </tr>
 DATAROW;
-              echo $dataRow;
+          echo $dataRow;
+        }
+
+        ?> 
+
+        </table>
+      </div>
+
+      <div id="history" class="tabcontent"> <?php
+        if (isset($_SESSION['username'])) {
+          $username = $_SESSION['username'];
+        }
+          if (!isset($username) || $username == "guest") {
+            ?> 
+        <h2>
+          Unfortunately, you are not signed in or are signed in as a guest. History is not available unless you are signed in with an account.
+        </h2><?php
+          } else {
+        ?> 
+
+        <table class="history">
+        <tr>
+            <th>Username</th>
+            <th>Score</th>
+            <th>Wave Reached</th>
+            <th>Total Money Earned</th>
+            <th>Total of Healed Henchmen</th>
+            <th>Difficulty</th>
+          </tr>
+        <?php 
+          // Get user info from temp table 
+          include "sanitize.php";
+          // TODO: Get user info from cookies
+
+          if ($username) {
+            
+            // Make sure user exists
+            $categoryResult = callQuery($pdo, "SELECT * FROM players WHERE username = '$username'", "Username not found");
+
+            if ($player = $categoryResult->fetch()) {
+              // Get history info and output as a table
+
+              $query = "SELECT username, score, waveReached, henchmenHealed, totalMoneyEarned, difficulty FROM players, runs WHERE runs.playerId = players.playerId AND username = '$username' ORDER BY runId";
+              $error = "Error fetching player history";
+
+              $historyResult = callQuery($pdo, $query, $error);
+
+              while ($row = $historyResult->fetch()) {
+                $playerName = $row['username'];
+                $score = $row['score'];
+                $waveReached = $row['waveReached'];
+                $totalCurrency = $row['totalMoneyEarned'];
+                $totalHealed = $row['henchmenHealed'];
+                $difficulty = $row['difficulty'];
+        
+        
+                $dataRow = <<<DATAROW
+        
+          <tr>
+            <td>$playerName</td>
+            <td>$score</td>
+            <td>$waveReached</td>
+            <td>$totalCurrency</td>
+            <td>$totalHealed</td>
+            <td>$difficulty</td>
+          </tr>
+  DATAROW;
+                echo $dataRow;
+              }
+
             }
 
           }
 
-        }
-
-      ?> 
-      </table><?php 
-      } 
-      ?> 
+        ?> 
+        </table><?php 
+        } 
+        ?> 
+      </div>
+    </div>
+    <div id="toStart">
+      <a href="startScreen.html">Back to Start</a>
     </div>
   </div>
 

@@ -4,12 +4,11 @@
   width: 65%;
   left: 2.5rem;
   top: 1.5rem;
-  height: 68%;
+  height: 100%;
   color:cadetblue;
   font-size: 3.5rem;
   text-shadow: black 2px 1px 1px;
   background-image: url(../media/otter-space.jpg);
-  /* background-image: url(../media/splashImage.png); */
   background-size: cover;
   background-size: 200% 200%;
   background-repeat: no-repeat;
@@ -71,7 +70,6 @@
 }
 
 #splashImage {
-  /* border: solid red; */
   position: absolute;
   background-image: url(../media/splashImage2.png);
   background-size: contain;
@@ -79,8 +77,8 @@
   box-sizing: border-box;
   width: 92%;
   height: 58%;
-  right: 0;
-  bottom: 0;
+  left: 0;
+  bottom: -18%;
 }
 #glados {
   /* border: solid red; */
@@ -91,20 +89,20 @@
   box-sizing: border-box;
   width: 40%;
   height: 50%;
-  right: -12%;
+  right: -8%;
   top: 0;
 }
 
 #menuDiv {
+  border: 10px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  border: solid red;
+  /* justify-content: center; */
   position:absolute;
   width: 30%;
   top: 1.5rem;
-  right: 1.5rem;
-  height: 95%;
+  right: 0;
+  height: 100%;
   background-color: cadetblue;
   align-items: center;
   box-sizing: border-box; /* Include padding and border in the total width and height */
@@ -118,11 +116,10 @@
 }
 
 #nav {
-  border: solid yellow;
   position: absolute;
   width: 65%;
   left: 2.5rem;
-  bottom: 1rem;
+  bottom: 3rem;
   height: 23%;
   background-color: cadetblue;
 }

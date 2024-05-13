@@ -83,19 +83,19 @@ if (isset($_POST['saveRun'])) {
     <table id="statsTable">
       <th><h3>Stats</h3></th>
       <tr>
-        <td>Henchmen Healed: <span><?= $totalHealed ?></span></td>
+      <td>Difficulty: <span><?= $difficulty ?></span></td>
       </tr>
       <tr>
-        <td>Difficulty: <span><?= $difficulty ?></span></td>
+      <td>Total Score: <span><?= $score ?></span></td>
       </tr>
       <tr>
         <td>Money earned: <span><?= $totalCurrency ?></span></td>
       </tr>
       <tr>
-        <td>Total Score: <span><?= $score ?></span></td>
+        <td>Wave reached: <span><?=$waveReached?></span></td>
       </tr>
       <tr>
-        <td>Difficulty: <span><?= $difficulty ?></span></td>
+        <td>Henchmen Healed: <span><?= $totalHealed ?></span></td>
       </tr>
     </table>
 
