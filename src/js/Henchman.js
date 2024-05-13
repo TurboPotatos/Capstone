@@ -147,9 +147,9 @@ respecHenchman(henchArray["Henchman 24"],        24, 2,   24, 24,   24, 240,   2
 // 5 health, 6 maxHealth, 
 // 7 damage, 
 // 8 scoreGiven, 9 currencyGiven, 10 staminaReward
-respecHenchman(bossArray["Bowser"],               15, 2,   18, 24,   3,  300,   17,   350, 75, 40); 
-respecHenchman(bossArray["GLaDOS"],               18, 4,   18, 24,   45, 260,   30,   310, 68, 40); 
-respecHenchman(bossArray["Satan Himself"],        30, 6,   18, 24,   15, 320,   48,   370, 85, 40); 
+respecHenchman(bossArray["Bowser"],               15, 2,   4, 40,   3,  300,   17,   350, 75, 40); 
+respecHenchman(bossArray["GLaDOS"],               18, 4,   4, 40,   45, 260,   30,   310, 68, 40); 
+respecHenchman(bossArray["Satan Himself"],        30, 6,   4, 40,   15, 320,   48,   370, 85, 40); 
 
 
 export const wave1 = ["Goomba","Bokoblin","Stuart the Minion","Beetle","Space Invader", "GLaDOS"];

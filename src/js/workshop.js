@@ -210,8 +210,8 @@ for (let i = 0; i < player.diceArray.length; i++) {
 
   // newDiceDisplay is the button (that looks like the dice) that will expand newDice
   let newDiceDisplay = document.createElement('li');
-  newDiceDisplay.textContent = player.diceArray[i].typeOf;
-  newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + newDiceDisplay.textContent + ".png')";
+  // newDiceDisplay.textContent = player.diceArray[i].typeOf;
+  newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + player.diceArray[i].typeOf + ".png')";
   
   newDiceDisplay.classList.add("diceListDisplay");
   newDice.classList.add("diceListItem");
@@ -233,7 +233,7 @@ const modBackBtn = document.querySelector('#modBackBtn');
 
 document.querySelector(".diceListWrapper").addEventListener("click", function() {
   modDice.style.display = "block";
-  diceList.style.display = "block";
+  diceList.style.display = "flex";
   
 });
 
@@ -269,13 +269,29 @@ document.querySelectorAll(".diceListDisplay").forEach(displayNode => {
   displayNode.addEventListener("click", () => {
     // get the parent of the clicked element
     let parent = document.querySelector(`.${displayNode.classList[1]}.diceListItem`);
+
     // get the diceSide children of the parent
     parent.querySelectorAll(".diceSide").forEach(diceFace => {
       // swap the display mode
       if (diceFace.style.display != "inline-block") {
         diceFace.style.display = "inline-block";
+        parent.style.display = "inline-block";
+        // Hide all other dice
+        document.querySelectorAll(".die-btn").forEach((die) => {
+          if (die != displayNode) {
+            die.style.display = 'none';
+          }
+        });
+        
       } else {
+        parent.style.display = "none";
         diceFace.style.display = "none";
+        // Show all other dice
+        document.querySelectorAll(".die-btn").forEach((die) => {
+          if (die != displayNode) {
+            die.style.display = 'block';
+          }
+        });
       }
     });
   });
@@ -302,9 +318,9 @@ for(let i = 0; i < player.diceSideArray.length; i++) {
 
 spanPlayerFaces.addEventListener("click", () => {
   playerDiceSides.querySelectorAll('.diceSide').forEach(diceSide => {
-    if (diceSide.style.display != "block") {
-      diceSide.style.display = "block";
-      playerDiceFacesDisplay = 'block';
+    if (diceSide.style.display != "inline-block") {
+      diceSide.style.display = "inline-block";
+      playerDiceFacesDisplay = 'inline-block';
     } else {
       diceSide.style.display = "none";
       playerDiceFacesDisplay = 'none';

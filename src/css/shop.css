@@ -347,20 +347,23 @@ td img {
 }
 
 #diceOptions{
-  /* border: solid green; */
   position: absolute;
   height: 6.3rem;
   width: 18.4rem;
   top: 50%;
-  /* right: 50%; */
-  /* justify-content: center; */
   box-sizing: border-box;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #message {
-  /* border: solid red; */
-  position: relative;
-  top: 20%;
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  align-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 1.5rem;
 }
 
 #message h2 {
