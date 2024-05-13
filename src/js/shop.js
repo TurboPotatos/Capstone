@@ -843,7 +843,7 @@ diceMachine.addEventListener("click", (e) => {
   backBtn.style.display = "block";
   buyConsumables.style.display = "none";
   message.style.display = 'none';
-  if (player.currency < 15) {
+  if (player.currency < calculatePrice(player.wave, player.diceArray.length, player.difficulty, 15)) {
     message.style.display = "block";
     message.innerHTML = "<h2 style=\"color: red;top:40%; font-size:25px; text-shadow: 1px 2px 1px rgb(70, 19, 19)\">You don't have enough funds!</h2>";
     buyDice.style.display = "none";
