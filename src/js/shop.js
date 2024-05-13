@@ -918,7 +918,7 @@ buyDice.addEventListener("click", (e) => {
     let spare = player.maxConsumableDice - player.getSpecialDiceCount();
     let room = (player.maxDiceCount > player.diceArray.length);
 
-    if (player.subtractCurrency(15)) {
+    if (player.subtractCurrency(calculatePrice(player.wave, player.diceArray.length, player.difficulty, 15))) {
       document.querySelector("#currentCurrency").innerHTML = player.currency;
       buyDice.style.display = "none"
       backBtn.style.display = "none";
