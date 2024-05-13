@@ -63,9 +63,6 @@ if (isset($_POST['saveRun'])) {
   $totalCurrency = "";
 }
 
-// TODO update Database Documents stuff
-// TODO update leaderboard queries to get new stored info
-
 ?> 
 <!DOCTYPE html>
 <html lang="en">

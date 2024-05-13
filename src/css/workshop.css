@@ -1,13 +1,16 @@
 #devTools {
-  border: solid red;
+  border: 4px solid #222;
+  background-image: linear-gradient(rgba(220, 220, 220, 0.5), rgba(220, 220, 220, 0.5)), url(../media/background2.png);
+  background-blend-mode: overlay; /* Blend mode to mix background color and image */
+  background-size: cover;
   position: absolute;
-  /* width: 20%; */
-  background-color: cadetblue;
-  /* position: absolute; */
-  /* float: left; */
   font-size: 2rem;
-  /* display: block; */
   cursor: pointer;
+  z-index: 1;
+  overflow: auto;
+  max-width: 30%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 td{
@@ -361,16 +364,17 @@ td::after{
   border: 2px solid black;
   position: relative;
   width: 75%;
-  background-color: red;
+  background-color: rgba(190, 50, 50, 1);
   box-sizing: border-box;
   z-index: -2;
   margin-bottom: 1rem;
+  color: #ccc;
+  text-shadow: 2px 2px 2px #222;
 }
 
 #playerStaminaBar {
-  /* border: 2px solid black; */
   border-right: 2px solid black;
-  background-color: blue;
+  background-color: rgba(61, 119, 190, .9);
   width: 60%;
   height: 100%;
   position: absolute;
@@ -383,11 +387,13 @@ td::after{
 }
 
 #currency {
-  border: 1px dotted green;
   margin-bottom: 1rem;
+  color: #ccc;
+  text-shadow: 2px 2px 2px #222;
 }
 
 #boonBox {
+  margin-top: .5rem;
   max-height: 75%;
   border: 3px solid #333;
   box-shadow: 2px 2px 2px rgb(20, 20, 20);
@@ -437,22 +443,6 @@ td::after{
 
 #boonBox .active {
   background-color: rgba(35, 35, 35, .2);
-}
-
-#devTools {
-  border: solid red;
-  /* width: 20%; */
-  background-color: cadetblue;
-  position: absolute;
-  /* float: left; */
-  font-size: 2rem;
-  /* display: block; */
-  cursor: pointer;
-  z-index: 1;
-  overflow: auto;
-  max-width: 30%;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .tooltip {

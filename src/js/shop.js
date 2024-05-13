@@ -4,7 +4,6 @@ import { boonArray } from "./Boon.js";
 import { boonNameArray } from "./Boon.js";
 import { Dice } from "./Dice.js";
 
-// let player = new Player();
 const player = new Player(JSON.parse(localStorage.getItem('player')));
 
 if (player.boonArray['chaosEmerald']) {
@@ -132,34 +131,6 @@ for (let key in player.boonArray) {
     newSpanTag.classList.add("tooltip");
 
     boonBox.insertBefore(newImgTag, rightArrow);
-    newImgTag.insertAdjacentElement('afterend', newSpanTag);
-
-    newImgTag.addEventListener("click", function() {
-      boonBox.querySelectorAll(".active").forEach((active) => {
-        if (active != newImgTag) {
-          active.classList.remove("active");
-        }
-      });
-
-      if (newImgTag.classList.contains('active')) {
-        newImgTag.classList.remove('active');
-      } else {
-        newImgTag.classList.add('active');
-      }
-      let tooltip = newSpanTag;
-      let alreadyDisplayed = (tooltip.style.display == "block");
-  
-      let allTooltips = document.querySelectorAll('.tooltip');
-      allTooltips.forEach(tip => {
-        tip.style.display = "none";
-      });
-  
-      if (alreadyDisplayed) {
-        tooltip.style.display = 'none';
-      } else {
-        tooltip.style.display = 'block';
-      }
-    });
   }
 
 }
@@ -177,34 +148,6 @@ function addToBoonBox(boon) {
   newSpanTag.classList.add("tooltip");
 
   boonBox.insertBefore(newImgTag, rightArrow);
-  newImgTag.insertAdjacentElement('afterend', newSpanTag);
-
-  newImgTag.addEventListener("click", function() {
-    boonBox.querySelectorAll(".active").forEach((active) => {
-      if (active != newImgTag) {
-        active.classList.remove("active");
-      }
-    });
-
-    if (newImgTag.classList.contains('active')) {
-      newImgTag.classList.remove('active');
-    } else {
-      newImgTag.classList.add('active');
-    }
-    let tooltip = newSpanTag;
-    let alreadyDisplayed = (tooltip.style.display == "block");
-
-    let allTooltips = document.querySelectorAll('.tooltip');
-    allTooltips.forEach(tip => {
-      tip.style.display = "none";
-    });
-
-    if (alreadyDisplayed) {
-      tooltip.style.display = 'none';
-    } else {
-      tooltip.style.display = 'block';
-    }
-  });
 
   leftArrow.click();
 }
@@ -253,30 +196,17 @@ for (let i = 0; i < player.diceArray.length; i++) {
 
   // Set styles
   newDice.style.backgroundImage = "url('src/media/Dice/" + player.diceArray[i].typeOf + ".png')";
-  // newDice.style.display = "flex";
-  // newDice.style.justifyContent = "center";
-  // newDice.style.alignItems = "center";
-  // newDice.style.position = "relative";
   
   newDice.classList.add("die-btn");
   newDice.classList.add(player.diceArray[i].typeOf);
   
   // Give it a ul child populated by it's sides
   let newDiceSides = document.createElement("ul");
-  // newDiceSides.style.display = "none";
-  // newDiceSides.style.listStyleType = "none";
-  // newDiceSides.style.justifyContent = "space-around";
-  // newDiceSides.style.alignItems = "center";
-  // newDiceSides.style.position = "absolute";
-  // newDiceSides.style.left = "100%";
-
   
   for (let j = 0; j < player.diceArray[i].sides.length; j++) {
     // Populate the newDiceSides
     let newDiceSide = document.createElement("li");
     newDiceSide.textContent = player.diceArray[i].sides[j].value;
-
-    // newDiceSide.style.padding = "10px";
 
     // Add it to the ul
     newDiceSides.appendChild(newDiceSide);
@@ -312,14 +242,9 @@ for (let i = 0; i < player.diceArray.length; i++) {
 function addPlayerDice(dice) {
   // Add the dice as a clickable element that displays the sides when clicked
   let newDice = document.createElement('li');
-  // newDice.textContent = dice.typeOf;
 
   // Set styles
   newDice.style.backgroundImage = "url('src/media/Dice/" + dice.typeOf + ".png')";
-  // newDice.style.display = "flex";
-  // newDice.style.justifyContent = "center";
-  // newDice.style.alignItems = "center";
-  // newDice.style.position = "relative";
   
   newDice.classList.add("die-btn");
   newDice.classList.add(dice.typeOf);
@@ -376,7 +301,6 @@ for (let key in player.items) {
       // If the subarray ISN'T of type supplement, it's a dice. Add classes respectively
       for (let i = 0; i < player.items[key].length; i++) {
         let newConsumable = document.createElement('li');
-        // newConsumable.textContent = player.items[key][i].typeOf;
         // Set styles & classes
         newConsumable.style.backgroundImage = "url('src/media/Dice/" + player.items[key][i].typeOf + ".png')";
         newConsumable.style.display = "flex";
@@ -399,10 +323,7 @@ for (let key in player.items) {
         newConsumable.style.justifyContent = "center";
         newConsumable.style.alignItems = "center";
 
-        // TODO - get finalized backgroundImage and classes for supplements
         newConsumable.classList.add("consumable");
-        // newConsumable.classList.add("d4");
-        // newConsumable.style.backgroundImage = "url('src/media/Dice/d4.png')";
 
 
         // Add it to the consumableList
@@ -420,7 +341,6 @@ function addPlayerConsumables(consumable) {
   let consumableList = playerConsumables.querySelector("ul");
   if (consumable.bonus == null || consumable.bonus == undefined) {
     let newConsumable = document.createElement('li');
-    // newConsumable.textContent = consumable.typeOf;
     // Set styles & classes
     newConsumable.style.backgroundImage = "url('src/media/Dice/" + consumable.typeOf + ".png')";
     newConsumable.style.display = "flex";
@@ -488,7 +408,6 @@ coffeeTooltip.innerHTML = `
 ${activeBoon.name} <br><br> 
 ${activeBoon.description}<br>
 <span class='cost'>Cost: ${initCoffeeCost}</span>`;
-// player.addBoon(boonArray['crowbar']);
 
 let bannedArray = [];
 bannedArray.push(boonArray['cuppaJoe']);
@@ -603,17 +522,6 @@ shopContent.forEach((shopItem, index) => {
       }
     });
   }
-});
-
-
-// document.querySelector("#playerInfo").addEventListener("click", function() {
-//   console.log(player.boonArray);
-//   console.log(player.currency);
-// });
-
-document.querySelector("#addMoneys").addEventListener("click", function() {
-  player.currency += 10;
-  document.querySelector("#currentCurrency").innerHTML = player.currency;
 });
 
 function getCodeItem(class1, class2) {
@@ -912,7 +820,6 @@ function generateRandomDice() {
 
 buyDice.addEventListener("click", (e) => {
   // check if the player has enough funds
-  // TODO change hard coded cost 
   if (player.diceArray.length < player.maxDiceCount) {
     // if the player buying more dice won't exceed maximum
     let spare = player.maxConsumableDice - player.getSpecialDiceCount();
@@ -935,23 +842,18 @@ buyDice.addEventListener("click", (e) => {
       // Add a div option for each of them
       message.style.display = "block";
       if (player.diceArray.length == player.maxDiceCount && player.getSpecialDiceCount() + 3 < player.maxConsumableDice) {
-        // Get all
         message.innerHTML = "<h2>You will recieve all three of these dice as consumables.</h2><br>";
 
       } else if (player.getSpecialDiceCount() == player.maxConsumableDice && player.diceArray.length < player.maxDiceCount) {
-        // get one
         message.innerHTML = "<h2>Chose a die to keep permanently.<br>You will not recieve the others.</h2><br>";
 
       } else if (player.getSpecialDiceCount() + 2 > player.maxConsumableDice && player.getSpecialDiceCount() < player.maxConsumableDice && player.diceArray.length < player.maxDiceCount) {
-        // get some
         message.innerHTML = `<h2>Pick a die to keep permanently.<br>You will recieve the leftmost die you did not pick as well as a consumable</h2><br>`
         
       } else if (player.diceArray.length < player.maxDiceCount && player.getSpecialDiceCount() + 2 < player.maxConsumableDice) {
-        // normal
         message.innerHTML = "<h2>Chose a die to keep permanently.<br>You recieve the others as consumables.</h2><br>";
         
       } else if (player.getSpecialDiceCount() + 3 > player.maxConsumableDice && player.getSpecialDiceCount() < player.maxConsumableDice && player.diceArray.length == player.maxDiceCount) {
-        // custom
         if (player.maxConsumableDice - player.getSpecialDiceCount() == 1) {
           message.innerHTML = `<h2>Pick any die to get as a consumable!<br>You will not get any others.</h2><br>`;
         
@@ -1066,7 +968,6 @@ buyConsumables.addEventListener("click", () => {
       // Add all dice to the player's items
       for (let key in diceChoice) {
         if (diceChoice.hasOwnProperty(key)) {
-          // console.log(diceChoice[key]);
           diceChoice[key].name = diceChoice[key].typeOf;
           player.addItem(diceChoice[key]);
         }

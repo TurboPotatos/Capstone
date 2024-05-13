@@ -175,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
                            "Current Total: " + accumulatedTotal + "<br><br>";
       updateChartNotes();
 
-      // e.target.id example: consumable_3
       delete player.items['supplement'][e.target.id.substring(11)];
       // e.target is the consumable the player clicked on
       e.target.parentElement.removeChild(e.target);
@@ -639,8 +638,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       buttons[i].disabled = false;
-      // buttons[i].style.color = "black";
-      // buttons[i].style.textShadow = "none";
       buttons[i].classList.remove("success", "failure", "selected", "current");
     }
 

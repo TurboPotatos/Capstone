@@ -54,8 +54,5 @@ export class Dice {
     let tempDiceSide = this.sides[sideIndex];
     this.sides[sideIndex] = newDiceSide;
     return tempDiceSide;
-
-    // Assuming javascript has issues with the code above, go the cheap way
-    // this.sides[sideIndex].value = newDiceSide;
   }
 }

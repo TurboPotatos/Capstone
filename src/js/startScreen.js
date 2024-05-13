@@ -8,9 +8,6 @@ let currencyRemaining = document.querySelector('#currencyRemaining');
 // Get form
 let gameSettingsForm = document.querySelector("#gameSettings");
 
-// Select dice buy inputs
-// let diceBuys = document.querySelectorAll('input[type="text"]');
-
 let costSpans = document.querySelectorAll('.costSpan');
 let maxSpans = document.querySelectorAll('.maxSpan');
 
@@ -114,7 +111,6 @@ gameSettingsForm.addEventListener("submit", function(event) {
   let startBoon = formData.get('startBoon');
 
   // Create new objects
-  // let game = new Game(difficulty);
   
   let player = new Player();
   player.currency = currency;
@@ -174,10 +170,6 @@ gameSettingsForm.addEventListener("submit", function(event) {
   // - Save all objects for transfer between pages
   localStorage.setItem('player', JSON.stringify(player));
 
-  // localStorage.setItem('game', JSON.stringify(game));
-
-  
-  
   // - Redirect user if they have more than one or zero dice
   if (totalDice < 2) {
     alert("Please select two or more dice before proceeding!");

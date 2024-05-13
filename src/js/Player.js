@@ -101,7 +101,6 @@ export class Player {
           } else {
             // subarray is for type supplement
             for (let i = 0; i < player.items[key].length; i++) {
-              // console.log(player.items[key]);
               if (player.items[key][i]) {
                 let newSupplement = new Consumable(player.items[key][i].bonus);
                 this.addItem(newSupplement);
@@ -165,8 +164,7 @@ export class Player {
     if (this.stamina + delta >= this.maxStamina) {
       this.stamina = this.maxStamina;
     } else if (this.stamina + delta <= 0) {
-      // Run ends, save player object and direct to gameOver screen
-      console.log("Player loses!");
+      // Game ending is handled in game.js
       this.stamina += delta;
     } else {
       this.stamina += delta;

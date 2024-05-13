@@ -16,7 +16,6 @@ export class Henchman {
   constructor(name, wave) {
 
     this.name = name;
-    // this.health = Math.floor(Math.random() * 9) + 50;
     this.health = 97;
     this.threshold = 10 + wave;
     this.range = 3;

@@ -97,7 +97,6 @@ DATAROW;
         <?php 
           // Get user info from temp table 
           include "sanitize.php";
-          // TODO: Get user info from cookies
 
           if ($username) {
             

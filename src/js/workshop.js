@@ -125,7 +125,6 @@ shopContent.forEach(shopItem => {
   // Set shop HTML to dice side
 
   shopItem.innerHTML = diceSide.value;
-  // shopItem.style.background = diceSide.src;
 
   shopItem.id += "_" + diceSide.value;
 
@@ -148,14 +147,6 @@ shopContent.forEach(shopItem => {
     }
   });
 
-});
-
-
-document.querySelector("#playerInfo").addEventListener("click", function() {
-  console.log("Player's dice sides: ");
-  console.log(player.diceSideArray);
-  console.log("Player's dice: ");
-  console.log(player.diceArray);
 });
 
 const buyBtn = document.querySelector("#buyItem");
@@ -193,12 +184,6 @@ buyBtn.addEventListener("click", function() {
   }
 });
 
-document.querySelector("#addMoneys").addEventListener("click", function() {
-  player.currency += 10;
-  document.querySelector("#currentCurrency").innerHTML = player.currency;
-  console.log(boonBox.scrollWidth == boonBox.clientWidth);
-});
-
 // Populate the diceList to include all of the player's dice
 let diceList = document.querySelector(".diceList");
 
@@ -210,7 +195,6 @@ for (let i = 0; i < player.diceArray.length; i++) {
 
   // newDiceDisplay is the button (that looks like the dice) that will expand newDice
   let newDiceDisplay = document.createElement('li');
-  // newDiceDisplay.textContent = player.diceArray[i].typeOf;
   newDiceDisplay.style.backgroundImage = "url('src/media/Dice/" + player.diceArray[i].typeOf + ".png')";
   
   newDiceDisplay.classList.add("diceListDisplay");
@@ -335,7 +319,6 @@ var dragSrcEl = null;
 //#region [irrelevant drag functions]
   
 function handleDragStart(e) {
-  // console.log("handleDragStart");
   this.style.opacity = '0.4';
   
   dragSrcEl = this;
@@ -345,7 +328,6 @@ function handleDragStart(e) {
 }
 
 function handleDragOver(e) {
-  // console.log("handleDragOver");
   if (e.preventDefault) {
     e.preventDefault();
   }
@@ -356,19 +338,16 @@ function handleDragOver(e) {
 }
 
 function handleDragEnter(e) {
-  // console.log("handleDragEnter");
   this.classList.add('over');
 }
 
 function handleDragLeave(e) {
-  // console.log("handleDragLeave");
   this.classList.remove('over');
 }
 
 //#endregion
 
 function handleDrop(e) {
-  // console.log("handleDrop");
   if (e.stopPropagation) {
     e.stopPropagation(); // stops the browser from redirecting.
   }

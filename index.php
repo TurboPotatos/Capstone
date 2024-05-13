@@ -45,7 +45,6 @@ if (isset($_SESSION['username'])){
 
     <div id="content">
       <div class="leftSide">
-        <!-- <img src="src/media/potionDice_transparent.png" alt="placeholder"> -->
       </div>
       <div id="signIn"><?php 
 
@@ -135,7 +134,6 @@ if (isset($_SESSION['username'])){
           <input type="submit" name="create" value="Create Account!"><br>
         </form>
         <br>
-        <!-- <a href="#">Create Account</a> -->
         
         <br><br>
         Or
@@ -155,7 +153,6 @@ if (isset($_SESSION['username'])){
         <form method="post">
           <input type="submit" name="newAccount" value="Create Account">
         </form>
-        <!-- <a href="#">Create Account</a> -->
         
         <br><br><br>
         Or
