@@ -24,7 +24,6 @@
 }
 
 .wrapperWrapper {
-  /* border: solid red; */
   background-image: url(../media/background2.png);
 	background-size: cover;
   background-repeat: no-repeat;
@@ -33,16 +32,12 @@
   box-sizing: border-box;
 }
 .wrapper {
-  /* border: solid red; */
   position: absolute;
-  width: 95rem;
-  height: 44rem;
-  /* left: 1vw;
-  top: 1vh; */
+  width: 90%;
+  height: 80%;
   top: 3vh;
   left: 2vw;
   background: transparent;
-  position: relative;
 }
 
 .container {
