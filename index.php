@@ -99,7 +99,7 @@ if (isset($_SESSION['username'])){
           } else {
             // check passwords match
 
-            if ($password != $password2) { // Passwords don't match, output error
+            if ($password != $password2 && $password != "") { // Passwords don't match, output error
               echo "<style>input[name=\"password\"]{border: 2px solid red;}</style>";
               echo "<style>input[name=\"passwordTwo\"]{border: 2px solid red;}</style>";
             } else {
