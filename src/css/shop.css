@@ -347,18 +347,14 @@ td img {
 }
 
 #diceOptions{
-  /* border: solid green; */
   position: absolute;
   height: 6.3rem;
   width: 18.4rem;
   top: 50%;
-  /* right: 50%; */
-  /* justify-content: center; */
   box-sizing: border-box;
 }
 
 #message {
-  /* border: solid red; */
   position: relative;
   top: 20%;
 }
